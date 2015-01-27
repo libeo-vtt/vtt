@@ -1,0 +1,299 @@
+// ------------------------------ //
+//             Mixins             //
+// ------------------------------ //
+
+// Clearfix
+@mixin clearfix {
+    &:before,
+    &:after {
+        content: "";
+        display: table;
+        line-height: 0;
+    }
+    &:after {
+        clear: both;
+    }
+}
+
+// Visuallyhidden
+@mixin visuallyhidden($hide: true) {
+    @if $hide == true {
+        position: absolute;
+        overflow: hidden;
+        clip: rect(0 0 0 0);
+        width: 1px;
+        height: 1px;
+        margin: -1px;
+        padding: 0;
+        border: 0;
+    } @else {
+        overflow: visible;
+        clip: auto;
+        width: auto;
+        height: auto;
+        margin: 0;
+    }
+}
+
+// reset-list-style
+@mixin reset-list-style {
+    margin: 0;
+    padding: 0;
+    font-size: 0;
+    list-style-type: none;
+    li {
+        display: inline-block;
+        margin: 0;
+        padding: 0;
+        font-size: 1rem;
+    }
+}
+
+// Absolute position
+@mixin absolute($top: auto, $right: auto, $bottom: auto, $left: auto) {
+    position: absolute;
+    top: $top;
+    right: $right;
+    bottom: $bottom;
+    left: $left;
+}
+
+// Transition
+@mixin transition($args...) {
+    -webkit-transition: $args;
+    -moz-transition: $args;
+    -ms-transition: $args;
+    -o-transition: $args;
+    transition: $args;
+}
+
+// Calculate REM
+@function rem($size) {
+    $values: ();
+    @if type-of($size) == list {
+        @each $current in $size {
+            $values: append($values, remove-px($current) / 16 * 1rem);
+        }
+    } @else {
+        $values: remove-px($size) / 16 * 1rem;
+    }
+    @return $values;
+}
+
+// REM font-size
+@mixin rem-fontsize($size) {
+    font-size: remove-px($size) + px;
+    font-size: rem($size);
+}
+
+// REM line-height
+@mixin rem-lineheight($size) {
+    line-height: remove-px($size) + px;
+    line-height: rem($size);
+}
+
+// REM font-size and line-height
+@mixin rem-typo($font, $line: 1.4) {
+    font-size: remove-px($font) + px;
+    font-size: rem($font);
+    @if ($line == 1.4) {
+        line-height: $line;
+    } @else {
+        line-height: remove-px($line) + px;
+        line-height: rem($line);
+    }
+}
+
+// Remove-px
+@function remove-px($target) {
+    @if not unitless($target) {
+        @return $target / 1px ;
+    } @else {
+        @return $target;
+    }
+}
+
+// Placeholder
+@mixin placeholder($color) {
+    &::-webkit-input-placeholder,
+    &:-ms-input-placeholder,
+    &::-moz-placeholder,
+    &:-moz-placeholder {
+        color: $color;
+    }
+}
+
+// Transform
+@mixin transform($transforms) {
+    -webkit-transform: $transforms;
+    -moz-transform: $transforms;
+    -ms-transform: $transforms;
+    -o-transform: $transforms;
+    transform: $transforms;
+}
+
+// Rotate
+@mixin rotate ($deg) {
+    @include transform(rotate(#{$deg}deg));
+}
+
+// Scale
+@mixin scale($scale) {
+    @include transform(scale($scale));
+}
+
+// Translate
+@mixin translate ($x, $y) {
+    @include transform(translate($x, $y));
+}
+
+// Skew
+@mixin skew ($x, $y) {
+    @include transform(skew(#{$x}deg, #{$y}deg));
+}
+
+// Transform origin
+@mixin transform-origin ($origin) {
+    -webkit-transform-origin: $origin;
+    -moz-transform-origin: $origin;
+    -ms-transform-origin: $origin;
+    -o-transform-origin: $origin;
+    transform-origin: $origin;
+}
+
+// Transition
+@mixin transition($transition-property, $transition-time, $method: linear) {
+    -webkit-transition: $transition-property $transition-time $method;
+    -moz-transition: $transition-property $transition-time $method;
+    -ms-transition: $transition-property $transition-time $method;
+    -o-transition: $transition-property $transition-time $method;
+    transition: $transition-property $transition-time $method;
+}
+
+// Border-radius
+@mixin border-radius($radius) {
+    background-clip: padding-box;
+    -webkit-border-radius: $radius;
+    border-radius: $radius;
+}
+
+@mixin border-top-radius($radius) {
+    background-clip: padding-box;
+    -webkit-border-top-left-radius: $radius;
+    border-top-left-radius: $radius;
+    -webkit-border-top-right-radius: $radius;
+    border-top-right-radius: $radius;
+}
+@mixin border-right-radius($radius) {
+    background-clip: padding-box;
+    -webkit-border-top-right-radius: $radius;
+    border-top-right-radius: $radius;
+    -webkit-border-bottom-right-radius: $radius;
+    border-bottom-right-radius: $radius;
+}
+@mixin border-bottom-radius($radius) {
+    background-clip: padding-box;
+    -webkit-border-bottom-right-radius: $radius;
+    border-bottom-right-radius: $radius;
+    -webkit-border-bottom-left-radius: $radius;
+    border-bottom-left-radius: $radius;
+}
+@mixin border-left-radius($radius) {
+    background-clip: padding-box;
+    -webkit-border-top-left-radius: $radius;
+    border-top-left-radius: $radius;
+    -webkit-border-bottom-left-radius: $radius;
+    border-bottom-left-radius: $radius;
+}
+
+// Respond-to
+@mixin respond-to($breakpoint) {
+    $value: map-get($mq-breakpoints, $breakpoint);
+    @if type-of($breakpoint) == list {
+        @media (min-width: nth($breakpoint, 1)) and (max-width: nth($breakpoint, 2)) {
+            @content;
+        }
+    }
+    @else if $value != null {
+        @media (max-width: $value) {
+            @content;
+        }
+    }
+    @else {
+        @warn "No value could be retrieved from `#{$breakpoint}`.";
+    }
+}
+
+// Emify
+@function emify($target, $base: 16) {
+    $values: ();
+    $baseFixed: remove-px($base);
+    @if type-of($target) == list {
+        // $values will return element with type list
+        @each $t in $target {
+            $tFixed: remove-px($t);
+            $values: append($values, if(type-of($tFixed) == number, ($tFixed / $baseFixed) + em, $tFixed));
+        }
+    } @else {
+        // $values will return element with type number
+        $values: (remove-px($target) / $baseFixed) + em;
+    }
+    @return $values;
+}
+
+// Grid
+@mixin grid($gutter, $margin, $iterations: 4, $vertical-align: top) {
+    overflow: hidden;
+    margin: $margin 0;
+    padding: $margin;
+    font-size: 0;
+    &.grid-float {
+        .grid-wrapper {
+            @include clearfix;
+        }
+        [class^="col"] {
+            float: left;
+            display: block;
+        }
+    }
+    .grid-wrapper {
+        margin: 0 ($gutter / 2 * -1);
+        .ie & {
+            margin: 0 (($gutter - 1px) / 2 * -1);
+        }
+    }
+    [class^="col"] {
+        display: inline-block;
+        vertical-align: $vertical-align;
+        margin: ($gutter / 2);
+        font-size: 1rem;
+    }
+    @for $i from 1 through $iterations {
+        $current: $i;
+        @for $i from 1 through $current {
+            .col-#{$i}-#{$current} {
+                width: calc(100% / #{$current} * #{$i} - #{$gutter});
+            }
+            @each $breakpoint in $mq-breakpoints {
+                $bp-name: nth($breakpoint, 1);
+                $bp-value: nth($breakpoint, 2);
+                @if index($grid-disabled-breakpoints, $bp-name) == null {
+                    @if type-of($bp-value) == list {
+                        @media (min-width: nth($bp-value, 1)) and (max-width: nth($bp-value, 2)) {
+                            [class^="col"].col-#{$i}-#{$current}-#{$bp-name} {
+                                width: calc(100% / #{$current} * #{$i} - #{$gutter});
+                            }
+                        }
+                    }
+                    @else {
+                        @media (max-width: $bp-value) {
+                            [class^="col"].col-#{$i}-#{$current}-#{$bp-name} {
+                                width: calc(100% / #{$current} * #{$i} - #{$gutter});
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

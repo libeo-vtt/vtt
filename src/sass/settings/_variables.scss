@@ -1,0 +1,53 @@
+// --------------------------------- //
+//             Variables             //
+// --------------------------------- //
+
+$document-width: 1140px;
+$spacing-default: 40px;
+$spacing-tablet: 30px;
+$spacing-mobile: 20px;
+
+// ------------------------------------- //
+//             Media queries             //
+// ------------------------------------- //
+
+// Media queries
+$mq-breakpoints: (
+    "mobile" : 767px,
+    "tablet" : (768px, 1023px),
+    "desktop" : (1024px, 1920px),
+    "mobile-tablet": 1023px,
+    "document-width" : $document-width
+);
+
+// Disable breakpoints for grid classes
+$grid-disabled-breakpoints: "mobile-tablet", "document-width";
+
+// ------------------------------ //
+//             Colors             //
+// ------------------------------ //
+
+// Colors
+$c-black: #000;
+$c-white: #fff;
+$c-grey: #eee;
+
+// --------------------------------- //
+//
+$c-bg-document: $c-white;
+$c-bg-default: $c-grey;
+$c-border-default: $c-grey;
+$c-txt-default: $c-black;
+$c-txt-links: $c-black;
+
+// ----------------------------- //
+//             Fonts             //
+// ----------------------------- //
+
+// Fonts
+$ff-arial: Arial, Helvetica, sans-serif;
+$ff-roboto: "Roboto", sans-serif;
+
+// --------------------------------- //
+//
+$ff-default: $ff-roboto;

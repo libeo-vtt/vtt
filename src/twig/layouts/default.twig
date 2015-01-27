@@ -1,0 +1,44 @@
+{# default.twig #}
+<!DOCTYPE html>
+<html>
+<head>
+
+    <title>{{ get_project_name() }} - {{ get_project_version() }}</title>
+
+    <meta charset="UTF-8">
+    <meta name="author" content="lefoy">
+    <meta name="description" content="">
+
+    <!-- X-UA-Compatible -->
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+
+    <!-- Set the viewport width to device width for mobile -->
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <!-- Favicon -->
+    <link rel="shortcut icon" href="img/favicon.ico">
+    <link rel="apple-touch-icon" href="img/favicon.png">
+
+    <!-- Include stylesheets -->
+    {% stylesheet "css/main.css" %}
+
+    <!-- Include Modernizr -->
+    {% script "js/vendor/modernizr.min.js" %}
+    {% script "js/vendor/detectizr.min.js" %}
+
+</head>
+<body class="{{ class }}">
+
+    {% include '../partials/header.twig' %}
+
+    {% block content %}{% endblock %}
+
+    {% include '../partials/footer.twig' %}
+
+    {# google-analytics "XX-XXXXXXXX-X" #}
+
+    <!-- Include app script -->
+    {% script "js/bundle.js" %}
+
+</body>
+</html>

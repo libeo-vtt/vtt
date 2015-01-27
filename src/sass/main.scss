@@ -1,0 +1,19 @@
+// --------------------------------- //
+//             Main file             //
+// --------------------------------- //
+
+// Settings
+@import "settings/variables";
+@import "settings/mixins";
+
+// Vendor
+@import "vendor/*";
+
+// Basic styles
+@import "base/*";
+
+// Layout
+@import "layout/*";
+
+// Modules
+@import "modules/*";

@@ -1,0 +1,85 @@
+// ---------------------------- //
+//             Base             //
+// ---------------------------- //
+
+// Reset box-sizing to border-box
+html {
+    box-sizing: border-box;
+}
+
+// Keep box-sizing inheritance
+*,
+*:before,
+*:after {
+    box-sizing: inherit;
+}
+
+// Keep content-box for images to prevent image resizing
+img {
+    box-sizing: content-box;
+}
+
+// Body styles
+body {
+    overflow-x: hidden;
+    min-width: $document-width;
+    font-family: $ff-default;
+    color: $c-txt-default;
+    background-color: $c-bg-document;
+    @include respond-to(document-width) {
+        min-width: 0;
+    }
+}
+
+// Responsive images, svg and iframes
+img,
+svg,
+iframe {
+    max-width: 100%;
+    height: auto;
+}
+
+// Remove the gap between elements and the bottom of their containers
+audio,
+canvas,
+iframe,
+img,
+svg,
+video {
+    vertical-align: middle;
+}
+
+// Remove default fieldset styles
+fieldset {
+    margin: 0;
+    padding: 0;
+    border: 0;
+}
+
+// Allow only vertical resizing of textareas
+textarea {
+    resize: vertical;
+}
+
+// Default horizontal rule
+hr {
+    margin: 2em 0;
+    border-top: 0;
+    border-bottom: 1px solid $c-border-default;
+    &.hidden {
+        border-bottom-color: transparent;
+    }
+}
+
+// Disable default list style inside navigation
+nav ul {
+    @include reset-list-style;
+}
+
+// Text selection
+::selection,
+::-moz-selection {
+    color: #fff;
+    background: #000;
+    text-shadow: none;
+}

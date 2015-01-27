@@ -1,0 +1,84 @@
+// ------------------------------- //
+//             Commons             //
+// ------------------------------- //
+
+// Hide an element from the screen
+.visuallyhidden {
+    @include visuallyhidden;
+}
+
+// Force element to self-clear its children
+.clearfix {
+    @include clearfix;
+}
+
+// SVG fallback images
+.svg-fallback {
+    display: none;
+    .no-svg & {
+        display: inline;
+    }
+}
+
+// Display SVG wrapper as inline element
+.icon-wrapper {
+    display: inline-block;
+    vertical-align: middle;
+    .no-svg & {
+        display: inline;
+    }
+}
+
+// Keep iframes aspect ratio
+.iframe-wrapper {
+    position: relative;
+    overflow: hidden;
+    height: 0;
+    padding-bottom: (9 / 16 * 100%);
+    iframe {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+    }
+}
+
+// Prevent map scrollwheel zoom
+.map-wrapper.is-locked iframe {
+    pointer-events: none;
+}
+
+// ------------------------------- //
+
+.is-hidden {
+    visibility: hidden;
+}
+
+.is-centered {
+    text-align: center;
+}
+
+.is-text-align-left {
+    text-align: left;
+}
+
+.is-text-align-right {
+    text-align: right;
+}
+
+.is-text-align-center {
+    text-align: center;
+}
+
+.is-bold {
+    font-weight: bold;
+}
+
+.is-italic {
+    font-style: italic;
+}
+
+.is-underline {
+    text-decoration: underline;
+}

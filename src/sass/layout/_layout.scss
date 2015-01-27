@@ -1,0 +1,51 @@
+// ------------------------------ //
+//             Layout             //
+// ------------------------------ //
+
+:first-child {
+    margin-top: 0;
+}
+
+:last-child {
+    margin-bottom: 0;
+}
+
+.l-page-wrapper {
+    position: relative;
+    width: $document-width;
+    margin: 0 auto;
+    padding: 0 $spacing-default;
+    @include respond-to(document-width) {
+        width: auto;
+    }
+    @include respond-to(tablet) {
+        padding: 0 $spacing-tablet;
+    }
+    @include respond-to(mobile) {
+        padding: 0 $spacing-mobile;
+    }
+}
+
+.l-fullwidth {
+    position: relative;
+    left: 50%;
+    width: 100vw;
+    padding: 0 $spacing-default;
+    @include transform(translateX(-50%));
+    @include respond-to(tablet) {
+        padding: 0 $spacing-tablet;
+    }
+    @include respond-to(mobile) {
+        padding: 0 $spacing-mobile;
+    }
+    .ie8 & {
+        left: auto;
+        width: auto;
+        padding: 0;
+        @include transform(translateX(0));
+    }
+}
+
+.l-main-content {
+    @include clearfix;
+}
