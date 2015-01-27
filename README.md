@@ -1,3 +1,3 @@
-# gulp-project
+# vtt-starter-kit
 
-Basic project with Gulp, Sass, Twig, SVG, Browserify, BrowserSync and more
+Starter kit for VTT projects
