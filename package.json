@@ -1,6 +1,6 @@
 {
   "name": "vtt-starter-kit",
-  "version": "0.0.1",
+  "version": "0.1.0",
   "description": "Starter kit for VTT projects",
   "repository": "https://gitlab.libeo.com/vtt/starter-kit",
   "browserify": {
