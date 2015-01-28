@@ -2,6 +2,8 @@
   "name": "vtt-starter-kit",
   "version": "0.1.0",
   "description": "Starter kit for VTT projects",
+  "url": "http://127.0.0.1:3000",
+  "keywords": "vtt, starter, kit",
   "repository": "https://gitlab.libeo.com/vtt/starter-kit",
   "browserify": {
     "transform": [

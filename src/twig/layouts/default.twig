@@ -6,11 +6,18 @@
     <title>{{ get_project_name() }} - {{ get_project_version() }}</title>
 
     <meta charset="UTF-8">
-    <meta name="author" content="lefoy">
-    <meta name="description" content="">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 
-    <!-- X-UA-Compatible -->
-    <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+    <meta name="description" content="{{ get_project_description() }}">
+    <meta name="dcterms.description" content="{{ get_project_description() }}" />
+    <meta name="keywords" content="{{ get_project_keywords() }}" />
+
+    <!-- Open Graph -->
+    <meta property="og:title" content="{{ get_project_name() }}" />
+    <meta property="og:type" content="website" />
+    <meta property="og:image" content="" />
+    <meta property="og:url" content="{{ get_project_url() }}" />
+    <meta property="og:description" content="{{ get_project_description() }}" />
 
     <!-- Set the viewport width to device width for mobile -->
     <meta name="viewport" content="width=device-width, initial-scale=1" />

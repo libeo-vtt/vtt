@@ -39,6 +39,30 @@ customFunctions.push({
 });
 
 /**
+ * get_project_keywords
+ * Return:
+ *     Project keywords from package.json
+ */
+customFunctions.push({
+    name: 'get_project_keywords',
+    func: function(args) {
+        return project.keywords;
+    }
+});
+
+/**
+ * get_project_url
+ * Return:
+ *     Project url from package.json
+ */
+customFunctions.push({
+    name: 'get_project_url',
+    func: function(args) {
+        return project.url;
+    }
+});
+
+/**
  * get_project_repository
  * Return:
  *     Project repository from package.json
