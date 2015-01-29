@@ -66,7 +66,8 @@ hr {
     margin: 2em 0;
     border-top: 0;
     border-bottom: 1px solid $c-border-default;
-    &.hidden {
+    &.is-hidden {
+        display: block;
         border-bottom-color: transparent;
     }
 }

@@ -3,6 +3,7 @@ var _ = require('lodash');
 var waitForImages = require('waitforimages');
 
 module.exports = (function() {
+
     var identifiers = [];
 
     $(window).on('resize', _.debounce(function() {
@@ -28,4 +29,5 @@ module.exports = (function() {
             });
         });
     }, 100)).trigger('resize');
+
 }());

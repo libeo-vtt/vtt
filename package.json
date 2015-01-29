@@ -12,6 +12,7 @@
   },
   "browser": {
     "jquery": "./src/js/vendor/jquery.min.js",
+    "onfontresize": "./src/js/vendor/jquery.onfontresize.js",
     "webfont": "./src/js/vendor/webfont.min.js",
     "waitforimages": "./src/js/vendor/jquery.waitforimages.min.js"
   },
@@ -23,6 +24,10 @@
       "exports": "WebFont"
     },
     "waitforimages": {
+      "depends": "jquery",
+      "exports": null
+    },
+    "onfontresize": {
       "depends": "jquery",
       "exports": null
     }

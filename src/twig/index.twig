@@ -4,9 +4,11 @@
 {% set class = 'homepage' %}
 
 {% block content %}
-<div class="l-content">
+<div class="l-content" role="main">
     <div class="l-page-wrapper">
-        <hr class="hidden">
+        <hr class="is-hidden">
+
+        <h1 class="is-hidden">{{ get_project_name() }}</h1>
 
         {% svg "logo", "300x100" %}
 

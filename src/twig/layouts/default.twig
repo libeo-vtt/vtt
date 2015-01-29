@@ -1,6 +1,6 @@
 {# default.twig #}
 <!DOCTYPE html>
-<html>
+<html lang="fr">
 <head>
 
     <title>{{ get_project_name() }} - {{ get_project_version() }}</title>
@@ -35,6 +35,8 @@
 
 </head>
 <body class="{{ class }}">
+
+    <a href="#skip-content-anchor" class="skip-content-link">Passer au contenu</a>
 
     {% include '../partials/header.twig' %}
 

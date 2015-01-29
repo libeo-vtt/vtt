@@ -1,0 +1,31 @@
+// ------------------------------------- //
+//             Accessibility             //
+// ------------------------------------- //
+
+// Go to content link
+.skip-content-link {
+    @include visuallyhidden;
+    &:focus {
+        overflow: visible;
+        clip: auto;
+        width: auto;
+        height: auto;
+        margin: 6px;
+        padding: 4px 6px;
+    }
+}
+
+// Disable default outline
+:focus {
+    outline: none;
+}
+
+// Better focus outline
+a,
+input,
+button {
+    &:focus:not(.is-hover):not(.is-clicked) {
+        display: inline-block;
+        box-shadow: 0 0 0 2px #fff, 0 0 0 4px #000, 0 0 0 6px #fff;
+    }
+}
