@@ -49,3 +49,23 @@
 .l-main-content {
     @include clearfix;
 }
+
+// ---------------------------- //
+//             Grid             //
+// ---------------------------- //
+
+.grid-default {
+    $gutter: $spacing-default;
+    $margin: 0;
+    $max-columns: 5;
+    $vertical-align: middle;
+    @include grid($gutter, $margin, $max-columns, $vertical-align);
+    @include respond-to(tablet) {
+        $gutter: $spacing-tablet;
+        @include grid($gutter, $margin, $max-columns, $vertical-align);
+    }
+    @include respond-to(mobile) {
+        $gutter: $spacing-mobile;
+        @include grid($gutter, $margin, $max-columns, $vertical-align);
+    }
+}

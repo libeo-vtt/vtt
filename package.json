@@ -17,12 +17,8 @@
     "waitforimages": "./src/js/vendor/jquery.waitforimages.min.js"
   },
   "browserify-shim": {
-    "jquery": {
-      "exports": "$"
-    },
-    "webfont": {
-      "exports": "WebFont"
-    },
+    "jquery": "$",
+    "webfont": "WebFont",
     "waitforimages": {
       "depends": "jquery",
       "exports": null
