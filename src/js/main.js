@@ -1,3 +1,6 @@
+var App = {};
+
+// Vendors
 var $ = require('jquery');
 var waitForImages = require('waitforimages');
 
@@ -6,10 +9,13 @@ var helpers = require('./helpers');
 
 // Webfont
 var Webfont = require('./modules/webfont.js');
-var webfont = Webfont({
+App.Webfont = Webfont({
     fonts: ['Roboto', 'Roboto:bold', 'Roboto:italic']
 });
 
 // Map
 var Map = require('./modules/map.js');
-var map = Map($('.map-wrapper'));
+App.Map = Map($('.map-wrapper'));
+
+// Set global variable
+window.App = App;
