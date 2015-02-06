@@ -1,0 +1,16 @@
+{% extends "../layouts/single-column.twig" %}
+
+{% set title = 'Templates - Widgets' %}
+{% set class = '' %}
+
+{% set templates = true %}
+
+{% block content %}
+
+    <hr class="is-hidden">
+
+    {% include 'partials/templates-navigation.twig' with {active: 'widgets'} %}
+
+    <h1>{{ title }}</h1>
+
+{% endblock %}

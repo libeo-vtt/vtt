@@ -18,7 +18,7 @@ module.exports = {
             logging: false
         },
         svgSprite: {
-            filename: "symbols.svg"
+            filename: 'symbols.svg'
         },
         loremipsum: {
             minRange: 0.75,

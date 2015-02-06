@@ -1,0 +1,16 @@
+// -------------------------------------- //
+//             Templates file             //
+// -------------------------------------- //
+
+.templates-navigation {
+    li {
+        &.is-active {
+            a {
+                font-weight: bold;
+            }
+        }
+        + li {
+            margin-left: 20px;
+        }
+    }
+}

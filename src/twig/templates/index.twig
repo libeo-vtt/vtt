@@ -1,0 +1,16 @@
+{% extends "../layouts/two-columns.twig" %}
+
+{% set title = 'Templates - Home' %}
+{% set class = '' %}
+
+{% set templates = true %}
+
+{% block content %}
+
+    <hr class="is-hidden">
+
+    {% include 'partials/templates-navigation.twig' with {active: 'home'} %}
+
+    <h1>{{ title }}</h1>
+
+{% endblock %}

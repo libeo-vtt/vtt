@@ -7,8 +7,11 @@ var customFunctions = require('../helpers/twig.customFunctions.js');
 var customTags = require('../helpers/twig.customTags.js');
 
 gulp.task('twig', function() {
-    return gulp.src(config.src + 'twig/*.twig')
+    return gulp.src([config.src + 'twig/*.twig', config.src + 'twig/templates/*.twig'], {
+            base: 'src/twig/'
+        })
         .pipe(twig({
+            //data: require('../../' + config.src + 'twig/data.js'),
             functions: customFunctions,
             extend: function(Twig) {
                 return extendTwig(Twig, customTags);
