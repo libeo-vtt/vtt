@@ -2,11 +2,11 @@
 //             Grid             //
 // ---------------------------- //
 
-.grid-default {
+.grid {
     $gutter: $spacing-default;
     $margin: 0;
     $max-columns: 5;
-    $vertical-align: middle;
+    $vertical-align: top;
     @include grid($gutter, $margin, $max-columns, $vertical-align);
     @include respond-to(tablet) {
         $gutter: $spacing-tablet;
@@ -16,4 +16,20 @@
         $gutter: $spacing-mobile;
         @include grid($gutter, $margin, $max-columns, $vertical-align);
     }
+}
+
+.grid-small {
+    $gutter: $spacing-mobile;
+    $margin: 0;
+    $max-columns: 5;
+    $vertical-align: top;
+    @include grid($gutter, $margin, $max-columns, $vertical-align);
+}
+
+.grid-collapsed {
+    $gutter: 0;
+    $margin: 0;
+    $max-columns: 5;
+    $vertical-align: top;
+    @include grid($gutter, $margin, $max-columns, $vertical-align);
 }

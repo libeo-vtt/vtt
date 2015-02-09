@@ -1,9 +1,27 @@
-<nav class="templates-navigation">
+<nav class="l-template-navigation">
     <ul>
-        <li {% if active == "home" %} class="is-active" {% endif %}>
-            <a href="/templates/">Home</a>
+        <li class="menu-project {% if active == "project" %}is-active{% endif %}">
+            <a href="/templates/index.html">Project</a>
         </li>
-        <li {% if active == "widgets" %} class="is-active" {% endif %}>
+        <li class="menu-colors {% if active == "colors" %}is-active{% endif %}">
+            <a href="/templates/colors.html">Couleurs</a>
+        </li>
+        <li class="menu-typography {% if active == "typography" %}is-active{% endif %}">
+            <a href="/templates/typography.html">Typographie</a>
+        </li>
+        <li class="menu-icons {% if active == "icons" %}is-active{% endif %}">
+            <a href="/templates/icons.html">Iconographie</a>
+        </li>
+        <li class="menu-grids {% if active == "grids" %}is-active{% endif %}">
+            <a href="/templates/grids.html">Grilles</a>
+        </li>
+        <li class="menu-navigation {% if active == "navigation" %}is-active{% endif %}">
+            <a href="/templates/navigation.html">Navigation</a>
+        </li>
+        <li class="menu-forms {% if active == "forms" %}is-active{% endif %}">
+            <a href="/templates/forms.html">Formulaires</a>
+        </li>
+        <li class="menu-widgets {% if active == "widgets" %}is-active{% endif %}">
             <a href="/templates/widgets.html">Widgets</a>
         </li>
     </ul>

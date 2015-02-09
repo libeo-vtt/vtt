@@ -1,0 +1,14 @@
+{% extends "../layouts/two-columns.twig" %}
+
+{% set title = 'Templates - Navigation' %}
+{% set class = 'template-navigation' %}
+
+{% set templates = true %}
+
+{% block content %}
+
+    {% include 'partials/templates-navigation.twig' with {active: 'navigation'} %}
+
+    <h1 class="template-title">Navigation</h1>
+
+{% endblock %}

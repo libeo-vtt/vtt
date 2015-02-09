@@ -247,6 +247,9 @@
     margin: $margin 0;
     padding: $margin;
     font-size: 0;
+    @if $gutter == 0 {
+        $gutter: 0px;
+    }
     &.grid-float {
         .grid-wrapper {
             @include clearfix;
