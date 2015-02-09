@@ -3,7 +3,11 @@
 <html lang="fr">
 <head>
 
+    {% if title is empty %}
     <title>{{ get_project_name() }} - {{ get_project_version() }}</title>
+    {% else %}
+    <title>{{ title }}</title>
+    {% endif %}
 
     <meta charset="UTF-8">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
@@ -23,31 +27,37 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
 
     <!-- Favicon -->
-    <link rel="shortcut icon" href="img/favicon.ico">
-    <link rel="apple-touch-icon" href="img/favicon.png">
+    <link rel="shortcut icon" href="/img/favicon.ico">
+    <link rel="apple-touch-icon" href="/img/favicon.png">
 
-    <!-- Include stylesheets -->
-    {% stylesheet "css/main.css" %}
+    <!-- Stylesheets -->
+    {% stylesheet "/css/main.css" %}
 
-    <!-- Include Modernizr -->
-    {% script "js/vendor/modernizr.min.js" %}
-    {% script "js/vendor/detectizr.min.js" %}
+    <!-- Templates styles -->
+    {% if templates == true %}{% stylesheet "/css/templates.css" %}{% endif %}
+
+    <!-- Modernizr & Detectizr -->
+    {% script "/js/vendor/modernizr.min.js" %}
+    {% script "/js/vendor/detectizr.min.js" %}
 
 </head>
 <body class="{{ class }}">
 
     <a href="#skip-content-anchor" class="skip-content-link">Passer au contenu</a>
 
+    <!-- Header -->
     {% include '../partials/header.twig' %}
 
-    {% block content %}{% endblock %}
+    <!-- Content -->
+    {% block page %}{% endblock %}
 
+    <!-- Footer -->
     {% include '../partials/footer.twig' %}
 
     {# google-analytics "XX-XXXXXXXX-X" #}
 
-    <!-- Include javascript bundle -->
-    {% script "js/bundle.js" %}
+    <!-- Javascript bundle -->
+    {% script "/js/bundle.js" %}
 
 </body>
 </html>

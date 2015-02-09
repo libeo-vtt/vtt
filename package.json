@@ -13,17 +13,26 @@
   "browser": {
     "jquery": "./src/js/vendor/jquery.min.js",
     "onfontresize": "./src/js/vendor/jquery.onfontresize.js",
+    "upload": "./src/js/vendor/jquery.upload.js",
     "webfont": "./src/js/vendor/webfont.min.js",
     "waitforimages": "./src/js/vendor/jquery.waitforimages.min.js"
   },
   "browserify-shim": {
-    "jquery": "$",
-    "webfont": "WebFont",
-    "waitforimages": {
+    "jquery": {
+      "exports": "$"
+    },
+    "onfontresize": {
       "depends": "jquery",
       "exports": null
     },
-    "onfontresize": {
+    "upload": {
+      "depends": "jquery",
+      "exports": null
+    },
+    "webfont": {
+      "exports": "WebFont"
+    },
+    "waitforimages": {
       "depends": "jquery",
       "exports": null
     }

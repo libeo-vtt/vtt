@@ -1,0 +1,151 @@
+// ----------------------------------- //
+//             Formulaires             //
+// ----------------------------------- //
+
+.field + .field {
+    margin: 1em 0;
+}
+
+fieldset {
+    padding: 0;
+    border: 0;
+    .error-message-explanation span {
+        top: 0;
+        padding: 3px 8px 2px;
+    }
+}
+
+input,
+textarea,
+select {
+    z-index: 1;
+    position: relative;
+}
+
+input[type="text"],
+textarea,
+select {
+    display: block;
+    min-width: 290px;
+    padding: 4px 6px;
+    border: 1px solid $c-border-default;
+    @include border-radius(3px);
+}
+
+textarea {
+    width: 80%;
+    min-height: 150px;
+}
+
+input[type="file"] {
+    display: block;
+    margin: 10px 0;
+    @include rem-typo(16px, 16px);
+}
+
+.radio-field,
+.checkbox-field {
+    position: relative;
+    margin: 3px 0;
+    padding-left: 25px;
+    input {
+        position: absolute;
+        top: 3px;
+        left: 1px;
+    }
+}
+
+.format,
+.required {
+    font-size: 0.8em;
+    opacity: 0.6;
+}
+
+.format {
+    display: block;
+    width: 290px;
+    padding-bottom: 5px;
+    font-style: italic;
+}
+
+// ------------------------------ //
+//             Errors             //
+// ------------------------------ //
+
+.errors {
+    ul {
+        margin-bottom: 20px;
+        padding: 0;
+        list-style-type: none;
+        li:before {
+            display: none;
+        }
+    }
+    a {
+        text-decoration: none;
+        color: $c-alert;
+        &:before {
+            content: "- ";
+        }
+        &:hover {
+            text-decoration: underline;
+        }
+    }
+}
+
+.field.error input[type="text"],
+.field.error input[type="file"],
+.field.error .radio-field-wrapper,
+.field.error .checkbox-field-wrapper,
+.field.error textarea,
+.field.error select {
+    border: 1px solid $c-alert;
+    @include border-radius(3px);
+}
+
+.error-message {
+    color: $c-alert;
+}
+
+.fields .error-message-explanation {
+    display: block;
+    span {
+        display: inline-block;
+        position: relative;
+        top: 3px;
+        padding: 3px 8px 5px;
+        font-size: 0.9em;
+        color: $c-white;
+        border-top-left-radius: 3px;
+        border-top-right-radius: 3px;
+        background-color: $c-alert;
+    }
+}
+
+.lbo-aif {
+    display: block;
+    position: relative;
+    padding: 8px 0 2px 25px;
+    .btn-supprimer {
+        display: block;
+        position: absolute;
+        top: 60%;
+        left: 0;
+        width: 20px;
+        height: 20px;
+        border: 0;
+        background-color: $c-txt-default;
+        @include border-radius(50%);
+        @include transform(translateY(-50%));
+        &:before {
+            content: "x";
+            display: block;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            color: $c-white;
+            @include rem-typo(14px, 14px);
+            @include transform(translate(-50%, -50%));
+        }
+    }
+}

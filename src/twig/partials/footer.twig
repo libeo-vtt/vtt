@@ -1,5 +1,17 @@
+<!-- Templates footer -->
+{% if templates == true %}
+<footer class="l-footer l-template-footer">
+    <div class="l-page-wrapper is-text-align-right">
+        version {{ get_project_version() }}
+    </div>
+</footer>
+{% endif %}
+
+<!-- Default footer -->
+{% if templates != true %}
 <footer class="l-footer">
     <div class="l-page-wrapper">
 
     </div>
 </footer>
+{% endif %}

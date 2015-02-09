@@ -51,6 +51,22 @@
 
 // ------------------------------- //
 
+.table {
+    display: table;
+    width: 100%;
+}
+
+.tr {
+    display: table-row;
+}
+
+.td,
+.th {
+    display: table-cell;
+}
+
+// ------------------------------- //
+
 .is-hidden {
     display: none;
 }

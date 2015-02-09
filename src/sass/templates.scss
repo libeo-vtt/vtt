@@ -1,0 +1,255 @@
+// --------------------------------- //
+//             Templates             //
+// --------------------------------- //
+
+// Settings
+@import "settings/variables";
+@import "settings/mixins";
+
+// --------------------------------- //
+
+hr {
+    border-color: $c-grey;
+}
+
+.l-template-header {
+    padding: 10px 0;
+    color: $c-white;
+    background-color: $c-black;
+}
+
+.l-template-footer {
+    margin-top: 40px;
+    padding: 10px 0;
+    color: $c-grey;
+}
+
+.l-template-navigation {
+    position: relative;
+    left: 50%;
+    width: 100vw;
+    padding: 10px 0;
+    background-color: $c-grey-light;
+    @include transform(translateX(-50%));
+    ul {
+        position: relative;
+        width: $document-width;
+        margin: 0 auto;
+        padding: 0 10px;
+        @include respond-to(document-width) {
+            width: auto;
+        }
+        @include respond-to(mobile) {
+            padding: 0 20px;
+        }
+    }
+    li {
+        display: inline-block;
+        vertical-align: bottom;
+        width: 125px;
+        margin: 10px 0;
+        @include respond-to(mobile) {
+            display: block;
+            width: auto;
+        }
+        a {
+            display: block;
+            font-weight: bold;
+            text-align: center;
+            text-transform: uppercase;
+            @include rem-typo(14px);
+            @include respond-to(mobile) {
+                text-align: left;
+            }
+            &:hover {
+                text-decoration: none;
+            }
+        }
+        a:before {
+            content: "";
+            display: block;
+            width: 65px;
+            height: 65px;
+            margin: 0 auto 10px;
+            border: 5px solid $c-grey-light;
+            border-radius: 50%;
+            background-color: $c-white;
+            background-repeat: no-repeat;
+            background-position: center;
+            @include respond-to(mobile) {
+                display: inline-block;
+                vertical-align: top;
+                width: 0;
+                height: 0;
+                margin-right: 10px;
+                border: 10px solid $c-white;
+                background-image: none;
+            }
+        }
+        &.is-active a:before {
+            border-color: $c-black;
+        }
+        &.menu-colors a:before {
+            background-image: url("../img/templates/menu-colors.png");
+        }
+        &.menu-forms a:before {
+            background-image: url("../img/templates/menu-forms.png");
+        }
+        &.menu-grids a:before {
+            background-image: url("../img/templates/menu-grids.png");
+        }
+        &.menu-icons a:before {
+            background-image: url("../img/templates/menu-icons.png");
+        }
+        &.menu-navigation a:before {
+            background-image: url("../img/templates/menu-navigation.png");
+        }
+        &.menu-project a:before {
+            background-image: url("../img/templates/menu-project.png");
+        }
+        &.menu-typography a:before {
+            background-image: url("../img/templates/menu-typography.png");
+        }
+        &.menu-widgets a:before {
+            background-image: url("../img/templates/menu-widgets.png");
+        }
+    }
+}
+
+.template-title {
+    margin: 20px 0;
+    border-bottom: 1px solid $c-grey;
+    header > & {
+        margin-top: 0;
+    }
+}
+
+.template-title-offset {
+    margin-top: 23px;
+}
+
+.template-table {
+    .td {
+        padding: 10px 15px;
+    }
+    .tr:nth-child(2n-1) .td {
+        background-color: $c-grey-light;
+    }
+}
+
+// ------------------------------ //
+//             Colors             //
+// ------------------------------ //
+
+.template-colors-wrapper {
+    font-size: 0;
+    .template-color {
+        display: inline-block;
+        vertical-align: middle;
+        width: 25%;
+        height: 100px;
+        text-align: center;
+        @include rem-typo(16px, 100px);
+    }
+}
+
+// ----------------------------- //
+//             Icons             //
+// ----------------------------- //
+
+.template-icons-wrapper {
+    font-size: 0;
+    .template-icon {
+        display: inline-block;
+        vertical-align: middle;
+        @include rem-typo(16px, 100px);
+    }
+}
+
+// ---------------------------------- //
+//             Typography             //
+// ---------------------------------- //
+
+.template-typography-no-context {
+    position: relative;
+    padding-left: 100px;
+    h2:before {
+        content: "h2";
+    }
+    h3:before {
+        content: "h3";
+    }
+    h4:before {
+        content: "h4";
+    }
+    h5:before {
+        content: "h5";
+    }
+    h6:before {
+        content: "h6";
+    }
+    p:before {
+        content: "p";
+    }
+    p.intro:before {
+        content: "intro";
+    }
+    ul:before {
+        content: "ul";
+    }
+    ul ul:before,
+    ol ol:before,
+    ul ol:before,
+    ol ul:before {
+        content: "";
+        display: none;
+    }
+    ol:before {
+        content: "ol";
+    }
+    blockquote:before {
+        content: "blockquote";
+        font-style: normal;
+    }
+}
+
+.template-typography-no-context h1,
+.template-typography-no-context h2,
+.template-typography-no-context h3,
+.template-typography-no-context h4,
+.template-typography-no-context h5,
+.template-typography-no-context h6,
+.template-typography-no-context p,
+.template-typography-no-context ul,
+.template-typography-no-context ol,
+.template-typography-no-context blockquote {
+    position: relative;
+    &:before {
+        content: "h1";
+        display: block;
+        position: absolute;
+        top: 50%;
+        left: -100px;
+        width: 80px;
+        padding-right: 20px;
+        font-size: 14px;
+        font-weight: normal;
+        text-align: right;
+        color: $c-grey;
+        border-right: 1px solid $c-grey;
+        @include transform(translateY(-50%));
+    }
+}
+
+// ----------------------------- //
+//             Grids             //
+// ----------------------------- //
+
+.template-grids-wrapper {
+    [class^="col"] {
+        height: 100px;
+        line-height: 100px;
+        text-align: center;
+        background-color: $c-grey-light;
+    }
+}

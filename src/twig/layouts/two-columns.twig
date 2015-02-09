@@ -1,0 +1,16 @@
+{% extends "default.twig" %}
+
+{% block page %}
+<div class="l-page" role="main">
+    <div class="l-page-wrapper">
+
+        <div class="l-content">
+            {% block content %}{% endblock %}
+        </div>
+        <div class="l-sidebar">
+            {% block sidebar %}{% endblock %}
+        </div>
+
+    </div>
+</div>
+{% endblock %}
