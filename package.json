@@ -14,6 +14,12 @@
     "jquery": "./src/js/vendor/jquery.min.js",
     "onfontresize": "./src/js/vendor/jquery.onfontresize.js",
     "upload": "./src/js/vendor/jquery.upload.js",
+    "buttonize": "./src/js/vendor/jquery.buttonize.js",
+    "eminize": "./src/js/vendor/jquery.eminize.js",
+    "focusable": "./src/js/vendor/jquery.focusable.js",
+    "vtt-folder": "./src/js/vendor/vtt.folder.js",
+    "vtt-slider": "./src/js/vendor/vtt.slider.js",
+    "vtt-tab": "./src/js/vendor/vtt.tab.js",
     "webfont": "./src/js/vendor/webfont.min.js",
     "waitforimages": "./src/js/vendor/jquery.waitforimages.min.js"
   },
@@ -25,7 +31,31 @@
       "depends": "jquery",
       "exports": null
     },
+    "buttonize": {
+      "depends": "jquery",
+      "exports": null
+    },
+    "eminize": {
+      "depends": "jquery",
+      "exports": null
+    },
+    "focusable": {
+      "depends": "jquery",
+      "exports": null
+    },
     "upload": {
+      "depends": "jquery",
+      "exports": null
+    },
+    "vtt-folder": {
+      "depends": "jquery",
+      "exports": null
+    },
+    "vtt-slider": {
+      "depends": "jquery",
+      "exports": null
+    },
+    "vtt-tab": {
       "depends": "jquery",
       "exports": null
     },

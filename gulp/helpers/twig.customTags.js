@@ -168,6 +168,12 @@ customTags.push({
     output: function(args) {
         var locked = (args[1] === 'locked' ? ' is-locked' : ''),
             output = '<div class="iframe-wrapper map-wrapper' + locked + '"><iframe width="100%" height="100%" frameborder="0" src="https://www.google.com/maps/embed/v1/place?q=' + args[0] + '&key=' + config.defaults.googleMap.apiKey + '"></iframe></div>';
+
+        // Prevent map display without API
+        if (config.defaults.googleMap.apiKey === 'XXXXXXXXXXXXXXXXXXXXXXXXXXX-XX-XXXXXXXX') {
+            output = '<p>You must change the default API key in <code>/gulp/config.js</code></p>';
+        }
+
         return output;
     }
 });

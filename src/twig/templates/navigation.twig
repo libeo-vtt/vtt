@@ -8,4 +8,12 @@
 
     <h1 class="template-title">Navigation</h1>
 
+    <h2>Navigation principale</h2>
+    {% include "../partials/navigation-main.twig" %}
+
+    <hr>
+
+    <h2>Navigation principale (fullwidth)</h2>
+    {% include "../partials/navigation-main.twig" with {class: 'is-fullwidth'} %}
+
 {% endblock %}

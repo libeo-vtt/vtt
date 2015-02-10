@@ -22,6 +22,12 @@
     outline: none;
     // Custom outline color
     [data-state="keyboard"] & {
-        box-shadow: 0 0 0 2px #fff, 0 0 0 4px #000, 0 0 0 6px #fff !important;
+        box-shadow: 0 0 0 1px #fff, 0 0 0 3px #000, 0 0 0 4px #fff !important;
     }
+}
+
+// Custom inline links outline color
+[data-state="keyboard"] p > a:focus {
+    text-decoration: none;
+    background-color: $c-bg-document;
 }
