@@ -3,29 +3,25 @@
 // ------------------------------------- //
 
 // Go to content link
+.skip-menu-link,
 .skip-content-link {
+    z-index: 100;
+    position: fixed;
+    top: 6px;
+    left: 6px;
+    background-color: $c-white;
     @include visuallyhidden;
+    // Reset style on focus
     &:focus {
-        overflow: visible;
-        clip: auto;
-        width: auto;
-        height: auto;
-        margin: 6px;
-        padding: 4px 6px;
+        @include visuallyhidden(false);
     }
 }
 
 // Disable default outline
 :focus {
     outline: none;
-}
-
-// Better focus outline
-a,
-input,
-button {
-    &:focus:not(.is-hover):not(.is-clicked) {
-        display: inline-block;
-        box-shadow: 0 0 0 2px #fff, 0 0 0 4px #000, 0 0 0 6px #fff;
+    // Custom outline color
+    [data-state="keyboard"] & {
+        box-shadow: 0 0 0 2px #fff, 0 0 0 4px #000, 0 0 0 6px #fff !important;
     }
 }

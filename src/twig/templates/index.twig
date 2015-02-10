@@ -1,13 +1,10 @@
-{% extends "../layouts/two-columns.twig" %}
+{% extends "../layouts/single-column.twig" %}
 
 {% set title = 'Templates - Home' %}
 {% set class = 'template-home' %}
-
 {% set templates = true %}
 
 {% block content %}
-
-    {% include 'partials/templates-navigation.twig' with {active: 'project'} %}
 
     <div class="l-template-content">
         <div class="grid">

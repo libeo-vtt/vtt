@@ -15,4 +15,10 @@ module.exports = (function() {
         }
     });
 
+    $body.on('mousedown', function(e) {
+        if ($body.attr('data-state')) {
+            $body.removeAttr('data-state');
+        }
+    });
+
 }());

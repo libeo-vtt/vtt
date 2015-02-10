@@ -1,13 +1,10 @@
-{% extends "../layouts/two-columns.twig" %}
+{% extends "../layouts/single-column.twig" %}
 
 {% set title = 'Templates - Typographie' %}
 {% set class = 'template-typography' %}
-
 {% set templates = true %}
 
 {% block content %}
-
-    {% include 'partials/templates-navigation.twig' with {active: 'typography'} %}
 
     <h1 class="template-title">Typographie</h1>
 
@@ -19,9 +16,7 @@
         <h5>Edge case d'écriture de contenu</h5>
         <h6>Le presque jamais existant H6 dans toute sa grandeur</h6>
         <p>Lorem ipsum dolor sit amet,
-            <em>consectetur</em>adipiscing elit.
-            <strong>Nulla viverra</strong>placerat tincidunt. Donec ornare condimentum odio tempor malesuada. Proin pretium ultrices diam, sit amet fermentum lacus tristique fringilla. Aenean tincidunt varius dolor tincidunt cursus. Ut sem velit, pharetra sed libero ut, lacinia luctus risus. Quisque <i>non lacus malesuada</i>, sollicitudin orci ac, gravida diam. <a href="#N">unc placerat sagittis</a> ultrices. Sed malesuada neque id placerat sagittis. Pellentesque elit libero, adipiscing et ultrices mollis, mollis eu mauris. Mauris quis ullamcorper mauris. Sed sem ipsum, cursus nec tincidunt id, posuere lobortis libero. Sed condimentum diam ac velit <u>gravida posuere</u>. Morbi lacinia viverra iaculis. Donec porttitor lobortis pretium. Aliquam <b>nibh odio</b>, porttitor sed posuere eget, tincidunt eget velit.
-            <q>Sed eget felis quis sem consectetur placerat et ac erat.</q>
+            <em>consectetur</em> adipiscing elit.<strong>Nulla viverra</strong> placerat tincidunt. Donec ornare condimentum odio tempor malesuada. Proin pretium ultrices diam, sit amet fermentum lacus tristique fringilla. Aenean tincidunt varius dolor tincidunt cursus. Ut sem velit, pharetra sed libero ut, lacinia luctus risus. Quisque <i>non lacus malesuada</i>, sollicitudin orci ac, gravida diam. <a href="#N">unc placerat sagittis</a> ultrices. Sed malesuada neque id placerat sagittis. Pellentesque elit libero, adipiscing et ultrices mollis, mollis eu mauris. Mauris quis ullamcorper mauris. Sed sem ipsum, cursus nec tincidunt id, posuere lobortis libero. Sed condimentum diam ac velit <u>gravida posuere</u>. Morbi lacinia viverra iaculis. Donec porttitor lobortis pretium. Aliquam <b>nibh odio</b>, porttitor sed posuere eget, tincidunt eget velit.<q>Sed eget felis quis sem consectetur placerat et ac erat.</q>
         </p>
         <ul>
             <li>Lorem ipsum dolor sit amet.</li>
@@ -71,10 +66,7 @@
         <p class="intro">Texte d'intro avec la class .intro ou .heading Curabitur congue arcu eget ipsum pretium, at vehicula ante iaculis. Sed quis diam ut ante luctus mattis. Donec facilisis nulla in lorem ultricies eleifend. Aliquam erat volutpat. Donec dictum neque augue, vitae vulputate nibh auctor nec. Pellentesque commodo velit a elit bibendum elementum ac ac risus.</p>
         <h2>Sed quis diam ut ante luctus mattis. Donec facilisis nulla in lorem ultricies eleifend</h2>
         <p>
-            Lorem ipsum dolor sit amet,
-            <em>consectetur</em>adipiscing elit.
-            <strong>Nulla viverra</strong>placerat tincidunt. Donec ornare condimentum odio tempor malesuada. Proin pretium ultrices diam, sit amet fermentum lacus tristique fringilla. Aenean tincidunt varius dolor tincidunt cursus. Ut sem velit, pharetra sed libero ut, lacinia luctus risus. Quisque <i>non lacus malesuada</i>, sollicitudin orci ac, gravida diam. <a href="#">unc placerat sagittis</a> ultrices. Sed malesuada neque id placerat sagittis. Pellentesque elit libero, adipiscing et ultrices mollis, mollis eu mauris. Mauris quis ullamcorper mauris. Sed sem ipsum, cursus nec tincidunt id, posuere lobortis libero. Sed condimentum diam ac velit <u>gravida posuere</u>. Morbi lacinia viverra iaculis. Donec porttitor lobortis pretium. Aliquam <b>nibh odio</b>, porttitor sed posuere eget, tincidunt eget velit.
-            <q>Sed eget felis quis sem consectetur placerat et ac erat.</q>
+            Lorem ipsum dolor sit amet, <em>consectetur</em> adipiscing elit. <strong>Nulla viverra</strong> placerat tincidunt. Donec ornare condimentum odio tempor malesuada. Proin pretium ultrices diam, sit amet fermentum lacus tristique fringilla. Aenean tincidunt varius dolor tincidunt cursus. Ut sem velit, pharetra sed libero ut, lacinia luctus risus. Quisque <i>non lacus malesuada</i>, sollicitudin orci ac, gravida diam. <a href="#">unc placerat sagittis</a> ultrices. Sed malesuada neque id placerat sagittis. Pellentesque elit libero, adipiscing et ultrices mollis, mollis eu mauris. Mauris quis ullamcorper mauris. Sed sem ipsum, cursus nec tincidunt id, posuere lobortis libero. Sed condimentum diam ac velit <u>gravida posuere</u>. Morbi lacinia viverra iaculis. Donec porttitor lobortis pretium. Aliquam <b>nibh odio</b>, porttitor sed posuere eget, tincidunt eget velit. <q>Sed eget felis quis sem consectetur placerat et ac erat.</q>
         </p>
         <h3>Sed quis diam ut ante luctus mattis. Donec facilisis nulla in lorem ultricies eleifend</h3>
         <p>Curabitur congue arcu eget ipsum pretium, at vehicula ante iaculis. Sed quis diam ut ante luctus mattis. Donec facilisis nulla in lorem ultricies eleifend. Aliquam erat volutpat. Donec dictum neque augue, vitae vulputate nibh auctor nec. Pellentesque commodo velit a elit bibendum elementum ac ac risus.</p>
@@ -95,6 +87,5 @@
         <h6>Curabitur congue arcu eget ipsum pretium, at vehicula ante iaculis Sed quis diam ut ante luctus mattis. Donec facilisis nulla in lorem ultricies eleifend</h6>
         <p>Curabitur congue arcu eget ipsum pretium, at vehicula ante iaculis. Sed quis diam ut ante luctus mattis. Donec facilisis nulla in lorem ultricies eleifend. Aliquam erat volutpat. Donec dictum neque augue, vitae vulputate nibh auctor nec. Pellentesque commodo velit a elit bibendum elementum ac ac risus.</p>
     </div>
-
 
 {% endblock %}

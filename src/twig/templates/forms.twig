@@ -1,13 +1,10 @@
-{% extends "../layouts/two-columns.twig" %}
+{% extends "../layouts/single-column.twig" %}
 
 {% set title = 'Templates - Formulaires' %}
 {% set class = 'template-forms' %}
-
 {% set templates = true %}
 
 {% block content %}
-
-    {% include 'partials/templates-navigation.twig' with {active: 'forms'} %}
 
     <h1 class="template-title">Formulaires</h1>
 
@@ -132,22 +129,14 @@
                     <div class="errors">
                         <h3 id="errors-title">Il y a 7 champs erronés</h3>
                         <ul>
-                            <li><a href="#nom-2">Nom est obligatoire.</a>
-                            </li>
-                            <li><a href="#prenom-2">Prénom est obligatoire.</a>
-                            </li>
-                            <li><a href="#telephone-2">Téléphone est obligatoire.</a>
-                            </li>
-                            <li><a href="#courriel-2">Courriel est obligatoire.</a>
-                            </li>
-                            <li><a href="#message-2">Message est obligatoire.</a>
-                            </li>
-                            <li><a href="#secteur-2">Secteur est obligatoire.</a>
-                            </li>
-                            <li><a href="#radio-2">Radio est obligatoire.</a>
-                            </li>
-                            <li><a href="#checkbox-2">Checkbox est obligatoire.</a>
-                            </li>
+                            <li><a href="#nom-2">Nom est obligatoire.</a></li>
+                            <li><a href="#prenom-2">Prénom est obligatoire.</a></li>
+                            <li><a href="#telephone-2">Téléphone est obligatoire.</a></li>
+                            <li><a href="#courriel-2">Courriel est obligatoire.</a></li>
+                            <li><a href="#message-2">Message est obligatoire.</a></li>
+                            <li><a href="#secteur-2">Secteur est obligatoire.</a></li>
+                            <li><a href="#radio-2">Radio est obligatoire.</a></li>
+                            <li><a href="#checkbox-2">Checkbox est obligatoire.</a></li>
                         </ul>
                     </div>
 

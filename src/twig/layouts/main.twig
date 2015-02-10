@@ -43,16 +43,25 @@
 </head>
 <body class="{{ class }}">
 
+    <a href="#skip-menu-anchor" class="skip-menu-link">Passer au menu</a>
     <a href="#skip-content-anchor" class="skip-content-link">Passer au contenu</a>
 
     <!-- Header -->
-    {% include '../partials/header.twig' %}
+    {% if templates == true %}
+        {% include '../templates/partials/header.twig' %}
+    {% else %}
+        {% include '../partials/header.twig' %}
+    {% endif %}
 
     <!-- Content -->
     {% block page %}{% endblock %}
 
     <!-- Footer -->
-    {% include '../partials/footer.twig' %}
+    {% if templates == true %}
+        {% include '../templates/partials/footer.twig' %}
+    {% else %}
+        {% include '../partials/footer.twig' %}
+    {% endif %}
 
     {# google-analytics "XX-XXXXXXXX-X" #}
 

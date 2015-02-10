@@ -1,4 +1,3 @@
-exports.betterfocus = require('./betterfocus');
 exports.equalheight = require('./equalheight');
 exports.external_links = require('./external_links');
 exports.keyboard_navigation = require('./keyboard_navigation');
