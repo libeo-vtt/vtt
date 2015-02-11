@@ -1,34 +1,29 @@
-{% extends "../layouts/two-columns.twig" %}
+{% extends "../layouts/single-column.twig" %}
 
 {% set title = 'Templates - Formulaires' %}
 {% set class = 'template-forms' %}
-
 {% set templates = true %}
 
 {% block content %}
-
-    {% include 'partials/templates-navigation.twig' with {active: 'forms'} %}
 
     <h1 class="template-title">Formulaires</h1>
 
     <div class="grid">
         <div class="grid-wrapper">
-            <div class="col-1-2">
-                <form enctype="multipart/form-data" method="GET" action="#">
-                    <div class="errors"></div>
-
+            <div class="col-1-2 col-1-1-mobile">
+                <form enctype="multipart/form-data" method="GET" action="#" data-errors-message="Il y a {n} erreur{s}." data-errors-prefix="Erreur - ">
                     <div class="fields" id="fields">
                         <div class="field nom">
                             <label for="nom">Nom
                                 <span class="required">(obligatoire)</span>
                             </label>
-                            <input type="text" id="nom" value="" />
+                            <input type="text" id="nom" value="" data-validate="!empty alphaNumeric" data-message-empty="Le nom est obligatoire." data-message-alphaNumeric="Ceci est un message d'erreur juste vraiment trop long pour faire des tests. Ça va me permettre de tester lorsque le message tomber sur plusieurs lignes." />
                         </div>
                         <div class="field prenom">
                             <label for="prenom">Prénom
                                 <span class="required">(obligatoire)</span>
                             </label>
-                            <input type="text" id="prenom" value="" />
+                            <input type="text" id="prenom" value="" data-validate="!empty" data-message-empty="Le prénom est obligatoire." />
                         </div>
                         <div class="field telephone">
                             <label for="telephone">
@@ -36,25 +31,26 @@
                                 <span class="required">(obligatoire)</span>
                                 <span class="format">Exemple : 418-934-1234</span>
                             </label>
-                            <input type="text" id="telephone" maxlength="12" value="418-934-1234" />
+                            <input type="text" id="telephone" value="" data-validate="nanpPhone" data-message-nanpPhone="Le téléphone doit être valide." />
                         </div>
                         <div class="field courriel">
                             <label for="courriel">Courriel
                                 <span class="required">(obligatoire)</span>
                             </label>
-                            <input type="text" id="courriel" value="" />
+                            <input type="text" id="courriel" value="" data-validate="!empty email" data-message-empty="Le courriel est obligatoire." data-message-email="Le courriel doit être valide." />
                         </div>
                         <div class="field message">
                             <label for="message">Message
                                 <span class="required">(obligatoire)</span>
                             </label>
-                            <textarea id="message"></textarea>
+                            <textarea id="message" data-validate="!empty" data-message-empty="Le message est obligatoire."></textarea>
                         </div>
                         <div class="field secteur">
                             <label for="secteur">Choisissez votre secteur d'activité
                                 <span class="required">(obligatoire)</span>
                             </label>
-                            <select id="secteur">
+                            <select id="secteur" data-validate="!empty" data-message-empty="Le secteur d'activité est obligatoire.">
+                                <option value="">-</option>
                                 <option value="1">Administration et Gestion</option>
                                 <option value="2">Agriculture, Pêcheries et Alimentation</option>
                                 <option value="3">Architecture, Arpentage, Urbanisme</option>
@@ -84,40 +80,44 @@
                         </div>
                         <div class="field banniere">
                             <label for="banniere">Veuillez téléverser une image au format bannière de 580 pixels par 200 pixels, d'un poids maximal de 2 Mo.</label>
-                            <input type="file" id="banniere" />
+                            <input type="file" id="banniere" data-validate="!empty" data-message-empty="Le champ fichier est obligatoire." />
                         </div>
-                        <fieldset class="field radio" id="radio">
+                        <fieldset class="field radio" id="radio" data-validate="!empty" data-message-empty="Les boutons radio sont obligatoires.">
                             <legend>Boutons radio
                                 <span class="required">(obligatoire)</span>
                             </legend>
-                            <div class="radio-field">
-                                <label for="radio1">Lorem ipsum dolor sit amet</label>
-                                <input type="radio" name="radio" id="radio1" value="1" />
-                            </div>
-                            <div class="radio-field">
-                                <label for="radio2">Donec id elit non mi porta gravida at eget metus. Etiam porta sem malesuada magna mollis euismod.</label>
-                                <input type="radio" name="radio" id="radio2" value="2" />
-                            </div>
-                            <div class="radio-field">
-                                <label for="radio3">Lorem ipsum dolor sit amet</label>
-                                <input type="radio" name="radio" id="radio3" value="3" />
+                            <div class="radio-field-wrapper">
+                                <div class="radio-field">
+                                    <label for="radio1">Lorem ipsum dolor sit amet</label>
+                                    <input type="radio" name="radio" id="radio1" value="1" />
+                                </div>
+                                <div class="radio-field">
+                                    <label for="radio2">Donec id elit non mi porta gravida at eget metus. Etiam porta sem malesuada magna mollis euismod.</label>
+                                    <input type="radio" name="radio" id="radio2" value="2" />
+                                </div>
+                                <div class="radio-field">
+                                    <label for="radio3">Lorem ipsum dolor sit amet</label>
+                                    <input type="radio" name="radio" id="radio3" value="3" />
+                                </div>
                             </div>
                         </fieldset>
-                        <fieldset class="field checkbox" id="checkbox">
+                        <fieldset class="field checkbox" id="checkbox" data-validate="!empty above" data-compare-above="1" data-message-above="Vous devez cocher au moins 2 cases." data-message-empty="Les cases à cocher sont obligatoires.">
                             <legend>Cases à cocher
                                 <span class="required">(obligatoire)</span>
                             </legend>
-                            <div class="checkbox-field">
-                                <label for="checkbox1">Lorem ipsum dolor sit amet</label>
-                                <input type="checkbox" name="checkbox" id="checkbox1" value="1" />
-                            </div>
-                            <div class="checkbox-field">
-                                <label for="checkbox2">Donec id elit non mi porta gravida at eget metus. Etiam porta sem malesuada magna mollis euismod.</label>
-                                <input type="checkbox" name="checkbox" id="checkbox2" value="2" />
-                            </div>
-                            <div class="checkbox-field">
-                                <label for="checkbox3">Lorem ipsum dolor sit amet</label>
-                                <input type="checkbox" name="checkbox" id="checkbox3" value="3" />
+                            <div class="checkbox-field-wrapper">
+                                <div class="checkbox-field">
+                                    <label for="checkbox1">Lorem ipsum dolor sit amet</label>
+                                    <input type="checkbox" name="checkbox" id="checkbox1" value="1" />
+                                </div>
+                                <div class="checkbox-field">
+                                    <label for="checkbox2">Donec id elit non mi porta gravida at eget metus. Etiam porta sem malesuada magna mollis euismod.</label>
+                                    <input type="checkbox" name="checkbox" id="checkbox2" value="2" />
+                                </div>
+                                <div class="checkbox-field">
+                                    <label for="checkbox3">Lorem ipsum dolor sit amet</label>
+                                    <input type="checkbox" name="checkbox" id="checkbox3" value="3" />
+                                </div>
                             </div>
                         </fieldset>
                     </div>
@@ -127,32 +127,25 @@
                     </div>
                 </form>
             </div>
-            <div class="col-1-2">
+            <div class="col-1-2 col-1-1-mobile">
+                <!--
                 <form enctype="multipart/form-data" method="post" action="#">
                     <div class="errors">
                         <h3 id="errors-title">Il y a 7 champs erronés</h3>
                         <ul>
-                            <li><a href="#nom-2">Nom est obligatoire.</a>
-                            </li>
-                            <li><a href="#prenom-2">Prénom est obligatoire.</a>
-                            </li>
-                            <li><a href="#telephone-2">Téléphone est obligatoire.</a>
-                            </li>
-                            <li><a href="#courriel-2">Courriel est obligatoire.</a>
-                            </li>
-                            <li><a href="#message-2">Message est obligatoire.</a>
-                            </li>
-                            <li><a href="#secteur-2">Secteur est obligatoire.</a>
-                            </li>
-                            <li><a href="#radio-2">Radio est obligatoire.</a>
-                            </li>
-                            <li><a href="#checkbox-2">Checkbox est obligatoire.</a>
-                            </li>
+                            <li><a href="#nom-2">Nom est obligatoire.</a></li>
+                            <li><a href="#prenom-2">Prénom est obligatoire.</a></li>
+                            <li><a href="#telephone-2">Téléphone est obligatoire.</a></li>
+                            <li><a href="#courriel-2">Courriel est obligatoire.</a></li>
+                            <li><a href="#message-2">Message est obligatoire.</a></li>
+                            <li><a href="#secteur-2">Secteur est obligatoire.</a></li>
+                            <li><a href="#radio-2">Radio est obligatoire.</a></li>
+                            <li><a href="#checkbox-2">Checkbox est obligatoire.</a></li>
                         </ul>
                     </div>
 
                     <div class="fields" id="fields-error">
-                        <div class="field nom error">
+                        <div class="field nom is-error">
                             <label for="nom">
                                 <span class="error-message">Erreur -</span>
                                 Nom
@@ -163,7 +156,7 @@
                             </label>
                             <input type="text" id="nom-2" value="" />
                         </div>
-                        <div class="field prenom error">
+                        <div class="field prenom is-error">
                             <label for="prenom">
                                 <span class="error-message">Erreur -</span>
                                 Prénom
@@ -174,7 +167,7 @@
                             </label>
                             <input type="text" id="prenom-2" value="" />
                         </div>
-                        <div class="field telephone error">
+                        <div class="field telephone is-error">
                             <label for="telephone">
                                 <span class="error-message">Erreur -</span>
                                 Téléphone
@@ -186,7 +179,7 @@
                             </label>
                             <input type="text" id="telephone-2" maxlength="12" value="418-934-1234" />
                         </div>
-                        <div class="field courriel error">
+                        <div class="field courriel is-error">
                             <label for="courriel">
                                 <span class="error-message">Erreur -</span>
                                 Courriel
@@ -197,7 +190,7 @@
                             </label>
                             <input type="text" id="courriel-2" value="" />
                         </div>
-                        <div class="field message error">
+                        <div class="field message is-error">
                             <label for="message">
                                 <span class="error-message">Erreur -</span>
                                 Message
@@ -208,7 +201,7 @@
                             </label>
                             <textarea id="message-2"></textarea>
                         </div>
-                        <div class="field secteur error">
+                        <div class="field secteur is-error">
                             <label for="secteur">
                                 <span class="error-message">Erreur -</span>
                                 Choisissez votre secteur d'activité
@@ -245,7 +238,7 @@
                                 <option value="25">Ressources naturelles</option>
                             </select>
                         </div>
-                        <div class="field banniere error">
+                        <div class="field banniere is-error">
                             <label for="banniere">
                                 Veuillez téléverser une image au format bannière de 580 pixels par 200 pixels, d'un poids maximal de 2 Mo.
                             </label>
@@ -262,15 +255,15 @@
                             </legend>
                             <div class="radio-field-wrapper">
                                 <div class="radio-field">
-                                    <label for="radio1">Lorem ipsum dolor sit amet</label>
+                                    <label for="radio1-2">Lorem ipsum dolor sit amet</label>
                                     <input type="radio" name="radio" id="radio1-2" value="1" />
                                 </div>
                                 <div class="radio-field">
-                                    <label for="radio2">Donec id elit non mi porta gravida at eget metus. Etiam porta sem malesuada magna mollis euismod.</label>
+                                    <label for="radio2-2">Donec id elit non mi porta gravida at eget metus. Etiam porta sem malesuada magna mollis euismod.</label>
                                     <input type="radio" name="radio" id="radio2-2" value="2" />
                                 </div>
                                 <div class="radio-field">
-                                    <label for="radio3">Lorem ipsum dolor sit amet</label>
+                                    <label for="radio3-2">Lorem ipsum dolor sit amet</label>
                                     <input type="radio" name="radio" id="radio3-2" value="3" />
                                 </div>
                             </div>
@@ -286,15 +279,15 @@
                             </legend>
                             <div class="checkbox-field-wrapper">
                                 <div class="checkbox-field">
-                                    <label for="checkbox1">Lorem ipsum dolor sit amet</label>
+                                    <label for="checkbox1-2">Lorem ipsum dolor sit amet</label>
                                     <input type="checkbox" name="checkbox" id="checkbox1-2" value="1" />
                                 </div>
                                 <div class="checkbox-field">
-                                    <label for="checkbox2">Donec id elit non mi porta gravida at eget metus. Etiam porta sem malesuada magna mollis euismod.</label>
+                                    <label for="checkbox2-2">Donec id elit non mi porta gravida at eget metus. Etiam porta sem malesuada magna mollis euismod.</label>
                                     <input type="checkbox" name="checkbox" id="checkbox2-2" value="2" />
                                 </div>
                                 <div class="checkbox-field">
-                                    <label for="checkbox3">Lorem ipsum dolor sit amet</label>
+                                    <label for="checkbox3-2">Lorem ipsum dolor sit amet</label>
                                     <input type="checkbox" name="checkbox" id="checkbox3-2" value="3" />
                                 </div>
                             </div>
@@ -305,6 +298,7 @@
                         <input type="submit" value="Envoyer le formulaire" class="submit" />
                     </div>
                 </form>
+                -->
             </div>
         </div>
     </div>

@@ -5,9 +5,7 @@
 var $ = require('jquery');
 
 function Map(obj, config) {
-    if (!(this instanceof Map)) return new Map(obj, config);
-
-    this.obj = obj;
+    this.map = obj;
     this.config = $.extend({}, config);
 
     this.bindEvents();
@@ -15,7 +13,7 @@ function Map(obj, config) {
 
 $.extend(Map.prototype, {
     bindEvents: function() {
-        this.obj.filter('.is-locked').each(function(index, element) {
+        this.map.filter('.is-locked').each(function(index, element) {
             $(element).on('mousedown', function() {
                 $(this).addClass('is-active').find('iframe').css('pointer-events', 'auto');
             });
@@ -26,4 +24,8 @@ $.extend(Map.prototype, {
     }
 });
 
-module.exports = Map;
+module.exports = function(obj, config) {
+    return obj.map(function(index, element) {
+        return new Map($(element), config);
+    });
+};

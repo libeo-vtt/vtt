@@ -1,13 +1,10 @@
-{% extends "../layouts/two-columns.twig" %}
+{% extends "../layouts/single-column.twig" %}
 
 {% set title = 'Templates - Home' %}
 {% set class = 'template-home' %}
-
 {% set templates = true %}
 
 {% block content %}
-
-    {% include 'partials/templates-navigation.twig' with {active: 'project'} %}
 
     <div class="l-template-content">
         <div class="grid">
@@ -21,7 +18,6 @@
                     <ol class="template-list">
                         <li>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Neque modi repellat similique autem, sint velit. Accusantium quasi natus hic tenetur. Tempore iusto sequi consequuntur repellendus ratione, hic autem, reiciendis repudiandae nam obcaecati voluptatem quos, vel!</li>
                         <li>In dolorem nisi ratione temporibus adipisci id nihil alias doloremque dolorum vero ad commodi explicabo iste nesciunt magnam, tempore, quibusdam illum, eaque maxime blanditiis. Repellendus assumenda nostrum tenetur soluta perferendis suscipit fugiat, quaerat impedit animi.</li>
-                        <li>Accusamus sed cum praesentium iure, sunt dignissimos minima! Iusto rerum quae aliquid vitae harum, minima molestias autem, quo culpa amet, facilis consequuntur hic! Iste quo animi deleniti asperiores tempore nemo eaque expedita non a tenetur!</li>
                     </ol>
                 </section>
 
@@ -42,17 +38,17 @@
                         </div>
                         <div class="tr">
                             <div class="td">Version IE</div>
-                            <div class="td">IE9 +</div>
+                            <div class="td">9+</div>
                         </div>
                     </div>
 
                     <h2 class="template-title">Références</h2>
                     <ul>
                         <li>
-                            <a href="http://caniuse.com/">caniuse.com</a>
+                            <a href="https://gitlab.libeo.com/vtt/starter-kit">Gitlab</a>
                         </li>
                         <li>
-                            <a href="http://smacss.com/">smacss.com</a>
+                            <a href="https://projets.libeo.com/projects/vtt">Redmine</a>
                         </li>
                     </ul>
                 </section>

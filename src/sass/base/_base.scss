@@ -78,6 +78,16 @@ hr {
     }
 }
 
+// Default list style
+ul,
+ol {
+    @include clearfix;
+    li,
+    li:first-child {
+        margin-top: 0.25em;
+    }
+}
+
 // Disable default list style inside navigation
 nav ul {
     @include reset-list-style;

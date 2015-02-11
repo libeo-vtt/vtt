@@ -19,8 +19,7 @@ hr {
 }
 
 .l-template-footer {
-    margin-top: 40px;
-    padding: 10px 0;
+    padding: 40px 0;
     color: $c-grey;
 }
 
@@ -31,6 +30,11 @@ hr {
     padding: 10px 0;
     background-color: $c-grey-light;
     @include transform(translateX(-50%));
+    .ie8 & {
+        left: 0;
+        width: auto;
+        @include transform(none);
+    }
     ul {
         position: relative;
         width: $document-width;
@@ -150,6 +154,12 @@ hr {
         height: 100px;
         text-align: center;
         @include rem-typo(16px, 100px);
+        @include respond-to(tablet) {
+            width: 33%;
+        }
+        @include respond-to(mobile) {
+            width: 50%;
+        }
     }
 }
 

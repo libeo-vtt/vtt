@@ -1,15 +1,33 @@
-{% extends "../layouts/two-columns.twig" %}
+{% extends "../layouts/single-column.twig" %}
 
 {% set title = 'Templates - Widgets' %}
 {% set class = 'template-widgets' %}
-
 {% set templates = true %}
 
 {% block content %}
 
-    {% include 'partials/templates-navigation.twig' with {active: 'widgets'} %}
-
     <h1 class="template-title">Widgets</h1>
+
+    <h2>Slider</h2>
+    {% include "../widgets/slider.twig" %}
+    <hr>
+    {% include "../widgets/slider.is-arrows.twig" %}
+    <hr>
+    {% include "../widgets/slider.is-dots.twig" %}
+
+    <hr>
+
+    <h2>Folder</h2>
+    {% include "../widgets/folder.twig" %}
+
+    <hr>
+
+    <h2>Tab</h2>
+    {% include "../widgets/tab.twig" %}
+    <hr>
+    {% include "../widgets/tab.twig" %}
+
+    <hr>
 
     <h2>Pagination</h2>
     {% pagination "Previous", "1..10", "Next" %}
@@ -23,11 +41,11 @@
 
     <div class="grid">
         <div class="grid-wrapper">
-            <div class="col-1-2">
+            <div class="col-1-2 col-1-1-mobile">
                 <h2>Youtube</h2>
                 {% youtube "QJ0bAAA-QQU" %}
             </div>
-            <div class="col-1-2">
+            <div class="col-1-2 col-1-1-mobile">
                 <h2>Vimeo</h2>
                 {% vimeo "108679294" %}
             </div>
@@ -38,11 +56,11 @@
 
     <div class="grid">
         <div class="grid-wrapper">
-            <div class="col-1-2">
+            <div class="col-1-2 col-1-1-mobile">
                 <h2>Google Map</h2>
                 {% map "Lebourgneuf, Québec, Canada" %}
             </div>
-            <div class="col-1-2">
+            <div class="col-1-2 col-1-1-mobile">
                 <h2>Google Map (locked)</h2>
                 {% map "Lebourgneuf, Québec, Canada", "locked" %}
             </div>

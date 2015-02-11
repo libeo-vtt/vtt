@@ -1,19 +1,31 @@
-var $ = require('jquery');
-var upload = require('upload');
-var waitForImages = require('waitforimages');
+// App
+var App = require('./app.js');
 
 // Helpers
 var helpers = require('./helpers');
 
-// Make every upload input accessible
-$('input[type="file"]').accessibleUpload();
-
 // Webfont
 var Webfont = require('./modules/webfont.js');
-var webfont = Webfont({
+App.Webfont = Webfont({
     fonts: ['Roboto', 'Roboto:bold', 'Roboto:italic']
 });
 
-// Map
+// Maps
 var Map = require('./modules/map.js');
-var map = Map($('.map-wrapper'));
+App.Components.Maps = Map($('.map-wrapper'));
+
+// Folders
+var Folder = require('./modules/folder.js');
+App.Components.Folders = Folder($('.folder'));
+
+// Sliders
+var Slider = require('./modules/slider.js');
+App.Components.Sliders = Slider($('.slider'));
+
+// Tabs
+var Tab = require('./modules/tab.js');
+App.Components.Tabs = Tab($('.tab'));
+
+// Forms
+var Form = require('./modules/form.js');
+App.Components.forms = Form($('form'));

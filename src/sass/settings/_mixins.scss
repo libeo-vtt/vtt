@@ -209,8 +209,8 @@
 // Respond-to
 @mixin respond-to($breakpoint) {
     $value: map-get($mq-breakpoints, $breakpoint);
-    @if type-of($breakpoint) == list {
-        @media (min-width: nth($breakpoint, 1)) and (max-width: nth($breakpoint, 2)) {
+    @if type-of($value) == list {
+        @media (min-width: nth($value, 1)) and (max-width: nth($value, 2)) {
             @content;
         }
     }
@@ -243,7 +243,6 @@
 
 // Grid
 @mixin grid($gutter, $margin, $iterations: 4, $vertical-align: top) {
-    overflow: hidden;
     margin: $margin 0;
     padding: $margin;
     font-size: 0;

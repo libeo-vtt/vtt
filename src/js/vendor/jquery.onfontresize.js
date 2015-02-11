@@ -1,13 +1,4 @@
 ﻿'use strict';
-/*!
- * Plugin name : onfontresize
- * Copyright (c) 2008 Petr Staníček (pixy@pixy.cz)
- * February 2009
- * @usage : $(document).on('fontresize',myHandler);
- * @optional stop the observer : $.onFontResize.unwatch();
- * @optional start again : $.onFontResize.watch();
- * @optional start with different timeout: $.onFontResize.watch(1000);
- */
 (function($, window, document, undefined) {
     $.onFontResize = {
         delay: 250,

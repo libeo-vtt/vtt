@@ -46,6 +46,7 @@
     }
 }
 
-.l-main-content {
+.l-content,
+.l-sidebar {
     @include clearfix;
 }

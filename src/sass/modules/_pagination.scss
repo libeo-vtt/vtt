@@ -6,6 +6,7 @@
     .pagination-element {
         display: inline-block;
         vertical-align: middle;
+        margin: 0;
         + .pagination-element {
             margin-left: 10px;
         }
