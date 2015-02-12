@@ -165,11 +165,13 @@ $.extend(Form.prototype, {
         return data !== undefined ? data : '';
     },
 
+    // Reset form errors
     resetErrors: function() {
         this.form.find('.field').removeClass(this.classes.error);
         this.form.find('.error-message, .error-message-explanation').remove();
     },
 
+    // Throw new input error
     newError: function(input, message) {
         var id = $(input).attr('id'),
             label = this.form.find('label[for="' + id + '"]'),
@@ -184,6 +186,7 @@ $.extend(Form.prototype, {
         this.errors.push(markup);
     },
 
+    // Throw new fieldset error
     newFieldsetError: function(fieldset, message) {
         var $fieldset = $(fieldset),
             id = $fieldset.attr('id'),
@@ -198,6 +201,7 @@ $.extend(Form.prototype, {
         this.errors.push(markup);
     },
 
+    // Display errors summary
     displayErrors: function() {
         this.form.find('.errors').remove();
         if (this.errors.length > 0) {
@@ -213,6 +217,7 @@ $.extend(Form.prototype, {
         }
     },
 
+    // Check if given value is a number
     isNumber: function(value) {
         if (value === undefined) return false;
         return value.toString().match(/^[0-9]+$/) && !isNaN(parseInt(value));
