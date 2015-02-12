@@ -43,6 +43,18 @@ $.extend(Form.prototype, {
         }, this));
     },
 
+    // Bind errors events with actions
+    bindErrorsEvents: function() {
+        // Scroll and focus input on error click
+        this.form.find('.errors a').on('click', $.proxy(function(e) {
+            var label = this.form.find(e.currentTarget.hash).parents('.field').find('label'),
+                input = this.form.find(e.currentTarget.hash);
+            input.focus();
+            $(window).scrollTop(label.offset().top);
+            e.preventDefault();
+        }, this));
+    },
+
     // Catch form submit and validate values
     validate: function() {
         var inputs = this.form.find('input, textarea, select, fieldset');
@@ -68,7 +80,10 @@ $.extend(Form.prototype, {
                     term = this.getTerm(validationTerm),
                     modifier = this.getModifier(validationTerm),
                     compare = this.getCompare(input, term);
-                if (modifier !== false) {
+                if (term === 'regex') {
+                    var regex = new RegExp(compare);
+                    valid = regex.test(value);
+                } else if (modifier !== false) {
                     valid = is[modifier][term](value, compare) ? valid : false;
                 } else {
                     valid = is[term](value, compare) ? valid : false;
@@ -194,6 +209,7 @@ $.extend(Form.prototype, {
             _.each(this.errors, $.proxy(function(error) {
                 this.form.errorsList.append('<li>' + error + '</li>');
             }, this));
+            this.bindErrorsEvents();
         }
     },
 
