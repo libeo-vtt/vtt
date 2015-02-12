@@ -29,7 +29,7 @@ module.exports = {
             height: '100'
         },
         googleMap: {
-            apiKey: 'XXXXXXXXXXXXXXXXXXXXXXXXXXX-XX-XXXXXXXX'
+            apiKey: 'AIzaSyCVaukYgO4yQkwxcUNAMu6-L2-EhyszPsA'
         }
     }
 };
