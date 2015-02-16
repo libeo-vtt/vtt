@@ -1,8 +1,8 @@
 // Initialize project
-var App = window.App = {};
+var PROJECT_NAME = window.PROJECT_NAME = {};
 
 // Project settings
-App.Settings = {
+PROJECT_NAME.Settings = {
     Classes: {
         active: 'is-active',
         open: 'is-open',
@@ -17,7 +17,7 @@ App.Settings = {
 };
 
 // Project components
-App.Components = {};
+PROJECT_NAME.Components = {};
 
 // Export project
-module.exports = App;
+module.exports = PROJECT_NAME;

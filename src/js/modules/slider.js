@@ -9,7 +9,7 @@ var focusable = require('focusable');
 
 function Slider(obj, config) {
     this.slider = obj;
-    this.classes = window.App.Settings.Classes;
+    this.classes = window.PROJECT_NAME.Settings.Classes;
 
     this.config = $.extend({
         displayedSlides: 4,

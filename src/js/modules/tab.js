@@ -10,7 +10,7 @@ var buttonize = require('buttonize');
 
 function Tab(obj, config) {
     this.tab = obj;
-    this.classes = window.App.Settings.Classes;
+    this.classes = window.PROJECT_NAME.Settings.Classes;
 
     this.config = $.extend({
         defaultOpenedTab: 1,

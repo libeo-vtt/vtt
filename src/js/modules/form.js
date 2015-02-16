@@ -10,7 +10,7 @@ var is = require('is');
 
 function Form(obj, config) {
     this.form = obj;
-    this.classes = window.App.Settings.Classes;
+    this.classes = window.PROJECT_NAME.Settings.Classes;
 
     this.config = $.extend({
         modifiers: {

@@ -9,7 +9,7 @@ var buttonize = require('buttonize');
 
 function Folder(obj, config) {
     this.folder = obj;
-    this.classes = window.App.Settings.Classes;
+    this.classes = window.PROJECT_NAME.Settings.Classes;
 
     this.config = $.extend({
         animation: 'linear',
