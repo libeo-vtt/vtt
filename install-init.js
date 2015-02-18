@@ -57,7 +57,7 @@ inquirer.prompt(questions, function(answers) {
     project.repository = answers.repository;
 
     // Save new project values
-    fs.writeFile('./package.json', JSON.stringify(project, null, 2), function (error) {
+    fs.writeFile('./package.json', JSON.stringify(project, null, 2), function(error) {
         if (error) return console.log(error);
     });
 

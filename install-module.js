@@ -97,14 +97,14 @@ inquirer.prompt(questions, function(answers) {
 });
 
 function header(name) {
-    var header = '',
+    var output = '',
         line = Array(name.length + 1).join('-');
 
-    header += '// ------------------------' + line + ' //\n';
-    header += '//             ' + camelcase(name) + '             //\n';
-    header += '// ------------------------' + line + ' //';
+    output += '// ------------------------' + line + ' //\n';
+    output += '//             ' + camelcase(name) + '             //\n';
+    output += '// ------------------------' + line + ' //';
 
-    return header;
+    return output;
 }
 
 function replaceAll(find, replace, str) {
