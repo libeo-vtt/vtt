@@ -55,6 +55,7 @@ inquirer.prompt(questions, function(answers) {
     project.keywords = answers.keywords;
     project.url = answers.url;
     project.repository = answers.repository;
+    project.jsname = answers.jsname;
 
     // Save new project values
     fs.writeFile('./package.json', JSON.stringify(project, null, 2), function(error) {

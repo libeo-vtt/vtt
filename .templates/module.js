@@ -9,7 +9,7 @@ inherits({{MODULE_NAME}}, EventEmitter);
 function {{MODULE_NAME}}(obj, config) {
 
     this.{{MODULE_NAME_LOWERCASE}} = obj;
-    this.classes = window.Project.Settings.Classes;
+    this.classes = window.PROJECT_NAME.Settings.Classes;
 
     // Default configuration
     this.config = $.extend({}, config);

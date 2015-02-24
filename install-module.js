@@ -52,6 +52,7 @@ inquirer.prompt(questions, function(answers) {
                     data = replaceAll('{{HEADER}}', header(answers.name), data);
                     data = replaceAll('{{MODULE_NAME_LOWERCASE}}', lowercase(answers.name), data);
                     data = replaceAll('{{MODULE_NAME}}', camelcase(answers.name), data);
+                    data = replaceAll('PROJECT_NAME', project.jsname, data);
 
                     fs.writeFile(jsNewFile, data, 'utf8', function(error) {
                         if (error) return console.log(error);
