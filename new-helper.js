@@ -12,6 +12,33 @@ program
     .option('-n, --name <name>', 'helper name')
     .parse(process.argv);
 
+function replaceAll(find, replace, str) {
+    return str.replace(new RegExp(find, 'g'), replace);
+}
+
+function camelcase(string) {
+    return (string || '').toLowerCase().replace(/(\b|-)\w/g, function(match) {
+        return match.toUpperCase().replace(/-/, '');
+    });
+}
+
+function lowercase(string) {
+    return (string || '').toLowerCase().replace(/(\b|-)\w/g, function(match) {
+        return match.toLowerCase().replace(/-/, '');
+    });
+}
+
+function header(name) {
+    var output = '',
+        line = Array(name.length + 1).join('-');
+
+    output += '// ------------------------' + line + ' //\n';
+    output += '//             ' + camelcase(name) + '             //\n';
+    output += '// ------------------------' + line + ' //';
+
+    return output;
+}
+
 // Helper prompt questions
 var questions = [{
     name: 'name',
@@ -57,30 +84,3 @@ inquirer.prompt(questions, function(answers) {
         }
     });
 });
-
-function header(name) {
-    var header = '',
-        line = Array(name.length + 1).join('-');
-
-    header += '// ------------------------' + line + ' //\n';
-    header += '//             ' + camelcase(name) + '             //\n';
-    header += '// ------------------------' + line + ' //';
-
-    return header;
-}
-
-function replaceAll(find, replace, str) {
-    return str.replace(new RegExp(find, 'g'), replace);
-}
-
-function camelcase(string) {
-    return (string || '').toLowerCase().replace(/(\b|-)\w/g, function(match) {
-        return match.toUpperCase().replace(/-/, '');
-    });
-}
-
-function lowercase(string) {
-    return (string || '').toLowerCase().replace(/(\b|-)\w/g, function(match) {
-        return match.toLowerCase().replace(/-/, '');
-    });
-}

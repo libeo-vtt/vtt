@@ -11,6 +11,10 @@ program
     .option('-n, --name', 'project name')
     .parse(process.argv);
 
+function replaceAll(find, replace, str) {
+    return str.replace(new RegExp(find, 'g'), replace);
+}
+
 // Initialisation prompt questions
 var questions = [{
     name: 'name',
@@ -84,7 +88,3 @@ inquirer.prompt(questions, function(answers) {
         }
     });
 });
-
-function replaceAll(find, replace, str) {
-    return str.replace(new RegExp(find, 'g'), replace);
-}

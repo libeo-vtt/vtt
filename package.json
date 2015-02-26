@@ -5,7 +5,7 @@
   "url": "http://127.0.0.1:3000",
   "keywords": "vtt, starter, kit",
   "repository": "https://gitlab.libeo.com/vtt/starter-kit",
-  "jsname": "VTT",
+  "jsname": "PROJECT_NAME",
   "browserify": {
     "transform": [
       "browserify-shim"

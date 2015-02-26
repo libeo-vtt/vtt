@@ -22,7 +22,9 @@ function {{MODULE_NAME}}(obj, config) {
 $.extend({{MODULE_NAME}}.prototype, {
 
     // Component initialization
-    init: function() {}
+    init: function() {
+        console.log('Module {{HELPER_NAME_LOWERCASE}} initiated.');
+    }
 
 });
 
