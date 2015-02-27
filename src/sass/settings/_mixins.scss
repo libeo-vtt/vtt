@@ -252,7 +252,9 @@
         }
     }
     @else {
-        @warn "No value could be retrieved from `#{$breakpoint}`.";
+        @media (max-width: $breakpoint) {
+            @content;
+        }
     }
 }
 
