@@ -23,7 +23,7 @@ $.extend({{MODULE_NAME}}.prototype, {
 
     // Component initialization
     init: function() {
-        console.log('Module {{HELPER_NAME_LOWERCASE}} initiated.');
+        console.log('Module {{MODULE_NAME_LOWERCASE}} initiated.');
     }
 
 });
