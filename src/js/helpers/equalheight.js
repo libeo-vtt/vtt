@@ -12,7 +12,7 @@ module.exports = (function() {
             if (!_.contains(identifiers, id)) identifiers.push(id);
         });
 
-        identifiers.forEach(function(id) {
+        _.forEach(identifiers, function(id) {
             var height = 0,
                 elements = $('[data-equalheight=' + id + ']');
 
