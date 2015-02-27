@@ -39,7 +39,6 @@ textarea {
 
 input[type="file"] {
     display: block;
-    margin: 10px 0;
     @include rem-typo(16px, 16px);
 }
 
@@ -73,6 +72,9 @@ input[type="file"] {
 // ------------------------------ //
 
 .errors {
+    p {
+        font-weight: bold;
+    }
     ul {
         margin-bottom: 20px;
         padding: 0;
@@ -93,14 +95,17 @@ input[type="file"] {
     }
 }
 
-.field.error input[type="text"],
-.field.error input[type="file"],
-.field.error .radio-field-wrapper,
-.field.error .checkbox-field-wrapper,
-.field.error textarea,
-.field.error select {
+.field.is-error input[type="text"],
+.field.is-error input[type="file"],
+.field.is-error .radio-field-wrapper,
+.field.is-error .checkbox-field-wrapper,
+.field.is-error textarea,
+.field.is-error select {
     border: 1px solid $c-alert;
-    @include border-radius(3px);
+    border-top-left-radius: 0;
+    border-top-right-radius: 3px;
+    border-bottom-left-radius: 3px;
+    border-bottom-right-radius: 3px;
 }
 
 .error-message {
@@ -112,13 +117,15 @@ input[type="file"] {
     span {
         display: inline-block;
         position: relative;
-        top: 3px;
         padding: 3px 8px 5px;
         font-size: 0.9em;
         color: $c-white;
         border-top-left-radius: 3px;
         border-top-right-radius: 3px;
         background-color: $c-alert;
+    }
+    + .error-message-explanation span {
+        border-top-left-radius: 0;
     }
 }
 
@@ -133,6 +140,7 @@ input[type="file"] {
         left: 0;
         width: 20px;
         height: 20px;
+        padding: 0;
         border: 0;
         background-color: $c-txt-default;
         @include border-radius(50%);

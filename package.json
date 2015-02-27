@@ -5,6 +5,7 @@
   "url": "http://127.0.0.1:3000",
   "keywords": "vtt, starter, kit",
   "repository": "https://gitlab.libeo.com/vtt/starter-kit",
+  "jsname": "PROJECT_NAME",
   "browserify": {
     "transform": [
       "browserify-shim"
@@ -12,20 +13,21 @@
   },
   "browser": {
     "jquery": "./src/js/vendor/jquery.min.js",
+    "is": "./src/js/vendor/is.min.js",
     "onfontresize": "./src/js/vendor/jquery.onfontresize.js",
     "upload": "./src/js/vendor/jquery.upload.js",
     "buttonize": "./src/js/vendor/jquery.buttonize.js",
     "eminize": "./src/js/vendor/jquery.eminize.js",
     "focusable": "./src/js/vendor/jquery.focusable.js",
-    "vtt-folder": "./src/js/vendor/vtt.folder.js",
-    "vtt-slider": "./src/js/vendor/vtt.slider.js",
-    "vtt-tab": "./src/js/vendor/vtt.tab.js",
     "webfont": "./src/js/vendor/webfont.min.js",
     "waitforimages": "./src/js/vendor/jquery.waitforimages.min.js"
   },
   "browserify-shim": {
     "jquery": {
       "exports": "$"
+    },
+    "is": {
+      "exports": "is"
     },
     "onfontresize": {
       "depends": "jquery",
@@ -72,8 +74,11 @@
     "browserify": "^7.0.3",
     "browserify-shim": "^3.8.2",
     "cheerio": "^0.18.0",
+    "colors": "^1.0.3",
+    "commander": "^2.6.0",
     "del": "^1.1.1",
     "event-emitter": "^0.3.2",
+    "glob": "^4.3.5",
     "gulp": "~3.8.10",
     "gulp-cheerio": "^0.5.1",
     "gulp-compass": "^2.0.3",
@@ -90,6 +95,7 @@
     "gulp-util": "^3.0.3",
     "gulp-watch": "^3.0.0",
     "inherits": "^2.0.1",
+    "inquirer": "^0.8.0",
     "lodash": "^3.0.0",
     "lorem-ipsum": "^1.0.1",
     "require-dir": "^0.1.0",

@@ -1,0 +1,14 @@
+// ------------------------------- //
+//             Buttons             //
+// ------------------------------- //
+
+button,
+input[type="reset"],
+input[type="submit"] {
+    padding: 10px 15px;
+    border: 0;
+    background-color: $c-grey-light;
+    &:hover {
+        background-color: darken($c-grey-light, 10%);
+    }
+}

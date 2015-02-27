@@ -1,11 +1,4 @@
 'use strict';
-/*!
- * Plugin name : eminize
- * Plugin description : Pixel to Em calculation
- * Author: Scott Jehl (scott@filamentgroup.com), http://www.filamentgroup.com
- * @usage : $(myPixelValue).eminize()
- * @return : Em value
- */
 (function($, window, document, undefined) {
 
     var defaultConfig = {
@@ -13,12 +6,12 @@
     };
 
     var Eminize = function(pxValue, config) {
-        this.config  = $.extend({}, defaultConfig, config);
+        this.config = $.extend({}, defaultConfig, config);
         this.pxValue = pxValue;
     };
 
     Eminize.prototype.init = function() {
-        var that = parseInt(this.pxValue[ 0 ], 10),
+        var that = parseInt(this.pxValue[0], 10),
             scopeTest = $('<div style="display: none; font-size: 1em; margin: 0; padding:0; height: auto; line-height: 1; border:0;">&nbsp;</div>').appendTo(this.config.scope),
             scopeVal = scopeTest.height();
 

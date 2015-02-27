@@ -1,18 +1,14 @@
-/*****************************************************
- *
- * Change the file uploads to make them accessible
- * @author Danny Turcotte <danny.turcotte@libeo.com>
- *
- * $('#my-file-upload').accessibleUpload();
- *
- *****************************************************/
+/*
+* jQuery Accessible Upload file
+* @author Danny Turcotte <danny.turcotte@libeo.com>
+*
+* Usage: $('#my-file-upload').accessibleUpload();
+*/
 (function($, window, document, undefined) {
 
     var methods = {
-        //Binds event to each object of the selector and creates the holder
         init: function(options) {
             return this.each(function() {
-
                 var holder = methods._createFilenameHolder(this);
 
                 $(holder).insertAfter($(this));
@@ -31,20 +27,16 @@
             });
         },
 
-        //if you want to remove the plugin
         destroy: function() {
             $(this).next('.aif').remove();
             $(this).unbind('.aif');
         },
 
-        //Creates html to hold the filename and delete button
         _createFilenameHolder: function(input) {
             return '<span class="lbo-aif" style="display: none;"><span class="lbo-aif-filename" aria-live="polite"></span></span>';
         },
 
-        //Callback for event when a file is selected
         _change: function(event) {
-
             var label = '';
 
             if (this.title) {
@@ -67,15 +59,11 @@
                 .focus();
         },
 
-        //Extract the filename of the path
         _getFilename: function(filename) {
-
             filename = filename.split('\\');
-
             return filename.pop();
         },
 
-        //Callback for event when remove file selected
         _fileRemove: function(event) {
             event.preventDefault();
             var clone = $(event.data.input).clone();
@@ -91,7 +79,6 @@
         }
     };
 
-    //Initiate the plugin
     $.fn.accessibleUpload = function(method) {
         if (methods[method]) {
             return methods[method].apply(this, Array.prototype.slice.call(arguments, 1));
@@ -102,5 +89,6 @@
         }
     };
 
+    $('input[type="file"]').accessibleUpload();
 
 })(jQuery);

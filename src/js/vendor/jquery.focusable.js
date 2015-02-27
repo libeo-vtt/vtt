@@ -4,9 +4,8 @@
 *
 * Usage: $('#my-container').find(':focusable');
 */
-
-jQuery.extend(jQuery.expr[':'], {
-    focusable: function(el, index, selector){
+$.extend($.expr[':'], {
+    focusable: function(el, index, selector) {
         return $(el).is('a, button, :input, [tabindex]');
     }
 });

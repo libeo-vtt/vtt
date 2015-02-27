@@ -113,6 +113,38 @@
     }
 }
 
+// Triangle
+@mixin triangle($direction: up, $color:#000, $size:100px) {
+    @if($direction == up) {
+        width: 0;
+        height: 0;
+        border-width: 0 $size $size;
+        border-style: solid;
+        border-color: transparent transparent $color;
+    }
+    @if($direction == down) {
+        width: 0;
+        height: 0;
+        border-width: $size;
+        border-style: solid;
+        border-color: $color transparent transparent;
+    }
+    @if($direction == left) {
+        width: 0;
+        height: 0;
+        border-width: $size $size $size 0;
+        border-style: solid;
+        border-color: transparent $color transparent transparent;
+    }
+    @if($direction == right) {
+        width: 0;
+        height: 0;
+        border-width: $size 0 $size $size;
+        border-style: solid;
+        border-color: transparent transparent transparent $color;
+    }
+}
+
 // Placeholder
 @mixin placeholder($color) {
     &::-webkit-input-placeholder,
@@ -243,7 +275,6 @@
 
 // Grid
 @mixin grid($gutter, $margin, $iterations: 4, $vertical-align: top) {
-    overflow: hidden;
     margin: $margin 0;
     padding: $margin;
     font-size: 0;

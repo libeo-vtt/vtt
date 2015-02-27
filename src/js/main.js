@@ -1,51 +1,31 @@
-var App = {};
-
-// ------------------------------- //
-//             Vendors             //
-// ------------------------------- //
-
-var $ = require('jquery');
-var upload = require('upload');
-var waitForImages = require('waitforimages');
-var focusable = require('focusable');
-var buttonize = require('buttonize');
-var eminize = require('eminize');
-
-// ------------------------------- //
-//             Helpers             //
-// ------------------------------- //
+// Project
+var PROJECT_NAME = require('./project.js');
 
 // Helpers
-var helpers = require('./helpers');
-
-// ------------------------------- //
-//             Modules             //
-// ------------------------------- //
-
-// Make every upload input accessible
-$('input[type="file"]').accessibleUpload();
+var Helpers = require('./helpers');
 
 // Webfont
 var Webfont = require('./modules/webfont.js');
-App.Webfont = Webfont({
+PROJECT_NAME.Webfont = Webfont({
     fonts: ['Roboto', 'Roboto:bold', 'Roboto:italic']
 });
 
-// Map
+// Maps
 var Map = require('./modules/map.js');
-App.Map = Map($('.map-wrapper'));
+PROJECT_NAME.Components.Maps = Map($('.map-wrapper'));
 
 // Folders
-var folder = require('vtt-folder');
-$('.folder').folder();
+var Folder = require('./modules/folder.js');
+PROJECT_NAME.Components.Folders = Folder($('.folder'));
 
 // Sliders
-var slider = require('vtt-slider');
-$('.slider').slider();
+var Slider = require('./modules/slider.js');
+PROJECT_NAME.Components.Sliders = Slider($('.slider'));
 
 // Tabs
-var tab = require('vtt-tab');
-$('.tab').tab();
+var Tab = require('./modules/tab.js');
+PROJECT_NAME.Components.Tabs = Tab($('.tab'));
 
-// Set global variable
-window.App = App;
+// Forms
+var Form = require('./modules/form.js');
+PROJECT_NAME.Components.forms = Form($('form'));

@@ -1,34 +1,27 @@
 'use strict';
-/*!
- * Plugin name : buttonize
- * Plugin description : Transform any html tag in <button>
- * Author: based on anyTagIntoBtn by Hugo Soucy <hugo@soucy.cc>
- * @usage : $('a').buttonize()
- * @return : $(button) collection
- */
 (function($, window, document, undefined) {
 
     var defaultConfig = {
-        a11y        : false,
-        a11yText    : 'Cliquer pour ouvrir',
-        unbuttonize : false,
-        toTag       : ''
+        a11y: false,
+        a11yText: 'Cliquer pour ouvrir',
+        unbuttonize: false,
+        toTag: ''
     };
 
     var Buttonize = function(tag, config) {
         this.config = $.extend({}, defaultConfig, config);
-        this.tag    = $(tag);
+        this.tag = $(tag);
     };
 
     Buttonize.prototype.init = function() {
-        var tagHtml         = this.tag.html(),
-            tagAttr         = this.getAttributes(this.tag[ 0 ]),
-            tagAria         = this.config.a11y ? ' aria-live="polite"': '',
-            tagA11yText     = this.config.a11y ? '<span class="visuallyhidden">' + this.config.a11yText + '</span>' : '',
-            button          = '<button ' + tagAttr.join(' ') + tagAria + '>' + tagHtml + tagA11yText + '</button>';
+        var tagHtml = this.tag.html(),
+            tagAttr = this.getAttributes(this.tag[0]),
+            tagAria = this.config.a11y ? ' aria-live="polite"' : '',
+            tagA11yText = this.config.a11y ? '<span class="visuallyhidden">' + this.config.a11yText + '</span>' : '',
+            button = '<button ' + tagAttr.join(' ') + tagAria + '>' + tagHtml + tagA11yText + '</button>';
 
         if (this.config.unbuttonize) {
-            button          = '<' + this.config.toTag + ' ' + tagAttr.join(' ') + '>' + tagHtml + '</' + this.config.toTag + '>';
+            button = '<' + this.config.toTag + ' ' + tagAttr.join(' ') + '>' + tagHtml + '</' + this.config.toTag + '>';
         }
 
         this.tag.replaceWith(button);
