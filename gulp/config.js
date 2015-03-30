@@ -15,7 +15,7 @@ module.exports = {
             open: false
         },
         compass: {
-            logging: false
+            logging: true
         },
         svgSprite: {
             filename: 'symbols.svg'

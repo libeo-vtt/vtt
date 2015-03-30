@@ -7,8 +7,8 @@ input[type="reset"],
 input[type="submit"] {
     padding: 10px 15px;
     border: 0;
-    background-color: $c-grey-light;
+    background-color: #efefef;
     &:hover {
-        background-color: darken($c-grey-light, 10%);
+        background-color: darken(#efefef, 10%);
     }
 }
