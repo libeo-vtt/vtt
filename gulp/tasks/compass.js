@@ -11,7 +11,7 @@ gulp.task('compass', function() {
             sass: config.src + 'sass',
             image: config.src + 'img',
             relative: true,
-            logging: config.defaults.compass.logging,
+            logging: true,
             sourcemap: config.sourcemaps,
             require: ['sass-globbing']
         }))

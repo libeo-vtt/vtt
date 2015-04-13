@@ -18,7 +18,7 @@ gulp.task('svgSprite', function() {
         .pipe(svgSprite({
             mode: {
                 symbol: {
-                    dest: "svg",
+                    dest: 'svg',
                     sprite: config.defaults.svgSprite.filename
                 }
             }

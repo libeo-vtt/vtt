@@ -52,9 +52,9 @@ customTags.push({
             width = parseInt(size.substring(0, size.indexOf('x'))),
             height = parseInt(size.substring(size.indexOf('x') + 1)),
             alt = (args[2] !== undefined ? args[2] : ''),
-            output = '<div class="icon-wrapper icon-' + icon + '-wrapper">' +
-            '<svg width="' + width + '" height="' + height + '" class="icon-' + icon + '"><use xlink:href="/svg/symbols.svg#' + icon + '"></use></svg>' +
-            (config.svgFallback ? '<img class="svg-fallback icon-' + icon + ' icon-' + icon + '-fallback" src="img/svg-fallbacks/' + icon + '.png" width="' + width + '" height="' + height + '" alt="' + alt + '" />' : '') +
+            output = '<div class="icon-wrapper ' + config.defaults.svg.prefix + '' + icon + '-wrapper">' +
+            '<svg width="' + width + '" height="' + height + '" class="' + config.defaults.svg.prefix + icon + '"><use xlink:href="/svg/symbols.svg#' + icon + '"></use></svg>' +
+            (config.svgFallback ? '<img class="svg-fallback ' + config.defaults.svg.prefix + icon + ' ' + config.defaults.svg.prefix + icon + '-fallback" src="img/svg-fallbacks/' + icon + '.png" width="' + width + '" height="' + height + '" alt="' + alt + '" />' : '') +
             '</div>';
         return output;
     }

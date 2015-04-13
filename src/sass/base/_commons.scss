@@ -2,6 +2,12 @@
 //             Commons             //
 // ------------------------------- //
 
+// Mirror an element
+.is-mirrored {
+    display: block;
+    @include transform(scaleX(-1));
+}
+
 // Hide an element from the screen
 .visuallyhidden {
     @include visuallyhidden;
@@ -24,6 +30,7 @@
 .icon-wrapper {
     display: inline-block;
     vertical-align: middle;
+    line-height: 0;
     .no-svg & {
         display: inline;
     }

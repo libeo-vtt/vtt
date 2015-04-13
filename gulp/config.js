@@ -14,9 +14,6 @@ module.exports = {
         browserSync: {
             open: false
         },
-        compass: {
-            logging: true
-        },
         svgSprite: {
             filename: 'symbols.svg'
         },
@@ -26,7 +23,8 @@ module.exports = {
         },
         svg: {
             width: '100',
-            height: '100'
+            height: '100',
+            prefix: ''
         },
         googleMap: {
             apiKey: 'XXXXXXXXXXXXXXXXXXXXXXXXXXX-XX-XXXXXXXX'

@@ -29,7 +29,7 @@ select {
     width: 280px;
     padding: 4px 6px;
     border: 1px solid $c-border-default;
-    @include border-radius(3px);
+    border-radius: 3px;
 }
 
 textarea {
@@ -104,8 +104,8 @@ input[type="file"] {
     border: 1px solid $c-alert;
     border-top-left-radius: 0;
     border-top-right-radius: 3px;
-    border-bottom-left-radius: 3px;
     border-bottom-right-radius: 3px;
+    border-bottom-left-radius: 3px;
 }
 
 .error-message {
@@ -142,8 +142,8 @@ input[type="file"] {
         height: 20px;
         padding: 0;
         border: 0;
+        border-radius: 50%;
         background-color: $c-txt-default;
-        @include border-radius(50%);
         @include transform(translateY(-50%));
         &:before {
             content: "x";
