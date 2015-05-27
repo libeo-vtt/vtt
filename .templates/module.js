@@ -4,8 +4,6 @@ var $ = require('jquery');
 var inherits = require('inherits');
 var EventEmitter = require('events').EventEmitter;
 
-inherits({{MODULE_NAME}}, EventEmitter);
-
 function {{MODULE_NAME}}(obj, config) {
 
     this.{{MODULE_NAME_LOWERCASE}} = obj;
@@ -18,6 +16,8 @@ function {{MODULE_NAME}}(obj, config) {
     this.init();
 
 }
+
+inherits({{MODULE_NAME}}, EventEmitter);
 
 $.extend({{MODULE_NAME}}.prototype, {
 
