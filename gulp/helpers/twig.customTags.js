@@ -224,7 +224,7 @@ customTags.push({
                 output += '<li class="pagination-element"><a href="#">' + value + '</a></li>';
             }
         });
-        output += '</nav></ul>';
+        output += '</ul></nav>';
         return output;
     }
 });
