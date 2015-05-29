@@ -8,19 +8,19 @@
 
 // --------------------------------- //
 
-hr {
-    border-color: #ccc;
-}
-
 .l-template-header {
     padding: 10px 0;
-    color: #fff;
     background-color: #000;
+    p {
+        font-family: "Roboto";
+        color: #fff;
+    }
 }
 
 .l-template-footer {
     padding: 40px 0;
-    color: #ccc;
+    font-family: "Roboto";
+    color: #efefef;
 }
 
 .l-template-navigation {
@@ -28,6 +28,7 @@ hr {
     left: 50%;
     width: 100vw;
     padding: 10px 0;
+    font-family: "Roboto";
     background-color: #efefef;
     @include transform(translateX(-50%));
     .ie8 & {
@@ -61,6 +62,7 @@ hr {
             font-weight: bold;
             text-align: center;
             text-transform: uppercase;
+            color: #000;
             @include rem-typo(14px);
             @include respond-to(mobile) {
                 text-align: left;
@@ -121,15 +123,27 @@ hr {
 }
 
 .template-title {
-    margin: 20px 0;
-    border-bottom: 1px solid #ccc;
-    header > & {
-        margin-top: 0;
-    }
+    margin: 20px 0 !important;
+    font-family: "Roboto";
+    font-weight: bold;
+    line-height: 1.4;
+    text-transform: none;
+    color: #000;
+    border-bottom: 1px solid #efefef;
+}
+
+.template-subtitle {
+    margin: 20px 0 !important;
+    font-family: "Roboto";
+    font-weight: bold;
+    line-height: 1.4;
+    text-transform: none;
+    color: #000;
+    border-bottom: 1px solid #efefef;
 }
 
 .template-title-offset {
-    margin-top: 23px;
+    margin-top: 45px;
 }
 
 .template-table {
@@ -153,6 +167,7 @@ hr {
         width: 25%;
         height: 100px;
         text-align: center;
+        color: #fff;
         @include rem-typo(16px, 100px);
         @include respond-to(tablet) {
             width: 33%;
@@ -171,8 +186,15 @@ hr {
     font-size: 0;
     .template-icon {
         display: inline-block;
-        vertical-align: middle;
-        @include rem-typo(16px, 100px);
+        vertical-align: top;
+        @include rem-typo(16px);
+        + .template-icon {
+            margin-left: 1em;
+        }
+    }
+    .icon-wrapper {
+        vertical-align: top;
+        line-height: 0;
     }
 }
 
@@ -183,6 +205,9 @@ hr {
 .template-typography-no-context {
     position: relative;
     padding-left: 100px;
+    h1:before {
+        content: "h1";
+    }
     h2:before {
         content: "h2";
     }
@@ -221,6 +246,9 @@ hr {
         content: "blockquote";
         font-style: normal;
     }
+    blockquote p:before {
+        display: none;
+    }
 }
 
 .template-typography-no-context h1,
@@ -234,21 +262,36 @@ hr {
 .template-typography-no-context ol,
 .template-typography-no-context blockquote {
     position: relative;
+    margin-left: 0;
     &:before {
-        content: "h1";
         display: block;
         position: absolute;
-        top: 50%;
+        top: 0.8em;
         left: -100px;
         width: 80px;
         padding-right: 20px;
+        font-family: "Roboto";
         font-size: 14px;
         font-weight: normal;
+        line-height: 14px;
         text-align: right;
-        color: #ccc;
+        text-transform: none;
+        color: #aaa;
         border-right: 1px solid #ccc;
-        @include transform(translateY(-50%));
     }
+}
+
+.template-typography-context h1,
+.template-typography-context h2,
+.template-typography-context h3,
+.template-typography-context h4,
+.template-typography-context h5,
+.template-typography-context h6,
+.template-typography-context p,
+.template-typography-context ul,
+.template-typography-context ol,
+.template-typography-context blockquote {
+    margin-left: 0;
 }
 
 // ----------------------------- //

@@ -12,7 +12,7 @@ var customTags = [];
 customTags.push({
     name: 'stylesheet',
     regex: /^stylesheet\s+(.+)$/,
-    output: functbrion(args) {
+    output: function(args) {
         return '<link rel="stylesheet" href="' + args[0] + '" type="text/css" media="screen">';
     }
 });
@@ -131,7 +131,7 @@ customTags.push({
                 count: Math.random() * (max - min) + min,
                 units: 'words'
             });
-        return output.charAt(0).toUpperCase() + output.slice(1);
+        return output.charAt(0).toUpperCase() + output.slice(1) + '.';
     }
 });
 
@@ -193,7 +193,7 @@ customTags.push({
         args.forEach(function(value) {
             output += '<li class="breadcrumb-element"><a href="#">' + value + '</a></li>';
         });
-        output += '</ul></nav>';
+        output += '</nav></ul>';
         return output;
     }
 });
@@ -224,7 +224,7 @@ customTags.push({
                 output += '<li class="pagination-element"><a href="#">' + value + '</a></li>';
             }
         });
-        output += '</ul></nav>';
+        output += '</nav></ul>';
         return output;
     }
 });

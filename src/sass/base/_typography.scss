@@ -2,39 +2,38 @@
 //             Typography             //
 // ---------------------------------- //
 
+@include headers {
+    font-family: $ff-headers;
+    color: $c-txt-default;
+}
+
 h1,
 .h1 {
-    color: $c-txt-default;
     @include rem-typo(48px);
 }
 
 h2,
 .h2 {
-    color: $c-txt-default;
     @include rem-typo(32px);
 }
 
 h3,
 .h3 {
-    color: $c-txt-default;
     @include rem-typo(24px);
 }
 
 h4,
 .h4 {
-    color: $c-txt-default;
     @include rem-typo(16px);
 }
 
 h5,
 .h5 {
-    color: $c-txt-default;
     @include rem-typo(13px);
 }
 
 h6,
 .h6 {
-    color: $c-txt-default;
     @include rem-typo(11px);
 }
 
@@ -50,12 +49,6 @@ a {
     color: $c-txt-links;
     &:hover {
         text-decoration: underline;
-    }
-    p & {
-        text-decoration: underline;
-        &:hover {
-            text-decoration: none;
-        }
     }
 }
 

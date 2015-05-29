@@ -70,9 +70,10 @@ $.extend(Form.prototype, {
 
     // Validate current input
     validateInput: function(input) {
-        var data = $(input).val(),
-            value = this.isNumber(data) ? parseInt(data) : data,
-            validationTerms = this.getValidationTerms(input);
+        var data = $(input).val();
+        var value = this.isNumber(data) ? parseInt(data) : data;
+        var validationTerms = this.getValidationTerms(input);
+        var empty = false;
 
         if (validationTerms) {
             _.each(validationTerms, $.proxy(function(validationTerm) {
@@ -80,6 +81,9 @@ $.extend(Form.prototype, {
                     term = this.getTerm(validationTerm),
                     modifier = this.getModifier(validationTerm),
                     compare = this.getCompare(input, term);
+                if (this.isNumber(compare)) {
+                    value = value.length;
+                }
                 if (term === 'regex') {
                     var regex = new RegExp(compare);
                     valid = regex.test(value);
@@ -88,7 +92,11 @@ $.extend(Form.prototype, {
                 } else {
                     valid = is[term](value, compare) ? valid : false;
                 }
-                if (!valid) {
+                if (!valid && term === 'empty') {
+                    empty = true;
+                    this.newError(input, this.getErrorMessage(input, term));
+                }
+                if (!valid && !empty) {
                     this.newError(input, this.getErrorMessage(input, term));
                 }
             }, this));
@@ -100,7 +108,8 @@ $.extend(Form.prototype, {
         var inputs = $(fieldset).find('input'),
             validationTerms = this.getValidationTerms(fieldset),
             label = $(fieldset).find('legend'),
-            checkedElements = [];
+            checkedElements = [],
+            empty = false;
 
         inputs.each(function(index, el) {
             if ($(el).is(':checked')) checkedElements.push(el);
@@ -119,6 +128,7 @@ $.extend(Form.prototype, {
                         valid = is[term](checkedElements, compare) ? valid : false;
                     }
                     if (!valid) {
+                        empty = true;
                         this.newFieldsetError(fieldset, this.getErrorMessage(fieldset, term));
                     }
                 } else {
@@ -127,7 +137,7 @@ $.extend(Form.prototype, {
                     } else {
                         valid = is[term](checkedElements.length, compare) ? valid : false;
                     }
-                    if (!valid) {
+                    if (!valid && !empty) {
                         this.newFieldsetError(fieldset, this.getErrorMessage(fieldset, term));
                     }
                 }
@@ -138,7 +148,7 @@ $.extend(Form.prototype, {
     // Get validation terms
     getValidationTerms: function(input) {
         var data = $(input).data('validate');
-        return data !== undefined ? data.split(' ') : false;
+        return data !== undefined ? data.trim().split(' ') : false;
     },
 
     // Normalize given term name
@@ -219,7 +229,7 @@ $.extend(Form.prototype, {
 
     // Check if given value is a number
     isNumber: function(value) {
-        if (value === undefined) return false;
+        if (!value) return false;
         return value.toString().match(/^[0-9]+$/) && !isNaN(parseInt(value));
     }
 });

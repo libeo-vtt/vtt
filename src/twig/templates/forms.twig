@@ -17,7 +17,7 @@
                             <label for="nom">Nom
                                 <span class="required">(obligatoire)</span>
                             </label>
-                            <input type="text" id="nom" value="" data-validate="!empty" data-message-empty="Le nom est obligatoire." />
+                            <input type="text" id="nom" value="" data-validate="!empty above" data-compare-above="10" data-message-above="Le nom doit avoir plus de 10 caractères" data-message-empty="Le nom est obligatoire." />
                         </div>
                         <div class="field prenom">
                             <label for="prenom">Prénom
@@ -31,7 +31,7 @@
                                 <span class="required">(obligatoire)</span>
                                 <span class="format">Exemple : 418-934-1234</span>
                             </label>
-                            <input type="text" id="telephone" value="" data-validate="nanpPhone" data-message-nanpPhone="Le téléphone doit être valide." />
+                            <input type="text" id="telephone" value="" data-validate="!empty nanpPhone" data-message-empty="Le téléphone est obligatoire." data-message-nanpPhone="Le téléphone doit être valide." />
                         </div>
                         <div class="field courriel">
                             <label for="courriel">Courriel

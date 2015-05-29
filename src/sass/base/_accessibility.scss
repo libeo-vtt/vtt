@@ -9,7 +9,7 @@
     position: fixed;
     top: 6px;
     left: 6px;
-    background-color: $c-white;
+    background-color: $c-bg-document;
     @include visuallyhidden;
     // Reset style on focus
     &:focus {

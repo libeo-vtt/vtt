@@ -5,7 +5,7 @@ var runSequence = require('run-sequence');
 gulp.task('watch:js', ['browserify', 'copy:js']);
 gulp.task('watch:img', ['copy:img']);
 gulp.task('watch:sass', ['compass']);
-gulp.task('watch:twig', ['twig']);
+gulp.task('watch:twig', ['twig', 'twig-templates']);
 gulp.task('watch:svg', ['svg2png', 'svgSprite', 'copy:svg']);
 
 gulp.task('watch', ['browser-sync'], function() {

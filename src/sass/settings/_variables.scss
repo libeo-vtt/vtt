@@ -2,10 +2,11 @@
 //             Variables             //
 // --------------------------------- //
 
-$document-width: 1140px;
 $spacing-default: 40px;
 $spacing-tablet: 30px;
 $spacing-mobile: 20px;
+$document-width: 1280px;
+$document-width-inner: $document-width - $spacing-default * 2;
 
 // ------------------------------------- //
 //             Media queries             //
@@ -13,41 +14,80 @@ $spacing-mobile: 20px;
 
 // Media queries
 $mq-breakpoints: (
-    "mobile" : 767px,
-    "tablet" : (768px, 1023px),
-    "desktop" : (1024px, 1920px),
-    "mobile-tablet": 1023px,
-    "document-width" : $document-width
+    "mobile": (
+        min: false,
+        max: 767px,
+        grid: true
+    ),
+    "tablet": (
+        min: 768px,
+        max: 1024px,
+        grid: true
+    ),
+    "desktop": (
+        min: 1025px,
+        max: false,
+        grid: true
+    ),
+    "mobile-tablet": (
+        min: false,
+        max: 1024px,
+        grid: false
+    ),
+    "document-width": (
+        min: false,
+        max: $document-width,
+        grid: false
+    )
 );
-
-// Disable breakpoints for grid classes
-$grid-disabled-breakpoints: "mobile-tablet", "document-width";
 
 // ------------------------------ //
 //             Colors             //
 // ------------------------------ //
 
-// Colors
-$c-black: #000;
-$c-white: #fff;
-$c-red: #f00000;
+$colors: (
+    "black": (
+        "base": #000,
+        "light": #555
+    ),
+    "white": (
+        "base": #fff,
+        "dark": darken(#fff, 10%)
+    ),
+    "grey": (
+        "base": #d5d5d5
+    ),
+    "red": (
+        "base": #f00
+    )
+);
+
+@function color($color, $tone: "base") {
+    @if map-has-key($colors, $color) {
+        @return map-get(map-get($colors, $color), $tone);
+    } @else {
+        @warn "Unfortunately, no value could be retrieved from `#{$color}`. Please make sure it is defined in `$colors` map.";
+        @return null;
+    }
+}
 
 // ------------------------------ //
 
-$c-bg-document: $c-white;
-$c-border-default: $c-black;
-$c-txt-default: $c-black;
-$c-txt-links: $c-black;
-$c-alert: $c-red;
+$c-bg-document: color("white");
+$c-border-default: color("grey");
+$c-txt-default: color("black");
+$c-txt-headers: color("black", "light");
+$c-txt-intro: color("black", "light");
+$c-txt-links: color("black", "light");
+$c-alert: color("red");
 
 // ----------------------------- //
 //             Fonts             //
 // ----------------------------- //
 
-// Fonts
-$ff-arial: Arial, Helvetica, sans-serif;
-$ff-roboto: "Roboto", sans-serif;
+$ff-roboto: "Roboto", "Arial", sans-serif;
 
 // ------------------------------ //
 
 $ff-default: $ff-roboto;
+$ff-headers: $ff-roboto;

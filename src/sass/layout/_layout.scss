@@ -12,32 +12,33 @@
 
 .l-page-wrapper {
     position: relative;
-    width: $document-width;
+    width: $document-width - ($spacing-default * 2);
     margin: 0 auto;
-    padding: 0 $spacing-default;
-    @include respond-to(document-width) {
+    padding: 0;
+    font-size: 0;
+    @include respond-to(1220px) {
         width: auto;
-    }
-    @include respond-to(tablet) {
         padding: 0 $spacing-tablet;
     }
     @include respond-to(mobile) {
+        width: auto;
         padding: 0 $spacing-mobile;
     }
+    .is-zoomed & {
+        width: auto;
+        margin: 0 $spacing-default;
+    }
+}
+
+.l-content-section {
+    position: relative;
 }
 
 .l-fullwidth {
     position: relative;
     left: 50%;
     width: 100vw;
-    padding: 0 $spacing-default;
     @include transform(translateX(-50%));
-    @include respond-to(tablet) {
-        padding: 0 $spacing-tablet;
-    }
-    @include respond-to(mobile) {
-        padding: 0 $spacing-mobile;
-    }
     .ie8 & {
         left: auto;
         width: auto;
@@ -46,7 +47,9 @@
     }
 }
 
-.l-content,
-.l-sidebar {
+.l-block-content,
+.l-block-sidebar {
+    position: relative;
+    font-size: 1rem;
     @include clearfix;
 }

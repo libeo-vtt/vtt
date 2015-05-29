@@ -4,7 +4,8 @@ var config = require('../config.js');
 gulp.task('copy:js', function() {
     return gulp.src([
             config.src + 'js/vendor/modernizr*.js',
-            config.src + 'js/vendor/detectizr*.js'
+            config.src + 'js/vendor/detectizr*.js',
+            config.src + 'js/vendor/svg4everybody*.js'
         ])
         .pipe(gulp.dest(config.build + 'js/vendor'));
 });

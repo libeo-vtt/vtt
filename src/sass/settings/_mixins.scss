@@ -2,7 +2,6 @@
 //             Mixins             //
 // ------------------------------ //
 
-// Headers
 @mixin headers {
     h1,
     h2,
@@ -18,6 +17,25 @@
     .h6 {
         @content;
     }
+}
+
+@mixin absolute-center {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    @include transform(translate(-50%, -50%));
+}
+
+@mixin absolute-vertical-center {
+    position: absolute;
+    top: 50%;
+    @include transform(translateY(-50%));
+}
+
+@mixin absolute-horizontal-center {
+    position: absolute;
+    left: 50%;
+    @include transform(translateX(-50%));
 }
 
 // Clearfix
@@ -182,8 +200,17 @@
     transform: $transforms;
 }
 
+// Underline
+@mixin underline($color: inherit, $weight: 1px, $offset: 2px) {
+    text-decoration: none;
+    background-image: linear-gradient(to top, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0) $offset, $color $offset, $color $offset + $weight, rgba(0, 0, 0, 0) $offset + $weight);
+    &:hover {
+        text-decoration: none;
+    }
+}
+
 // Rotate
-@mixin rotate ($deg) {
+@mixin rotate($deg) {
     @include transform(rotate(#{$deg}deg));
 }
 
@@ -193,12 +220,12 @@
 }
 
 // Translate
-@mixin translate ($x, $y) {
+@mixin translate($x, $y) {
     @include transform(translate($x, $y));
 }
 
 // Skew
-@mixin skew ($x, $y) {
+@mixin skew($x, $y) {
     @include transform(skew(#{$x}deg, #{$y}deg));
 }
 
@@ -256,26 +283,6 @@
     border-bottom-left-radius: $radius;
 }
 
-// Respond-to
-@mixin respond-to($breakpoint) {
-    $value: map-get($mq-breakpoints, $breakpoint);
-    @if type-of($value) == list {
-        @media (min-width: nth($value, 1)) and (max-width: nth($value, 2)) {
-            @content;
-        }
-    }
-    @else if $value != null {
-        @media (max-width: $value) {
-            @content;
-        }
-    }
-    @else {
-        @media (max-width: $breakpoint) {
-            @content;
-        }
-    }
-}
-
 // Emify
 @function emify($target, $base: 16) {
     $values: ();
@@ -293,56 +300,134 @@
     @return $values;
 }
 
+// Respond-to
+@mixin respond-to($breakpoint) {
+    $bp-value: map-get($mq-breakpoints, $breakpoint);
+    @if $bp-value == null {
+        @if $breakpoint == list {
+            @media (min-width: nth($breakpoint, 1)) and (max-width: nth($breakpoint, 2)) {
+                @content;
+            }
+        }
+        @else {
+            @media (max-width: $breakpoint) {
+                @content;
+            }
+        }
+    }
+    @else {
+        $bp-min: nth(nth($bp-value, 1), 2);
+        $bp-max: nth(nth($bp-value, 2), 2);
+        @if $bp-min == false and $bp-max != false {
+            @media (max-width: $bp-max) {
+                @content;
+            }
+        }
+        @else if $bp-min != false and $bp-max == false {
+            @media (min-width: $bp-min) {
+                @content;
+            }
+        } @else {
+            @media (min-width: $bp-min) and (max-width: $bp-max) {
+                @content;
+            }
+        }
+    }
+}
+
+// Media queries classes
+@each $breakpoint in $mq-breakpoints {
+    $bp-name: nth($breakpoint, 1);
+    $bp-value: nth($breakpoint, 2);
+    $bp-min: nth(nth($bp-value, 1), 2);
+    $bp-max: nth(nth($bp-value, 2), 2);
+    @if $bp-min == false and $bp-max != false {
+        @media (max-width: $bp-max) {
+            .is-#{$bp-name} {
+                display: block !important;
+            }
+            .is-not-#{$bp-name} {
+                display: none !important;
+            }
+        }
+    }
+    @else if $bp-min != false and $bp-max == false {
+        @media (min-width: $bp-min) {
+            .is-#{$bp-name} {
+                display: block !important;
+            }
+            .is-not-#{$bp-name} {
+                display: none !important;
+            }
+        }
+    } @else {
+        @media (min-width: $bp-min) and (max-width: $bp-max) {
+            .is-#{$bp-name} {
+                display: block !important;
+            }
+            .is-not-#{$bp-name} {
+                display: none !important;
+            }
+        }
+    }
+}
+
 // Grid
-@mixin grid($gutter, $margin, $iterations: 4, $vertical-align: top) {
-    margin: $margin 0;
-    padding: $margin;
+@mixin grid($horizontal-gutter, $vertical-gutter, $margin, $iterations: 4, $vertical-align: top) {
+    margin: $margin;
     font-size: 0;
-    @if $gutter == 0 {
-        $gutter: 0px;
+    //overflow: hidden;
+    @if $horizontal-gutter == 0 {
+        $horizontal-gutter: $horizontal-gutter * 1px;
     }
-    &.grid-float {
-        .grid-wrapper {
-            @include clearfix;
-        }
-        [class^="col"] {
-            float: left;
-            display: block;
-        }
+    @if $vertical-gutter == 0 {
+        $vertical-gutter: $vertical-gutter * 1px;
     }
-    .grid-wrapper {
-        margin: 0 ($gutter / 2 * -1);
+    > .grid-wrapper {
+        position: relative;
+        top: ($vertical-gutter / 2 * -1);
+        margin: 0 ($horizontal-gutter / 2 * -1) ($vertical-gutter * -1);
         .ie & {
-            margin: 0 (($gutter - 1px) / 2 * -1);
+            margin: 0 (($horizontal-gutter - 1px) / 2 * -1);
         }
     }
-    [class^="col"] {
+    > .grid-wrapper > [class^="col"] {
         display: inline-block;
         vertical-align: $vertical-align;
-        margin: ($gutter / 2);
+        margin: ($vertical-gutter / 2) ($horizontal-gutter / 2);
         font-size: 1rem;
+        @include transition(all, 150ms);
     }
     @for $i from 1 through $iterations {
         $current: $i;
         @for $i from 1 through $current {
-            .col-#{$i}-#{$current} {
-                width: calc(100% / #{$current} * #{$i} - #{$gutter});
+            > .grid-wrapper > .col-#{$i}-#{$current} {
+                width: calc(100% / #{$current} * #{$i} - #{$horizontal-gutter});
             }
             @each $breakpoint in $mq-breakpoints {
                 $bp-name: nth($breakpoint, 1);
                 $bp-value: nth($breakpoint, 2);
-                @if index($grid-disabled-breakpoints, $bp-name) == null {
-                    @if type-of($bp-value) == list {
-                        @media (min-width: nth($bp-value, 1)) and (max-width: nth($bp-value, 2)) {
-                            [class^="col"].col-#{$i}-#{$current}-#{$bp-name} {
-                                width: calc(100% / #{$current} * #{$i} - #{$gutter});
+                $bp-min: nth(nth($bp-value, 1), 2);
+                $bp-max: nth(nth($bp-value, 2), 2);
+                $bp-grid: nth(nth($bp-value, 3), 2);
+                @if $bp-grid == true {
+                    @if $bp-min == false and $bp-max != false {
+                        @media (max-width: $bp-max) {
+                            > .grid-wrapper > [class^="col"].col-#{$i}-#{$current}-#{$bp-name} {
+                                width: calc(100% / #{$current} * #{$i} - #{$horizontal-gutter});
                             }
                         }
                     }
-                    @else {
-                        @media (max-width: $bp-value) {
-                            [class^="col"].col-#{$i}-#{$current}-#{$bp-name} {
-                                width: calc(100% / #{$current} * #{$i} - #{$gutter});
+                    @else if $bp-min != false and $bp-max == false {
+                        @media (min-width: $bp-min) {
+                            > .grid-wrapper > [class^="col"].col-#{$i}-#{$current}-#{$bp-name} {
+                                width: calc(100% / #{$current} * #{$i} - #{$horizontal-gutter});
+                            }
+                        }
+                    } @else {
+                        @media (min-width: $bp-min) and (max-width: $bp-max) {
+                            > .grid-wrapper > [class^="col"].col-#{$i}-#{$current}-#{$bp-name} {
+                                width: calc(100% / #{$current} * #{$i} - #{$horizontal-gutter});
                             }
                         }
                     }
@@ -350,4 +435,8 @@
             }
         }
     }
+}
+
+@function strip-units($number) {
+    @return $number / ($number * 0 + 1);
 }

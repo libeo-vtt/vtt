@@ -4,8 +4,17 @@
 
 // Mirror an element
 .is-mirrored {
-    display: block;
+    display: inline-block;
     @include transform(scaleX(-1));
+}
+
+// Display child elements as inline-block
+.inline-block {
+    font-size: 0;
+    > * {
+        display: inline-block;
+        font-size: 1rem;
+    }
 }
 
 // Hide an element from the screen
@@ -56,6 +65,21 @@
     pointer-events: none;
 }
 
+// Opacity classes
+// ex: opacity-05, opacity-10, opacity-15, opacity-20, [...], opacity-90, opacity-95, opacity-100
+
+@for $i from 0 through 10 {
+    .opacity-#{$i}0 {
+        opacity: $i / 10;
+    }
+    @if $i < 10 {
+        .opacity-#{$i}5 {
+            opacity: ($i + 0.5) / 10;
+        }
+    }
+}
+
+
 // ------------------------------- //
 
 .table {
@@ -104,4 +128,18 @@
 
 .is-underline {
     text-decoration: underline;
+}
+
+.float-left-content {
+    float: left;
+    margin-top: 3px;
+    margin-right: 30px;
+    margin-bottom: 3px;
+}
+
+.float-right-content {
+    float: right;
+    margin-top: 3px;
+    margin-bottom: 3px;
+    margin-left: 30px;
 }

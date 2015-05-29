@@ -40,6 +40,8 @@
     {% script "/js/vendor/modernizr.min.js" %}
     {% script "/js/vendor/detectizr.min.js" %}
 
+    {% script "/js/vendor/svg4everybody.ie8.min.js" %}
+
     <!-- Google Font Fallback -->
     <link href='http://fonts.googleapis.com/css?family=Roboto%7CRoboto:bold%7CRoboto:italic' rel='stylesheet' type='text/css'>
 
@@ -51,9 +53,9 @@
 
     <!-- Header -->
     {% if templates == true %}
-        {% include '../templates/partials/header.twig' %}
+        {% include 'templates/partials/header.twig' %}
     {% else %}
-        {% include '../partials/header.twig' %}
+        {% include 'partials/header.twig' %}
     {% endif %}
 
     <!-- Content -->
@@ -61,9 +63,9 @@
 
     <!-- Footer -->
     {% if templates == true %}
-        {% include '../templates/partials/footer.twig' %}
+        {% include 'templates/partials/footer.twig' %}
     {% else %}
-        {% include '../partials/footer.twig' %}
+        {% include 'partials/footer.twig' %}
     {% endif %}
 
     {# google-analytics "XX-XXXXXXXX-X" #}
