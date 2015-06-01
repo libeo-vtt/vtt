@@ -385,16 +385,16 @@
     }
     > .grid-wrapper {
         position: relative;
-        top: ($vertical-gutter / 2 * -1);
-        margin: 0 ($horizontal-gutter / 2 * -1) ($vertical-gutter * -1);
+        top: floor($vertical-gutter / 2 * -1);
+        margin: 0 floor($horizontal-gutter / 2 * -1) floor($vertical-gutter * -1);
         .ie & {
-            margin: 0 (($horizontal-gutter - 1px) / 2 * -1);
+            margin: 0 floor(($horizontal-gutter - 1px) / 2 * -1);
         }
     }
     > .grid-wrapper > [class^="col"] {
         display: inline-block;
         vertical-align: $vertical-align;
-        margin: ($vertical-gutter / 2) ($horizontal-gutter / 2);
+        margin: floor($vertical-gutter / 2) floor($horizontal-gutter / 2);
         font-size: 1rem;
         @include transition(all, 150ms);
     }
