@@ -15,7 +15,8 @@ gulp.task('twig', function() {
             functions: customFunctions,
             extend: function(Twig) {
                 return extendTwig(Twig, customTags);
-            }
+            },
+            onError: function(event) {}
         }))
         .pipe(prettify(config.prettify))
         .pipe(gulp.dest(config.build));
@@ -30,7 +31,8 @@ gulp.task('twig-templates', function() {
             functions: customFunctions,
             extend: function(Twig) {
                 return extendTwig(Twig, customTags);
-            }
+            },
+            onError: function(event) {}
         }))
         .pipe(prettify(config.prettify))
         .pipe(gulp.dest(config.build));
