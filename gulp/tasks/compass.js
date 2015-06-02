@@ -16,5 +16,8 @@ gulp.task('compass', function() {
             sourcemap: config.sourcemaps,
             require: ['sass-globbing']
         }))
+        .on('error', function(error) {
+            this.emit('end');
+        })
         .pipe(gulp.dest(config.build + 'css/'));
 });
