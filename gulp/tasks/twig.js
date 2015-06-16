@@ -7,7 +7,7 @@ var customFunctions = require('../helpers/twig.customFunctions.js');
 var customTags = require('../helpers/twig.customTags.js');
 
 gulp.task('twig', function() {
-    return gulp.src([config.src + 'twig/views/*.twig'], {
+    return gulp.src([config.src + 'twig/views/**/*.twig'], {
             base: 'src/twig/views/'
         })
         .pipe(twig({
