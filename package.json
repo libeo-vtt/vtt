@@ -99,6 +99,7 @@
     "lodash": "^3.8.0",
     "lorem-ipsum": "^1.0.1",
     "require-dir": "^0.3.0",
+    "rimraf": "^2.4.0",
     "run-sequence": "^1.1.0",
     "source-map": "^0.4.2",
     "svgo": "^0.5.1",

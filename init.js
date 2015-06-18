@@ -2,6 +2,7 @@
 
 var program = require('commander');
 var fs = require('fs');
+var rm = require('rimraf');
 var inquirer = require('inquirer');
 var glob = require('glob');
 var project = require('./package.json');
@@ -28,6 +29,11 @@ var questions = [{
     validate: function(input) {
         return input !== '' ? true : 'You must enter a valid javascript global object name.';
     }
+}, {
+    name: 'templates',
+    type: 'confirm',
+    message: 'Include VTT templates?',
+    default: true
 }, {
     name: 'version',
     message: 'Project version:',
@@ -60,6 +66,7 @@ inquirer.prompt(questions, function(answers) {
     project.url = answers.url;
     project.repository = answers.repository;
     project.jsname = answers.jsname;
+    project.templates = answers.templates;
 
     // Save new project values
     fs.writeFile('./package.json', JSON.stringify(project, null, 2), function(error) {
@@ -87,4 +94,14 @@ inquirer.prompt(questions, function(answers) {
             })(i);
         }
     });
+
+    // Remove templates files
+    if (!answers.templates) {
+        rm('./src/twig/templates/', function(error) {
+            if (error) return console.log(error);
+        });
+        rm('./src/sass/templates.scss', function(error) {
+            if (error) return console.log(error);
+        });
+    }
 });
