@@ -6,5 +6,5 @@ var config = require('../config.js');
 gulp.task('svg2png', function() {
     return gulp.src(config.src + 'svg/*.svg')
         .pipe(gulpif(config.svgFallback, svg2png()))
-        .pipe(gulp.dest(config.build + 'img/svg-fallbacks/'));
+        .pipe(gulpif(config.svgFallback, gulp.dest(config.build + 'img/svg-fallbacks/')));
 });
