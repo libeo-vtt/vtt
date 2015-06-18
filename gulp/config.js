@@ -15,8 +15,8 @@ module.exports = {
         browserSync: {
             open: false
         },
-        svgSprite: {
-            filename: 'symbols.svg'
+        googleMap: {
+            apiKey: 'XXXXXXXXXXXXXXXXXXXXXXXXXXX-XX-XXXXXXXX'
         },
         loremipsum: {
             minRange: 0.75,
@@ -27,8 +27,12 @@ module.exports = {
             height: '100',
             prefix: ''
         },
-        googleMap: {
-            apiKey: 'XXXXXXXXXXXXXXXXXXXXXXXXXXX-XX-XXXXXXXX'
+        svgSprite: {
+            filename: 'symbols.svg'
+        },
+        twig: {
+            data: false,
+            file: 'twig/data.js'
         }
     }
 };
