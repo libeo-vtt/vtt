@@ -83,6 +83,7 @@
     "gulp-cheerio": "^0.6.2",
     "gulp-compass": "^2.0.4",
     "gulp-if": "^1.2.5",
+    "gulp-imagemin": "^2.2.1",
     "gulp-prettify": "^0.3.0",
     "gulp-sourcemaps": "^1.5.2",
     "gulp-svg-sprite": "^1.1.2",

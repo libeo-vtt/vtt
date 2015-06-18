@@ -2,6 +2,7 @@ module.exports = {
     build: './build/',
     src: './src/',
     minify: true,
+    imagemin: true,
     sourcemaps: true,
     svgFallback: false,
     prettify: {

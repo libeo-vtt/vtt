@@ -1,4 +1,6 @@
 var gulp = require('gulp');
+var gulpif = require('gulp-if');
+var imagemin = require('gulp-imagemin');
 var config = require('../config.js');
 
 gulp.task('copy:js', function() {
@@ -12,6 +14,7 @@ gulp.task('copy:js', function() {
 
 gulp.task('copy:img', function() {
     return gulp.src(config.src + 'img/**/*')
+        .pipe(gulpif(config.imagemin, imagemin()))
         .pipe(gulp.dest(config.build + 'img'));
 });
 
