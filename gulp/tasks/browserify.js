@@ -1,4 +1,5 @@
 var gulp = require('gulp');
+var argv = require('yargs').argv;
 var gulpif = require('gulp-if');
 var browserify = require('browserify');
 var source = require('vinyl-source-stream');
@@ -15,10 +16,10 @@ gulp.task('browserify', function() {
         .bundle()
         .pipe(source('bundle.js'))
         .pipe(buffer())
-        .pipe(gulpif(config.sourcemaps, sourcemaps.init({
+        .pipe(gulpif(config.sourcemaps && !argv.prod, sourcemaps.init({
             loadMaps: config.sourcemaps
         })))
-        .pipe(gulpif(config.minify, uglify()))
-        .pipe(gulpif(config.sourcemaps, sourcemaps.write('./')))
+        .pipe(gulpif(config.minify || argv.prod, uglify()))
+        .pipe(gulpif(config.sourcemaps && !argv.prod, sourcemaps.write('./')))
         .pipe(gulp.dest(config.build + 'js/'));
 });
