@@ -341,6 +341,7 @@
     $bp-value: nth($breakpoint, 2);
     $bp-min: nth(nth($bp-value, 1), 2);
     $bp-max: nth(nth($bp-value, 2), 2);
+    $bp-export: nth(nth($bp-value, 4), 2);
     @if $bp-min == false and $bp-max != false {
         @media (max-width: $bp-max) {
             .is-#{$bp-name} {
@@ -348,6 +349,13 @@
             }
             .is-not-#{$bp-name} {
                 display: none !important;
+            }
+            // Export breakpoint for Javascript
+            @if $bp-export == true {
+                body:before {
+                    display: none;
+                    content: $bp-name;
+                }
             }
         }
     }
@@ -359,6 +367,13 @@
             .is-not-#{$bp-name} {
                 display: none !important;
             }
+            // Export breakpoint for Javascript
+            @if $bp-export == true {
+                body:before {
+                    display: none;
+                    content: $bp-name;
+                }
+            }
         }
     } @else {
         @media (min-width: $bp-min) and (max-width: $bp-max) {
@@ -367,6 +382,13 @@
             }
             .is-not-#{$bp-name} {
                 display: none !important;
+            }
+            // Export breakpoint for Javascript
+            @if $bp-export == true {
+                body:before {
+                    display: none;
+                    content: $bp-name;
+                }
             }
         }
     }

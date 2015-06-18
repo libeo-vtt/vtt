@@ -17,27 +17,32 @@ $mq-breakpoints: (
     "mobile": (
         min: false,
         max: 767px,
-        grid: true
+        grid: true,
+        export: true
     ),
     "tablet": (
         min: 768px,
         max: 1024px,
-        grid: true
+        grid: true,
+        export: true
     ),
     "desktop": (
         min: 1025px,
         max: false,
-        grid: true
+        grid: true,
+        export: true
     ),
     "mobile-tablet": (
         min: false,
         max: 1024px,
-        grid: false
+        grid: false,
+        export: false
     ),
     "document-width": (
         min: false,
         max: $document-width,
-        grid: false
+        grid: false,
+        export: false
     )
 );
 
