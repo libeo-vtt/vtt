@@ -24,4 +24,7 @@ gulp.task('watch', ['browser-sync'], function() {
     gulp.watch('./src/svg/**/*', function() {
         runSequence('clean:svg', 'watch:svg', browserSync.reload);
     });
+    gulp.watch(['./README.md', './LICENSE.md', './src/documentation/**/*'], function() {
+        runSequence('documentation', browserSync.reload);
+    });
 });
