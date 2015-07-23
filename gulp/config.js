@@ -1,6 +1,7 @@
 module.exports = {
     build: './build/',
     src: './src/',
+    documentation: true,
     minify: true,
     imagemin: true,
     sourcemaps: true,

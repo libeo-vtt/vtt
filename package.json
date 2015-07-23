@@ -70,6 +70,7 @@
     }
   },
   "devDependencies": {
+    "beautiful-docs": "^1.0.3",
     "browser-sync": "^2.7.1",
     "browserify": "^10.1.2",
     "browserify-shim": "^3.8.6",
@@ -85,6 +86,7 @@
     "gulp-if": "^1.2.5",
     "gulp-imagemin": "^2.2.1",
     "gulp-prettify": "^0.3.0",
+    "gulp-shell": "^0.4.2",
     "gulp-sourcemaps": "^1.5.2",
     "gulp-svg-sprite": "^1.1.2",
     "gulp-svg2png": "^0.3.0",

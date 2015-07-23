@@ -1,0 +1,207 @@
+body {
+    min-width: 1100px;
+    font-family: Helvetica, Arial, sans-serif;
+    font-size: 14px;
+    line-height: 1.4em;
+}
+#header {
+    display: block;
+    position: relative;
+    padding: 10px 20px;
+    border-bottom: 3px solid #ccc;
+    background: #efefef;
+}
+#header h1 {
+    font-size: 37px;
+    line-height: 46px;
+}
+#header h1 a {
+    text-decoration: none;
+    color: #333333;
+}
+#header #menu {
+    position: absolute;
+    top: 25px;
+    right: 20px;
+}
+#header #menu a {
+    display: inline-block;
+    position: relative;
+    top: -1px;
+    margin: 0;
+    padding: 5px 10px;
+    font-size: 16px;
+    text-decoration: none;
+    color: #444;
+    border: 1px solid #da7c0c;
+    -moz-border-radius: 4px;
+    border-radius: 4px;
+    background: #f78d1d;
+    background: -webkit-gradient(linear, left top, left bottom, from(#faa51a), to(#f47a20));
+    background: -moz-linear-gradient(top, #faa51a, #f47a20);
+    -webkit-box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+    -moz-box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+    text-shadow: 0 1px 1px rgba(0, 0, 0, 0.3);
+    cursor: pointer;
+}
+#sidebar {
+    float: left;
+    width: 230px;
+    padding: 27px 30px 15px;
+    border-right: 1px solid #cccccc;
+}
+#sidebar input#search {
+    width: 100%;
+    margin-bottom: 20px;
+    padding: 4px 0;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    -moz-border-radius: 4px;
+    border-radius: 4px;
+}
+#sidebar #toc li {
+    margin: 14px 0;
+    font-size: 16px;
+}
+#sidebar #toc li a {
+    text-decoration: none;
+    color: #555;
+}
+#sidebar #toc > ol > li {
+    margin-bottom: 20px;
+    font-weight: bold;
+}
+#sidebar #toc > ol > li li {
+    margin-left: 15px;
+    font-weight: normal;
+}
+#sidebar #toc > ol > li li a {
+    color: #777;
+}
+#sidebar #links {
+    margin-top: 24px;
+    margin-bottom: 10px;
+    padding-top: 10px;
+    border-top: 1px dotted #ddd;
+}
+#sidebar #links a {
+    font-size: 12px;
+    text-decoration: none;
+    color: #888;
+}
+#content {
+    float: left;
+    width: 700px;
+    margin-left: -1px;
+    padding: 10px 40px 80px 30px;
+    color: #444;
+    border-left: 1px solid #cccccc;
+}
+#content h1 {
+    margin: 15px 0 25px 0;
+    font-size: 32px;
+    line-height: 35px;
+}
+#content h2 {
+    margin: 30px 0 15px 0;
+    padding-bottom: 7px;
+    font-size: 24px;
+    border-bottom: 2px solid #ccc;
+}
+#content p {
+    margin: 15px 0;
+}
+#content a {
+    text-decoration: none;
+    color: #d08708;
+}
+#content a:hover {
+    text-decoration: underline;
+}
+#content ul,
+#content ol {
+    margin-left: 30px;
+    list-style: disc;
+}
+#content ul li,
+#content ol li {
+    margin: 5px 0;
+}
+#content ol {
+    list-style: decimal;
+}
+#content pre {
+    margin: 15px 0;
+}
+#content code {
+    overflow: auto;
+}
+#content .note {
+    margin: 20px 0;
+    padding: 5px;
+    border: 2px solid #ccc;
+    background: #f3f3f3;
+}
+#content .warning {
+    margin: 20px 0;
+    padding: 5px;
+    border: 2px solid #d24d4d;
+    background: #fdeeee;
+}
+#content .tip {
+    margin: 20px 0;
+    padding: 5px;
+    border: 2px solid #e5cc24;
+    background: #fffbe2;
+}
+#content img {
+    max-width: 100%;
+}
+#content table {
+    width: 100%;
+    margin: 20px auto;
+}
+#content table th {
+    padding: 4px;
+    color: #555;
+    border-bottom: 1px solid #bbb;
+    border-left: 1px solid #bbb;
+    background: #efefef;
+}
+#content table th:first-child {
+    border-left: 0;
+}
+#content table td {
+    padding: 4px;
+    border-bottom: 1px solid #ccc;
+    border-left: 1px solid #ccc;
+}
+#content table td:first-child {
+    border-left: 0;
+}
+#content #disqus_thread {
+    margin-top: 50px;
+    padding-top: 20px;
+    border-top: 1px solid #ccc;
+}
+#footer {
+    display: block;
+    clear: both;
+    padding: 10px;
+    color: #999;
+    border-top: 1px solid #cccccc;
+}
+#footer a {
+    color: #999;
+}
+#fork-me-on-github {
+    display: block;
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 149px;
+    height: 149px;
+    text-indent: -9999px;
+    background: url(../img/github_forkme.png) no-repeat;
+}
