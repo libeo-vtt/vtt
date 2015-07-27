@@ -1,5 +1,6 @@
 var project = require('../../package.json');
 var config = require('../config.js');
+var glob = require('glob');
 var customFunctions = [];
 
 /**
@@ -95,6 +96,25 @@ customFunctions.push({
     name: 'ceil',
     func: function(args) {
         return Math.ceil(args);
+    }
+});
+
+/**
+ * ceil
+ * Return:
+ *     Math.ceil(value)
+ */
+customFunctions.push({
+    name: 'create_static_nav',
+    func: function(args) {
+        var output = '<nav class="debug_static_nav"><ul>';
+        var files = glob.sync(config.src + 'twig/views/**/*.twig');
+        files.forEach(function(file) {
+            var filename = file.replace(config.src + 'twig/views/', '').replace('.twig', '');
+            output += '<li><a href="/' + filename + '.html">' + filename + '</a></li>';
+        });
+        output += '</ul></nav>';
+        return output;
     }
 });
 
