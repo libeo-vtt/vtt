@@ -83,6 +83,13 @@ $.extend(Folder.prototype, {
         }, this));
 
         // Focus events
+        this.folderTrigger.on('focus', $.proxy(function(e) {
+            this.onTriggerFocus($(e.currentTarget));
+        }, this));
+        this.folderTrigger.on('blur', $.proxy(function(e) {
+            this.onTriggerBlur($(e.currentTarget));
+        }, this));
+        
         this.folderTrigger.on('focus', this.config.onFocus);
         this.folderTrigger.on('blur', this.config.onBlur);
     },
@@ -164,6 +171,16 @@ $.extend(Folder.prototype, {
     // Function to change the hidden text inside the folderTrigger
     changeAriaText: function(text) {
         this.folderAria.text(text);
+    },
+
+    // Change aria-live attribute on focus
+    onTriggerFocus: function(trigger) {
+        trigger.find('.' + this.config.ariaTextClass).attr('aria-live', 'polite');
+    },
+
+    // Change aria-live attribute on blur
+    onTriggerBlur: function(trigger) {
+        trigger.find('.' + this.config.ariaTextClass).removeAttr('aria-live');
     },
 
     // Check if folder is inside a group of folders
