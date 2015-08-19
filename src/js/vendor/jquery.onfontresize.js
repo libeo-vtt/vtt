@@ -15,7 +15,7 @@
                 left: '-9999px',
                 display: 'inline',
                 lineHeight: 1
-            }).appendTo('body');
+            }).attr('aria-hidden', 'true').appendTo('body');
 
             this.boxHeight = $(this.box).height();
         },
