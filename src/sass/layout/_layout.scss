@@ -12,11 +12,15 @@
 
 .l-page-wrapper {
     position: relative;
-    width: $document-width - ($spacing-default * 2);
+    width: $document-width;
     margin: 0 auto;
     padding: 0;
     font-size: 0;
-    @include respond-to(1220px) {
+    @include respond-to($document-width + $spacing-default * 2) {
+        width: auto;
+        padding: 0 $spacing-default;
+    }
+    @include respond-to(tablet) {
         width: auto;
         padding: 0 $spacing-tablet;
     }

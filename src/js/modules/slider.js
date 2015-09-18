@@ -197,7 +197,7 @@ $.extend(Slider.prototype, {
         this.sliderNavigation = this.slider.find('.' + this.config.sliderNavigationClass);
 
         // Add navigation type class
-        this.sliderNavigation.addClass(this.config.sliderNavigationClass + '-' + type);
+        this.sliderNavigation.addClass('is-' + this.config.sliderNavigationClass + '-' + type);
 
         // Arrows navigation type
         if (type === 'arrows') {

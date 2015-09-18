@@ -81,7 +81,7 @@ $.extend(Form.prototype, {
                     term = this.getTerm(validationTerm),
                     modifier = this.getModifier(validationTerm),
                     compare = this.getCompare(input, term);
-                if (this.isNumber(compare)) {
+                if (!this.isNumber(value) && this.isNumber(compare)) {
                     value = value.length;
                 }
                 if (term === 'regex') {

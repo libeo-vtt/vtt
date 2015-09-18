@@ -8,13 +8,15 @@ module.exports = (function() {
 
     $(window).on('resize', _.debounce(function() {
         $('[data-equalheight]').each(function() {
-            var id = $(this).data('equalheight');
-            if (!_.contains(identifiers, id)) identifiers.push(id);
+            var ids = $(this).data('equalheight').split(' ');
+            _.forEach(ids, function(id) {
+                if (!_.contains(identifiers, id)) identifiers.push(id);
+            });
         });
 
         _.forEach(identifiers, function(id) {
             var height = 0,
-                elements = $('[data-equalheight=' + id + ']');
+                elements = $('[data-equalheight~=' + id + ']');
 
             elements.waitForImages(function() {
                 elements.each(function() {

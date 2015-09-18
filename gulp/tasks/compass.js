@@ -16,7 +16,7 @@ var compass_config = {
     require: ['sass-globbing']
 };
 
-gulp.task('compass-default', function() {
+gulp.task('compass', (argv.prod ? [] : ['compass-templates']), function() {
     return gulp.src(['./src/sass/*.scss', '!./src/sass/templates.scss'])
         .pipe(compass(compass_config))
         .on('error', function(error) {
@@ -32,12 +32,4 @@ gulp.task('compass-templates', function() {
             this.emit('end');
         })
         .pipe(gulp.dest(config.build + 'css/'));
-});
-
-gulp.task('compass', function() {
-    if (argv.prod) {
-        runSequence(['compass-default']);
-    } else {
-        runSequence(['compass-default', 'compass-templates']);
-    }
 });

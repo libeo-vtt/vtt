@@ -8,7 +8,7 @@ var extendTwig = require('../helpers/twig.exports.extendTag.js');
 var customFunctions = require('../helpers/twig.customFunctions.js');
 var customTags = require('../helpers/twig.customTags.js');
 
-gulp.task('twig-default', function() {
+gulp.task('twig', (argv.prod ? [] : ['twig-templates']), function() {
     return gulp.src([config.src + 'twig/views/**/*.twig'], {
             base: 'src/twig/views/'
         })
@@ -38,12 +38,4 @@ gulp.task('twig-templates', function() {
         }))
         .pipe(prettify(config.prettify))
         .pipe(gulp.dest(config.build));
-});
-
-gulp.task('twig', function() {
-    if (argv.prod) {
-        runSequence(['twig-default']);
-    } else {
-        runSequence(['twig-default', 'twig-templates']);
-    }
 });

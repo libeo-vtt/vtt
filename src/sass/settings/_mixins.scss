@@ -304,7 +304,7 @@
 @mixin respond-to($breakpoint) {
     $bp-value: map-get($mq-breakpoints, $breakpoint);
     @if $bp-value == null {
-        @if $breakpoint == list {
+        @if type-of($breakpoint) == list {
             @media (min-width: nth($breakpoint, 1)) and (max-width: nth($breakpoint, 2)) {
                 @content;
             }
