@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+
+    {% set title = "Documentation VTT" %}
+
+    <title>{{ title }}</title>
+    <meta charset="UTF-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+
+    <!-- Set the viewport width to device width for mobile -->
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <!-- Favicon -->
+    <link rel="shortcut icon" href="/img/favicon.ico">
+    <link rel="apple-touch-icon" href="/img/favicon.png">
+
+    <!-- Stylesheets -->
+    {% stylesheet "documentation.css" %}
+
+</head>
+<body>
+
+    {% use 'documentation.twig' %}
+
+    <div class="l-page-wrapper">
+        <h1>{{title}}</h1>
+        <nav class="documentation-navigation">
+            <ul class="documentation-navigation-wrapper">
+                {% for section in sections %}
+                <li>
+                    <a href="#{{ section.title|slugify }}">{{ section.title }}</a>
+                    {% if section.type == "category" %}
+                    <ul>
+                        {% for subsection in section.sections %}
+                        <li>
+                            <a href="#{{ section.title|slugify }}-{{ subsection.title|slugify }}">{{ subsection.title }}</a>
+                        </li>
+                        {% endfor %}
+                    </ul>
+                    {% endif %}
+                </li>
+                {% endfor %}
+            </ul>
+        </nav>
+
+        {% for section in sections %}
+            <h2 id="{{ section.title|slugify }}">{{section.title}}</h2>
+            {% if section.type == "category" %}
+                {% for subsection in section.sections %}
+                    <h3 id="{{ section.title|slugify }}-{{ subsection.title|slugify }}">{{subsection.title}}</h3>
+                    {% filter markdown %}{% include subsection.template %}{% endfilter %}
+                {% endfor %}
+            {% else %}
+                {% filter markdown %}{% include section.template %}{% endfilter %}
+            {% endif %}
+            <hr>
+        {% endfor %}
+    </div>
+
+</body>
+</html>

@@ -1,0 +1,35 @@
+// ------------------------------------- //
+//             Documentation             //
+// ------------------------------------- //
+
+body {
+    font-family: "Roboto";
+}
+
+nav {
+    margin: 30px 0 50px;
+}
+
+hr {
+    height: 30px;
+    margin: 0;
+    border: 0;
+}
+
+pre {
+    padding: 20px;
+    color: #fff;
+    background-color: #1a1a1a;
+}
+
+code {
+    padding: 2px 3px;
+    color: #fff;
+    background-color: #1a1a1a;
+}
+
+.l-page-wrapper {
+    max-width: 960px;
+    margin: 0 auto;
+    padding: 40px;
+}

@@ -13,7 +13,7 @@ ExtendTwig.prototype = {
                 Twig.exports.extendTag({
                     type: element.name,
                     regex: element.regex,
-                    next: [],
+                    next: element.next === undefined ? [] : element.next,
                     open: true,
                     compile: function(token) {
                         var expression = token.match[1];
@@ -27,13 +27,24 @@ ExtendTwig.prototype = {
                         return token;
                     },
                     parse: function(token, context, chain) {
-                        var args = _.compact(_.map(token.stack, function(element){ return element.value; }));
+                        var args = _.compact(_.map(token.stack, function(element) {
+                            return element.value;
+                        }));
                         return {
                             chain: false,
-                            output: element.output(args)
+                            //=output: element.next === undefined ? element.output(args) : Twig.parse.apply(this, [token.output, context])
+                            output: element.output(token.output !== undefined ? [token.output[0].value, args] : args)
                         };
                     }
                 });
+                if (element.next !== undefined) {
+                    Twig.exports.extendTag({
+                        type: element.next[0],
+                        regex: new RegExp('^' + element.next[0] + '$'),
+                        next: [],
+                        open: false
+                    });
+                }
             }
         });
     }

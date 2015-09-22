@@ -1,5 +1,6 @@
 var config = require('../config.js');
 var lorem = require('lorem-ipsum');
+var marked = require('marked');
 var customTags = [];
 
 /**
@@ -225,6 +226,19 @@ customTags.push({
             }
         });
         output += '</nav></ul>';
+        return output;
+    }
+});
+
+/**
+ * Markdown
+ */
+customTags.push({
+    name: 'markdown',
+    regex: /^markdown\s+(.+)$/,
+    next: ['endmarkdown'],
+    output: function(args) {
+        var output = marked(args[0]);
         return output;
     }
 });

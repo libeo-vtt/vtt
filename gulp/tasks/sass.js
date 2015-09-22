@@ -42,3 +42,18 @@ gulp.task('sass-templates', function() {
         .pipe(gulpif(config.sourcemaps && !argv.prod, sourcemaps.write('./')))
         .pipe(gulp.dest(config.build + 'css/'));
 });
+
+gulp.task('sass-documentation', function() {
+    return gulp.src('./documentation/documentation.scss')
+        .pipe(cssGlobbing({
+            extensions: ['.css', '.scss'],
+            scssImportPath: {
+                leading_underscore: false,
+                filename_extension: false
+            }
+        }))
+        .pipe(gulpif(config.sourcemaps && !argv.prod, sourcemaps.init()))
+        .pipe(sass(sass_config))
+        .pipe(gulpif(config.sourcemaps && !argv.prod, sourcemaps.write('./')))
+        .pipe(gulp.dest(config.build + 'documentation/'));
+});
