@@ -1,0 +1,14 @@
+- `gulp` → Effectue un `gulp build` suivi d'un `gulp watch`
+- `gulp build` → Effectue les tâches `browserify` `sass` `copy` `documentation` `svg2png` `svgSprite` `twig`
+- `gulp browserify` → Compile les fichiers JavaScript
+- `gulp browserSync` → Crée un serveur local à l'adresse localhost:3000
+- `gulp clean` → Supprimer le contenu du dossier */build*
+- `gulp copy` → Copie les images et les SVG dans le dossier */build*
+- `gulp documentation` → Génère la documentation à partir des fichiers markdown dans */documentation/sections*
+- `gulp sass` → Compile les fichiers Sass
+- `gulp svg2png` → Génère un fichier PNG pour chaque fichier SVG
+- `gulp svgSprite` → Génère un sprite des SVG
+- `gulp symlink` → Crée un lien symbolique du dossier */src* dans le dossier */build* pour les sourcemaps
+- `gulp todo` → Génère un fichier todo.md à partir des commentaires dans les fichiers sources
+- `gulp twig` → Compile les fichiers Twig
+- `gulp watch` → Surveille les fichiers sources et exécute les tâches correspondantes lorsqu'un fichier est modifié

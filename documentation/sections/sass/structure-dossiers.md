@@ -1,0 +1,5 @@
+- **Base** → Styles de bases, styles pour l'accessibilité, styles d'impression, styles de typographie et classes communes
+- **Layout** → Styles de mise en page, styles pour le header et le footer ainsi que les grilles
+- **Modules** → Styles pour chaque modules dans des fichiers séparés
+- **Settings** → Mixins et variables
+- **Vendor** → Librairies externes

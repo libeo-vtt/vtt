@@ -3,7 +3,6 @@
 var program = require('commander');
 var fs = require('fs');
 var inquirer = require('inquirer');
-var colors = require('colors');
 var project = require('./package.json');
 var config = require('./gulp/config.js');
 

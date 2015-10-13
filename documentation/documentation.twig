@@ -1,6 +1,6 @@
 {% set sections = [{
     type: "section",
-    title: "Dépendances",
+    title: "Dépendances système",
     template: "sections/01_dependances.md"
 }, {
     type: "section",
@@ -24,36 +24,24 @@
     template: "sections/06_vtt-templates.md"
 }, {
     type: "section",
-    title: "Documentation",
-    template: "sections/07_documentation.md"
+    title: "Todo",
+    template: "sections/07_todo.md"
 }, {
     type: "category",
     title: "Gulp",
     sections: [{
         title: "Tâches Gulp",
         template: "sections/gulp/taches-gulp.md"
-    }, {
-        title: "Créer une nouvelle tâche",
-        template: "sections/gulp/creer-nouvelle-tache.md"
     }]
 }, {
     type: "category",
     title: "Sass",
     sections: [{
-        title: "node-sass",
-        template: "sections/sass/node-sass.md"
+        title: "Structure de dossiers",
+        template: "sections/sass/structure-dossiers.md"
     }, {
-        title: "Base",
-        template: "sections/sass/base.md"
-    }, {
-        title: "Layout",
-        template: "sections/sass/layout.md"
-    }, {
-        title: "Modules",
-        template: "sections/sass/modules.md"
-    }, {
-        title: "Settings",
-        template: "sections/sass/settings.md"
+        title: "Variables",
+        template: "sections/sass/variables.md"
     }, {
         title: "Grid",
         template: "sections/sass/grid.md"
@@ -65,14 +53,8 @@
     type: "category",
     title: "Twig",
     sections: [{
-        title: "Layouts",
-        template: "sections/twig/layouts.md"
-    }, {
-        title: "Partials",
-        template: "sections/twig/partials.md"
-    }, {
-        title: "Views",
-        template: "sections/twig/views.md"
+        title: "Structure de dossiers",
+        template: "sections/twig/structure-dossiers.md"
     }, {
         title: "Widgets",
         template: "sections/twig/widgets.md"
@@ -128,4 +110,8 @@
         title: "Optimisation des images",
         template: "sections/images/optimisation-images.md"
     }]
+}, {
+    type: "section",
+    title: "Documentation",
+    template: "sections/08_documentation.md"
 }] %}
