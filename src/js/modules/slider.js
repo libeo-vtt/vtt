@@ -41,7 +41,7 @@ function Slider(obj, config) {
         autoplayButtonClass: 'slider-autoplay',
         autoplayButtonText: 'Mettre le carrousel en marche',
         autoplayButtonPauseText: 'Mettre le carrousel en pause',
-        changeSlideLoop: false,
+        changeSlideLoop: true,
         animationSpeed: 300,
         beforeClone: $.noop,
         afterClone: $.noop,
@@ -156,33 +156,31 @@ $.extend(Slider.prototype, {
 
     // Bind events with actions
     bindEvents: function() {
-        var self = this;
-
         // Function called each time the window is resized
-        $(window).on('resize', function() {
-            self.onResize();
-        });
+        $(window).on('resize', $.proxy(function() {
+            this.onResize();
+        }, this));
 
-        this.slider.hover(function() {
-            self.mouseHover = true;
-        }, function() {
-            self.mouseHover = false;
-        });
+        this.slider.hover($.proxy(function() {
+            this.mouseHover = true;
+        }, this), $.proxy(function() {
+            this.mouseHover = false;
+        }, this));
 
         // Function called each time the sliderTrigger element is clicked
         if (this.isActiveContent()) {
-            this.slider.find('.' + this.config.sliderTriggerClass).on('click', function(e) {
-                var content = $(this).parents('.' + self.config.slideClass).find('.' + self.config.sliderTriggerContentClass).clone();
-                self.updateActiveSlideContent(content);
+            this.slider.find('.' + this.config.sliderTriggerClass).on('click', $.proxy(function(e) {
+                var content = $(e.currentTarget).parents('.' + this.config.slideClass).find('.' + this.config.sliderTriggerContentClass).clone();
+                this.updateActiveSlideContent(content);
                 e.prevent();
-            });
+            }, this));
         }
 
         // Detect keyboard navigation
-        $(document).on('keyboardnavigation', function() {
+        $(document).on('keyboardnavigation', $.proxy(function() {
             // Stop autoplay
-            self.stopAutoplay();
-        });
+            this.stopAutoplay();
+        }, this));
     },
 
     // Create navigation
@@ -239,39 +237,38 @@ $.extend(Slider.prototype, {
 
     // Bind events for the arrows navigation
     bindEventsArrowsNavigation: function() {
-        var self = this;
-
         // Bind previous arrow event
-        this.navigationPrevious.on('click', function() {
-            self.changeSlide(self.activeSlideIndex - 1);
-            self.navigationNext.removeClass(self.classes.active);
-            $(this).addClass(self.classes.active);
+        this.navigationPrevious.on('click', $.proxy(function(e) {
+            this.navigationTypeTriggered = 'arrows';
+            this.changeSlide(this.activeSlideIndex - 1);
+            this.navigationNext.removeClass(this.classes.active);
+            $(e.currentTarget).addClass(this.classes.active);
 
             // Update hidden aria box
-            self.updateAriabox('La diapositive précédente est affichée.');
+            this.updateAriabox('La diapositive précédente est affichée.');
 
             // Stop autoplay
-            self.stopAutoplay();
-        });
+            this.stopAutoplay();
+        }, this));
 
         // Bind next arrow event
-        this.navigationNext.on('click', function() {
-            self.changeSlide(self.activeSlideIndex + 1);
-            self.navigationPrevious.removeClass(self.classes.active);
-            $(this).addClass(self.classes.active);
+        this.navigationNext.on('click', $.proxy(function(e) {
+            this.navigationTypeTriggered = 'arrows';
+            this.changeSlide(this.activeSlideIndex + 1);
+            this.navigationPrevious.removeClass(this.classes.active);
+            $(e.currentTarget).addClass(this.classes.active);
 
             // Update hidden aria box
-            self.updateAriabox('La diapositive suivante est affichée.');
+            this.updateAriabox('La diapositive suivante est affichée.');
 
             // Stop autoplay
-            self.stopAutoplay();
-        });
+            this.stopAutoplay();
+        }, this));
     },
 
     // Create dots navigation
     createDotsNavigation: function() {
-        var self = this,
-            dot = '<button class="' + this.config.navigationDotClass + '"><span class="visuallyhidden ' + this.config.ariaTextClass + '"></span></button>';
+        var dot = '<button class="' + this.config.navigationDotClass + '"><span class="visuallyhidden ' + this.config.ariaTextClass + '"></span></button>';
 
         // Create navigation wrapper
         this.sliderNavigation.append('<div class="' + this.config.navigationDotClass + '-wrapper"></div>');
@@ -285,56 +282,53 @@ $.extend(Slider.prototype, {
         this.navigationDots = this.sliderNavigation.find('.' + this.config.navigationDotClass);
 
         // Add aria text for each dot
-        this.navigationDots.each(function(index, el) {
+        this.navigationDots.each($.proxy(function(index, el) {
             // Show dots number
-            if (self.config.displayDotsNumber === true) {
-                $(el).find('.' + self.config.ariaTextClass).text(self.config.navigationDotText).after(index + 1);
+            if (this.config.displayDotsNumber === true) {
+                $(el).find('.' + this.config.ariaTextClass).text(this.config.navigationDotText).after(index + 1);
             }
             // Don't show dots number
             else {
-                $(el).find('.' + self.config.ariaTextClass).text(self.config.navigationDotText + (parseInt(index) + 1));
+                $(el).find('.' + this.config.ariaTextClass).text(this.config.navigationDotText + (parseInt(index) + 1));
             }
-        });
+        }, this));
 
         // Initialize first dot button
-        this.navigationDots.eq(0).addClass(self.classes.active).append('<span class="visuallyhidden ' + self.config.ariaTextActiveClass + '"> ' + self.config.navigationDotActiveText + '</span>');
+        this.navigationDots.eq(0).addClass(this.classes.active).append('<span class="visuallyhidden ' + this.config.ariaTextActiveClass + '"> ' + this.config.navigationDotActiveText + '</span>');
 
         this.bindEventsDotsNavigation();
     },
 
     // Bind events for the dots navigation
     bindEventsDotsNavigation: function() {
-        var self = this;
-
         // Get dots elements
         this.navigationDots = this.sliderNavigation.find('.' + this.config.navigationDotClass);
 
         // Bind click events
-        this.navigationDots.on('click', function() {
-            var index = $(this).index() - $(this).parent().find('.slider-navigation-prev, .slider-navigation-next').length;
-            self.changeSlide(index * self.displayedSlides);
-            self.navigationDots.removeClass(self.classes.active);
-            $(this).addClass(self.classes.active);
+        this.navigationDots.on('click', $.proxy(function(e) {
+            this.navigationTypeTriggered = 'dots';
+            var index = $(e.currentTarget).index() - $(e.currentTarget).parent().find('.slider-navigation-prev, .slider-navigation-next').length;
+            this.changeSlide(index * this.displayedSlides);
+            this.navigationDots.removeClass(this.classes.active);
+            $(e.currentTarget).addClass(this.classes.active);
 
             // Stop autoplay
-            self.stopAutoplay();
-        });
+            this.stopAutoplay();
+        }, this));
     },
 
     // Initialize autoplay
     autoplay: function() {
-        var self = this;
-
         this.createAutoplayButton();
 
         this.isAutoplay = true;
         this.toggleAutoplayText();
 
-        this.autoplayInterval = setInterval(function() {
-            if (!self.mouseHover) {
-                self.changeSlide(self.activeSlideIndex + 1);
+        this.autoplayInterval = setInterval($.proxy(function() {
+            if (!this.mouseHover) {
+                this.changeSlide(this.activeSlideIndex + 1);
             }
-        }, this.config.autoplayDelay);
+        }, this), this.config.autoplayDelay);
 
     },
 
@@ -350,22 +344,20 @@ $.extend(Slider.prototype, {
     },
 
     bindEventsAutoplayButton: function() {
-        var self = this;
-
         // Get autoplay button
         this.autoplayButton = this.sliderNavigation.find('.' + this.config.autoplayButtonClass);
 
         // Bind click events
-        this.autoplayButton.on('click', function() {
-            if (self.isAutoplay) {
-                self.stopAutoplay();
-                self.autoplayButton.removeClass(self.classes.active);
+        this.autoplayButton.on('click', $.proxy(function() {
+            if (this.isAutoplay) {
+                this.stopAutoplay();
+                this.autoplayButton.removeClass(this.classes.active);
             } else {
-                self.mouseHover = false;
-                self.autoplay();
-                self.autoplayButton.addClass(self.classes.active);
+                this.mouseHover = false;
+                this.autoplay();
+                this.autoplayButton.addClass(this.classes.active);
             }
-        });
+        }, this));
     },
 
     // Stop autoplay
@@ -416,10 +408,14 @@ $.extend(Slider.prototype, {
                 index = 0;
             }
         } else if (index > this.slides.length - this.displayedSlides) {
-            if (this.config.changeSlideLoop) {
-                index = 0;
-            } else {
+            if (this.navigationTypeTriggered === 'dots') {
                 index = this.slides.length - this.displayedSlides;
+            } else {
+                if (this.config.changeSlideLoop) {
+                    index = 0;
+                } else {
+                    index = this.slides.length - this.displayedSlides;
+                }
             }
         }
 
@@ -431,8 +427,6 @@ $.extend(Slider.prototype, {
 
     // Change active slide animation
     changeSlideAnimation: function(index) {
-        var self = this;
-
         // Update animation state
         this.animated = true;
 
@@ -441,25 +435,25 @@ $.extend(Slider.prototype, {
 
         // Change slide animation
         this.sliderContainer.animate({
-            left: 100 / self.displayedSlides * index * -1 + '%'
-        }, self.config.animationSpeed, function() {
+            left: 100 / this.displayedSlides * index * -1 + '%'
+        }, this.config.animationSpeed, $.proxy(function() {
             // Update animation state
-            self.animated = false;
+            this.animated = false;
             // Callback
-            self.config.afterChangeSlide();
+            this.config.afterChangeSlide();
             // Update active slide index
-            self.activeSlideIndex = index;
+            this.activeSlideIndex = index;
             // Update tabindex
-            self.slides.find(':focusable').attr('tabindex', '-1');
-            self.slides.slice(index, index + self.displayedSlides).find(':focusable').removeAttr('tabindex');
-            if (self.config.navigationType === 'dots' || self.config.navigationType === 'both') {
+            this.slides.find(':focusable').attr('tabindex', '-1');
+            this.slides.slice(index, index + this.displayedSlides).find(':focusable').removeAttr('tabindex');
+            if (this.config.navigationType === 'dots' || this.config.navigationType === 'both') {
                 // Update dots buttons
-                self.navigationDots.removeClass(self.classes.active).eq(index).addClass(self.classes.active);
+                this.navigationDots.removeClass(this.classes.active).eq(index).addClass(this.classes.active);
                 // Update hidden active text
-                self.navigationDots.find('.' + self.config.ariaTextActiveClass).remove();
-                self.navigationDots.eq(index).append('<span class="visuallyhidden ' + self.config.ariaTextActiveClass + '">' + self.config.navigationDotActiveText + '</span>');
+                this.navigationDots.find('.' + this.config.ariaTextActiveClass).remove();
+                this.navigationDots.eq(index).append('<span class="visuallyhidden ' + this.config.ariaTextActiveClass + '">' + this.config.navigationDotActiveText + '</span>');
             }
-        });
+        }, this));
     },
 
     // Update active slide content
