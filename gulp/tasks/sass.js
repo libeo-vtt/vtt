@@ -2,6 +2,8 @@ var gulp = require('gulp');
 var argv = require('yargs').argv;
 var sass = require('gulp-sass');
 var gulpif = require('gulp-if');
+var gutil = require('gulp-util');
+var plumber = require('gulp-plumber');
 var sourcemaps = require('gulp-sourcemaps');
 var cssGlobbing = require('gulp-css-globbing');
 var customFunctions = require('../helpers/sass.customFunctions.js');
@@ -15,6 +17,11 @@ var sass_config = {
 
 gulp.task('sass', (argv.prod ? [] : ['sass-templates']), function() {
     return gulp.src([config.src + 'sass/*.scss', '!' + config.src + 'sass/templates.scss'])
+        .pipe(plumber({
+            errorHandler: function(error) {
+                gutil.log(gutil.colors.red('Error: ' + error.message.replace('\n', '')));
+            }
+        }))
         .pipe(cssGlobbing({
             extensions: ['.css', '.scss'],
             scssImportPath: {

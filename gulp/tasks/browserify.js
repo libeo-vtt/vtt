@@ -4,6 +4,7 @@ var gulpif = require('gulp-if');
 var browserify = require('browserify');
 var source = require('vinyl-source-stream');
 var buffer = require('vinyl-buffer');
+var gutil = require('gulp-util');
 var uglify = require('gulp-uglify');
 var sourcemaps = require('gulp-sourcemaps');
 var config = require('../config');
@@ -14,6 +15,10 @@ gulp.task('browserify', function() {
             debug: config.sourcemaps
         })
         .bundle()
+        .on('error', function(error) {
+            gutil.log(gutil.colors.red('Error: ' + error.message));
+            this.emit('end');
+        })
         .pipe(source('bundle.js'))
         .pipe(buffer())
         .pipe(gulpif(config.sourcemaps && !argv.prod, sourcemaps.init({
