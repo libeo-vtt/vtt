@@ -3,6 +3,7 @@ var argv = require('yargs').argv;
 var sass = require('gulp-sass');
 var gulpif = require('gulp-if');
 var gutil = require('gulp-util');
+var notifier = require('node-notifier');
 var plumber = require('gulp-plumber');
 var sourcemaps = require('gulp-sourcemaps');
 var cssGlobbing = require('gulp-css-globbing');
@@ -19,6 +20,10 @@ gulp.task('sass', (argv.prod ? [] : ['sass-templates']), function() {
     return gulp.src([config.src + 'sass/*.scss', '!' + config.src + 'sass/templates.scss'])
         .pipe(plumber({
             errorHandler: function(error) {
+                notifier.notify({
+                    'title': 'Compiling Error: Sass',
+                    'message': error.message.replace('\n', '')
+                });
                 gutil.log(gutil.colors.red('Error: ' + error.message.replace('\n', '')));
             }
         }))

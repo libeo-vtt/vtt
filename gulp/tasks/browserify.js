@@ -5,6 +5,7 @@ var browserify = require('browserify');
 var source = require('vinyl-source-stream');
 var buffer = require('vinyl-buffer');
 var gutil = require('gulp-util');
+var notifier = require('node-notifier');
 var uglify = require('gulp-uglify');
 var sourcemaps = require('gulp-sourcemaps');
 var config = require('../config');
@@ -16,6 +17,10 @@ gulp.task('browserify', function() {
         })
         .bundle()
         .on('error', function(error) {
+            notifier.notify({
+                'title': 'Compiling Error: Browserify',
+                'message': error.message.replace('\n', '')
+            });
             gutil.log(gutil.colors.red('Error: ' + error.message));
             this.emit('end');
         })

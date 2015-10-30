@@ -102,6 +102,7 @@
     "inquirer": "^0.8.3",
     "lodash": "^3.8.0",
     "lorem-ipsum": "^1.0.1",
+    "node-notifier": "^4.3.1",
     "node-sass": "^3.2.0",
     "require-dir": "^0.3.0",
     "rimraf": "^2.4.0",
