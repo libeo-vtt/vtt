@@ -88,14 +88,14 @@ customFunctions.push({
 });
 
 /**
- * ceil
+ * floor
  * Return:
- *     Math.ceil(value)
+ *     Math.floor(value)
  */
 customFunctions.push({
-    name: 'ceil',
+    name: 'floor',
     func: function(args) {
-        return Math.ceil(args);
+        return Math.floor(args);
     }
 });
 
