@@ -14,11 +14,10 @@
     position: relative;
     width: $document-width;
     margin: 0 auto;
-    padding: 0;
+    padding: 0 $spacing-default;
     font-size: 0;
-    @include respond-to($document-width + $spacing-default * 2) {
+    @include respond-to($document-width) {
         width: auto;
-        padding: 0 $spacing-default;
     }
     @include respond-to(tablet) {
         width: auto;
