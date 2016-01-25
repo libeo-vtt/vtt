@@ -3,7 +3,7 @@ var $ = require('jquery');
 module.exports = (function() {
 
     $(window).on('resize', function() {
-        window.breakpoint = window.getComputedStyle(document.querySelector('body'), ':before').getPropertyValue('content').replace(/"|'/g, '');
+        window.breakpoints = JSON.parse(JSON.parse(window.getComputedStyle(document.querySelector('body'), ':before').content));
     }).trigger('resize');
 
 }());
