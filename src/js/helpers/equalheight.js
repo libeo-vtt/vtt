@@ -8,37 +8,42 @@ module.exports = (function() {
     var identifiers = [];
 
     $(window).on('resize', _.debounce(function() {
-        var currentBPidentifiers = [];
+        var currentBreakpointIdentifiers = [];
         var currentBreakpoint = window.breakpoints.current;
 
+        // Get all equalheight identifiers
         $('[data-equalheight]').each(function() {
             var ids = $(this).data('equalheight').split(' ');
             _.forEach(ids, function(id) {
-                var hasBreakpoint = false;
-                // Check if current breakpoint contains a breakpoint
-                _.forEach(window.breakpoints.all, function(breakpoint, key) {
-                    if(id.endsWith(key)) hasBreakpoint = true;
-                });
-                // Check if breakpoint is current
-                if (hasBreakpoint && id.endsWith(currentBreakpoint) && !_.contains(currentBPidentifiers, id)) {
-                    currentBPidentifiers.push(id);
-                }
-                // ID has no breakpoint
-                if (!hasBreakpoint && !_.contains(identifiers, id)) {
+                if (!_.contains(identifiers, id)) {
                     identifiers.push(id);
                 }
             });
         });
 
+        // Get all equalheight identifiers for current breakpoint
+        $('[data-equalheight-' + currentBreakpoint + ']').each(function() {
+            var ids = $(this).data('equalheight-' + currentBreakpoint).split(' ');
+            _.forEach(ids, function(id) {
+                if (!_.contains(currentBreakpointIdentifiers, id)) {
+                    currentBreakpointIdentifiers.push(id);
+                }
+            });
+        });
+
+        // Set equalheight for each identifiers
         _.forEach(identifiers, function(id) {
             var elements = $('[data-equalheight~=' + id + ']');
             setEqualheight(elements);
         });
 
-        _.forEach(currentBPidentifiers, function(id) {
-            var elements = $('[data-equalheight~=' + id + ']');
-            setEqualheight(elements);
-        });
+        // Set equalheight for each current breakpoint identifiers
+        if (currentBreakpointIdentifiers.length > 0) {
+            _.forEach(currentBreakpointIdentifiers, function(id) {
+                var elements = $('[data-equalheight-' + currentBreakpoint + '=' + id + ']');
+                setEqualheight(elements);
+            });
+        }
     }, 100)).trigger('resize');
 
 }());
