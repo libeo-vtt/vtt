@@ -300,6 +300,11 @@
                 @content;
             }
         }
+        @else if $breakpoint == "retina" {
+            @media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+                @content;
+            }
+        }
         @else {
             @media (max-width: $breakpoint) {
                 @content;
