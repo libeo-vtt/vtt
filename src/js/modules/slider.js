@@ -36,6 +36,7 @@ function Slider(obj, config) {
         ariaHiddenBoxClass: 'aria-hidden-box',
         displayDotsNumber: true,
         autoCenterActiveSlide: true,
+        swipe: false,
         autoplay: false,
         autoplayDelay: 3000,
         autoplayButtonClass: 'slider-autoplay',
@@ -87,6 +88,10 @@ function Slider(obj, config) {
     // Autoplay initialization
     if (this.config.autoplay) {
         this.autoplay();
+    }
+
+    if (this.config.swipe) {
+        this.swipe();
     }
 
     this.init();
@@ -317,6 +322,17 @@ $.extend(Slider.prototype, {
         }, this));
     },
 
+    swipe: function() {
+        this.detectswipe(this.slider, $.proxy(function(direction) {
+            if (direction === "left") {
+                this.changeSlide(this.activeSlideIndex + 1);
+            } else {
+                this.changeSlide(this.activeSlideIndex - 1);
+            }
+
+        }, this));
+    },
+
     // Initialize autoplay
     autoplay: function() {
         this.createAutoplayButton();
@@ -480,6 +496,48 @@ $.extend(Slider.prototype, {
 
         // Update breakpoint
         this.updateBreakpoint(currentBreakpoint);
+    },
+
+    detectswipe: function(element, callback) {
+        swipe_det = new Object();
+        swipe_det.sX = 0;
+        swipe_det.sY = 0;
+        swipe_det.eX = 0;
+        swipe_det.eY = 0;
+        var min_x = 30
+        var max_x = 30
+        var min_y = 50
+        var max_y = 60
+        var direc = "";
+        element = element[0];
+        element.addEventListener('touchstart', function(e) {
+            var t = e.touches[0];
+            swipe_det.sX = t.screenX;
+            swipe_det.sY = t.screenY;
+        }, false);
+        element.addEventListener('touchmove', function(e) {
+            e.preventDefault();
+            var t = e.touches[0];
+            swipe_det.eX = t.screenX;
+            swipe_det.eY = t.screenY;
+        }, false);
+        element.addEventListener('touchend', function(e) {
+            if ((((swipe_det.eX - min_x > swipe_det.sX) || (swipe_det.eX + min_x < swipe_det.sX)) && ((swipe_det.eY < swipe_det.sY + max_y) && (swipe_det.sY > swipe_det.eY - max_y) && (swipe_det.eX > 0)))) {
+                if (swipe_det.eX > swipe_det.sX) direction = 'right';
+                else direction = 'left';
+            } else if ((((swipe_det.eY - min_y > swipe_det.sY) || (swipe_det.eY + min_y < swipe_det.sY)) && ((swipe_det.eX < swipe_det.sX + max_x) && (swipe_det.sX > swipe_det.eX - max_x) && (swipe_det.eY > 0)))) {
+                if (swipe_det.eY > swipe_det.sY) direction = 'down';
+                else direction = 'up';
+            }
+            if (direction != '') {
+                if (typeof callback == 'function') callback(direction);
+            }
+            direction = '';
+            swipe_det.sX = 0;
+            swipe_det.sY = 0;
+            swipe_det.eX = 0;
+            swipe_det.eY = 0;
+        }, false);
     },
 
     // Update layout when a breakpoint is triggered

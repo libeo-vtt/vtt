@@ -49,18 +49,6 @@
       "depends": "jquery",
       "exports": null
     },
-    "vtt-folder": {
-      "depends": "jquery",
-      "exports": null
-    },
-    "vtt-slider": {
-      "depends": "jquery",
-      "exports": null
-    },
-    "vtt-tab": {
-      "depends": "jquery",
-      "exports": null
-    },
     "webfont": {
       "exports": "WebFont"
     },
