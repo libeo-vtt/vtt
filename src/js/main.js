@@ -29,3 +29,7 @@ PROJECT_NAME.Components.Tabs = Tab($('.tab'));
 // Forms
 var Form = require('./modules/form.js');
 PROJECT_NAME.Components.forms = Form($('form'));
+
+// Tooltip
+var Tooltip = require('./modules/tooltip.js');
+PROJECT_NAME.Components.tooltips = Tooltip($('.tooltip'));
