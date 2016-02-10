@@ -44,9 +44,6 @@ function Folder(obj, config) {
     this.folderTrigger.append('<span class="aria-text visuallyhidden"></span>');
     this.folderAria = this.folderTrigger.find('.' + this.config.ariaTextClass);
 
-    // Bind events
-    this.bindEvents();
-
     this.init();
 }
 
@@ -56,6 +53,10 @@ $.extend(Folder.prototype, {
 
     // Component initialization
     init: function() {
+
+        // Bind events
+        this.bindEvents();
+    
         if (!this.folder.hasClass(this.config.forceOpenClass)) {
             this.folderContent.hide();
             this.changeAriaText(this.config.ariaTextOpen);
