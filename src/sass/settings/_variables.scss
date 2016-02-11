@@ -14,12 +14,6 @@ $document-width: 1280px;
 // Media queries
 $mq-breakpoints: (
     "mobile": (
-        min: false,
-        max: 767px,
-        grid: true,
-        export: true
-    ),
-    "tablet": (
         min: 768px,
         max: 1024px,
         grid: true,

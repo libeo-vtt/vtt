@@ -11,17 +11,17 @@
     text-decoration: none;
 
 }
-[data-js="tooltip-trigger"] {
+.tooltip-trigger {
     background-color: transparent;
     border: none;
     display: inline-block;
     padding: 0;
 }
-[data-js="tooltip-content"] {
+.tooltip-content {
     @include rem-typo(14, 17);
-    background-color: #f2f2f2;
+    background-color: #bfbfbf;
     box-sizing: border-box;
-    border: 1px solid #000;
+    border: none;
     display: none;
     font-style: italic;
     font-weight: 300;
@@ -31,5 +31,26 @@
     top: -510%;
     width: emify(310);
     z-index: 10;
+    &:after {
+       content: "";
+       width: 0;
+       height: 0;
+       border-left: 10px solid transparent;
+       border-right: 10px solid transparent;
+       border-top: 10px solid #bfbfbf;
+       position: absolute;
+       bottom: emify(-10); 
+       left: emify(10);
+        @include respond-to(mobile) {
+            display: none;
+        }
+    }
+    &.has-x {
+        background-image: url("../img/x.png");
+        background-position: 96% 10px;
+        background-repeat: no-repeat;
+        padding-right: 50px;
+    }
+
 }
 
