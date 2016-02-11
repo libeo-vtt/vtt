@@ -33,3 +33,12 @@ PROJECT_NAME.Components.forms = Form($('form'));
 // Tooltip
 var Tooltip = require('./modules/tooltip.js');
 PROJECT_NAME.Components.tooltips = Tooltip($('.tooltip'));
+
+//flowtext 
+var Flowtext = require('./modules/flowtext.js');
+PROJECT_NAME.Components.Flowtext = Flowtext($('.js-flow'));
+
+
+
+
+
