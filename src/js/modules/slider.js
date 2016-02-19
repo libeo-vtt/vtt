@@ -324,6 +324,9 @@ $.extend(Slider.prototype, {
 
     swipe: function() {
         this.detectswipe(this.slider, $.proxy(function(direction) {
+             // Stop autoplay
+            this.stopAutoplay();
+
             if (direction === "left") {
                 this.changeSlide(this.activeSlideIndex + 1);
             } else {
