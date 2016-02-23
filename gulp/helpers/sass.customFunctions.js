@@ -7,12 +7,12 @@ var customFunctions = {
     'image-width($url: "")': function(url) {
         var image = url.getValue();
         var dimensions = sizeOf(config.src + 'img/' + image);
-        return sass.types.String(dimensions.width.toString() + 'px');
+        return sass.types.Number(dimensions.width, 'px');
     },
     'image-height($url: "")': function(url) {
         var image = url.getValue();
         var dimensions = sizeOf(config.src + 'img/' + image);
-        return sass.types.String(dimensions.height.toString() + 'px');
+        return sass.types.Number(dimensions.height, 'px');
     }
 }
 
