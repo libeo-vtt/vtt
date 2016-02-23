@@ -16,6 +16,7 @@ function Slider(obj, config) {
         slidesMargin: 20,
         createNavigation: true,
         navigationType: 'both',
+        sliderOverflowClass: 'slider-overflow',
         sliderWrapperClass: 'slider-wrapper',
         sliderContainerClass: 'slider-container',
         slideClass: 'slide',
@@ -36,7 +37,7 @@ function Slider(obj, config) {
         ariaHiddenBoxClass: 'aria-hidden-box',
         displayDotsNumber: true,
         autoCenterActiveSlide: true,
-        swipe: false,
+        swipe: true,
         autoplay: false,
         autoplayDelay: 3000,
         autoplayButtonClass: 'slider-autoplay',
@@ -124,7 +125,7 @@ $.extend(Slider.prototype, {
     // Layout initialization
     initLayout: function() {
         var slideWidth = 100 / this.slides.length,
-            slideWidthCalc = this.config.slidesMargin / this.slides.length * (this.slides.length - 1),
+            slideWidthCalc = this.config.slidesMargin / this.slides.length * this.slides.length,
             slidesCSS = 'float: left;' +
             'position: relative;' +
             'width: ' + slideWidth + '%;' +
@@ -136,8 +137,14 @@ $.extend(Slider.prototype, {
         // Add necessary css for the slider
         this.sliderWrapper.css({
             'position': 'relative',
-            'overflow': 'hidden'
+            'overflow': 'hidden',
+            'margin-left': this.config.slidesMargin / 2 * -1 + 'px',
+            'margin-right': this.config.slidesMargin / 2 * -1 + 'px'
         });
+
+        // Create slider overflow wrapper
+        this.sliderWrapper.wrap('<div class="' + this.config.sliderOverflowClass + '"></div>');
+        this.slider.find('.' + this.config.sliderOverflowClass).css('overflow', 'hidden');
 
         this.sliderContainer.css({
             'position': 'relative',
@@ -147,9 +154,10 @@ $.extend(Slider.prototype, {
 
         this.slides.attr('style', slidesCSS).find('> a').css('display', 'block');
 
-        // Add margin to all slides except the first one
-        this.slides.slice(1).css({
-            'margin-left': this.config.slidesMargin + 'px'
+        // Add margin to all slides
+        this.slides.css({
+            'margin-left': this.config.slidesMargin / 2 + 'px',
+            'margin-right': this.config.slidesMargin / 2 + 'px'
         });
 
         // Disable focus on hidden slides
