@@ -30,6 +30,14 @@ gulp.task('browserify', function() {
             loadMaps: config.sourcemaps
         })))
         .pipe(gulpif(config.minify || argv.prod, uglify()))
+        .on('error', function(error) {
+            notifier.notify({
+                'title': 'Compiling Error: Uglify',
+                'message': error.message.replace('\n', '')
+            });
+            gutil.log(gutil.colors.red('Error: ' + error.message));
+            this.emit('end');
+        })
         .pipe(gulpif(config.sourcemaps && !argv.prod, sourcemaps.write('./')))
         .pipe(gulp.dest(config.build + 'js/'));
 });
