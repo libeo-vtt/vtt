@@ -9,6 +9,7 @@ gulp.task('browser-sync', function() {
         server: {
             baseDir: config.build
         },
+        ghostMode: false,
         open: config.defaults.browserSync.open
     });
 });
