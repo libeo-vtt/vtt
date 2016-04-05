@@ -1,5 +1,8 @@
-﻿'use strict';
-(function($, window, document, undefined) {
+(function() {
+
+    var $document = $(document),
+        $body = $('body');
+
     $.onFontResize = {
         delay: 250,
         timer: null,
@@ -40,15 +43,28 @@
 
             if (h !== that.boxHeight) {
                 that.boxHeight = h;
-                $(document).triggerHandler('fontresize');
+                $document.triggerHandler('fontresize');
             }
 
             if (that.on) this.timer = setTimeout(that.check, that.delay);
         }
     };
 
-    $(function() {
-        $.onFontResize.watch();
-    });
+    $.onFontResize.watch();
 
-})(jQuery, window, document);
+    $document.on('fontresize', $.proxy(function() {
+        var bodyClasses = ($body.attr('class')) ? _.filter($body.attr('class').split(' '), function(x) {
+                if (x.indexOf('is-font-') === -1) return x;
+            }) : '',
+            fontsize = parseInt($body.css('font-size').replace('px', ''), 10);
+
+        if (bodyClasses) $body.attr('class', '').addClass(bodyClasses.join(' '));
+
+        if (fontsize > 16) {
+            $body.addClass(window.classes.zoom + ' ' + 'is-font-' + fontsize);
+        } else {
+            $body.removeClass(window.classes.zoom);
+        }
+    }, this)).trigger('fontresize');
+
+}());

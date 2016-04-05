@@ -1,9 +1,4 @@
-var $ = require('jquery');
-var _ = require('lodash');
-var waitForImages = require('waitforimages');
-var breakpoints = require('./mq_breakpoints');
-
-module.exports = (function() {
+(function() {
 
     var identifiers = [];
 

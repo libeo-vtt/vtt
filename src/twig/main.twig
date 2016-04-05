@@ -38,7 +38,7 @@
     {% script "/js/vendor/modernizr.min.js" %}
     {% script "/js/vendor/detectizr.min.js" %}
 
-    {% script "/js/vendor/svg4everybody.js" %} 
+    {% script "/js/vendor/bower/svg4everybody.js" %}
 
     <!-- Google Font Fallback -->
     <link href="http://fonts.googleapis.com/css?family=Roboto%7CRoboto:bold%7CRoboto:italic" rel="stylesheet" type="text/css">
@@ -68,8 +68,31 @@
 
     {# google-analytics "XX-XXXXXXXX-X" #}
 
-    <!-- Javascript bundle -->
-    {% script "/js/bundle.js" %}
+    <!-- Javascript -->
+    {% script "/js/project.js" %}
+
+    <!-- Libs -->
+    {% script "/js/vendor/bower/jquery.js" %}
+    {% script "/js/vendor/bower/underscore.js" %}
+    {% script "/js/vendor/bower/webfontloader.js" %}
+    {% script "/js/vendor/bower/is.js" %}
+
+    <!-- jQuery dependencies -->
+    {% script "/js/vendor/bower/jquery.waitforimages.js" %}
+    {% script "/js/vendor/bower/jquery.focusable.js" %}
+    {% script "/js/vendor/bower/jquery.buttonize.js" %}
+    {% script "/js/vendor/bower/jquery.touchSwipe.js" %}
+
+    {% script "/js/helpers.js" %}
+
+    <!-- Bower modules -->
+    {% script "/js/vendor/bower/jquery.slider.js" %}
+    {% script "/js/vendor/bower/jquery.folder.js" %}
+    {% script "/js/vendor/bower/jquery.form.js" %}
+    {% script "/js/vendor/bower/jquery.tab.js" %}
+
+    <!-- Main file -->
+    {% script "/js/main.js" %}
 
 </body>
 </html>

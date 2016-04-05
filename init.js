@@ -9,7 +9,6 @@ var project = require('./package.json');
 
 program
     .version(project.version)
-    .option('-n, --name', 'project name')
     .parse(process.argv);
 
 function replaceAll(find, replace, str) {

@@ -4,11 +4,12 @@ var runSequence = require('run-sequence');
 var config = require('../config.js');
 var watch = require('gulp-watch');
 
-gulp.task('watch:js', ['browserify', 'copy:js']);
+gulp.task('watch:js', ['bower', 'concat:helpers', 'copy:js']);
 gulp.task('watch:img', ['copy:img']);
 gulp.task('watch:sass', ['sass']);
 gulp.task('watch:twig', ['twig']);
 gulp.task('watch:svg', ['svg2png', 'svgSprite', 'copy:svg']);
+gulp.task('watch:bower', ['bower']);
 
 gulp.task('watch', ['browser-sync'], function() {
     watch(config.src + 'js/**/*', function() {
@@ -25,5 +26,8 @@ gulp.task('watch', ['browser-sync'], function() {
     });
     watch(config.src + 'svg/**/*', function() {
         runSequence('clean:svg', 'watch:svg', browserSync.reload);
+    });
+    watch('bower_components/**', function() {
+        runSequence('clean:bower', 'watch:bower');
     });
 });

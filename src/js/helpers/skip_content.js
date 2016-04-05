@@ -1,6 +1,4 @@
-var $ = require('jquery');
-
-module.exports = (function() {
+(function() {
 
     var $body = $('body');
 

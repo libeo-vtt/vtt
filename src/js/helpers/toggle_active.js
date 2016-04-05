@@ -1,6 +1,4 @@
-var $ = require('jquery');
-
-module.exports = (function() {
+(function() {
 
     var $body = $('body'),
         $document = $(document);
@@ -10,10 +8,10 @@ module.exports = (function() {
         if (classes.indexOf(' ') > 0) {
             var classesArray = classes.split(' ');
             for (var i = 0; i < classesArray.length; i++) {
-                $('.' + classesArray[i]).toggleClass(window.TFO.Settings.Classes.active);
+                $('.' + classesArray[i]).toggleClass(window.classes.active);
             }
         } else {
-            $('.' + classes).toggleClass(window.TFO.Settings.Classes.active);
+            $('.' + classes).toggleClass(window.classes.active);
         }
         event.preventDefault();
     });

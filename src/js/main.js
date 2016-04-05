@@ -1,31 +1,21 @@
-// Project
-var PROJECT_NAME = require('./project.js');
+// ---------------------------- //
+//             Main             //
+// ---------------------------- //
 
-// Helpers
-var Helpers = require('./helpers');
+// This file is called after every other javascript files
 
-// Webfont
-var Webfont = require('./modules/webfont.js');
-PROJECT_NAME.Webfont = Webfont({
-    fonts: ['Roboto', 'Roboto:bold', 'Roboto:italic']
+// Modules
+$('.tab').tab();
+$('form').form();
+$('.slider').slider();
+$('.folder-group').folder();
+
+// Google Fonts
+WebFont.load({
+    google: {
+        families: ["Roboto"]
+    },
+    active: function() {
+        $(document).trigger('googleFontsLoaded');
+    }
 });
-
-// Maps
-var Map = require('./modules/map.js');
-PROJECT_NAME.Components.Maps = Map($('.map-wrapper'));
-
-// Folders
-var Folder = require('./modules/folder.js');
-PROJECT_NAME.Components.Folders = Folder($('.folder'));
-
-// Sliders
-var Slider = require('./modules/slider.js');
-PROJECT_NAME.Components.Sliders = Slider($('.slider'));
-
-// Tabs
-var Tab = require('./modules/tab.js');
-PROJECT_NAME.Components.Tabs = Tab($('.tab'));
-
-// Forms
-var Form = require('./modules/form.js');
-PROJECT_NAME.Components.forms = Form($('form'));
