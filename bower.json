@@ -13,12 +13,6 @@
   "dependencies": {
     "svg4everybody": "^2.0.3",
     "webfontloader": "^1.6.24",
-    "is_js": "^0.7.6",
-    "waitForImages": "^2.2.0",
-    "vtt-jquery-folder": "git@github.com:libeo-vtt/jquery-folder.git#^2.0.0",
-    "vtt-jquery-tab": "git@github.com:libeo-vtt/jquery-tab.git#^1.0.0",
-    "vtt-jquery-accessibleUpload": "git@github.com:libeo-vtt/jquery-accessibleUpload.git#^1.0.0",
-    "vtt-jquery-form": "git@github.com:libeo-vtt/jquery-form.git#^1.0.0",
-    "vtt-jquery-slider": "git@github.com:libeo-vtt/jquery-slider.git#^1.0.0"
+    "waitForImages": "^2.2.0"
   }
 }
