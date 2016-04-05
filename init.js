@@ -23,12 +23,6 @@ var questions = [{
         return input !== '' ? true : 'You must enter a valid name.';
     }
 }, {
-    name: 'jsname',
-    message: 'Javascript global object name:',
-    validate: function(input) {
-        return input !== '' ? true : 'You must enter a valid javascript global object name.';
-    }
-}, {
     name: 'templates',
     type: 'confirm',
     message: 'Include VTT templates?',
