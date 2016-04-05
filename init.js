@@ -43,7 +43,7 @@ var questions = [{
 }, {
     name: 'url',
     message: 'Project url:',
-    default: 'http://127.0.0.1:3000'
+    default: 'http://localhost:3000'
 }, {
     name: 'repository',
     message: 'Project git repository:'
