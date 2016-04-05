@@ -6,7 +6,7 @@ var rm = require('rimraf');
 var inquirer = require('inquirer');
 var glob = require('glob');
 var colors = require('colors');
-var cmd = require('node-cmd');
+var exec = require('sync-exec');
 var project = require('./package.json');
 
 program
@@ -45,10 +45,9 @@ inquirer.prompt(questions, function(answers) {
     };
 
     modules.forEach(function(module) {
-        cmd.get('bower install ' + links[module] + ' --save', function(data) {
-            console.log(data);
-            console.log('[Success] '.green + module + ' module installed\n');
-        });
+        var output = exec('bower install ' + links[module] + ' --save');
+        console.log(output.stdout);
+        console.log('[Success] '.green + module + ' module installed');
     });
 
 });
