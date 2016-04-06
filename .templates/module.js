@@ -1,9 +1,9 @@
-// MODULENAME_UPPERCASE jQuery Plugin
+// MODULE_NAME_UPPERCASE jQuery Plugin
 // MODULE_DESCRIPTION
 
 (function($) {
-    var MODULENAME_UPPERCASE = function(element, options) {
-        this.MODULENAME_LOWERCASE = $(element);
+    var MODULE_NAME_UPPERCASE = function(element, options) {
+        this.MODULE_NAME_LOWERCASE = $(element);
 
         this.config = $.extend({
             customGlobalClasses: {}
@@ -21,27 +21,27 @@
         this.init();
     };
 
-    $.extend(MODULENAME_UPPERCASE.prototype, {
+    $.extend(MODULE_NAME_UPPERCASE.prototype, {
 
         // Component initialization
         init: function() {
-            console.log('Module MODULENAME_LOWERCASE initiated');
+            console.log('Module MODULE_NAME_LOWERCASE initiated');
         }
 
     });
 
-    $.fn.MODULENAME_LOWERCASE = function(options) {
+    $.fn.MODULE_NAME_LOWERCASE = function(options) {
         return this.each(function() {
             var element = $(this);
 
             // Return early if this element already has a plugin instance
-            if (element.data('MODULENAME_LOWERCASE')) return;
+            if (element.data('MODULE_NAME_LOWERCASE')) return;
 
             // pass options to plugin constructor
-            var MODULENAME_LOWERCASE = new MODULENAME_UPPERCASE(this, options);
+            var MODULE_NAME_LOWERCASE = new MODULE_NAME_UPPERCASE(this, options);
 
             // Store plugin object in this element's data
-            element.data('MODULENAME_LOWERCASE', MODULENAME_LOWERCASE);
+            element.data('MODULE_NAME_LOWERCASE', MODULE_NAME_LOWERCASE);
         });
     };
 })(jQuery);

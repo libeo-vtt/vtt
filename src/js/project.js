@@ -1,8 +1,13 @@
 // ------------------------------- //
 //             Project             //
 // ------------------------------- //
-
 // This file is called before every other javascript files
+
+// Create global project variable
+window.project = window.project || {};
+
+// Initialize project modules
+window.project.modules = {};
 
 // Generic classes
 window.classes = {

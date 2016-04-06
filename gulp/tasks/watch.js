@@ -27,7 +27,7 @@ gulp.task('watch', ['browser-sync'], function() {
     watch(config.src + 'svg/**/*', function() {
         runSequence('clean:svg', 'watch:svg', browserSync.reload);
     });
-    watch('bower_components/**', function() {
+    watch('bower.json', function() {
         runSequence('clean:bower', 'watch:bower');
     });
 });

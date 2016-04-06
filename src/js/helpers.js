@@ -1,5 +1,5 @@
 // Helpers
-module.exports = [
+var helpers = [
     "equalheight.js",
     "external_links.js",
     "font_resize.js",
@@ -10,3 +10,5 @@ module.exports = [
     "svg4everybody.js",
     "toggle_active.js"
 ];
+
+module.exports = helpers;

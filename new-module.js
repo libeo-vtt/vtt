@@ -9,7 +9,6 @@ var config = require('./gulp/config.js');
 
 program
     .version(project.version)
-    .option('-n, --name <name>', 'module name')
     .parse(process.argv);
 
 function replaceAll(find, replace, str) {
@@ -82,8 +81,8 @@ inquirer.prompt(questions, function(answers) {
                 fs.readFile(jsNewFile, 'utf8', function(error, data) {
                     if (error) return console.log(error);
 
-                    data = replaceAll('MODULENAME_LOWERCASE', lowercase(answers.name), data);
-                    data = replaceAll('MODULENAME_UPPERCASE', camelcase(answers.name), data);
+                    data = replaceAll('MODULE_NAME_LOWERCASE', lowercase(answers.name), data);
+                    data = replaceAll('MODULE_NAME_UPPERCASE', camelcase(answers.name), data);
                     data = replaceAll('MODULE_DESCRIPTION', answers.description, data);
 
                     fs.writeFile(jsNewFile, data, 'utf8', function(error) {
@@ -114,8 +113,8 @@ inquirer.prompt(questions, function(answers) {
                     if (error) return console.log(error);
 
                     data = replaceAll('HEADER', header(answers.name), data);
-                    data = replaceAll('MODULENAME_LOWERCASE', lowercase(answers.name), data);
-                    data = replaceAll('MODULENAME_UPPERCASE', camelcase(answers.name), data);
+                    data = replaceAll('MODULE_NAME_LOWERCASE', lowercase(answers.name), data);
+                    data = replaceAll('MODULE_NAME_UPPERCASE', camelcase(answers.name), data);
 
                     fs.writeFile(sassNewFile, data, 'utf8', function(error) {
                         if (error) return console.log(error);

@@ -69,9 +69,11 @@
     {# google-analytics "XX-XXXXXXXX-X" #}
 
     <!-- Javascript -->
+
+    <!-- Project -->
     {% script "/js/project.js" %}
 
-    <!-- Libs -->
+    <!-- Vendors -->
     {% script "/js/vendor/bower/jquery.js" %}
     {% script "/js/vendor/bower/underscore.js" %}
     {% script "/js/vendor/bower/webfontloader.js" %}
@@ -79,10 +81,11 @@
     <!-- jQuery dependencies -->
     {% script "/js/vendor/bower/jquery.waitforimages.js" %}
 
+    <!-- Helpers -->
     {% script "/js/helpers.js" %}
 
-    <!-- Bower modules -->
-
+    <!-- Modules -->
+    {# script "/js/vendor/bower/jquery.module.js" #}
 
     <!-- Main file -->
     {% script "/js/main.js" %}
