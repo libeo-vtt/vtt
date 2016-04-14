@@ -32,7 +32,7 @@
     {% stylesheet "/css/main.css" %}
 
     <!-- Templates styles -->
-    {% if templates == true %}{% stylesheet "/css/templates.css" %}{% endif %}
+    {% if templates == true %}{% stylesheet "/templates/css/templates.css" %}{% endif %}
 
     <!-- Modernizr & Detectizr -->
     {% script "/js/vendor/modernizr.min.js" %}
@@ -41,7 +41,7 @@
     {% script "/js/vendor/bower/svg4everybody.js" %}
 
     <!-- Google Font Fallback -->
-    <link href="http://fonts.googleapis.com/css?family=Roboto%7CRoboto:bold%7CRoboto:italic" rel="stylesheet" type="text/css">
+    <link href="{{ get_webfonts_url() }}">
 
 </head>
 <body class="{{ class }}">
@@ -51,7 +51,7 @@
 
     <!-- Header -->
     {% if templates == true %}
-        {% include "templates/partials/header.twig" %}
+        {% include "../../templates/twig/partials/header.twig" %}
     {% else %}
         {% include "partials/header.twig" %}
     {% endif %}
@@ -61,7 +61,7 @@
 
     <!-- Footer -->
     {% if templates == true %}
-        {% include "templates/partials/footer.twig" %}
+        {% include "../../templates/twig/partials/footer.twig" %}
     {% else %}
         {% include "partials/footer.twig" %}
     {% endif %}
@@ -89,6 +89,19 @@
 
     <!-- Main file -->
     {% script "/js/main.js" %}
+
+    <!-- Templates -->
+    {% if templates == true %}
+        {% script "/templates/js/templates.js" %}
+    {% endif %}
+
+    <script>
+    WebFont.load({
+        google: {
+            families: {{ get_webfonts()|json_encode|raw }}
+        }
+    });
+    </script>
 
 </body>
 </html>

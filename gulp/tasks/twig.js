@@ -8,7 +8,7 @@ var extendTwig = require('../helpers/twig.exports.extendTag.js');
 var customFunctions = require('../helpers/twig.customFunctions.js');
 var customTags = require('../helpers/twig.customTags.js');
 
-gulp.task('twig', (argv.prod ? [] : ['twig-templates']), function() {
+gulp.task('twig', (argv.prod ? [] : ['twig:templates']), function() {
     return gulp.src([config.src + 'twig/views/**/*.twig'], {
             base: 'src/twig/views/'
         })
@@ -24,9 +24,9 @@ gulp.task('twig', (argv.prod ? [] : ['twig-templates']), function() {
         .pipe(gulp.dest(config.build));
 });
 
-gulp.task('twig-templates', function() {
-    return gulp.src([config.src + 'twig/templates/*.twig'], {
-            base: 'src/twig/'
+gulp.task('twig:templates', function() {
+    return gulp.src([config.templates + 'twig/*.twig'], {
+            base: 'templates/twig/'
         })
         .pipe(twig({
             data: config.defaults.twig.data ? require('../../' + config.src + config.defaults.twig.file) : {},
@@ -37,5 +37,5 @@ gulp.task('twig-templates', function() {
             onError: function(event) {}
         }))
         .pipe(prettify(config.prettify))
-        .pipe(gulp.dest(config.build));
+        .pipe(gulp.dest(config.build + 'templates/'));
 });

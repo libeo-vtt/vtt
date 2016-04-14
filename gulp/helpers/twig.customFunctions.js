@@ -1,4 +1,5 @@
 var project = require('../../package.json');
+var styles = require('../../src/sass/styles.json');
 var config = require('../config.js');
 
 var customFunctions = [];
@@ -72,6 +73,56 @@ customFunctions.push({
     name: 'get_project_repository',
     func: function(args) {
         return project.repository;
+    }
+});
+
+/**
+ * get_styles_json
+ * Return:
+ *     JSON from styles.json
+ */
+customFunctions.push({
+    name: 'get_styles_json',
+    func: function(args) {
+        return styles;
+    }
+});
+
+/**
+ * get_webfonts
+ * Return:
+ *     Webfonts array from styles.json
+ */
+customFunctions.push({
+    name: 'get_webfonts',
+    func: function(args) {
+        var fonts = styles.fonts;
+        var webfonts = [];
+        for (var index in fonts) {
+            var font = fonts[index];
+            var webfont = font.name + ':' + font.weight.join();
+            webfonts.push(webfont);
+        }
+        return webfonts;
+    }
+});
+
+/**
+ * get_webfonts_url
+ * Return:
+ *     Webfonts array from styles.json
+ */
+customFunctions.push({
+    name: 'get_webfonts_url',
+    func: function(args) {
+        var fonts = styles.fonts;
+        var url = 'http://fonts.googleapis.com/css?family=';
+        for (var index in fonts) {
+            var font = fonts[index];
+            var webfont = (index > 0 ? '%7C' : '') + font.name.replace(' ', '+') + ':' + font.weight.join();
+            url += webfont;
+        }
+        return url;
     }
 });
 

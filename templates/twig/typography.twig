@@ -1,0 +1,166 @@
+{% extends "../../src/twig/layouts/single-column.twig" %}
+
+{% set title = "Templates - Typographie" %}
+{% set class = "template-typography" %}
+{% set templates = true %}
+
+{% block content %}
+
+    <h1 class="template-title">Typographie</h1>
+    <div class="template-typography-wrapper">
+        <div class="template-typography-edit-panel">
+            <label class="template-typography-label" for="template-typography-edit-selector">Balises</label>
+            <div class="template-typography-edit-selector-wrapper">
+                <select class="template-typography-edit-selector" id="template-typography-edit-selector"></select>
+            </div>
+            <div class="template-typography-edit-panel-wrapper">
+            </div>
+            <div class="template-typography-edit-panel-inputs is-template">
+                <div class="template-typography-input-wrapper">
+                    <label class="template-typography-label" for="template-typography-edit-font-family">Font-family</label>
+                    <select data-edit="font-family" class="template-typography-input template-typography-edit-font-family" id="template-typography-edit-font-family"></select>
+                </div>
+                <div class="template-typography-input-wrapper is-half">
+                    <label class="template-typography-label" for="template-typography-edit-font-weight">Font-weight</label>
+                    <select data-edit="font-weight" class="template-typography-input template-typography-edit-font-weight" id="template-typography-edit-font-weight">
+                        <option value="normal">Normal</option>
+                        <option value="bold">Bold</option>
+                        <option value="bolder">Bolder</option>
+                        <option value="lighter">Lighter</option>
+                        <option value="100">100</option>
+                        <option value="200">200</option>
+                        <option value="300">300</option>
+                        <option value="400">400</option>
+                        <option value="500">500</option>
+                        <option value="600">600</option>
+                        <option value="700">700</option>
+                        <option value="800">800</option>
+                        <option value="900">900</option>
+                    </select>
+                </div>
+                <div class="template-typography-input-wrapper is-half">
+                    <label class="template-typography-label" for="template-typography-edit-font-style">Font-style</label>
+                    <select data-edit="font-style" class="template-typography-input template-typography-edit-font-style" id="template-typography-edit-font-style">
+                        <option value="normal">Normal</option>
+                        <option value="italic">Italic</option>
+                        <option value="oblique">Oblique</option>
+                    </select>
+                </div>
+                <div class="template-typography-input-wrapper is-half">
+                    <label class="template-typography-label" for="template-typography-edit-text-decoration">Text-decoration</label>
+                    <select data-edit="text-decoration" class="template-typography-input template-typography-edit-text-decoration" id="template-typography-edit-text-decoration">
+                        <option value="none">None</option>
+                        <option value="underline">Underline</option>
+                        <option value="overline">Overline</option>
+                        <option value="line-through">Line-through</option>
+                    </select>
+                </div>
+                <div class="template-typography-input-wrapper is-half">
+                    <label class="template-typography-label" for="template-typography-edit-text-transform">Text-transform</label>
+                    <select data-edit="text-transform" class="template-typography-input template-typography-edit-text-transform" id="template-typography-edit-text-transform">
+                        <option value="none">None</option>
+                        <option value="lowercase">Lowercase</option>
+                        <option value="uppercase">Uppercase</option>
+                        <option value="capitalize">Capitalize</option>
+                    </select>
+                </div>
+                <div class="template-typography-input-wrapper is-quarter">
+                    <label class="template-typography-label" for="template-typography-edit-font-size">Font-size</label>
+                    <input type="text" data-edit="font-size" class="template-typography-input template-typography-edit-font-size is-quarter" id="template-typography-edit-font-size" value="16px">
+                </div>
+                <div class="template-typography-input-wrapper is-quarter">
+                    <label class="template-typography-label" for="template-typography-edit-line-height">Line-height</label>
+                    <input type="text" data-edit="line-height" class="template-typography-input template-typography-edit-line-height" id="template-typography-edit-line-height" value="20px">
+                </div>
+                <div class="template-typography-input-wrapper is-half">
+                    <label class="template-typography-label" for="template-typography-edit-color">Couleur</label>
+                    <select data-edit="color" class="template-typography-input template-typography-edit-color" id="template-typography-edit-color"></select>
+                </div>
+                <div class="template-typography-input-wrapper is-quarter">
+                    <label class="template-typography-label" for="template-typography-edit-margin-top">Margin-top</label>
+                    <input type="text" data-edit="margin-top" class="template-typography-input template-typography-edit-margin-top" id="template-typography-edit-margin-top" value="0">
+                </div>
+                <div class="template-typography-input-wrapper is-quarter">
+                    <label class="template-typography-label" for="template-typography-edit-margin-bottom">Margin-bottom</label>
+                    <input type="text" data-edit="margin-bottom" class="template-typography-input template-typography-edit-margin-bottom" id="template-typography-edit-margin-bottom" value="0">
+                </div>
+                <div class="template-typography-input-wrapper is-quarter">
+                    <label class="template-typography-label" for="template-typography-edit-margin-right">Margin-right</label>
+                    <input type="text" data-edit="margin-right" class="template-typography-input template-typography-edit-margin-right" id="template-typography-edit-margin-right" value="0">
+                </div>
+                <div class="template-typography-input-wrapper is-quarter">
+                    <label class="template-typography-label" for="template-typography-edit-margin-left">Margin-left</label>
+                    <input type="text" data-edit="margin-left" class="template-typography-input template-typography-edit-margin-left" id="template-typography-edit-margin-left" value="0">
+                </div>
+            </div>
+            <div class="json-preview-wrapper">
+                <div class="json-preview-buttons">
+                    <button onclick="generateTypographyJSON()">Générer</button>
+                    <button onclick="importTypographyJSON()">Importer</button>
+                </div>
+                <button class="json-preview-download" onclick="downloadTypographyJSON()">{% include '../svg/download.svg' %}</button>
+                <textarea class="json-preview"></textarea>
+            </div>
+        </div>
+        <div class="template-typography-preview">
+            <h1>{% lorem "10" %}</h1>
+            <h2>{% lorem "20" %}</h2>
+            <p class="intro">{% lorem "50" %}</p>
+            <h2>{% lorem "20" %}</h2>
+            <p>{% lorem "10" %} {% lorem "10" %} {% lorem "50" %} {% lorem "10" %} <a href="##">{% lorem "3" %}</a> {% lorem "30" %} <strong>{% lorem "2" %}</strong> {% lorem "30" %} {% lorem "10" %} <em>{% lorem "1" %}</em> {% lorem "10" %}</p>
+            <h3>{% lorem "20" %}</h3>
+            <p>{% lorem "50" %}</p>
+            <p>{% lorem "150" %}</p>
+            <p>{% lorem "50" %}</p>
+            <p>{% lorem "20" %}</p>
+            <ul>
+                <li>{% lorem "50" %}</li>
+                <li>{% lorem "10" %}
+                    <ul>
+                        <li>{% lorem "50" %}</li>
+                        <li>{% lorem "50" %}</li>
+                        <li>{% lorem "50" %}
+                            <ul>
+                                <li>{% lorem "50" %}</li>
+                                <li>{% lorem "50" %}</li>
+                                <li>{% lorem "50" %}</li>
+                            </ul>
+                        </li>
+                    </ul>
+                </li>
+                <li>{% lorem "50" %}</li>
+            </ul>
+            <h4>{% lorem "20" %}</h4>
+            <p>{% lorem "100" %}</p>
+            <ol>
+                <li>{% lorem "50" %}</li>
+                <li>{% lorem "10" %}
+                    <ol>
+                        <li>{% lorem "50" %}</li>
+                        <li>{% lorem "50" %}</li>
+                        <li>{% lorem "50" %}
+                            <ol>
+                                <li>{% lorem "50" %}</li>
+                                <li>{% lorem "50" %}</li>
+                                <li>{% lorem "50" %}</li>
+                            </ol>
+                        </li>
+                    </ol>
+                </li>
+                <li>{% lorem "50" %}</li>
+            </ol>
+            <h5>{% lorem "20" %}</h5>
+            <p>{% lorem "100" %}</p>
+            <h6>{% lorem "20" %}</h6>
+            <p>{% lorem "100" %}</p>
+        </div>
+    </div>
+
+    <script>
+    document.addEventListener("DOMContentLoaded", function(event) {
+        getTypography();
+        stickOnScroll();
+    });
+    </script>
+
+{% endblock %}

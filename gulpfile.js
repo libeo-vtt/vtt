@@ -5,7 +5,7 @@ var runSequence = require('run-sequence');
 
 requireDir('./gulp/tasks', { recurse: true });
 
-gulp.task('build', ['bower', 'sass', 'copy', 'concat:helpers', 'svg2png', 'svgSprite', 'twig']);
+gulp.task('build', ['bower', 'sass', 'copy', 'concat:helpers', 'concat:templates', 'svg2png', 'svgSprite', 'twig']);
 gulp.task('default', function() {
     if (argv.prod) {
         runSequence('clean', 'build');

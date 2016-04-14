@@ -1,0 +1,58 @@
+<nav class="l-template-navigation" role="navigation">
+    <ul>
+        <li class="menu-project {% if class == "template-home" %}is-active{% endif %}">
+            <a href="/templates/index.html">
+                {% include '../../svg/project.svg' %}
+                <span>Project</span>
+            </a>
+        </li>
+        <li class="menu-colors {% if class == "template-colors" %}is-active{% endif %}">
+            <a href="/templates/colors.html">
+                {% include '../../svg/colors.svg' %}
+                <span>Couleurs</span>
+            </a>
+        </li>
+        <li class="menu-fonts {% if class == "template-fonts" %}is-active{% endif %}">
+            <a href="/templates/fonts.html">
+                {% include '../../svg/fonts.svg' %}
+                <span>Fonts</span>
+            </a>
+        </li>
+        <li class="menu-typography {% if class == "template-typography" %}is-active{% endif %}">
+            <a href="/templates/typography.html">
+                {% include '../../svg/typography.svg' %}
+                <span>Typographie</span>
+            </a>
+        </li>
+        <li class="menu-icons {% if class == "template-icons" %}is-active{% endif %}">
+            <a href="/templates/icons.html">
+                {% include '../../svg/icons.svg' %}
+                <span>Iconographie</span>
+            </a>
+        </li>
+        <li class="menu-grids {% if class == "template-grids" %}is-active{% endif %}">
+            <a href="/templates/grids.html">
+                {% include '../../svg/grids.svg' %}
+                <span>Grilles</span>
+            </a>
+        </li>
+        <li class="menu-navigation {% if class == "template-navigation" %}is-active{% endif %}">
+            <a href="/templates/navigation.html">
+                {% include '../../svg/navigation.svg' %}
+                <span>Navigation</span>
+            </a>
+        </li>
+        <li class="menu-forms {% if class == "template-forms" %}is-active{% endif %}">
+            <a href="/templates/forms.html">
+                {% include '../../svg/forms.svg' %}
+                <span>Formulaires</span>
+            </a>
+        </li>
+        <li class="menu-widgets {% if class == "template-widgets" %}is-active{% endif %}">
+            <a href="/templates/widgets.html">
+                {% include '../../svg/widgets.svg' %}
+                <span>Widgets</span>
+            </a>
+        </li>
+    </ul>
+</nav>

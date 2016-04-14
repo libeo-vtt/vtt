@@ -12,6 +12,13 @@ gulp.task('copy:js', function() {
         .pipe(gulp.dest(config.build + 'js'));
 });
 
+gulp.task('copy:js:templates', function() {
+    return gulp.src([
+            config.templates + 'js/**/*.js'
+        ])
+        .pipe(gulp.dest(config.build + 'templates/js'));
+});
+
 gulp.task('copy:img', function() {
     return gulp.src(config.src + 'img/**/*')
         .pipe(gulpif(config.imagemin, imagemin()))
@@ -23,4 +30,4 @@ gulp.task('copy:svg', function() {
         .pipe(gulp.dest(config.build + 'svg/originals'));
 });
 
-gulp.task('copy', ['copy:js', 'copy:img', 'copy:svg']);
+gulp.task('copy', ['copy:js', 'copy:js:templates', 'copy:img', 'copy:svg']);

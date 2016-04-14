@@ -2,57 +2,45 @@
 //             Typography             //
 // ---------------------------------- //
 
-@include headers {
-    font-family: $ff-headers;
-    color: $c-txt-headers;
-}
-
-h1,
-.h1 {
-    @include rem-typo(48px);
-}
-
-h2,
-.h2 {
-    @include rem-typo(32px);
-}
-
-h3,
-.h3 {
-    @include rem-typo(24px);
-}
-
-h4,
-.h4 {
-    @include rem-typo(16px);
-}
-
-h5,
-.h5 {
-    @include rem-typo(13px);
-}
-
-h6,
-.h6 {
-    @include rem-typo(11px);
-}
-
-p,
-li,
-button {
-    color: $c-txt-default;
-    @include rem-typo(16px);
-}
-
-a {
-    text-decoration: none;
-    color: $c-txt-links;
-    &:hover {
-        text-decoration: underline;
+@each $typo in $typography {
+    $selector: nth($typo, 1);
+    #{$selector},
+    .#{$selector} {
+        @if map-has-key(nth($typo, 2), "color") {
+            color: color(font(#{$selector}, "color"));
+        }
+        @if map-has-key(nth($typo, 2), "font-family") {
+            font-family: font(#{$selector}, "font-family");
+        }
+        @if map-has-key(nth($typo, 2), "font-size") {
+            font-size: rem(font(#{$selector}, "font-size"));
+        }
+        @if map-has-key(nth($typo, 2), "font-style") {
+            font-style: font(#{$selector}, "font-style");
+        }
+        @if map-has-key(nth($typo, 2), "font-weight") {
+            font-weight: font(#{$selector}, "font-weight");
+        }
+        @if map-has-key(nth($typo, 2), "line-height") {
+            line-height: rem(font(#{$selector}, "line-height"));
+        }
+        @if map-has-key(nth($typo, 2), "text-decoration") {
+            text-decoration: font(#{$selector}, "text-decoration");
+        }
+        @if map-has-key(nth($typo, 2), "text-transform") {
+            text-transform: font(#{$selector}, "text-transform");
+        }
+        @if map-has-key(nth($typo, 2), "margin-top") {
+            margin-top: font(#{$selector}, "margin-top");
+        }
+        @if map-has-key(nth($typo, 2), "margin-right") {
+            margin-right: font(#{$selector}, "margin-right");
+        }
+        @if map-has-key(nth($typo, 2), "margin-bottom") {
+            margin-bottom: font(#{$selector}, "margin-bottom");
+        }
+        @if map-has-key(nth($typo, 2), "margin-left") {
+            margin-left: font(#{$selector}, "margin-left");
+        }
     }
-}
-
-p {
-    margin: 1em 0;
-    padding: 0;
 }

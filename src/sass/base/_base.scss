@@ -83,10 +83,10 @@ hr {
 // Default list style
 ul,
 ol {
+    padding: 5px 0;
     @include clearfix;
-    li,
-    li:first-child {
-        margin-top: 0.25em;
+    li > &:first-child {
+        margin-top: 10px;
     }
 }
 

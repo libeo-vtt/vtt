@@ -352,7 +352,7 @@ body:before {
     content: '{"current": "none", "all": {' + $mq-breakpoints-json + '}}';
 }
 
-@mixin breakpointContent {
+@mixin breakpointContent($bp-name, $bp-export) {
     .is-#{$bp-name} {
         display: block !important;
     }
@@ -377,17 +377,17 @@ body:before {
     $bp-export: nth(nth($bp-value, 4), 2);
     @if $bp-min == false and $bp-max != false {
         @media (max-width: $bp-max) {
-            @include breakpointContent;
+            @include breakpointContent($bp-name, $bp-export);
         }
     }
     @else if $bp-min != false and $bp-max == false {
         @media (min-width: $bp-min) {
-            @include breakpointContent;
+            @include breakpointContent($bp-name, $bp-export);
         }
     }
     @else if $bp-min != false and $bp-max != false {
         @media (min-width: $bp-min) and (max-width: $bp-max) {
-            @include breakpointContent;
+            @include breakpointContent($bp-name, $bp-export);
         }
     }
 }

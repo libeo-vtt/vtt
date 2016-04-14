@@ -14,3 +14,12 @@ gulp.task('concat:helpers', function() {
         .pipe(concat('helpers.js'))
         .pipe(gulp.dest(config.build + 'js'));
 });
+
+gulp.task('concat:templates', function() {
+    return gulp.src([
+            './templates/js/templates-*.js',
+            './templates/js/templates-edit-panel.js'
+        ])
+        .pipe(concat('templates.js'))
+        .pipe(gulp.dest(config.build + 'templates/js'));
+});

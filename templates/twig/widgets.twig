@@ -1,4 +1,4 @@
-{% extends "../layouts/single-column.twig" %}
+{% extends "../../src/twig/layouts/single-column.twig" %}
 
 {% set title = "Templates - Widgets" %}
 {% set class = "template-widgets" %}
@@ -8,27 +8,27 @@
 
     <h1 class="template-title">Widgets</h1>
 
-    <h2>Slider</h2>
+    <h2 class="template-subtitle">Slider</h2>
     {# include "../widgets/slider.twig" #}
 
     <hr>
 
-    <h2>Folder</h2>
+    <h2 class="template-subtitle">Folder</h2>
     {# include "../widgets/folder.twig" #}
 
     <hr>
 
-    <h2>Tab</h2>
+    <h2 class="template-subtitle">Tab</h2>
     {# include "../widgets/tab.twig" #}
 
     <hr>
 
-    <h2>Pagination</h2>
+    <h2 class="template-subtitle">Pagination</h2>
     {% pagination "Previous", "1..10", "Next" %}
 
     <hr>
 
-    <h2>Breadcrumb</h2>
+    <h2 class="template-subtitle">Breadcrumb</h2>
     {% breadcrumb "Accueil", "Titre de section", "Titre de sous-section" %}
 
     <hr>
@@ -36,11 +36,11 @@
     <div class="grid">
         <div class="grid-wrapper">
             <div class="col-1-2 col-1-1-mobile">
-                <h2>Youtube</h2>
+                <h2 class="template-subtitle">Youtube</h2>
                 {% youtube "QJ0bAAA-QQU" %}
             </div>
             <div class="col-1-2 col-1-1-mobile">
-                <h2>Vimeo</h2>
+                <h2 class="template-subtitle">Vimeo</h2>
                 {% vimeo "108679294" %}
             </div>
         </div>
@@ -51,11 +51,11 @@
     <div class="grid">
         <div class="grid-wrapper">
             <div class="col-1-2 col-1-1-mobile">
-                <h2>Google Map</h2>
+                <h2 class="template-subtitle">Google Map</h2>
                 {% map "Lebourgneuf, Québec, Canada" %}
             </div>
             <div class="col-1-2 col-1-1-mobile">
-                <h2>Google Map (locked)</h2>
+                <h2 class="template-subtitle">Google Map (locked)</h2>
                 {% map "Lebourgneuf, Québec, Canada", "locked" %}
             </div>
         </div>

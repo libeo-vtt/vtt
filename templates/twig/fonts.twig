@@ -1,0 +1,72 @@
+{% extends "../../src/twig/layouts/single-column.twig" %}
+
+{% set title = "Templates - Fonts" %}
+{% set class = "template-fonts" %}
+{% set templates = true %}
+
+{% block content %}
+
+    <h1 class="template-title">Fonts</h1>
+
+    <div class="template-fonts-buttons">
+        <div class="template-fonts-button-wrapper">
+            <button class="btn-show-add-font is-google" onclick="toggleAddFontSection('google')"><span>Google Webfont</span></button>
+            <div class="template-fonts-add-input-wrapper is-google">
+                <select class="template-fonts-add-select template-fonts-add-element"></select>
+                <button class="template-fonts-show-google-font" onclick="openGoogleFont()"></button>
+                <div class="template-fonts-add-font-weight"></div>
+                <button class="btn-add-font is-google" onclick="addNewFont('google')"></button>
+            </div>
+        </div>
+        <div class="template-fonts-button-wrapper">
+            <button class="btn-show-add-font is-custom" onclick="toggleAddFontSection('custom')"><span>Custom Webfont</span></button>
+            <div class="template-fonts-add-input-wrapper is-custom">
+                <input type="text" class="template-fonts-add-input template-fonts-add-element is-custom" placeholder="+ Custom font">
+                <button class="btn-add-font is-custom" onclick="addNewFont('custom')"></button>
+            </div>
+        </div>
+    </div>
+    <div class="template-fonts-wrapper"></div>
+
+    <div class="template-fonts-add-font-weight-wrapper is-template">
+        <input type="checkbox" class="template-fonts-add-font-checkbox" id="" value="">
+        <label for=""><span></span></label>
+    </div>
+
+    <div class="template-font is-template">
+        <div class="template-font-top">
+            <span class="template-font-name"></span>
+            <span class="template-font-type"></span>
+        </div>
+        <div class="template-font-preview"></div>
+        <button class="btn-remove-font" onclick="removeFontPreview()">{% include '../svg/delete.svg' %}</button>
+    </div>
+
+    <div class="json-preview-wrapper">
+        <div class="json-preview-buttons">
+            <button onclick="generateFontsJSON()">Générer JSON</button>
+            <button onclick="importFontsJSON()">Importer JSON</button>
+        </div>
+        <button class="json-preview-download" onclick="downloadFontsJSON()">{% include '../svg/download.svg' %}</button>
+        <textarea class="json-preview"></textarea>
+    </div>
+
+    <script>
+    document.addEventListener("DOMContentLoaded", function(event) {
+        getFonts();
+    });
+    function setGoogleAPI() {
+        var apiKey = 'AIzaSyBAcrm-Ho-fu2b_LvHJJPoIjH4iJgcV054';
+        gapi.client.setApiKey(apiKey);
+        gapi.client.load('webfonts', 'v1', function() {
+            var request = gapi.client.webfonts.webfonts.list();
+            request.execute(function(resp) {
+                fonts = resp.items;
+                updateFontsDropdown(fonts);
+            });
+        });
+    }
+    </script>
+    <script src="https://apis.google.com/js/client.js?onload=setGoogleAPI"></script>
+
+{% endblock %}

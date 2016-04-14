@@ -6,6 +6,22 @@ gulp.task('clean', function(callback) {
     return del([config.build], callback);
 });
 
+gulp.task('clean:templates', function(callback) {
+    return del([config.build + 'templates'], callback);
+});
+
+gulp.task('clean:sass:templates', function(callback) {
+    return del([config.build + 'templates/css'], callback);
+});
+
+gulp.task('clean:js:templates', function(callback) {
+    return del([config.build + 'templates/js'], callback);
+});
+
+gulp.task('clean:twig:templates', function(callback) {
+    return del([config.build + 'templates/*.html'], callback);
+});
+
 gulp.task('clean:bower', function(callback) {
     return del([config.build + 'js/vendor/bower'], callback);
 });

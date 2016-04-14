@@ -1,3 +1,5 @@
+@import "styles.json";
+
 // --------------------------------- //
 //             Variables             //
 // --------------------------------- //
@@ -49,26 +51,9 @@ $mq-breakpoints: (
 //             Colors             //
 // ------------------------------ //
 
-$colors: (
-    "black": (
-        "base": #000,
-        "light": #555
-    ),
-    "white": (
-        "base": #fff,
-        "dark": darken(#fff, 10%)
-    ),
-    "grey": (
-        "base": #d5d5d5
-    ),
-    "red": (
-        "base": #f00
-    )
-);
-
-@function color($color, $tone: "base") {
+@function color($color) {
     @if map-has-key($colors, $color) {
-        @return map-get(map-get($colors, $color), $tone);
+        @return map-get($colors, $color);
     } @else {
         @warn "Unfortunately, no value could be retrieved from `#{$color}`. Please make sure it is defined in `$colors` map.";
         @return null;
@@ -77,17 +62,28 @@ $colors: (
 
 // ------------------------------ //
 
-$c-bg-document: color("white");
-$c-border-default: color("grey");
-$c-txt-default: color("black");
-$c-txt-headers: color("black", "light");
-$c-txt-intro: color("black", "light");
-$c-txt-links: color("black", "light");
-$c-alert: color("red");
+$c-bg-document: color("c-white");
+$c-border-default: color("c-grey");
+$c-txt-default: color("c-black");
+$c-txt-headers: color("c-black-light");
+$c-txt-intro: color("c-black-light");
+$c-txt-links: color("c-black-light");
+$c-alert: color("c-red");
 
 // ----------------------------- //
 //             Fonts             //
 // ----------------------------- //
+
+@function font($font, $property: "font-size") {
+    @if map-has-key($typography, $font) {
+        @return map-get(map-get($typography, $font), $property);
+    } @else {
+        @warn "Unfortunately, no value could be retrieved from `#{$font}`. Please make sure it is defined in `$fonts` map.";
+        @return null;
+    }
+}
+
+// ------------------------------ //
 
 $ff-roboto: "Roboto", "Arial", sans-serif;
 

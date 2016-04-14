@@ -1,0 +1,19 @@
+{% extends "../../src/twig/layouts/single-column.twig" %}
+
+{% set title = "Templates - Navigation" %}
+{% set class = "template-navigation" %}
+{% set templates = true %}
+
+{% block content %}
+
+    <h1 class="template-title">Navigation</h1>
+
+    <h2 class="template-subtitle">Navigation principale</h2>
+    {% include "../../src/twig/partials/navigation-main.twig" %}
+
+    <hr>
+
+    <h2 class="template-subtitle">Navigation principale (fullwidth)</h2>
+    {% include "../../src/twig/partials/navigation-main.twig" with {class: "is-fullwidth"} %}
+
+{% endblock %}
