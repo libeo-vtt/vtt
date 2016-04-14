@@ -22,8 +22,10 @@ var questions = [{
         'Folder',
         'Tab',
         'Form',
-        'AccessibleUpload',
         'Slider',
+        'Map',
+        'Lightbox',
+        'AccessibleUpload',
         new inquirer.Separator(),
         'Buttonize',
         'Focusable'
@@ -35,13 +37,15 @@ inquirer.prompt(questions, function(answers) {
     // Update project values
     var modules = answers.modules;
     var links = {
-        Folder: 'git@github.com:libeo-vtt/jquery-folder.git',
-        Tab: 'git@github.com:libeo-vtt/jquery-tab.git',
-        Form: 'git@github.com:libeo-vtt/jquery-form.git',
-        AccessibleUpload: 'git@github.com:libeo-vtt/jquery-accessibleUpload.git',
-        Slider: 'git@github.com:libeo-vtt/jquery-slider.git',
-        Buttonize: 'git@github.com:libeo-vtt/jquery-buttonize.git',
-        Focusable: 'git@github.com:libeo-vtt/jquery-focusable.git'
+        Folder: 'https://github.com/libeo-vtt/jquery-folder.git',
+        Tab: 'https://github.com/libeo-vtt/jquery-tab.git',
+        Form: 'https://github.com/libeo-vtt/jquery-form.git',
+        AccessibleUpload: 'https://github.com/libeo-vtt/jquery-accessibleUpload.git',
+        Slider: 'https://github.com/libeo-vtt/jquery-slider.git',
+        Lightbox: 'https://github.com/libeo-vtt/jquery-lightbox.git',
+        GoogleMap: 'https://github.com/libeo-vtt/jquery-map.git',
+        Buttonize: 'https://github.com/libeo-vtt/jquery-buttonize.git',
+        Focusable: 'https://github.com/libeo-vtt/jquery-focusable.git'
     };
 
     modules.forEach(function(module) {
