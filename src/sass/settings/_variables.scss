@@ -53,7 +53,7 @@ $mq-breakpoints: (
 
 @function color($color) {
     @if map-has-key($colors, $color) {
-        @return map-get($colors, $color);
+        @return map-get(map-get($colors, $color), "value");
     } @else {
         @warn "Unfortunately, no value could be retrieved from `#{$color}`. Please make sure it is defined in `$colors` map.";
         @return null;
@@ -63,11 +63,8 @@ $mq-breakpoints: (
 // ------------------------------ //
 
 $c-bg-document: color("c-white");
-$c-border-default: color("c-grey");
+$c-border-default: color("c-black");
 $c-txt-default: color("c-black");
-$c-txt-headers: color("c-black-light");
-$c-txt-intro: color("c-black-light");
-$c-txt-links: color("c-black-light");
 $c-alert: color("c-red");
 
 // ----------------------------- //

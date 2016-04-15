@@ -17,8 +17,9 @@ gulp.task('concat:helpers', function() {
 
 gulp.task('concat:templates', function() {
     return gulp.src([
-            './templates/js/templates-*.js',
-            './templates/js/templates-edit-panel.js'
+            './templates/js/jquery.templatesManager.js',
+            './templates/js/jquery.templatesColors.js',
+            './templates/js/jquery.templatesFonts.js'
         ])
         .pipe(concat('templates.js'))
         .pipe(gulp.dest(config.build + 'templates/js'));

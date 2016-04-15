@@ -25,8 +25,19 @@ function updateFonts(json) {
 
 function getFonts() {
     $.getJSON('/src/sass/styles.json', function(json) {
+        var localJSON = JSON.parse(localStorage.getItem('JSON'));
+
+        if (localJSON !== null && localJSON.lastUpdated > json.lastUpdated) {
+            json = localJSON;
+        }
+
         updateFonts(json);
     });
+}
+
+function resetFontsJSON() {
+    localStorage.removeItem('JSON');
+    getFonts();
 }
 
 function updateFontsDropdown(fonts) {
@@ -172,6 +183,8 @@ function getFontsJSON() {
         json.fonts.push(font);
     });
 
+    json.lastUpdated = new Date().getTime();
+
     window.json = json;
     return json;
 }
@@ -179,8 +192,12 @@ function getFontsJSON() {
 function generateFontsJSON() {
     var json = getFontsJSON();
     var preview = $('.json-preview');
+    var strJSON = JSON.stringify(json, null, 2);
 
-    preview.val(JSON.stringify(json, null, 2));
+    preview.val(strJSON);
+
+    // Save JSON in localStorage
+    localStorage.setItem('JSON', strJSON);
 }
 
 function downloadFontsJSON() {

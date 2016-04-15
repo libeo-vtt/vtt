@@ -1,35 +1,47 @@
 function updateColors(json) {
-    window.json = json;
-    var container = $('.template-colors-wrapper');
-    var template = $('.template-color.is-template');
-    var addNewButton = container.find('.btn-add-color');
-    var colors = json.colors;
+    // window.json = json;
+    // var container = $('.template-colors-wrapper');
+    // var template = $('.template-color.is-template');
+    // var addNewButton = container.find('.btn-add-color');
+    // var colors = json.colors;
 
-    // Reset colors
-    container.find('.template-color').remove();
+    // // Reset colors
+    // container.find('.template-color').remove();
 
-    // Update colors from JSON
-    for (var index in colors) {
-        var name = index;
-        var color = colors[index];
-        var element = template.clone();
-        element.find('.template-color-preview').css('background-color', color);
-        element.find('.template-color-name').val(name).attr('readonly', 'true');
-        element.find('.template-color-value').val(color);
-        element.find('.btn-remove-color').css('visibility', 'hidden');
-        element.removeClass('is-template');
-        addNewButton.before(element);
-    }
+    // // Update colors from JSON
+    // for (var index in colors) {
+    //     var name = index;
+    //     var color = colors[index];
+    //     var element = template.clone();
+    //     element.find('.template-color-preview').css('background-color', color.value);
+    //     element.find('.template-color-name').val(name).attr('readonly', 'true');
+    //     element.find('.template-color-value').val(color.value);
+    //     element.find('.template-color-description').val(color.description);
+    //     element.find('.btn-remove-color').css('visibility', 'hidden');
+    //     element.removeClass('is-template');
+    //     addNewButton.before(element);
+    // }
 
-    // Bind events
-    $(document).on('change', '.template-color-value', updateColorPreview);
-    $(document).on('click', '.btn-remove-color', removeColorPreview);
+    // // Bind events
+    // $(document).on('change', '.template-color-value', updateColorPreview);
+    // $(document).on('click', '.btn-remove-color', removeColorPreview);
 }
 
 function getColors() {
     $.getJSON('/src/sass/styles.json', function(json) {
+        var localJSON = JSON.parse(localStorage.getItem('JSON'));
+
+        if (localJSON !== null && localJSON.lastUpdated > json.lastUpdated) {
+            json = localJSON;
+        }
+
         updateColors(json);
     });
+}
+
+function resetColorsJSON() {
+    localStorage.removeItem('JSON');
+    getColors();
 }
 
 function importColorsJSON() {
@@ -70,8 +82,14 @@ function getColorsJSON() {
         var $element = $(element);
         var name = $element.find('.template-color-name').val();
         var value = $element.find('.template-color-value').val();
-        json.colors[name] = value;
+        var description = $element.find('.template-color-description').val();
+        json.colors[name] = {
+            value: value,
+            description: description
+        };
     });
+
+    json.lastUpdated = new Date().getTime();
 
     window.json = json;
     return json;
@@ -80,8 +98,18 @@ function getColorsJSON() {
 function generateColorsJSON() {
     var json = getColorsJSON();
     var preview = $('.json-preview');
+    var strJSON = JSON.stringify(json, null, 2);
 
-    preview.val(JSON.stringify(json, null, 2));
+    preview.val(strJSON);
+
+    // Save JSON in localStorage
+    localStorage.setItem('JSON', strJSON);
+}
+
+function updateLocalStorage() {
+    var json = getColorsJSON();
+    var strJSON = JSON.stringify(json, null, 2);
+    localStorage.setItem('JSON', strJSON);
 }
 
 function downloadColorsJSON() {

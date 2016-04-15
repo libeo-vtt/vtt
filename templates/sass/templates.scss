@@ -130,6 +130,8 @@ hr {
     left: 10px;
     font-size: 0;
     button {
+        display: inline-block;
+        vertical-align: middle;
         height: 40px;
         padding: 0 18px;
         font-family: "Roboto";
@@ -143,18 +145,48 @@ hr {
         &:hover {
             background-color: darken(#a7a7a7, 5%);
         }
-        &:first-child {
-            border-top-left-radius: 3px;
-            border-bottom-left-radius: 3px;
-            background-color: #000;
-            &:hover {
-                background-color: lighten(#000, 15%);
-            }
+    }
+    .json-preview-generate {
+        border-top-left-radius: 3px;
+        border-bottom-left-radius: 3px;
+        background-color: #000;
+        &:hover {
+            background-color: lighten(#000, 15%);
         }
-        &:last-child {
-            border-top-right-radius: 3px;
-            border-bottom-right-radius: 3px;
-        }
+    }
+    .json-preview-import {
+        border-top-right-radius: 3px;
+        border-bottom-right-radius: 3px;
+    }
+}
+
+.json-preview-reset {
+    display: inline-block;
+    vertical-align: middle;
+    z-index: 2;
+    position: absolute;
+    top: 10px;
+    right: 55px;
+    width: 40px;
+    height: 40px;
+    margin-left: 10px;
+    font-size: 0;
+    line-height: 0;
+    fill: #fff;
+    border: 0;
+    border-radius: 3px;
+    background-color: #000;
+    &:hover {
+        background-color: lighten(#000, 15%);
+    }
+    svg {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        width: 32px;
+        height: 32px;
+        -moz-transform: translate(-50%, -50%);
+             transform: translate(-50%, -50%);
     }
 }
 
@@ -178,6 +210,8 @@ hr {
         position: absolute;
         top: 50%;
         left: 50%;
+        width: 23px;
+        height: 23px;
         -moz-transform: translate(-50%, -50%);
              transform: translate(-50%, -50%);
     }
@@ -213,7 +247,7 @@ hr {
     }
     .template-color-preview {
         display: block;
-        height: 200px;
+        height: 230px;
         background-color: #efefef;
     }
     .template-color-input {
@@ -246,7 +280,7 @@ hr {
     vertical-align: middle;
     position: relative;
     width: 20%;
-    height: 200px;
+    height: 230px;
     margin: 0;
     margin-bottom: 12px;
     padding: 0;
@@ -563,7 +597,7 @@ hr {
         font-size: 21px;
         line-height: 25px;
         &:before {
-            content: attr(data-font-weight);
+            content: attr(data-font-variances);
             display: inline-block;
             vertical-align: bottom;
             position: absolute;

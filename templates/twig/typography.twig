@@ -95,9 +95,10 @@
             </div>
             <div class="json-preview-wrapper">
                 <div class="json-preview-buttons">
-                    <button onclick="generateTypographyJSON()">Générer</button>
-                    <button onclick="importTypographyJSON()">Importer</button>
+                    <button class="json-preview-generate" onclick="generateTypographyJSON()">Générer</button>
+                    <button class="json-preview-import" onclick="importTypographyJSON()">Importer</button>
                 </div>
+                <button class="json-preview-reset" onclick="resetTypographyJSON()">{% include '../svg/reset.svg' %}</button>
                 <button class="json-preview-download" onclick="downloadTypographyJSON()">{% include '../svg/download.svg' %}</button>
                 <textarea class="json-preview"></textarea>
             </div>

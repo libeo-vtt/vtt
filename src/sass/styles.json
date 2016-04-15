@@ -1,13 +1,23 @@
 {
   "colors": {
-    "c-white": "#fafafa",
-    "c-black": "#1a1a1a"
+    "c-white": {
+      "value": "#fafafa",
+      "description": "Fond du site"
+    },
+    "c-black": {
+      "value": "#1a1a1a",
+      "description": "Textes"
+    },
+    "c-red": {
+      "value": "#ec3e3e",
+      "description": "Erreurs"
+    }
   },
   "fonts": [
     {
       "name": "Roboto",
       "type": "google",
-      "weight": [
+      "variances": [
         "100",
         "300",
         "300italic",
@@ -203,5 +213,6 @@
       "margin-bottom": "0",
       "margin-left": "0"
     }
-  }
+  },
+  "lastUpdated": 1460660399963
 }

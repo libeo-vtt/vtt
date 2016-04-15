@@ -100,7 +100,7 @@ customFunctions.push({
         var webfonts = [];
         for (var index in fonts) {
             var font = fonts[index];
-            var webfont = font.name + ':' + font.weight.join();
+            var webfont = font.name + ':' + font.variances.join();
             webfonts.push(webfont);
         }
         return webfonts;
@@ -119,7 +119,7 @@ customFunctions.push({
         var url = 'http://fonts.googleapis.com/css?family=';
         for (var index in fonts) {
             var font = fonts[index];
-            var webfont = (index > 0 ? '%7C' : '') + font.name.replace(' ', '+') + ':' + font.weight.join();
+            var webfont = (index > 0 ? '%7C' : '') + font.name.replace(' ', '+') + ':' + font.variances.join();
             url += webfont;
         }
         return url;

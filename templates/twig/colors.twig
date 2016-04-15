@@ -4,34 +4,39 @@
 {% set class = "template-colors" %}
 {% set templates = true %}
 
+<a href="#" class="logo is-desktop"><img src="logo.png" alt="Logo"></a>
+<a href="#" class="logo is-mobile is-tablet is-not-desktop"><img src="logo-mobile.png" alt="Logo"></a>
+
 {% block content %}
 
     <h1 class="template-title">Couleurs</h1>
     <div class="template-colors-wrapper">
-        <button class="btn-add-color" onclick="addColorPreview()"><span>Ajouter<br>une couleur</span></button>
+        <button class="btn-add-color"><span>Ajouter<br>une couleur</span></button>
     </div>
 
     <div class="template-color is-template">
         <span class="template-color-preview"></span>
         <div class="template-color-bottom">
-            <input type="text" class="template-color-input template-color-name" value="c-">
-            <input type="text" class="template-color-input template-color-value" value="#">
-            <button class="btn-remove-color" onclick="removeColorPreview()">{% include '../svg/delete.svg' %}</button>
+            <input type="text" class="template-color-input template-color-name">
+            <input type="text" class="template-color-input template-color-value">
+            <input type="text" class="template-color-input template-color-description">
+            <button class="btn-remove-color">{% include '../svg/delete.svg' %}</button>
         </div>
     </div>
 
     <div class="json-preview-wrapper">
         <div class="json-preview-buttons">
-            <button onclick="generateColorsJSON()">Générer</button>
-            <button onclick="importColorsJSON()">Importer</button>
+            <button class="json-preview-generate">Générer</button>
+            <button class="json-preview-import">Importer</button>
         </div>
-        <button class="json-preview-download" onclick="downloadColorsJSON()">{% include '../svg/download.svg' %}</button>
+        <button class="json-preview-reset">{% include '../svg/reset.svg' %}</button>
+        <button class="json-preview-download">{% include '../svg/download.svg' %}</button>
         <textarea class="json-preview"></textarea>
     </div>
 
     <script>
-    document.addEventListener("DOMContentLoaded", function(event) {
-        getColors();
+    document.addEventListener('DOMContentLoaded', function(event) {
+        $(this).templatesColors();
     });
     </script>
 

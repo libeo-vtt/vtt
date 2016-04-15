@@ -63,6 +63,23 @@ function updateTypography(json) {
 
 function getTypography() {
     $.getJSON('/src/sass/styles.json', function(json) {
+        var localJSON = JSON.parse(localStorage.getItem('JSON'));
+
+        if (localJSON !== null && localJSON.lastUpdated > json.lastUpdated) {
+            json = localJSON;
+        }
+
+        bindTypographyEvents();
+
+        updateFontDropdowns(json.fonts);
+        updateTypography(json);
+    });
+}
+
+function bindTypographyEvents() {
+    if (!window.typographyEventsBinded) {
+        window.typographyEventsBinded = true;
+
         // Bind events
         $(document).on('change', '.template-typography-edit-selector', function(event) {
             var selector = $(event.currentTarget).val();
@@ -113,10 +130,12 @@ function getTypography() {
                 window.altPressed = false;
             }
         });
+    }
+}
 
-        updateFontDropdowns(json.fonts);
-        updateTypography(json);
-    });
+function resetTypographyJSON() {
+    localStorage.removeItem('JSON');
+    getTypography();
 }
 
 function changeCurrentSelector(event) {
@@ -171,6 +190,8 @@ function getTypographyJSON() {
         });
     });
 
+    json.lastUpdated = new Date().getTime();
+
     window.json = json;
     return json;
 }
@@ -178,8 +199,12 @@ function getTypographyJSON() {
 function generateTypographyJSON() {
     var json = getTypographyJSON();
     var preview = $('.json-preview');
+    var strJSON = JSON.stringify(json, null, 2);
 
-    preview.val(JSON.stringify(json, null, 2));
+    preview.val(strJSON);
+
+    // Save JSON in localStorage
+    localStorage.setItem('JSON', strJSON);
 }
 
 function stickOnScroll() {
