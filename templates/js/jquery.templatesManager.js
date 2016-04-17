@@ -1,6 +1,3 @@
-// TemplatesManager jQuery Plugin
-// Manager for VTT templates
-
 var TemplatesManager = function() {
     this.config = {
         jsonFile: '/src/sass/styles.json',
@@ -36,6 +33,9 @@ $.extend(TemplatesManager.prototype, {
             // Return local JSON if more recent than file JSON
             if (localJSON !== null && localJSON.lastUpdated > data.lastUpdated) {
                 currentJSON = localJSON;
+                this.showResetButton();
+            } else {
+                this.hideResetButton();
             }
 
             if (typeof callback === 'function') {
@@ -44,6 +44,14 @@ $.extend(TemplatesManager.prototype, {
         }, this));
 
         return currentJSON;
+    },
+
+    showResetButton: function() {
+        this.$resetButton.show();
+    },
+
+    hideResetButton: function() {
+        this.$resetButton.hide();
     },
 
     getImportJSON: function() {
@@ -58,6 +66,7 @@ $.extend(TemplatesManager.prototype, {
 
     saveLocalJSON: function(data) {
         localStorage.setItem('JSON', JSON.stringify(data, null, 2));
+        this.showResetButton();
     },
 
     resetLocalJSON: function() {

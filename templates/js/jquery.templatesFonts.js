@@ -11,15 +11,19 @@
                 template: '.template-font.is-template',
                 addButton: '.btn-add-font',
                 showGoogleAddFontButton: '.btn-show-add-font-google',
-                showGoogleAddFontSection: '.template-fonts-add-input-wrapper-google',
+                showGoogleAddFontSection: '.template-fonts-add-input-wrapper[data-type="google"]',
                 showCustomAddFontButton: '.btn-show-add-font-custom',
-                showCustomAddFontSection: '.template-fonts-add-input-wrapper-custom',
+                showCustomAddFontSection: '.template-fonts-add-input-wrapper[data-type="custom"]',
                 fontsDropdown: '.template-fonts-add-select',
+                addFontElementWrapper: '.template-fonts-add-input-wrapper',
+                addFontElement: '.template-fonts-add-element',
+                addFontCheckbox: '.template-fonts-add-font-checkbox',
+                addFontGoogleButton: '.template-fonts-show-google-font',
                 preview: '.template-font',
                 previewName: '.template-font-name',
                 previewType: '.template-font-type',
-                previewVariances: '.template-font-preview',
-                previewVariance: '.template-font-preview-variance',
+                previewVariants: '.template-font-preview',
+                previewVariant: '.template-font-preview-variant',
                 previewDeleteButton: '.btn-remove-font'
             },
             customGlobalClasses: {}
@@ -40,7 +44,8 @@
         this.$showGoogleAddFontSection = $(this.config.classes.showGoogleAddFontSection);
         this.$showCustomAddFontButton = $(this.config.classes.showCustomAddFontButton);
         this.$showCustomAddFontSection = $(this.config.classes.showCustomAddFontSection);
-        this.$addButton = this.$container.find(this.config.classes.addButton);
+        this.$addButton = $(this.config.classes.addButton);
+        this.$addFontGoogleButton = $(this.config.classes.addFontGoogleButton);
 
         this.init();
     };
@@ -56,11 +61,14 @@
             this.$showGoogleAddFontButton.on('click', $.proxy(this.showGoogleAddFontSection, this));
             this.$showCustomAddFontButton.on('click', $.proxy(this.showCustomAddFontSection, this));
 
-            this.$addButton.on('click', $.proxy(function() {
-                // this.createFontPreview({
-                //     name: 'c-',
-                //     value: '#',
-                // }, true);
+            this.$addButton.on('click', $.proxy(function(event) {
+                var type = $(event.currentTarget).attr('data-type');
+                this.createNewFontPreview(type);
+            }, this));
+
+            this.$addFontGoogleButton.on('click', $.proxy(function() {
+                var selectedFont = $(this.config.classes.fontsDropdown).val();
+                window.open('https://www.google.com/fonts/specimen/' + selectedFont, '_blank');
             }, this));
 
             this.manager.$generateButton.on('click', $.proxy(this.generateJSON, this));
@@ -95,12 +103,35 @@
             }, this));
         },
 
-        loadGoogleFont: function(family, weight) {
+        loadGoogleFont: function(family, variants) {
             WebFont.load({
                 google: {
-                    families: [family + ':' + weight]
+                    families: [family + ':' + variants]
                 }
             });
+        },
+
+        createNewFontPreview: function(type) {
+            var $addFontWrapper = $(this.config.classes.addFontElementWrapper + ':visible');
+            var font = {};
+
+            font.name = $addFontWrapper.find(this.config.classes.addFontElement).val();
+            font.type = type;
+            font.variants = [];
+
+            if (type === 'google') {
+                var variants = $(this.config.classes.addFontCheckbox + ':checked');
+                variants.each(function(index, element) {
+                    font.variants.push($(element).val());
+                });
+            } else {
+                font.variants = ['400'];
+            }
+
+            if (font.name !== '') {
+                this.createFontPreview(font, true);
+                this.updateLocalJSON();
+            }
         },
 
         createFontPreview: function(font, editable) {
@@ -112,7 +143,11 @@
             $previewName.text(font.name);
             $previewType.text(font.type);
 
-            this.createFontPreviewVariances($preview, font);
+            this.createFontPreviewVariants($preview, font);
+
+            if (font.type === 'google') {
+                this.loadGoogleFont(font.name, font.variants.join());
+            }
 
             if (!editable) {
                 $deleteButton.hide();
@@ -125,50 +160,81 @@
             this.$container.append($preview);
         },
 
-        createFontPreviewVariances: function($preview, font) {
-            var $previewVariances = $preview.find(this.config.classes.previewVariances);
+        createFontPreviewVariants: function($preview, font) {
+            var $previewVariants = $preview.find(this.config.classes.previewVariants);
 
-            for (var index in font.variances) {
-                var variance = font.variances[index];
+            for (var index in font.variants) {
+                var variant = font.variants[index];
                 var fontWeight = 'normal';
                 var fontStyle = 'normal';
 
-                if (/^\d+$/.test(variance) || variance === 'regular') {
-                    fontWeight = variance;
-                } else if (/^\D+$/.test(variance)) {
-                    fontStyle = variance;
+                if (/^\d+$/.test(variant) || variant === 'regular') {
+                    fontWeight = variant;
+                } else if (/^\D+$/.test(variant)) {
+                    fontStyle = variant;
                 } else {
-                    var matches = variance.match(/(\d+)(\w+)/);
+                    var matches = variant.match(/(\d+)(\w+)/);
                     fontWeight = matches[1];
                     fontStyle = matches[2];
                 }
 
-                $previewVariance = $('<p class="template-font-preview-' + fontWeight + '"></p>');
-                $previewVariance.addClass(this.config.classes.previewVariance.replace('.', ''));
-                $previewVariance.text(this.config.previewSentence);
-                $previewVariance.attr('data-font-variances', variance);
-                $previewVariance.css({
+                $previewVariant = $('<p class="template-font-preview-' + fontWeight + '"></p>');
+                $previewVariant.addClass(this.config.classes.previewVariant.replace('.', ''));
+                $previewVariant.text(this.config.previewSentence);
+                $previewVariant.attr('data-font-variants', variant);
+                $previewVariant.css({
+                    fontFamily: font.name,
                     fontWeight: fontWeight,
                     fontStyle: fontStyle
                 });
 
-                $previewVariances.append($previewVariance);
+                $previewVariants.append($previewVariant);
             }
         },
 
         updateFontsDropdown: function(fonts) {
-            var fontsDropdown = $(this.config.classes.fontsDropdown);
+            this.fontsDropdown = $(this.config.classes.fontsDropdown);
 
-            fontsDropdown.each(function(index, element) {
+            this.fontsDropdown.each(function(index, element) {
                 var $element = $(element);
                 for (var index in fonts) {
                     var font = fonts[index].family;
-                    var weight = fonts[index].variants.join();
-                    $element.append('<option value="' + font + '" data-weight="' + weight + '">' + font + '</option>');
+                    var variants = fonts[index].variants.join();
+                    $element.append('<option value="' + font + '" data-variants="' + variants + '">' + font + '</option>');
                 }
             });
 
-            //fontsDropdown.on('change', updateFontsWeights).trigger('change');
+            this.fontsDropdown.on('change', $.proxy(function() {
+                var selectedOption = this.fontsDropdown.find('option:selected');
+                var variants = selectedOption.attr('data-variants').split(',');
+
+                this.updateAddFontVariants(variants);
+            }, this)).trigger('change');
+        },
+
+        updateAddFontVariants: function(variants) {
+            var container = $('.template-fonts-add-font-variants');
+
+            // Reset variants
+            container.html('');
+
+            for (var index in variants) {
+                var $element = $('.template-fonts-add-font-variants-wrapper.is-template').clone();
+                var variant = variants[index];
+                var label = $element.find('label');
+                var checkbox = $element.find('input');
+                var identifier = 'template-fonts-add-font-variants-' + variant;
+
+                label.attr('for', identifier).find('span').text(variant);
+                checkbox.attr('id', identifier).val(variant);
+                $element.removeClass('is-template');
+
+                if (variant === 'regular') {
+                    checkbox.attr('checked', 'checked');
+                }
+
+                container.append($element);
+            }
         },
 
         deleteFontPreview: function($preview) {
@@ -197,20 +263,19 @@
 
             fonts.each($.proxy(function(index, element) {
                 var $element = $(element);
-                var $varianceElements = $element.find(this.config.classes.previewVariance);
+                var $variantElements = $element.find(this.config.classes.previewVariant);
                 var name = $element.find(this.config.classes.previewName).text();
                 var type = $element.find(this.config.classes.previewType).text();
                 var font = {};
 
                 font.name = name;
                 font.type = type;
-                font.variances = [];
+                font.variants = [];
 
-                $varianceElements.each(function(index, element) {
+                $variantElements.each(function(index, element) {
                     var $element = $(element);
-                    var variance = $element.attr('data-font-variances');
-                    console.log(variance);
-                    font.variances.push(variance);
+                    var variant = $element.attr('data-font-variants');
+                    font.variants.push(variant);
                 });
 
                 currentJSON.fonts.push(font);

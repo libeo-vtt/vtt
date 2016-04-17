@@ -161,7 +161,7 @@ hr {
 }
 
 .json-preview-reset {
-    display: inline-block;
+    display: none;
     vertical-align: middle;
     z-index: 2;
     position: absolute;
@@ -597,7 +597,7 @@ hr {
         font-size: 21px;
         line-height: 25px;
         &:before {
-            content: attr(data-font-variances);
+            content: attr(data-font-variants);
             display: inline-block;
             vertical-align: bottom;
             position: absolute;
@@ -741,12 +741,12 @@ hr {
     background-color: #f5f5f5;
 }
 
-.template-fonts-add-font-weight {
+.template-fonts-add-font-variants {
     width: calc(100% - 100px);
     padding: 15px;
 }
 
-.template-fonts-add-font-weight-wrapper {
+.template-fonts-add-font-variants-wrapper {
     display: inline-block;
     vertical-align: middle;
     margin: 2px 4px 2px 0;

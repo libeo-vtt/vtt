@@ -11,24 +11,24 @@
     <div class="template-fonts-buttons">
         <div class="template-fonts-button-wrapper">
             <button class="btn-show-add-font btn-show-add-font-google"><span>Google Webfont</span></button>
-            <div class="template-fonts-add-input-wrapper template-fonts-add-input-wrapper-google">
+            <div class="template-fonts-add-input-wrapper" data-type="google">
                 <select class="template-fonts-add-select template-fonts-add-element"></select>
                 <button class="template-fonts-show-google-font"></button>
-                <div class="template-fonts-add-font-weight"></div>
-                <button class="btn-add-font is-google"></button>
+                <div class="template-fonts-add-font-variants"></div>
+                <button class="btn-add-font" data-type="google"></button>
             </div>
         </div>
         <div class="template-fonts-button-wrapper">
             <button class="btn-show-add-font btn-show-add-font-custom"><span>Custom Webfont</span></button>
-            <div class="template-fonts-add-input-wrapper template-fonts-add-input-wrapper-custom">
+            <div class="template-fonts-add-input-wrapper" data-type="custom">
                 <input type="text" class="template-fonts-add-input template-fonts-add-element is-custom" placeholder="+ Custom font">
-                <button class="btn-add-font is-custom"></button>
+                <button class="btn-add-font" data-type="custom"></button>
             </div>
         </div>
     </div>
     <div class="template-fonts-wrapper"></div>
 
-    <div class="template-fonts-add-font-weight-wrapper is-template">
+    <div class="template-fonts-add-font-variants-wrapper is-template">
         <input type="checkbox" class="template-fonts-add-font-checkbox" id="" value="">
         <label for=""><span></span></label>
     </div>
