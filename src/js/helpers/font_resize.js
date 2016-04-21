@@ -61,9 +61,9 @@
         if (bodyClasses) $body.attr('class', '').addClass(bodyClasses.join(' '));
 
         if (fontsize > 16) {
-            $body.addClass(window.classes.zoom + ' ' + 'is-font-' + fontsize);
+            $body.addClass(window.project.classes.states.zoom + ' ' + 'is-font-' + fontsize);
         } else {
-            $body.removeClass(window.classes.zoom);
+            $body.removeClass(window.project.classes.states.zoom);
         }
     }, this)).trigger('fontresize');
 

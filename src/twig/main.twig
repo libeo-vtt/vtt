@@ -85,15 +85,14 @@
     {% script "/js/helpers.js" %}
 
     <!-- Modules -->
-    {# script "/js/vendor/bower/jquery.module.js" #}
+    {# script "/js/vendor/bower/jquery.moduleName.js" #}
+    {# script "/js/modules/jquery.moduleName.js" #}
 
     <!-- Main file -->
     {% script "/js/main.js" %}
 
     <!-- Templates -->
-    {% if templates == true %}
-        {% script "/templates/js/templates.js" %}
-    {% endif %}
+    {% if templates == true %}{% script "/templates/js/templates.js" %}{% endif %}
 
     <script>
     WebFont.load({

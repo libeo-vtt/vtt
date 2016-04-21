@@ -63,10 +63,10 @@ textarea {
     resize: vertical;
 }
 
-// Change blockquote margin for padding
+// Reset blockquote margin and padding
 blockquote {
-    margin-left: 0;
-    padding-left: 40px;
+    margin: 0;
+    padding: 0;
 }
 
 // Default horizontal rule

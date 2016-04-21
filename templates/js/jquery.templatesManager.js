@@ -1,7 +1,6 @@
 var TemplatesManager = function() {
     this.config = {
-        jsonFile: '/src/sass/styles.json',
-        autosaveDelay: 100
+        jsonFile: '/src/sass/styles.json'
     }
 
     this.$generateButton = $('.json-preview-generate');
@@ -21,29 +20,32 @@ $.extend(TemplatesManager.prototype, {
     },
 
     getJSON: function(callback) {
-        var currentJSON;
-
         // Set the global ajax config to synchronous
         $.ajaxSetup({ async: false });
 
-        $.getJSON(this.config.jsonFile, $.proxy(function(data) {
-            var localJSON = this.getLocalJSON();
-            currentJSON = data;
+        if (this.currentJSON) {
+            return this.currentJSON;
+        } else {
+            $.getJSON(this.config.jsonFile, $.proxy(function(data) {
+                var localJSON = this.getLocalJSON();
 
-            // Return local JSON if more recent than file JSON
-            if (localJSON !== null && localJSON.lastUpdated > data.lastUpdated) {
-                currentJSON = localJSON;
-                this.showResetButton();
-            } else {
-                this.hideResetButton();
-            }
+                this.currentJSON = data;
 
-            if (typeof callback === 'function') {
-                callback(currentJSON);
-            }
-        }, this));
+                // Return local JSON if more recent than file JSON
+                if (localJSON !== null && localJSON.lastUpdated > data.lastUpdated) {
+                    this.currentJSON = localJSON;
+                    this.showResetButton();
+                } else {
+                    this.hideResetButton();
+                }
 
-        return currentJSON;
+                if (typeof callback === 'function') {
+                    callback(this.currentJSON);
+                }
+            }, this));
+
+            return this.currentJSON;
+        }
     },
 
     showResetButton: function() {
@@ -65,6 +67,7 @@ $.extend(TemplatesManager.prototype, {
     },
 
     saveLocalJSON: function(data) {
+        this.currentJSON = data;
         localStorage.setItem('JSON', JSON.stringify(data, null, 2));
         this.showResetButton();
     },

@@ -9,13 +9,15 @@ window.project = window.project || {};
 // Initialize project modules
 window.project.modules = {};
 
-// Generic classes
-window.classes = {
-    active: 'is-active',
-    open: 'is-open',
-    hover: 'is-hover',
-    clicked: 'is-clicked',
-    extern: 'is-external',
-    error: 'is-error',
-    zoom: 'is-zoomed'
+// Initialize project classes
+window.project.classes = {
+    states: {
+        active: 'is-active',
+        open: 'is-open',
+        hover: 'is-hover',
+        clicked: 'is-clicked',
+        extern: 'is-external',
+        error: 'is-error',
+        zoom: 'is-zoomed'
+    }
 };

@@ -52,8 +52,18 @@ $mq-breakpoints: (
 // ------------------------------ //
 
 @function color($color) {
-    @if map-has-key($colors, $color) {
-        @return map-get(map-get($colors, $color), "value");
+    $returnValue: null;
+
+    @each $current in $colors {
+        $name: map-get($current, "name");
+        $value: map-get($current, "value");
+        @if $name == $color {
+            $returnValue: $value;
+        }
+    }
+
+    @if $returnValue != null {
+        @return $returnValue;
     } @else {
         @warn "Unfortunately, no value could be retrieved from `#{$color}`. Please make sure it is defined in `$colors` map.";
         @return null;
@@ -70,17 +80,6 @@ $c-alert: color("c-red");
 // ----------------------------- //
 //             Fonts             //
 // ----------------------------- //
-
-@function font($font, $property: "font-size") {
-    @if map-has-key($typography, $font) {
-        @return map-get(map-get($typography, $font), $property);
-    } @else {
-        @warn "Unfortunately, no value could be retrieved from `#{$font}`. Please make sure it is defined in `$fonts` map.";
-        @return null;
-    }
-}
-
-// ------------------------------ //
 
 $ff-roboto: "Roboto", "Arial", sans-serif;
 

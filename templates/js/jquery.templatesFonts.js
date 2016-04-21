@@ -3,8 +3,10 @@
         this.templatesFonts = $(element);
         this.manager = new TemplatesManager();
 
-        this.config = $.extend({
+        // Default module configuration
+        this.defaults = {
             previewSentence: 'Libéo et les magiciens grincheux font un mélange toxique pour le mal de la Reine et Jack.',
+            customFontVariants: ['100', '100italic', '300', '300italic', '400', '400italic', '500', '500italic', '600', '600italic', '700', '700italic', '800', '800italic', '900', '900italic'],
             googleApiKey: 'AIzaSyBAcrm-Ho-fu2b_LvHJJPoIjH4iJgcV054',
             classes: {
                 container: '.template-fonts-wrapper',
@@ -19,6 +21,7 @@
                 addFontElement: '.template-fonts-add-element',
                 addFontCheckbox: '.template-fonts-add-font-checkbox',
                 addFontGoogleButton: '.template-fonts-show-google-font',
+                addFontVariantsWrapper: '.template-fonts-add-font-variants',
                 preview: '.template-font',
                 previewName: '.template-font-name',
                 previewType: '.template-font-type',
@@ -26,17 +29,13 @@
                 previewVariant: '.template-font-preview-variant',
                 previewDeleteButton: '.btn-remove-font'
             },
-            customGlobalClasses: {}
-        }, options || {});
+        };
 
-        this.globalClasses = $.extend({
-            active: 'is-active',
-            open: 'is-open',
-            hover: 'is-hover',
-            clicked: 'is-clicked',
-            extern: 'is-external',
-            error: 'is-error'
-        }, (window.classes !== undefined ? window.classes : this.config.customGlobalClasses) || {});
+        // Merge default classes with window.project.classes
+        this.classes = $.extend(true, this.defaults.classes, window.project.classes || {});
+
+        // Merge default config with custom config
+        this.config = $.extend(true, this.defaults, options || {});
 
         this.$container = $(this.config.classes.container);
         this.$template = $(this.config.classes.template);
@@ -78,10 +77,6 @@
             $(document).on('googleCallback', $.proxy(this.loadGoogleFontsAPI, this));
         },
 
-        loadJSON: function() {
-            this.manager.getJSON($.proxy(this.loadFonts, this));
-        },
-
         loadFonts: function(data) {
             this.$container.find(this.config.classes.preview).remove();
 
@@ -119,14 +114,10 @@
             font.type = type;
             font.variants = [];
 
-            if (type === 'google') {
-                var variants = $(this.config.classes.addFontCheckbox + ':checked');
-                variants.each(function(index, element) {
-                    font.variants.push($(element).val());
-                });
-            } else {
-                font.variants = ['400'];
-            }
+            var variants = $addFontWrapper.find(this.config.classes.addFontCheckbox + ':checked');
+            variants.each(function(index, element) {
+                font.variants.push($(element).val());
+            });
 
             if (font.name !== '') {
                 this.createFontPreview(font, true);
@@ -208,19 +199,23 @@
                 var selectedOption = this.fontsDropdown.find('option:selected');
                 var variants = selectedOption.attr('data-variants').split(',');
 
-                this.updateAddFontVariants(variants);
+                this.updateAddFontVariants(variants, 'google');
             }, this)).trigger('change');
         },
 
-        updateAddFontVariants: function(variants) {
-            var container = $('.template-fonts-add-font-variants');
+        updateAddFontVariants: function(variants, type) {
+            if (type === 'google') {
+                var $container = this.$showGoogleAddFontSection.find(this.config.classes.addFontVariantsWrapper);
+            } else {
+                var $container = this.$showCustomAddFontSection.find(this.config.classes.addFontVariantsWrapper);
+            }
 
             // Reset variants
-            container.html('');
+            $container.html('');
 
             for (var index in variants) {
                 var $element = $('.template-fonts-add-font-variants-wrapper.is-template').clone();
-                var variant = variants[index];
+                var variant = (variants[index] === 'regular' ? '400' : variants[index]);
                 var label = $element.find('label');
                 var checkbox = $element.find('input');
                 var identifier = 'template-fonts-add-font-variants-' + variant;
@@ -229,11 +224,11 @@
                 checkbox.attr('id', identifier).val(variant);
                 $element.removeClass('is-template');
 
-                if (variant === 'regular') {
+                if (variant === '400') {
                     checkbox.attr('checked', 'checked');
                 }
 
-                container.append($element);
+                $container.append($element);
             }
         },
 
@@ -253,6 +248,8 @@
             this.$showGoogleAddFontSection.hide();
             this.$showCustomAddFontButton.hide();
             this.$showCustomAddFontSection.show();
+
+            this.updateAddFontVariants(this.config.customFontVariants, 'custom');
         },
 
         getNewJSON: function() {
@@ -284,6 +281,10 @@
             currentJSON.lastUpdated = new Date().getTime();
 
             return currentJSON;
+        },
+
+        loadJSON: function() {
+            this.manager.getJSON($.proxy(this.loadFonts, this));
         },
 
         updateLocalJSON: function() {

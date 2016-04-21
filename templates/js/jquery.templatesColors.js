@@ -3,7 +3,8 @@
         this.templatesColors = $(element);
         this.manager = new TemplatesManager();
 
-        this.config = $.extend({
+        // Default module configuration
+        this.defaults = {
             classes: {
                 container: '.template-colors-wrapper',
                 template: '.template-color.is-template',
@@ -12,20 +13,17 @@
                 previewName: '.template-color-name',
                 previewValue: '.template-color-value',
                 previewColor: '.template-color-preview',
+                previewColorPicker: '.template-color-picker',
                 previewDescription: '.template-color-description',
                 previewDeleteButton: '.btn-remove-color'
-            },
-            customGlobalClasses: {}
-        }, options || {});
+            }
+        };
 
-        this.globalClasses = $.extend({
-            active: 'is-active',
-            open: 'is-open',
-            hover: 'is-hover',
-            clicked: 'is-clicked',
-            extern: 'is-external',
-            error: 'is-error'
-        }, (window.classes !== undefined ? window.classes : this.config.customGlobalClasses) || {});
+        // Merge default classes with window.project.classes
+        this.classes = $.extend(true, this.defaults.classes, window.project.classes || {});
+
+        // Merge default config with custom config
+        this.config = $.extend(true, this.defaults, options || {});
 
         this.$container = $(this.config.classes.container);
         this.$template = $(this.config.classes.template);
@@ -46,6 +44,7 @@
                 this.createColorPreview({
                     name: 'c-',
                     value: '#',
+                    description: 'Description'
                 }, true);
             }, this));
 
@@ -61,11 +60,11 @@
         loadColors: function(data) {
             this.$container.find(this.config.classes.preview).remove();
 
-            for (var name in data.colors) {
+            for (var index in data.colors) {
                 var color = {};
-                color.name = name;
-                color.value = data.colors[name].value;
-                color.description = data.colors[name].description;
+                color.name = data.colors[index].name;
+                color.value = data.colors[index].value;
+                color.description = data.colors[index].description;
 
                 this.createColorPreview(color, false);
             }
@@ -77,12 +76,17 @@
             var $previewValue = $element.find(this.config.classes.previewValue);
             var $previewDescription = $element.find(this.config.classes.previewDescription);
             var $previewColor = $element.find(this.config.classes.previewColor);
+            var $previewColorPicker = $element.find(this.config.classes.previewColorPicker);
             var $deleteButton = $element.find(this.config.classes.previewDeleteButton);
+            var id = 'picker' + (Math.floor(Math.random() * 5000) + 1);
 
             $previewName.val(color.name);
             $previewValue.val(color.value);
             $previewDescription.val(color.description);
             $previewColor.css('background-color', color.value);
+
+            $previewColor.attr('for', id);
+            $previewColorPicker.attr('id', id);
 
             if (!editable) {
                 $deleteButton.hide();
@@ -93,29 +97,36 @@
                 }, this));
             }
 
-            $element.find(this.config.classes.previewValue).on('change', $.proxy(function(event) {
-                this.updateColorPreview($element);
+            $previewValue.add($previewColorPicker).on('change', $.proxy(function(event) {
+                var color = $(event.currentTarget).val();
+
+                this.updateColorPreview($element, color);
+                this.updateLocalJSON();
+            }, this));
+
+            $previewName.add($previewDescription).on('change', $.proxy(function(event) {
+                this.updateLocalJSON();
             }, this));
 
             this.$addButton.before($element);
         },
 
-        updateColorPreview: function($preview) {
-            var color = $preview.find(this.config.classes.previewValue).val();
-
+        updateColorPreview: function($preview, color) {
+            $preview.find(this.config.classes.previewValue).val(color);
+            $preview.find(this.config.classes.previewColorPicker).val(color);
             $preview.find(this.config.classes.previewColor).css('background-color', color);
-            this.updateLocalJSON();
         },
 
         deleteColorPreview: function($preview) {
             $preview.remove();
+            this.updateLocalJSON();
         },
 
         getNewJSON: function() {
             var currentJSON = this.manager.getJSON();
             var colors = this.$container.find(this.config.classes.preview);
 
-            currentJSON.colors = {};
+            currentJSON.colors = [];
 
             colors.each($.proxy(function(index, element) {
                 var $element = $(element);
@@ -123,10 +134,11 @@
                 var value = $element.find(this.config.classes.previewValue).val();
                 var description = $element.find(this.config.classes.previewDescription).val();
 
-                currentJSON.colors[name] = {
+                currentJSON.colors.push({
+                    name: name,
                     value: value,
                     description: description
-                };
+                });
             }, this));
 
             currentJSON.lastUpdated = new Date().getTime();

@@ -3,44 +3,34 @@
 // ---------------------------------- //
 
 @each $typo in $typography {
-    $selector: nth($typo, 1);
-    #{$selector},
-    .#{$selector} {
-        @if map-has-key(nth($typo, 2), "color") {
-            color: color(font(#{$selector}, "color"));
-        }
-        @if map-has-key(nth($typo, 2), "font-family") {
-            font-family: font(#{$selector}, "font-family");
-        }
-        @if map-has-key(nth($typo, 2), "font-size") {
-            font-size: rem(font(#{$selector}, "font-size"));
-        }
-        @if map-has-key(nth($typo, 2), "font-style") {
-            font-style: font(#{$selector}, "font-style");
-        }
-        @if map-has-key(nth($typo, 2), "font-weight") {
-            font-weight: font(#{$selector}, "font-weight");
-        }
-        @if map-has-key(nth($typo, 2), "line-height") {
-            line-height: rem(font(#{$selector}, "line-height"));
-        }
-        @if map-has-key(nth($typo, 2), "text-decoration") {
-            text-decoration: font(#{$selector}, "text-decoration");
-        }
-        @if map-has-key(nth($typo, 2), "text-transform") {
-            text-transform: font(#{$selector}, "text-transform");
-        }
-        @if map-has-key(nth($typo, 2), "margin-top") {
-            margin-top: font(#{$selector}, "margin-top");
-        }
-        @if map-has-key(nth($typo, 2), "margin-right") {
-            margin-right: font(#{$selector}, "margin-right");
-        }
-        @if map-has-key(nth($typo, 2), "margin-bottom") {
-            margin-bottom: font(#{$selector}, "margin-bottom");
-        }
-        @if map-has-key(nth($typo, 2), "margin-left") {
-            margin-left: font(#{$selector}, "margin-left");
+    $selector: map-get($typo, "selector");
+    $type: map-get($typo, "type");
+    $properties: map-get($typo, "properties");
+
+    @if $type == "id" { $selector: "#" + $selector; }
+    @if $type == "class" { $selector: "." + $selector; }
+    @if $type == "element" { $selector: $selector + ", ." + $selector; }
+
+    #{$selector} {
+        @each $current in $properties {
+            $property: nth($current, 1);
+            $value: nth($current, 2);
+            $remProperties: (
+                "font-size",
+                "line-height",
+                "margin-top",
+                "margin-right",
+                "margin-bottom",
+                "margin-left",
+            );
+
+            @if index($remProperties, $property) != null {
+                #{$property}: rem($value);
+             } @else if $property == "color" {
+                #{$property}: color($value);
+             } @else {
+                #{$property}: $value;
+             }
         }
     }
 }

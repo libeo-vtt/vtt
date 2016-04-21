@@ -5,18 +5,22 @@
     var MODULE_NAME_UPPERCASE = function(element, options) {
         this.MODULE_NAME_LOWERCASE = $(element);
 
-        this.config = $.extend({
-            customGlobalClasses: {}
-        }, options || {});
+        // Default module configuration
+        this.defaults = {
+            classes: {
+                class1: 'class1',
+                class2: 'class2',
+                states: {
+                    active: 'is-active'
+                }
+            }
+        };
 
-        this.classes = $.extend({
-            active: 'is-active',
-            open: 'is-open',
-            hover: 'is-hover',
-            clicked: 'is-clicked',
-            extern: 'is-external',
-            error: 'is-error'
-        }, (window.classes !== undefined ? window.classes : this.config.customGlobalClasses) || {});
+        // Merge default classes with window.project.classes
+        this.classes = $.extend(true, this.defaults.classes, window.project.classes || {});
+
+        // Merge default config with custom config
+        this.config = $.extend(true, this.defaults, options || {});
 
         this.init();
     };

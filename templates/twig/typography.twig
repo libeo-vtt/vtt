@@ -22,29 +22,11 @@
                 </div>
                 <div class="template-typography-input-wrapper is-half">
                     <label class="template-typography-label" for="template-typography-edit-font-weight">Font-weight</label>
-                    <select data-edit="font-weight" class="template-typography-input template-typography-edit-font-weight" id="template-typography-edit-font-weight">
-                        <option value="normal">Normal</option>
-                        <option value="bold">Bold</option>
-                        <option value="bolder">Bolder</option>
-                        <option value="lighter">Lighter</option>
-                        <option value="100">100</option>
-                        <option value="200">200</option>
-                        <option value="300">300</option>
-                        <option value="400">400</option>
-                        <option value="500">500</option>
-                        <option value="600">600</option>
-                        <option value="700">700</option>
-                        <option value="800">800</option>
-                        <option value="900">900</option>
-                    </select>
+                    <select data-edit="font-weight" class="template-typography-input template-typography-edit-font-weight" id="template-typography-edit-font-weight"></select>
                 </div>
                 <div class="template-typography-input-wrapper is-half">
                     <label class="template-typography-label" for="template-typography-edit-font-style">Font-style</label>
-                    <select data-edit="font-style" class="template-typography-input template-typography-edit-font-style" id="template-typography-edit-font-style">
-                        <option value="normal">Normal</option>
-                        <option value="italic">Italic</option>
-                        <option value="oblique">Oblique</option>
-                    </select>
+                    <select data-edit="font-style" class="template-typography-input template-typography-edit-font-style" id="template-typography-edit-font-style"></select>
                 </div>
                 <div class="template-typography-input-wrapper is-half">
                     <label class="template-typography-label" for="template-typography-edit-text-decoration">Text-decoration</label>
@@ -81,12 +63,12 @@
                     <input type="text" data-edit="margin-top" class="template-typography-input template-typography-edit-margin-top" id="template-typography-edit-margin-top" value="0">
                 </div>
                 <div class="template-typography-input-wrapper is-quarter">
-                    <label class="template-typography-label" for="template-typography-edit-margin-bottom">Margin-bottom</label>
-                    <input type="text" data-edit="margin-bottom" class="template-typography-input template-typography-edit-margin-bottom" id="template-typography-edit-margin-bottom" value="0">
-                </div>
-                <div class="template-typography-input-wrapper is-quarter">
                     <label class="template-typography-label" for="template-typography-edit-margin-right">Margin-right</label>
                     <input type="text" data-edit="margin-right" class="template-typography-input template-typography-edit-margin-right" id="template-typography-edit-margin-right" value="0">
+                </div>
+                <div class="template-typography-input-wrapper is-quarter">
+                    <label class="template-typography-label" for="template-typography-edit-margin-bottom">Margin-bottom</label>
+                    <input type="text" data-edit="margin-bottom" class="template-typography-input template-typography-edit-margin-bottom" id="template-typography-edit-margin-bottom" value="0">
                 </div>
                 <div class="template-typography-input-wrapper is-quarter">
                     <label class="template-typography-label" for="template-typography-edit-margin-left">Margin-left</label>
@@ -95,23 +77,22 @@
             </div>
             <div class="json-preview-wrapper">
                 <div class="json-preview-buttons">
-                    <button class="json-preview-generate" onclick="generateTypographyJSON()">Générer</button>
-                    <button class="json-preview-import" onclick="importTypographyJSON()">Importer</button>
+                    <button class="json-preview-generate">Générer</button>
+                    <button class="json-preview-import">Importer</button>
                 </div>
-                <button class="json-preview-reset" onclick="resetTypographyJSON()">{% include '../svg/reset.svg' %}</button>
-                <button class="json-preview-download" onclick="downloadTypographyJSON()">{% include '../svg/download.svg' %}</button>
+                <button class="json-preview-reset">{% include '../svg/reset.svg' %}</button>
+                <button class="json-preview-download">{% include '../svg/download.svg' %}</button>
                 <textarea class="json-preview"></textarea>
             </div>
         </div>
         <div class="template-typography-preview">
             <h1>{% lorem "10" %}</h1>
-            <h2>{% lorem "20" %}</h2>
             <p class="intro">{% lorem "50" %}</p>
             <h2>{% lorem "20" %}</h2>
             <p>{% lorem "10" %} {% lorem "10" %} {% lorem "50" %} {% lorem "10" %} <a href="##">{% lorem "3" %}</a> {% lorem "30" %} <strong>{% lorem "2" %}</strong> {% lorem "30" %} {% lorem "10" %} <em>{% lorem "1" %}</em> {% lorem "10" %}</p>
             <h3>{% lorem "20" %}</h3>
             <p>{% lorem "50" %}</p>
-            <p>{% lorem "150" %}</p>
+            <blockquote><p class="blockquote">{% lorem "150" %}</p></blockquote>
             <p>{% lorem "50" %}</p>
             <p>{% lorem "20" %}</p>
             <ul>
@@ -159,8 +140,7 @@
 
     <script>
     document.addEventListener("DOMContentLoaded", function(event) {
-        getTypography();
-        stickOnScroll();
+        $(document).templatesTypography();
     });
     </script>
 
