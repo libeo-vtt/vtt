@@ -36,9 +36,6 @@ img,
 svg,
 iframe {
     max-width: 100%;
-    html:not(.ie) & {
-        height: auto;
-    }
 }
 
 // Remove the gap between elements and the bottom of their containers

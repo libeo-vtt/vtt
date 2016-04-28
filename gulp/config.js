@@ -3,7 +3,7 @@ module.exports = {
     src: './src/',
     templates: './templates/',
     minify: true,
-    imagemin: true,
+    imagemin: false,
     sourcemaps: true,
     svgFallback: false,
     prettify: {

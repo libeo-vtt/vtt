@@ -1,5 +1,6 @@
 var gulp = require('gulp');
 var gulpif = require('gulp-if');
+var argv = require('yargs').argv;
 var imagemin = require('gulp-imagemin');
 var config = require('../config.js');
 
@@ -21,7 +22,7 @@ gulp.task('copy:js:templates', function() {
 
 gulp.task('copy:img', function() {
     return gulp.src(config.src + 'img/**/*')
-        .pipe(gulpif(config.imagemin, imagemin()))
+        .pipe(gulpif(config.imagemin || argv.prod, imagemin()))
         .pipe(gulp.dest(config.build + 'img'));
 });
 

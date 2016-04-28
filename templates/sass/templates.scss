@@ -14,7 +14,7 @@ body {
 
 .l-template-header {
     padding: 10px 0;
-    background-color: #000;
+    background-color: #1a1a1a;
     p {
         font-family: "Roboto";
         color: #fff;
@@ -58,8 +58,8 @@ body {
             text-align: center;
             text-decoration: none;
             text-transform: uppercase;
-            color: #000;
-            fill: #000;
+            color: #1a1a1a;
+            fill: #1a1a1a;
             &:hover {
                 color: #8c2c74;
                 fill: #8c2c74;
@@ -89,7 +89,7 @@ body {
     font-weight: bold;
     line-height: 1.4;
     text-transform: none;
-    color: #000;
+    color: #1a1a1a;
     border-bottom: 1px solid #efefef;
 }
 
@@ -99,7 +99,7 @@ body {
     font-weight: bold;
     line-height: 1.4;
     text-transform: none;
-    color: #000;
+    color: #1a1a1a;
 }
 
 .template-table {
@@ -149,9 +149,9 @@ hr {
     .json-preview-generate {
         border-top-left-radius: 3px;
         border-bottom-left-radius: 3px;
-        background-color: #000;
+        background-color: #1a1a1a;
         &:hover {
-            background-color: lighten(#000, 15%);
+            background-color: lighten(#1a1a1a, 15%);
         }
     }
     .json-preview-import {
@@ -175,9 +175,9 @@ hr {
     fill: #fff;
     border: 0;
     border-radius: 3px;
-    background-color: #000;
+    background-color: #1a1a1a;
     &:hover {
-        background-color: lighten(#000, 15%);
+        background-color: lighten(#1a1a1a, 15%);
     }
     svg {
         position: absolute;
@@ -202,9 +202,9 @@ hr {
     fill: #fff;
     border: 0;
     border-radius: 3px;
-    background-color: #000;
+    background-color: #1a1a1a;
     &:hover {
-        background-color: lighten(#000, 15%);
+        background-color: lighten(#1a1a1a, 15%);
     }
     svg {
         position: absolute;
@@ -267,7 +267,7 @@ hr {
         font-family: "Roboto";
         font-weight: bold;
         line-height: 36px;
-        color: #000;
+        color: #1a1a1a;
         border: 0;
         border-radius: 0;
         & + .template-color-input {
@@ -612,7 +612,7 @@ hr {
     margin: 10px 0 0;
     font-size: 24px;
     line-height: 28px;
-    color: #000;
+    color: #1a1a1a;
     p {
         position: relative;
         margin: 0 0 0 60px;
@@ -784,7 +784,7 @@ hr {
         font-weight: bold;
         border-radius: 3px;
         text-align: center;
-        color: #000;
+        color: #1a1a1a;
         background: #d9d9d9;
         span {
             z-index: 1;
@@ -795,7 +795,7 @@ hr {
         display: none;
         &:checked + label {
             color: #fff;
-            background-color: #000;
+            background-color: #1a1a1a;
         }
     }
 }
@@ -832,7 +832,7 @@ hr {
     font-weight: bold;
     //margin-top: 20px;
     border: 0;
-    border-bottom: 1px solid #000;
+    border-bottom: 1px solid #1a1a1a;
     border-radius: 0;
     background-color: transparent;
     background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAwAAAAHCAQAAACWu2SvAAAAWElEQVQIHQXBsQqCYBQG0EMXh/5A3x+KWgpxqlWHotC9XujrHH5GHQDojL48xKQAlEncaRZxVaDcxGwPzUuc7ZSLeGoABx9xdBJvDQB6m4hNDwAwWK0GgD/0cxuCzlH1gQAAAABJRU5ErkJggg==);
