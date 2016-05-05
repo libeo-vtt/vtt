@@ -92,6 +92,11 @@ nav ul {
     @include reset-list-style;
 }
 
+// Remove default underline for links inside navigation
+nav a {
+    text-decoration: none;
+}
+
 // Text selection
 ::selection,
 ::-moz-selection {

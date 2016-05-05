@@ -1,0 +1,16 @@
+{% extends "../layouts/single-column.twig" %}
+
+{% set title = "" %}
+{% set class = "" %}
+
+{% block content %}
+
+    <hr class="is-hidden">
+    <h1 class="is-hidden">{{ get_project_displayedName() }}</h1>
+
+    {% svg "logo", "300x100" %}
+
+    <p>{% lorem "100" %}</p>
+    <p>{% lorem "200" %}</p>
+
+{% endblock %}

@@ -16,10 +16,7 @@
                 fontStylesDropdown: '.template-typography-edit-font-style',
                 colorsDropdown: '.template-typography-edit-color',
                 typographyInput: '.template-typography-input',
-                previewWrapper: '.template-typography-preview',
-                states: {
-                    editing: 'is-editing'
-                }
+                previewWrapper: '.template-typography-preview'
             }
         };
 
@@ -100,6 +97,8 @@
 
             this.loadSelectorsDropdown(data.typography);
             this.updateFontDropdowns(data.fonts);
+
+            this.manager.finishLoading();
         },
 
         bindEvents: function() {
@@ -198,7 +197,7 @@
                 .removeClass('is-active')
                 .filter('[data-selector="' + selector + '"]')
                 .addClass('is-active');
-            $('.' + this.classes.states.editing).removeClass(this.classes.states.editing);
+            $('.l-block-content .' + this.classes.states.editing).removeClass(this.classes.states.editing);
 
             if (type === 'element') {
                 // Only return elements with no classes or ID

@@ -1,6 +1,7 @@
 var gulp = require('gulp');
 var _ = require('lodash');
 var concat = require('gulp-concat');
+
 var config = require('../config.js');
 
 var helpers = require('../../' + config.src + 'js/helpers.js');

@@ -10,30 +10,34 @@
 {% block content %}
 
     <h1 class="template-title">Couleurs</h1>
-    <div class="template-colors-wrapper">
-        <button class="btn-add-color"><span>Ajouter<br>une couleur</span></button>
-    </div>
 
-    <div class="template-color is-template">
-        <label class="template-color-preview" for="colorpicker"></label>
-        <input type="color" pattern="#[a-f0-9]{6}" id="colorpicker" class="template-color-picker">
-        <div class="template-color-bottom">
-            <input type="text" class="template-color-input template-color-name">
-            <input type="text" class="template-color-input template-color-value">
-            <input type="text" class="template-color-input template-color-description">
-            <button class="btn-remove-color">{% include '../svg/delete.svg' %}</button>
+    <div class="loading-wrapper">
+        <div class="template-colors-wrapper">
+            <button class="btn-add-color editing-element"><span>Ajouter<br>une couleur</span></button>
+        </div>
+
+        <div class="template-color is-template">
+            <label class="template-color-preview" for="colorpicker"></label>
+            <input type="color" pattern="#[a-f0-9]{6}" id="colorpicker" class="template-color-picker editing-element">
+            <div class="template-color-bottom editing-element">
+                <input type="text" class="template-color-input template-color-name">
+                <input type="text" class="template-color-input template-color-value">
+                <input type="text" class="template-color-input template-color-description">
+                <button class="btn-remove-color">{% include '../svg/delete.svg' %}</button>
+            </div>
+        </div>
+
+        <div class="json-preview-wrapper editing-element">
+            <div class="json-preview-buttons">
+                <button class="json-preview-generate">Générer</button>
+                <button class="json-preview-import">Importer</button>
+            </div>
+            <button class="json-preview-reset">{% include '../svg/reset.svg' %}</button>
+            <button class="json-preview-download">{% include '../svg/download.svg' %}</button>
+            <textarea class="json-preview"></textarea>
         </div>
     </div>
-
-    <div class="json-preview-wrapper">
-        <div class="json-preview-buttons">
-            <button class="json-preview-generate">Générer</button>
-            <button class="json-preview-import">Importer</button>
-        </div>
-        <button class="json-preview-reset">{% include '../svg/reset.svg' %}</button>
-        <button class="json-preview-download">{% include '../svg/download.svg' %}</button>
-        <textarea class="json-preview"></textarea>
-    </div>
+    <div class="loading-animation"></div>
 
     <script>
     document.addEventListener('DOMContentLoaded', function(event) {

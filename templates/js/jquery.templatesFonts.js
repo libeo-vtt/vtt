@@ -85,6 +85,10 @@
 
                 this.createFontPreview(font, false);
             }
+
+            window.setTimeout($.proxy(function() {
+                this.manager.finishLoading();
+            }, this), 100);
         },
 
         loadGoogleFontsAPI: function() {

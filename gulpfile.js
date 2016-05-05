@@ -7,9 +7,5 @@ requireDir('./gulp/tasks', { recurse: true });
 
 gulp.task('build', ['bower', 'sass', 'copy', 'concat:helpers', 'concat:templates', 'svg2png', 'svgSprite', 'twig']);
 gulp.task('default', function() {
-    if (argv.prod) {
-        runSequence('clean', 'build');
-    } else {
-        runSequence('clean', 'build', 'symlink', 'watch');
-    }
+    runSequence('clean', 'build', 'symlink', 'watch');
 });

@@ -6,6 +6,9 @@
 
 body {
     background-color: #fff;
+    &:not(.is-editing) .editing-element {
+        display: none !important;
+    }
 }
 
 [data-state="keyboard"] :focus {
@@ -15,8 +18,9 @@ body {
 .l-template-header {
     padding: 10px 0;
     background-color: #1a1a1a;
-    p {
+    a {
         font-family: "Roboto";
+        text-decoration: none;
         color: #fff;
     }
 }
@@ -111,11 +115,32 @@ body {
     }
 }
 
+.template-list {
+    margin: 0;
+    padding: 0;
+    li {
+        margin: 0.3em 0;
+        padding: 0;
+        list-style-position: inside;
+    }
+}
+
 hr {
     margin: 15px 3px;
     border-color: #efefef;
     border-right: 0;
     border-left: 0;
+}
+
+.loading-wrapper {
+    opacity: 0;
+    transition: all 100ms;
+    &.is-loaded {
+        opacity: 1;
+        + .loading-animation {
+            opacity: 0;
+        }
+    }
 }
 
 .json-preview-wrapper {
@@ -368,6 +393,35 @@ hr {
 //             Icons             //
 // ----------------------------- //
 
+.icons-wrapper {
+    font-size: 0;
+}
+
+.icon {
+    display: inline-block;
+    vertical-align: top;
+    width: 25%;
+    text-align: center;
+    padding: 20px;
+    &.is-small {
+        width: 10%;
+        img {
+            width: 32px;
+            height: 32px;
+        }
+    }
+    a {
+        display: block;
+    }
+    span {
+        display: block;
+        margin-top: 10px;
+        font-size: 12px;
+        line-height: 14px;
+        text-align: center;
+    }
+}
+
 .template-icons-wrapper {
     font-size: 0;
     .template-icon {
@@ -402,7 +456,7 @@ hr {
     &.is-fixed {
         position: fixed;
         top: 0;
-        & + .template-typography-preview {
+        body.is-editing & + .template-typography-preview {
             margin-left: 340px;
         }
     }
@@ -413,16 +467,18 @@ hr {
     vertical-align: top;
     position: relative;
     width: calc(100% - 340px);
-    padding-top: 50px;
-    padding-left: 180px;
-    &:before {
-        content: "";
-        position: absolute;
-        top: 30px;
-        left: 150px;
-        width: 1px;
-        height: 100%;
-        background-color: #efefef;
+    body.is-editing & {
+        padding-top: 50px;
+        padding-left: 180px;
+        &:before {
+            content: "";
+            position: absolute;
+            top: 30px;
+            left: 150px;
+            width: 1px;
+            height: 100%;
+            background-color: #efefef;
+        }
     }
     @each $typo in $typography {
         $selector: map-get($typo, "selector");
@@ -455,6 +511,9 @@ hr {
             &.is-editing:before {
                 color: #8c2c74;
                 background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAUAAAAFCAYAAACNbyblAAAABGdBTUEAALGPC/xhBQAAACBjSFJNAAB6JgAAgIQAAPoAAACA6AAAdTAAAOpgAAA6mAAAF3CculE8AAAABmJLR0QAAAAAAAD5Q7t/AAAACXBIWXMAAAsSAAALEgHS3X78AAAARUlEQVQI113IsQ1AUBRA0ePFHCYwAGr2kDCCMf4IFPZQYyG9gobT3ORmqZwKzKhxYMyxoPXosAYqX03g/M09MGDD9ba/ASAICk37mQGNAAAAAElFTkSuQmCC');
+            }
+            body:not(.is-editing) &:before {
+                display: none !important;
             }
         }
     }

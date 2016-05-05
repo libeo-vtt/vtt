@@ -1,6 +1,7 @@
 var gulp = require('gulp');
 var exec = require('child_process').exec;
 var mainBowerFiles = require('main-bower-files');
+
 var config = require('../config.js');
 
 gulp.task('bower', ['bower:install'], function() {

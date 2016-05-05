@@ -7,6 +7,7 @@ var inquirer = require('inquirer');
 var glob = require('glob');
 var package = require('./package.json');
 var bower = require('./bower.json');
+var project = {};
 
 program
     .version(package.version)
@@ -15,7 +16,13 @@ program
 // Initialisation prompt questions
 var questions = [{
     name: 'name',
-    message: 'Project name:',
+    message: 'Project unique name:',
+    validate: function(input) {
+        return input !== '' ? true : 'You must enter a valid name.';
+    }
+}, {
+    name: 'displayedName',
+    message: 'Project displayed name:',
     validate: function(input) {
         return input !== '' ? true : 'You must enter a valid name.';
     }
@@ -79,6 +86,11 @@ var questions = [{
     message: 'Accessible?',
     default: true
 }, {
+    name: 'retina',
+    type: 'confirm',
+    message: 'Retina?',
+    default: true
+}, {
     name: 'templates',
     type: 'confirm',
     message: 'Include VTT templates?',
@@ -102,6 +114,17 @@ inquirer.prompt(questions, function(answers) {
     bower.description = answers.description;
     bower.homepage = answers.url;
 
+    // Update project.json values
+    project.name = answers.name;
+    project.displayedName = answers.displayedName;
+    project.description = answers.description;
+    project.repository = answers.repository;
+    project.templates = answers.templates;
+    project.browsers = answers.browsers;
+    project.responsive = answers.responsive;
+    project.accessible = answers.accessible;
+    project.retina = answers.retina;
+
     // Save new package.json values
     fs.writeFile('./package.json', JSON.stringify(package, null, 2), function(error) {
         if (error) return console.log(error);
@@ -109,6 +132,11 @@ inquirer.prompt(questions, function(answers) {
 
     // Save new project values
     fs.writeFile('./bower.json', JSON.stringify(bower, null, 2), function(error) {
+        if (error) return console.log(error);
+    });
+
+    // Save new project values
+    fs.writeFile('./project.json', JSON.stringify(project, null, 2), function(error) {
         if (error) return console.log(error);
     });
 

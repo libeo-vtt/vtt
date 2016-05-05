@@ -2,6 +2,7 @@ var gulp = require('gulp');
 var gulpif = require('gulp-if');
 var argv = require('yargs').argv;
 var imagemin = require('gulp-imagemin');
+
 var config = require('../config.js');
 
 gulp.task('copy:js', function() {

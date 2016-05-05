@@ -1,8 +1,9 @@
 var gulp = require('gulp');
 var browserSync = require('browser-sync');
 var runSequence = require('run-sequence');
-var config = require('../config.js');
 var watch = require('gulp-watch');
+
+var config = require('../config.js');
 
 gulp.task('watch:js', ['bower', 'concat:helpers', 'copy:js']);
 gulp.task('watch:img', ['copy:img']);

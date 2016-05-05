@@ -6,50 +6,64 @@
 
 {% block content %}
 
+    {% set project = get_project_informations() %}
+
     <div class="grid">
         <div class="grid-wrapper">
             <section class="col-1-2 col-1-1-mobile">
                 <header>
-                    <h1 class="template-title">{{ get_project_name() }}</h1>
-                    <p class="template-description">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Omnis eaque quam reiciendis facere praesentium similique perspiciatis magni fugiat quia, molestiae ducimus illum ipsam ea officiis a suscipit debitis. Ipsam vero quo repellendus blanditiis, ipsa sint sapiente repellat aliquid iste aliquam dolorum esse et qui aspernatur nobis itaque animi, quia architecto!</p>
+                    <h1 class="template-title">{{ project.displayedName }}</h1>
+                    <p class="template-description">{{ project.description }}</p>
                 </header>
-                <h2 class="template-title">Notes</h2>
-                <ol class="template-list">
-                    <li>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Neque modi repellat similique autem, sint velit. Accusantium quasi natus hic tenetur. Tempore iusto sequi consequuntur repellendus ratione, hic autem, reiciendis repudiandae nam obcaecati voluptatem quos, vel!</li>
-                    <li>In dolorem nisi ratione temporibus adipisci id nihil alias doloremque dolorum vero ad commodi explicabo iste nesciunt magnam, tempore, quibusdam illum, eaque maxime blanditiis. Repellendus assumenda nostrum tenetur soluta perferendis suscipit fugiat, quaerat impedit animi.</li>
-                </ol>
+                <h2 class="template-title">Gabarits</h2>
+                <ul class="template-list">
+                    {% for page in get_static_pages() %}
+                        <li><a href="/{{ page }}">{{ page }}</a></li>
+                    {% endfor %}
+                </ul>
             </section>
 
             <section class="col-1-2 col-1-1-mobile">
-                <h2 class="template-title">Caractéristiques</h2>
+                <h2 class="template-title">Informations</h2>
                 <div class="table template-table">
+                    <div class="tr">
+                        <div class="td">Nom du projet</div>
+                        <div class="td">{{ get_project_name() }}</div>
+                    </div>
                     <div class="tr">
                         <div class="td">Version</div>
                         <div class="td">{{ get_project_version() }}</div>
                     </div>
                     <div class="tr">
+                        <div class="td">Git</div>
+                        <div class="td">
+                            <a href="{{ get_project_repository() }}" target="_blank">{{ get_project_repository() }}</a>
+                        </div>
+                    </div>
+                    <div class="tr">
                         <div class="td">Responsive</div>
-                        <div class="td">Oui</div>
+                        <div class="td">{{ get_project_responsive() }}</div>
+                    </div>
+                    <div class="tr">
+                        <div class="td">Accessible</div>
+                        <div class="td">{{ get_project_accessible() }}</div>
                     </div>
                     <div class="tr">
                         <div class="td">Retina</div>
-                        <div class="td">Oui</div>
+                        <div class="td">{{ get_project_retina() }}</div>
                     </div>
                     <div class="tr">
-                        <div class="td">Version IE</div>
-                        <div class="td">9+</div>
+                        <div class="td">Navigateurs</div>
+                        <div class="td">
+                            <ul class="template-list">
+                                {% set browsers = get_project_browsers() %}
+                                {% for browser in browsers %}
+                                    <li>{{browser}}</li>
+                                {% endfor %}
+                            </ul>
+                        </div>
                     </div>
                 </div>
-
-                <h2 class="template-title">Références</h2>
-                <ul>
-                    <li>
-                        <a href="https://gitlab.libeo.com/vtt/starter-kit">Gitlab</a>
-                    </li>
-                    <li>
-                        <a href="https://projets.libeo.com/projects/vtt">Redmine</a>
-                    </li>
-                </ul>
             </section>
         </div>
     </div>

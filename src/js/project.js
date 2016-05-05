@@ -15,6 +15,8 @@ window.project.classes = {
         active: 'is-active',
         open: 'is-open',
         hover: 'is-hover',
+        loaded: 'is-loaded',
+        editing: 'is-editing',
         clicked: 'is-clicked',
         extern: 'is-external',
         error: 'is-error',

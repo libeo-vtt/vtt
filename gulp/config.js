@@ -2,10 +2,11 @@ module.exports = {
     build: './build/',
     src: './src/',
     templates: './templates/',
-    minify: true,
+    minify: false,
     imagemin: false,
     sourcemaps: true,
     svgFallback: false,
+    showDebugStaticNav: true,
     prettify: {
         indent_inner_html: false,
         indent_size: 4,

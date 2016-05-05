@@ -11,7 +11,8 @@ var jsonImporter = require('node-sass-json-importer');
 var customFunctions = require('../helpers/sass.customFunctions.js');
 
 var config = require('../config.js');
-var sass_config = {
+
+var sassConfig = {
     indentWidth: 4,
     importer: jsonImporter,
     outputStyle: config.minify || argv.prod ? 'compressed' : 'expanded',
@@ -37,7 +38,7 @@ gulp.task('sass', (argv.prod ? [] : ['sass:templates']), function() {
             }
         }))
         .pipe(gulpif(config.sourcemaps && !argv.prod, sourcemaps.init()))
-        .pipe(sass(sass_config))
+        .pipe(sass(sassConfig))
         .pipe(gulpif(config.sourcemaps && !argv.prod, sourcemaps.write('./')))
         .pipe(gulp.dest(config.build + 'css/'));
 });
@@ -52,7 +53,7 @@ gulp.task('sass:templates', function() {
             }
         }))
         .pipe(gulpif(config.sourcemaps && !argv.prod, sourcemaps.init()))
-        .pipe(sass(sass_config))
+        .pipe(sass(sassConfig))
         .pipe(gulpif(config.sourcemaps && !argv.prod, sourcemaps.write('./')))
         .pipe(gulp.dest(config.build + 'templates/css/'));
 });

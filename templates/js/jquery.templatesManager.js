@@ -3,6 +3,7 @@ var TemplatesManager = function() {
         jsonFile: '/src/sass/styles.json'
     }
 
+    this.$loadingWrapper = $('.loading-wrapper');
     this.$generateButton = $('.json-preview-generate');
     this.$importButton = $('.json-preview-import');
     this.$resetButton = $('.json-preview-reset');
@@ -10,13 +11,36 @@ var TemplatesManager = function() {
     this.$jsonPreview = $('.json-preview');
 
     this.bindEvents();
+    this.manageEditMode();
 };
 
 $.extend(TemplatesManager.prototype, {
 
-    // Component initialization
+    manageEditMode: function() {
+        var editParameter = this.getUrlParameter('edit');
+        var editLocalStorage = localStorage.getItem('editMode');
+        if (editParameter === 'false') {
+            this.disableEditMode();
+        } else if (editParameter === 'true' || editLocalStorage === 'true') {
+            this.enableEditMode();
+        }
+    },
+
+    enableEditMode: function() {
+        localStorage.setItem('editMode', 'true');
+        $('body').addClass(window.project.classes.states.editing);
+    },
+
+    disableEditMode: function() {
+        localStorage.removeItem('editMode');
+    },
+
     bindEvents: function() {
         this.$resetButton.on('click', this.resetLocalJSON);
+    },
+
+    finishLoading: function() {
+        this.$loadingWrapper.addClass(window.project.classes.states.loaded);
     },
 
     getJSON: function(callback) {
@@ -93,6 +117,20 @@ $.extend(TemplatesManager.prototype, {
             link.click();
             document.body.removeChild(link);
         }, 100);
+    },
+
+    getUrlParameter: function(parameter) {
+        var pageURL = decodeURIComponent(window.location.search.substring(1)),
+            parameters = pageURL.split('&'),
+            parameterName;
+
+        for (var i = 0; i < parameters.length; i++) {
+            parameterName = parameters[i].split('=');
+
+            if (parameterName[0] === parameter) {
+                return parameterName[1] === undefined ? true : parameterName[1];
+            }
+        }
     }
 
 });

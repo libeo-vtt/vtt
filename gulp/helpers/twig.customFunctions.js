@@ -1,18 +1,33 @@
-var project = require('../../package.json');
+var package = require('../../package.json');
+var project = require('../../project.json');
 var styles = require('../../src/sass/styles.json');
+var glob = require('glob');
+var argv = require('yargs').argv;
 var config = require('../config.js');
 
 var customFunctions = [];
 
 /**
- * get_project_name
+ * get_config
  * Return:
- *     Project name from package.json
+ *     Project informations from project.json
  */
 customFunctions.push({
-    name: 'get_project_name',
+    name: 'get_config',
     func: function(args) {
-        return project.name;
+        return config;
+    }
+});
+
+/**
+ * get_project_informations
+ * Return:
+ *     Project informations from project.json
+ */
+customFunctions.push({
+    name: 'get_project_informations',
+    func: function(args) {
+        return project;
     }
 });
 
@@ -24,14 +39,38 @@ customFunctions.push({
 customFunctions.push({
     name: 'get_project_version',
     func: function(args) {
-        return project.version;
+        return package.version;
+    }
+});
+
+/**
+ * get_project_name
+ * Return:
+ *     Project name from project.json
+ */
+customFunctions.push({
+    name: 'get_project_name',
+    func: function(args) {
+        return project.name;
+    }
+});
+
+/**
+ * get_project_displayedName
+ * Return:
+ *     Project displayedName from project.json
+ */
+customFunctions.push({
+    name: 'get_project_displayedName',
+    func: function(args) {
+        return project.displayedName;
     }
 });
 
 /**
  * get_project_description
  * Return:
- *     Project description from package.json
+ *     Project description from project.json
  */
 customFunctions.push({
     name: 'get_project_description',
@@ -43,7 +82,7 @@ customFunctions.push({
 /**
  * get_project_keywords
  * Return:
- *     Project keywords from package.json
+ *     Project keywords from project.json
  */
 customFunctions.push({
     name: 'get_project_keywords',
@@ -55,7 +94,7 @@ customFunctions.push({
 /**
  * get_project_url
  * Return:
- *     Project url from package.json
+ *     Project url from project.json
  */
 customFunctions.push({
     name: 'get_project_url',
@@ -67,12 +106,60 @@ customFunctions.push({
 /**
  * get_project_repository
  * Return:
- *     Project repository from package.json
+ *     Project repository from project.json
  */
 customFunctions.push({
     name: 'get_project_repository',
     func: function(args) {
         return project.repository;
+    }
+});
+
+/**
+ * get_project_browsers
+ * Return:
+ *     Project browsers from project.json
+ */
+customFunctions.push({
+    name: 'get_project_browsers',
+    func: function(args) {
+        return project.browsers;
+    }
+});
+
+/**
+ * get_project_responsive
+ * Return:
+ *     Project responsive from project.json
+ */
+customFunctions.push({
+    name: 'get_project_responsive',
+    func: function(args) {
+        return (project.responsive ? 'Oui' : 'Non');
+    }
+});
+
+/**
+ * get_project_accessible
+ * Return:
+ *     Project accessible from project.json
+ */
+customFunctions.push({
+    name: 'get_project_accessible',
+    func: function(args) {
+        return (project.accessible ? 'Oui' : 'Non');
+    }
+});
+
+/**
+ * get_project_retina
+ * Return:
+ *     Project retina from project.json
+ */
+customFunctions.push({
+    name: 'get_project_retina',
+    func: function(args) {
+        return (project.retina ? 'Oui' : 'Non');
     }
 });
 
@@ -85,6 +172,42 @@ customFunctions.push({
     name: 'get_styles_json',
     func: function(args) {
         return styles;
+    }
+});
+
+/**
+ * get_styles_json
+ * Return:
+ *     JSON from styles.json
+ */
+customFunctions.push({
+    name: 'get_styles_json',
+    func: function(args) {
+        return styles;
+    }
+});
+
+/**
+ * ceil
+ * Return:
+ *     Math.ceil(value)
+ */
+customFunctions.push({
+    name: 'ceil',
+    func: function(args) {
+        return Math.ceil(args);
+    }
+});
+
+/**
+ * floor
+ * Return:
+ *     Math.floor(value)
+ */
+customFunctions.push({
+    name: 'floor',
+    func: function(args) {
+        return Math.floor(args);
     }
 });
 
@@ -127,26 +250,73 @@ customFunctions.push({
 });
 
 /**
- * ceil
+ * get_svg_collection
  * Return:
- *     Math.ceil(value)
+ *     Array of SVG files
  */
 customFunctions.push({
-    name: 'ceil',
-    func: function(args) {
-        return Math.ceil(args);
+    name: 'get_svg_collection',
+    func: function(collectionName) {
+        var files = [];
+        var baseDirectory = config.src + 'svg/';
+        if (collectionName === 'all') {
+            var filesPath = baseDirectory + '**/*.svg';
+        } else if (collectionName === 'generic' || collectionName === 'global') {
+            var filesPath = baseDirectory + '*.svg';
+        } else {
+            var filesPath = baseDirectory + collectionName + '**/*.svg';
+        }
+        glob.sync(filesPath).forEach(function(file) {
+            var fileObject = {};
+            fileObject.url = file.replace(baseDirectory, '');
+            fileObject.name = fileObject.url.replace(collectionName + '/', '');
+            files.push(fileObject);
+        });
+        return files;
     }
 });
 
 /**
- * floor
+ * get_static_pages
  * Return:
- *     Math.floor(value)
+ *     HTML list with static pages links
  */
 customFunctions.push({
-    name: 'floor',
+    name: 'get_static_pages',
     func: function(args) {
-        return Math.floor(args);
+        var files = [];
+        var baseDirectory = config.src + 'twig/views/';
+        var filesPath = baseDirectory + '**/*.twig';
+        glob.sync(filesPath).forEach(function(file) {
+            var fileName = file.replace(baseDirectory, '').replace('.twig', '.html');
+            files.push(fileName);
+        });
+        return files;
+    }
+});
+
+/**
+ * create_debug_static_nav
+ * Return:
+ *     HTML list with static pages links
+ */
+customFunctions.push({
+    name: 'create_debug_static_nav',
+    func: function(args) {
+        if (!argv.prod) {
+            var index = 0;
+            var output = '<nav class="debug_static_nav" style="position: fixed; bottom: 0; left: 0; width: 100%; padding: 10px 20px; background-color: rgba(0,0,0,0.75); text-align: center;"><ul>';
+            var files = glob.sync(config.src + 'twig/views/**/*.twig');
+            files.forEach(function(file) {
+                var filename = file.replace(config.src + 'twig/views/', '').replace('.twig', '');
+                output += '<li style="display: inline-block; vertical-align: middle; ' + (index > 0 ? 'margin-left: 15px;' : '') + '"><a href="/' + filename + '.html" style="color: #fff; text-transform: uppercase; font-size: 12px; text-decoration: none;">' + filename + '</a></li>';
+                index++;
+            });
+            output += '</ul></nav>';
+            return output;
+        } else {
+            return '';
+        }
     }
 });
 

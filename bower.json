@@ -1,11 +1,11 @@
 {
-  "name": "vtt-starter-kit",
+  "name": "vtt",
   "version": "1.0.0",
   "homepage": "https://github.com/libeo-vtt/vtt",
   "authors": [
     "libeo <info@libeo.com>"
   ],
-  "description": "Starter kit for VTT projects",
+  "description": "Outil d'intégration frontend soucieux du SGQRI008.",
   "private": true,
   "ignore": [
     "node_modules"

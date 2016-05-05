@@ -1,6 +1,7 @@
 var gulp = require('gulp');
 var gulpif = require('gulp-if');
 var svg2png = require('gulp-svg2png');
+
 var config = require('../config.js');
 
 gulp.task('svg2png', function() {

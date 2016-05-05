@@ -68,6 +68,8 @@
 
                 this.createColorPreview(color, false);
             }
+
+            this.manager.finishLoading();
         },
 
         createColorPreview: function(color, editable) {
