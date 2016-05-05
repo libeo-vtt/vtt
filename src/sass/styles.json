@@ -21,29 +21,13 @@
       "description": "Erreurs"
     }
   ],
-  "fonts": [
-    {
-      "name": "Roboto",
-      "type": "google",
-      "variants": [
-        "100",
-        "100italic",
-        "300",
-        "300italic",
-        "400",
-        "italic",
-        "500",
-        "500italic",
-        "700"
-      ]
-    }
-  ],
+  "fonts": [],
   "typography": [
     {
       "selector": "h1",
       "type": "element",
       "properties": {
-        "font-family": "Roboto",
+        "font-family": "sans-serif",
         "font-weight": "500",
         "font-style": "normal",
         "text-decoration": "none",
@@ -61,7 +45,7 @@
       "selector": "h2",
       "type": "element",
       "properties": {
-        "font-family": "Roboto",
+        "font-family": "sans-serif",
         "font-weight": "400",
         "font-style": "normal",
         "text-decoration": "none",
@@ -79,7 +63,7 @@
       "selector": "h3",
       "type": "element",
       "properties": {
-        "font-family": "Roboto",
+        "font-family": "sans-serif",
         "font-weight": "400",
         "font-style": "normal",
         "text-decoration": "none",
@@ -97,7 +81,7 @@
       "selector": "h4",
       "type": "element",
       "properties": {
-        "font-family": "Roboto",
+        "font-family": "sans-serif",
         "font-weight": "400",
         "font-style": "normal",
         "text-decoration": "none",
@@ -115,7 +99,7 @@
       "selector": "h5",
       "type": "element",
       "properties": {
-        "font-family": "Roboto",
+        "font-family": "sans-serif",
         "font-weight": "700",
         "font-style": "normal",
         "text-decoration": "none",
@@ -133,7 +117,7 @@
       "selector": "h6",
       "type": "element",
       "properties": {
-        "font-family": "Roboto",
+        "font-family": "sans-serif",
         "font-weight": "700",
         "font-style": "normal",
         "text-decoration": "none",
@@ -151,7 +135,7 @@
       "selector": "p",
       "type": "element",
       "properties": {
-        "font-family": "Roboto",
+        "font-family": "sans-serif",
         "font-weight": "400",
         "font-style": "normal",
         "text-decoration": "none",
@@ -169,7 +153,7 @@
       "selector": "a",
       "type": "element",
       "properties": {
-        "font-family": "Roboto",
+        "font-family": "sans-serif",
         "font-weight": "400",
         "font-style": "normal",
         "text-decoration": "underline",
@@ -187,7 +171,7 @@
       "selector": "ul",
       "type": "element",
       "properties": {
-        "font-family": "Roboto",
+        "font-family": "sans-serif",
         "font-weight": "400",
         "font-style": "normal",
         "text-decoration": "none",
@@ -205,7 +189,7 @@
       "selector": "ol",
       "type": "element",
       "properties": {
-        "font-family": "Roboto",
+        "font-family": "sans-serif",
         "font-weight": "400",
         "font-style": "normal",
         "text-decoration": "none",
@@ -223,7 +207,7 @@
       "selector": "li",
       "type": "element",
       "properties": {
-        "font-family": "Roboto",
+        "font-family": "sans-serif",
         "font-weight": "400",
         "font-style": "normal",
         "text-decoration": "none",
@@ -241,7 +225,7 @@
       "selector": "strong",
       "type": "element",
       "properties": {
-        "font-family": "Roboto",
+        "font-family": "sans-serif",
         "font-weight": "700",
         "font-style": "normal",
         "text-decoration": "none",
@@ -259,7 +243,7 @@
       "selector": "em",
       "type": "element",
       "properties": {
-        "font-family": "Roboto",
+        "font-family": "sans-serif",
         "font-weight": "400",
         "font-style": "italic",
         "text-decoration": "none",
@@ -277,7 +261,7 @@
       "selector": "intro",
       "type": "class",
       "properties": {
-        "font-family": "Roboto",
+        "font-family": "sans-serif",
         "font-weight": "300",
         "font-style": "normal",
         "text-decoration": "none",
@@ -295,7 +279,7 @@
       "selector": "blockquote",
       "type": "class",
       "properties": {
-        "font-family": "Roboto",
+        "font-family": "sans-serif",
         "font-weight": "300",
         "font-style": "italic",
         "text-decoration": "none",

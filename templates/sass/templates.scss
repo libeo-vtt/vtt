@@ -5,9 +5,17 @@
 @import "../../src/sass/styles.json";
 
 body {
+    font-family: "Roboto";
     background-color: #fff;
     &:not(.is-editing) .editing-element {
         display: none !important;
+    }
+    &.template-home {
+        p,
+        a,
+        li {
+            font-family: "Roboto";
+        }
     }
 }
 
@@ -57,6 +65,7 @@ body {
         flex-grow: 1;
         a {
             display: block;
+            font-family: "Roboto";
             font-size: 13px;
             font-weight: bold;
             text-align: center;
