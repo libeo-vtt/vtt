@@ -26,7 +26,7 @@ var questions = [{
         'Map',
         'Lightbox',
         'AccessibleUpload',
-        new inquirer.Separator(),
+        'FlowText',
         'Buttonize',
         'Focusable'
     ]
@@ -44,6 +44,7 @@ inquirer.prompt(questions, function(answers) {
         Slider: 'https://github.com/libeo-vtt/jquery-slider.git',
         Lightbox: 'https://github.com/libeo-vtt/jquery-lightbox.git',
         GoogleMap: 'https://github.com/libeo-vtt/jquery-map.git',
+        FlowText: 'https://github.com/libeo-vtt/jquery-flowtext.git',
         Buttonize: 'https://github.com/libeo-vtt/jquery-buttonize.git',
         Focusable: 'https://github.com/libeo-vtt/jquery-focusable.git'
     };
