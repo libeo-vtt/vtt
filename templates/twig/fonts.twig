@@ -36,12 +36,17 @@
         </div>
 
         <div class="template-font is-template">
-            <div class="template-font-top">
-                <span class="template-font-name"></span>
-                <span class="template-font-type"></span>
+            <div class="template-font-left">
+                <input type="radio" class="template-font-input" name="template-font-main">
             </div>
-            <div class="template-font-preview"></div>
-            <button class="btn-remove-font">{% include '../svg/delete.svg' %}</button>
+            <div class="template-font-right">
+                <div class="template-font-top">
+                    <span class="template-font-name"></span>
+                    <span class="template-font-type"></span>
+                </div>
+                <div class="template-font-preview"></div>
+                <button class="btn-remove-font">{% include '../svg/delete.svg' %}</button>
+            </div>
         </div>
 
         <div class="json-preview-wrapper editing-element">

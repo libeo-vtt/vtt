@@ -55,9 +55,10 @@ body {
     ul {
         display: flex;
         position: relative;
-        width: 1280px;
+        max-width: 1280px;
         margin: 0 auto;
         padding: 0 10px;
+        flex-wrap: wrap;
     }
     li {
         display: inline-block;
@@ -65,6 +66,7 @@ body {
         flex-grow: 1;
         a {
             display: block;
+            padding: 0 10px;
             font-family: "Roboto";
             font-size: 13px;
             font-weight: bold;
@@ -398,6 +400,180 @@ hr {
     background: none;
 }
 
+// ----------------------------------- //
+//             Breakpoints             //
+// ----------------------------------- //
+
+.template-breakpoints-wrapper {
+    position: relative;
+    margin: 60px 0;
+    font-size: 0;
+}
+
+.template-breakpoint {
+    display: inline-block;
+    vertical-align: middle;
+    position: absolute;
+    &.is-new {
+        .template-breakpoint-content {
+            background-color: rgba(#3b99fc, 0.25);
+        }
+    }
+    &.is-template {
+        display: none;
+    }
+}
+
+.template-breakpoint-name[type="text"],
+.template-breakpoint-min[type="text"],
+.template-breakpoint-max[type="text"] {
+    font-size: 16px;
+    border: none;
+    background-color: #fff;
+    border-radius: 0;
+}
+
+.template-breakpoint-content {
+    display: flex;
+    padding: 6px;
+    margin: 3px 0;
+    background-color: rgba(#e5e5e5, 0.5);
+    flex-wrap: wrap;
+    input[type="text"] {
+        width: 100%;
+        min-width: 0;
+        &.template-breakpoint-name {
+            flex-basis: 100%;
+        }
+    }
+    .template-breakpoint-input-wrapper {
+        display: flex;
+        position: relative;
+        width: auto;
+        min-width: 0;
+        flex-grow: 1;
+        flex-basis: 1%;
+        &.template-breakpoint-name {
+            flex-basis: 100%;
+        }
+    }
+    .template-breakpoint-min-activate,
+    .template-breakpoint-max-activate {
+        display: block;
+        z-index: 2;
+        position: absolute;
+        top: 50%;
+        left: 5px;
+        width: 20px;
+        height: 31px;
+        font-size: 16px;
+        transform: translateY(-50%);
+    }
+    .template-breakpoint-name {
+        font-size: 12px;
+        font-weight: bold;
+        text-transform: uppercase;
+        color: #000;
+        margin-bottom: 5px;
+        padding-left: 0;
+        background-color: transparent;
+    }
+    .template-breakpoint-max {
+        &[disabled] {
+            border-left: 0;
+        }
+    }
+    .template-breakpoint-max {
+        margin-left: 2px;
+    }
+    .template-breakpoint-min,
+    .template-breakpoint-max {
+        font-size: 12px;
+        text-indent: 20px;
+        color: #666;
+        padding-top: 10px;
+        padding-bottom: 10px;
+        &[disabled] {
+            background-color: transparent;
+        }
+    }
+}
+
+.template-breakpoints-grid {
+    position: absolute;
+    top: -30px;
+    left: 0;
+    width: 100%;
+    height: calc(100% + 60px);
+}
+
+.template-breakpoint-grid-element {
+    position: absolute;
+    top: 20px;
+    width: 1px;
+    height: calc(100% - 20px);
+    background-color: #ddd;
+    &:before {
+        content: attr(data-label);
+        position: absolute;
+        top: -20px;
+        left: 50%;
+        font-size: 12px;
+        text-align: center;
+        color: #ddd;
+        transform: translateX(-50%);
+    }
+}
+
+.btn-remove-breakpoint {
+    flex-shrink: 0;
+    flex-grow: 0;
+    border: 0;
+    background-color: #fff;
+    fill: #e60c0c;
+}
+
+.btn-add-breakpoint {
+    display: inline-block;
+    vertical-align: middle;
+    position: relative;
+    margin: 0;
+    padding: 12px 20px;
+    border: 0;
+    color: #8c2c74;
+    font-size: 14px;
+    font-weight: bold;
+    text-transform: uppercase;
+    background: #b33874;
+    background:    -moz-linear-gradient(45deg, #b33874 0%, #aa3574 9%, #8c2c74 49%, #70227b 100%);
+    background: -webkit-gradient(linear, left bottom, right top, color-stop(0%, #b33874), color-stop(9%, #aa3574), color-stop(49%, #8c2c74), color-stop(100%, #70227b));
+    background: -webkit-linear-gradient(45deg, #b33874 0%, #aa3574 9%, #8c2c74 49%, #70227b 100%);
+    background:      -o-linear-gradient(45deg, #b33874 0%, #aa3574 9%, #8c2c74 49%, #70227b 100%);
+    background:     -ms-linear-gradient(45deg, #b33874 0%, #aa3574 9%, #8c2c74 49%, #70227b 100%);
+    background:         linear-gradient(45deg, #b33874 0%, #aa3574 9%, #8c2c74 49%, #70227b 100%);
+    &:before {
+        content: "";
+        position: absolute;
+        top: 4px;
+        left: 4px;
+        width: calc(100% - 8px);
+        height: calc(100% - 8px);
+        background-color: #fff;
+    }
+    &:hover {
+        cursor: pointer;
+        color: #fff;
+        &:before {
+            background-color: transparent;
+        }
+    }
+    span {
+        position: relative;
+        z-index: 1;
+    }
+}
+
+
 // ----------------------------- //
 //             Icons             //
 // ----------------------------- //
@@ -410,8 +586,8 @@ hr {
     display: inline-block;
     vertical-align: top;
     width: 25%;
-    text-align: center;
     padding: 20px;
+    text-align: center;
     &.is-small {
         width: 10%;
         img {
@@ -450,6 +626,14 @@ hr {
 // ---------------------------------- //
 //             Typography             //
 // ---------------------------------- //
+
+.main-font-alert {
+    padding: 15px 20px;
+    text-align: center;
+    color: #fff;
+    border-radius: 3px;
+    background-color: #ca0003;
+}
 
 .template-typography-wrapper {
     font-size: 0;
@@ -510,6 +694,7 @@ hr {
                 font-style: normal;
                 text-align: right;
                 padding-right: 30px;
+                text-transform: none;
                 text-decoration: none;
                 color: #dadada;
                 pointer-events: all;
@@ -529,6 +714,28 @@ hr {
     ul:before,
     ol:before {
         margin-top: -10px;
+    }
+}
+
+.template-typography-preview-container {
+    max-width: 100%;
+    //transition: max-width 300ms 100ms;
+    &.is-mobile {
+        max-width: calc(320px);
+        &:before {
+            content: "";
+            position: absolute;
+            left: 500px;
+            width: calc(100% - 500px);
+            height: 100%;
+            background: repeating-linear-gradient(
+              45deg,
+              #fff,
+              #fff 10px,
+              #fafafa 10px,
+              #fafafa 20px
+            );
+        }
     }
 }
 
@@ -559,7 +766,8 @@ hr {
     }
 }
 
-.template-typography-input-wrapper {
+.template-typography-input-wrapper,
+.template-typography-edit-breakpoint-wrapper {
     display: inline-block;
     vertical-align: top;
     width: 100%;
@@ -585,6 +793,7 @@ hr {
 
 .template-typography-input,
 .template-typography-edit-selector,
+.template-typography-edit-breakpoint,
 .template-typography-input[type="text"] {
     display: inline-block;
     vertical-align: top;
@@ -650,12 +859,47 @@ hr {
 
 .template-font {
     position: relative;
+    overflow: hidden;
     margin: 20px 0;
-    padding: 25px 70px 25px 30px;
+    padding: 25px 70px 25px 0;
+    font-size: 0;
     background-color: #f5f5f5;
     &.is-template {
         display: none;
     }
+}
+
+.template-font-left {
+    display: inline-block;
+    vertical-align: middle;
+    position: relative;
+    width: 60px;
+}
+
+.template-font-right {
+    display: inline-block;
+    vertical-align: middle;
+    width: calc(100% - 60px);
+}
+
+.template-font-label {
+    display: block;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 100%;
+    height: 600px;
+    background-color: #f5f5f5;
+    transform: translate(-50%, -50%);
+}
+
+.template-font-input {
+    display: block;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    font-size: 1rem;
+    transform: translate(-50%, -50%);
 }
 
 .template-font-name {
@@ -717,6 +961,28 @@ hr {
     vertical-align: middle;
     position: relative;
     width: calc(50% - 5px);
+    @media (max-width: 767px) {
+        display: block;
+        width: auto;
+    }
+    & + & {
+        margin-left: 10px;
+        @media (max-width: 767px) {
+            margin-top: 10px;
+            margin-left: 0 !important;
+        }
+    }
+}
+
+.template-fonts-button-wrapper {
+    display: inline-block;
+    vertical-align: middle;
+    position: relative;
+    width: calc(50% - 5px);
+    @media (max-width: 767px) {
+        display: block;
+        width: auto;
+    }
     & + & {
         margin-left: 10px;
     }
@@ -827,7 +1093,8 @@ hr {
     display: none;
     position: relative;
     width: 100%;
-    height: 130px;
+    height: auto;
+    min-height: 130px;
     background-color: #f5f5f5;
 }
 
@@ -850,9 +1117,9 @@ hr {
         padding: 4px 10px;
         font-size: 11px;
         font-weight: bold;
-        border-radius: 3px;
         text-align: center;
         color: #1a1a1a;
+        border-radius: 3px;
         background: #d9d9d9;
         span {
             z-index: 1;

@@ -23,7 +23,7 @@ img {
 body {
     overflow-x: hidden;
     min-width: $document-width;
-    font-family: $ff-default;
+    font-family: get-main-font(), $font-fallback;
     color: $c-txt-default;
     background-color: $c-bg-document;
     @include respond-to(document-width) {

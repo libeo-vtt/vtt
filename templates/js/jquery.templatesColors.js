@@ -25,9 +25,9 @@
         // Merge default config with custom config
         this.config = $.extend(true, this.defaults, options || {});
 
-        this.$container = $(this.config.classes.container);
-        this.$template = $(this.config.classes.template);
-        this.$addButton = this.$container.find(this.config.classes.addButton);
+        this.$container = $(this.classes.container);
+        this.$template = $(this.classes.template);
+        this.$addButton = this.$container.find(this.classes.addButton);
 
         this.init();
     };
@@ -58,7 +58,7 @@
         },
 
         loadColors: function(data) {
-            this.$container.find(this.config.classes.preview).remove();
+            this.$container.find(this.classes.preview).remove();
 
             for (var index in data.colors) {
                 var color = {};
@@ -74,12 +74,12 @@
 
         createColorPreview: function(color, editable) {
             var $element = this.$template.clone().removeClass('is-template');
-            var $previewName = $element.find(this.config.classes.previewName);
-            var $previewValue = $element.find(this.config.classes.previewValue);
-            var $previewDescription = $element.find(this.config.classes.previewDescription);
-            var $previewColor = $element.find(this.config.classes.previewColor);
-            var $previewColorPicker = $element.find(this.config.classes.previewColorPicker);
-            var $deleteButton = $element.find(this.config.classes.previewDeleteButton);
+            var $previewName = $element.find(this.classes.previewName);
+            var $previewValue = $element.find(this.classes.previewValue);
+            var $previewDescription = $element.find(this.classes.previewDescription);
+            var $previewColor = $element.find(this.classes.previewColor);
+            var $previewColorPicker = $element.find(this.classes.previewColorPicker);
+            var $deleteButton = $element.find(this.classes.previewDeleteButton);
             var id = 'picker' + (Math.floor(Math.random() * 5000) + 1);
 
             $previewName.val(color.name);
@@ -92,7 +92,7 @@
 
             if (!editable) {
                 $deleteButton.hide();
-                $element.find(this.config.classes.previewName).attr('readonly', 'true');
+                $element.find(this.classes.previewName).attr('readonly', 'true');
             } else {
                 $deleteButton.on('click', $.proxy(function(event) {
                     this.deleteColorPreview($element);
@@ -114,9 +114,9 @@
         },
 
         updateColorPreview: function($preview, color) {
-            $preview.find(this.config.classes.previewValue).val(color);
-            $preview.find(this.config.classes.previewColorPicker).val(color);
-            $preview.find(this.config.classes.previewColor).css('background-color', color);
+            $preview.find(this.classes.previewValue).val(color);
+            $preview.find(this.classes.previewColorPicker).val(color);
+            $preview.find(this.classes.previewColor).css('background-color', color);
         },
 
         deleteColorPreview: function($preview) {
@@ -126,15 +126,15 @@
 
         getNewJSON: function() {
             var currentJSON = this.manager.getJSON();
-            var colors = this.$container.find(this.config.classes.preview);
+            var colors = this.$container.find(this.classes.preview);
 
             currentJSON.colors = [];
 
             colors.each($.proxy(function(index, element) {
                 var $element = $(element);
-                var name = $element.find(this.config.classes.previewName).val();
-                var value = $element.find(this.config.classes.previewValue).val();
-                var description = $element.find(this.config.classes.previewDescription).val();
+                var name = $element.find(this.classes.previewName).val();
+                var value = $element.find(this.classes.previewValue).val();
+                var description = $element.find(this.classes.previewDescription).val();
 
                 currentJSON.colors.push({
                     name: name,

@@ -7,3 +7,5 @@
 
 // Example:
 // window.project.modules.exampleModule = $('.element').module();
+
+$('.lightbox').lightbox();

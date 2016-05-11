@@ -23,6 +23,7 @@
                 addFontGoogleButton: '.template-fonts-show-google-font',
                 addFontVariantsWrapper: '.template-fonts-add-font-variants',
                 preview: '.template-font',
+                previewInput: '.template-font-input',
                 previewName: '.template-font-name',
                 previewType: '.template-font-type',
                 previewVariants: '.template-font-preview',
@@ -37,14 +38,14 @@
         // Merge default config with custom config
         this.config = $.extend(true, this.defaults, options || {});
 
-        this.$container = $(this.config.classes.container);
-        this.$template = $(this.config.classes.template);
-        this.$showGoogleAddFontButton = $(this.config.classes.showGoogleAddFontButton);
-        this.$showGoogleAddFontSection = $(this.config.classes.showGoogleAddFontSection);
-        this.$showCustomAddFontButton = $(this.config.classes.showCustomAddFontButton);
-        this.$showCustomAddFontSection = $(this.config.classes.showCustomAddFontSection);
-        this.$addButton = $(this.config.classes.addButton);
-        this.$addFontGoogleButton = $(this.config.classes.addFontGoogleButton);
+        this.$container = $(this.classes.container);
+        this.$template = $(this.classes.template);
+        this.$showGoogleAddFontButton = $(this.classes.showGoogleAddFontButton);
+        this.$showGoogleAddFontSection = $(this.classes.showGoogleAddFontSection);
+        this.$showCustomAddFontButton = $(this.classes.showCustomAddFontButton);
+        this.$showCustomAddFontSection = $(this.classes.showCustomAddFontSection);
+        this.$addButton = $(this.classes.addButton);
+        this.$addFontGoogleButton = $(this.classes.addFontGoogleButton);
 
         this.init();
     };
@@ -66,7 +67,7 @@
             }, this));
 
             this.$addFontGoogleButton.on('click', $.proxy(function() {
-                var selectedFont = $(this.config.classes.fontsDropdown).val();
+                var selectedFont = $(this.classes.fontsDropdown).val();
                 window.open('https://www.google.com/fonts/specimen/' + selectedFont, '_blank');
             }, this));
 
@@ -78,7 +79,7 @@
         },
 
         loadFonts: function(data) {
-            this.$container.find(this.config.classes.preview).remove();
+            this.$container.find(this.classes.preview).remove();
 
             for (var index in data.fonts) {
                 var font = data.fonts[index];
@@ -111,14 +112,14 @@
         },
 
         createNewFontPreview: function(type) {
-            var $addFontWrapper = $(this.config.classes.addFontElementWrapper + ':visible');
+            var $addFontWrapper = $(this.classes.addFontElementWrapper + ':visible');
             var font = {};
 
-            font.name = $addFontWrapper.find(this.config.classes.addFontElement).val();
+            font.name = $addFontWrapper.find(this.classes.addFontElement).val();
             font.type = type;
             font.variants = [];
 
-            var variants = $addFontWrapper.find(this.config.classes.addFontCheckbox + ':checked');
+            var variants = $addFontWrapper.find(this.classes.addFontCheckbox + ':checked');
             variants.each(function(index, element) {
                 font.variants.push($(element).val());
             });
@@ -131,10 +132,12 @@
 
         createFontPreview: function(font, editable) {
             var $preview = this.$template.clone().removeClass('is-template');
-            var $previewName = $preview.find(this.config.classes.previewName);
-            var $previewType = $preview.find(this.config.classes.previewType);
-            var $deleteButton = $preview.find(this.config.classes.previewDeleteButton);
+            var $previewInput = $preview.find(this.classes.previewInput);
+            var $previewName = $preview.find(this.classes.previewName);
+            var $previewType = $preview.find(this.classes.previewType);
+            var $deleteButton = $preview.find(this.classes.previewDeleteButton);
 
+            $previewInput.attr('id', font.name.toLowerCase().replace(' ', '-'));
             $previewName.text(font.name);
             $previewType.text(font.type);
 
@@ -143,6 +146,14 @@
             if (font.type === 'google') {
                 this.loadGoogleFont(font.name, font.variants.join());
             }
+
+            if (font.main) {
+                $previewInput.attr('checked', 'checked');
+            }
+
+            $previewInput.on('change', $.proxy(function() {
+                this.updateMainFont(font);
+            }, this));
 
             if (!editable) {
                 $deleteButton.hide();
@@ -156,7 +167,7 @@
         },
 
         createFontPreviewVariants: function($preview, font) {
-            var $previewVariants = $preview.find(this.config.classes.previewVariants);
+            var $previewVariants = $preview.find(this.classes.previewVariants);
 
             for (var index in font.variants) {
                 var variant = font.variants[index];
@@ -174,7 +185,7 @@
                 }
 
                 $previewVariant = $('<p class="template-font-preview-' + fontWeight + '"></p>');
-                $previewVariant.addClass(this.config.classes.previewVariant.replace('.', ''));
+                $previewVariant.addClass(this.classes.previewVariant.replace('.', ''));
                 $previewVariant.text(this.config.previewSentence);
                 $previewVariant.attr('data-font-variants', variant);
                 $previewVariant.css({
@@ -188,7 +199,7 @@
         },
 
         updateFontsDropdown: function(fonts) {
-            this.fontsDropdown = $(this.config.classes.fontsDropdown);
+            this.fontsDropdown = $(this.classes.fontsDropdown);
 
             this.fontsDropdown.each(function(index, element) {
                 var $element = $(element);
@@ -207,11 +218,24 @@
             }, this)).trigger('change');
         },
 
+        updateMainFont: function(font) {
+            var currentJSON = this.manager.getJSON();
+
+            for (var index in currentJSON.typography) {
+                var properties = currentJSON.typography[index].properties;
+                if (properties['font-family'] === 'sans-serif') {
+                    properties['font-family'] = font.name;
+                }
+            }
+
+            this.updateLocalJSON(currentJSON);
+        },
+
         updateAddFontVariants: function(variants, type) {
             if (type === 'google') {
-                var $container = this.$showGoogleAddFontSection.find(this.config.classes.addFontVariantsWrapper);
+                var $container = this.$showGoogleAddFontSection.find(this.classes.addFontVariantsWrapper);
             } else {
-                var $container = this.$showCustomAddFontSection.find(this.config.classes.addFontVariantsWrapper);
+                var $container = this.$showCustomAddFontSection.find(this.classes.addFontVariantsWrapper);
             }
 
             // Reset variants
@@ -256,21 +280,23 @@
             this.updateAddFontVariants(this.config.customFontVariants, 'custom');
         },
 
-        getNewJSON: function() {
-            var currentJSON = this.manager.getJSON();
-            var fonts = this.$container.find(this.config.classes.preview);
+        getNewJSON: function(JSON) {
+            var currentJSON = JSON || this.manager.getJSON();
+            var fonts = this.$container.find(this.classes.preview);
 
             currentJSON.fonts = [];
 
             fonts.each($.proxy(function(index, element) {
                 var $element = $(element);
-                var $variantElements = $element.find(this.config.classes.previewVariant);
-                var name = $element.find(this.config.classes.previewName).text();
-                var type = $element.find(this.config.classes.previewType).text();
+                var $variantElements = $element.find(this.classes.previewVariant);
+                var main = $element.find(this.classes.previewInput).is(':checked');
+                var name = $element.find(this.classes.previewName).text();
+                var type = $element.find(this.classes.previewType).text();
                 var font = {};
 
                 font.name = name;
                 font.type = type;
+                font.main = main;
                 font.variants = [];
 
                 $variantElements.each(function(index, element) {
@@ -291,8 +317,8 @@
             this.manager.getJSON($.proxy(this.loadFonts, this));
         },
 
-        updateLocalJSON: function() {
-            var currentJSON = this.getNewJSON();
+        updateLocalJSON: function(JSON) {
+            var currentJSON = this.getNewJSON(JSON);
 
             this.manager.saveLocalJSON(currentJSON);
         },

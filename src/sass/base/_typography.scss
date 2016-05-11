@@ -3,16 +3,17 @@
 // ---------------------------------- //
 
 @each $typo in $typography {
-    $selector: map-get($typo, "selector");
-    $type: map-get($typo, "type");
-    $properties: map-get($typo, "properties");
+    $typo_selector: map-get($typo, "selector");
+    $typo_type: map-get($typo, "type");
+    $typo_properties: map-get($typo, "properties");
+    $typo_breakpoints: map-get($typo, "breakpoints");
 
-    @if $type == "id" { $selector: "#" + $selector; }
-    @if $type == "class" { $selector: "." + $selector; }
-    @if $type == "element" { $selector: $selector + ", ." + $selector; }
+    @if $typo_type == "id" { $typo_selector: "#" + $typo_selector; }
+    @if $typo_type == "class" { $typo_selector: "." + $typo_selector; }
+    @if $typo_type == "element" { $typo_selector: $typo_selector + ", ." + $typo_selector; }
 
-    #{$selector} {
-        @each $current in $properties {
+    #{$typo_selector} {
+        @each $current in $typo_properties {
             $property: nth($current, 1);
             $value: nth($current, 2);
             $remProperties: (
@@ -31,6 +32,33 @@
              } @else {
                 #{$property}: $value;
              }
+        }
+
+        @each $breakpoint in $typo_breakpoints {
+            $name: nth($breakpoint, 1);
+            $typo_properties: nth($breakpoint, 2);
+            @include respond-to($name) {
+                @each $current in $typo_properties {
+                    $property: nth($current, 1);
+                    $value: nth($current, 2);
+                    $remProperties: (
+                        "font-size",
+                        "line-height",
+                        "margin-top",
+                        "margin-right",
+                        "margin-bottom",
+                        "margin-left",
+                    );
+
+                    @if index($remProperties, $property) != null {
+                        #{$property}: rem($value);
+                     } @else if $property == "color" {
+                        #{$property}: color($value);
+                     } @else {
+                        #{$property}: $value;
+                     }
+                }
+            }
         }
     }
 }

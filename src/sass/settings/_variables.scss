@@ -81,9 +81,4 @@ $c-alert: color("c-red");
 //             Fonts             //
 // ----------------------------- //
 
-$ff-roboto: "Roboto", "Arial", sans-serif;
-
-// ------------------------------ //
-
-$ff-default: $ff-roboto;
-$ff-headers: $ff-roboto;
+$font-fallback: "Arial", sans-serif;

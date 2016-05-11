@@ -6,6 +6,18 @@
                 <span>Project</span>
             </a>
         </li>
+        <li class="menu-grids {% if class == "template-grids" %}is-active{% endif %}">
+            <a href="/templates/grids.html">
+                {% include '../../svg/grids.svg' %}
+                <span>Grilles</span>
+            </a>
+        </li>
+        <li class="menu-breakpoints {% if class == "template-breakpoints" %}is-active{% endif %}">
+            <a href="/templates/breakpoints.html">
+                {% include '../../svg/breakpoints.svg' %}
+                <span>Breakpoints</span>
+            </a>
+        </li>
         <li class="menu-colors {% if class == "template-colors" %}is-active{% endif %}">
             <a href="/templates/colors.html">
                 {% include '../../svg/colors.svg' %}
@@ -28,12 +40,6 @@
             <a href="/templates/icons.html">
                 {% include '../../svg/icons.svg' %}
                 <span>Iconographie</span>
-            </a>
-        </li>
-        <li class="menu-grids {% if class == "template-grids" %}is-active{% endif %}">
-            <a href="/templates/grids.html">
-                {% include '../../svg/grids.svg' %}
-                <span>Grilles</span>
             </a>
         </li>
         <li class="menu-navigation {% if class == "template-navigation" %}is-active{% endif %}">

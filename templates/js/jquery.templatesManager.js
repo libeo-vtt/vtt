@@ -44,8 +44,11 @@ $.extend(TemplatesManager.prototype, {
     },
 
     getJSON: function(callback) {
-        // Set the global ajax config to synchronous
-        $.ajaxSetup({ async: false });
+        if (typeof callback === 'function') {
+            $.ajaxSetup({ async: true });
+        } else {
+            $.ajaxSetup({ async: false });
+        }
 
         if (this.currentJSON) {
             return this.currentJSON;

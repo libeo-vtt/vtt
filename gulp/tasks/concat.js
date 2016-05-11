@@ -21,7 +21,8 @@ gulp.task('concat:templates', function() {
             './templates/js/jquery.templatesManager.js',
             './templates/js/jquery.templatesColors.js',
             './templates/js/jquery.templatesFonts.js',
-            './templates/js/jquery.templatesTypography.js'
+            './templates/js/jquery.templatesTypography.js',
+            './templates/js/jquery.templatesBreakpoints.js'
         ])
         .pipe(concat('templates.js'))
         .pipe(gulp.dest(config.build + 'templates/js'));

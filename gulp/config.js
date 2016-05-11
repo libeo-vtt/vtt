@@ -32,6 +32,9 @@ module.exports = {
         svgSprite: {
             filename: 'symbols.svg'
         },
+        sass: {
+            mainFont: 'Roboto'
+        },
         twig: {
             data: false,
             file: 'twig/data.js'

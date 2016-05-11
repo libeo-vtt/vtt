@@ -5,18 +5,22 @@
 
         // Default module configuration
         this.defaults = {
+            mainFontAlertMessage: 'Aucune font principale trouvée. Vous devez définir une font principale avant de continuer.',
             classes: {
+                wrapper: '.template-typography-wrapper',
                 container: '.template-typography-edit-panel-wrapper',
                 panelWrapper: '.template-typography-edit-panel',
                 panel: '.template-typography-edit-panel-inputs',
                 template: '.template-typography-edit-panel-inputs.is-template',
                 selectorsDropdown: '.template-typography-edit-selector',
+                breakpointsDropdown: '.template-typography-edit-breakpoint',
                 fontFamilyDropdown: '.template-typography-edit-font-family',
                 fontWeightDropdown: '.template-typography-edit-font-weight',
                 fontStylesDropdown: '.template-typography-edit-font-style',
                 colorsDropdown: '.template-typography-edit-color',
                 typographyInput: '.template-typography-input',
-                previewWrapper: '.template-typography-preview'
+                previewWrapper: '.template-typography-preview',
+                previewContainer: '.template-typography-preview-container'
             }
         };
 
@@ -26,10 +30,14 @@
         // Merge default config with custom config
         this.config = $.extend(true, this.defaults, options || {});
 
-        this.$container = $(this.config.classes.container);
-        this.$panelWrapper = $(this.config.classes.panelWrapper);
-        this.$template = $(this.config.classes.template);
-        this.$selectorsDropdown = $(this.config.classes.selectorsDropdown);
+        this.$wrapper = $(this.classes.wrapper);
+        this.$container = $(this.classes.container);
+        this.$previewWrapper = $(this.classes.previewWrapper);
+        this.$previewContainer = $(this.classes.previewContainer);
+        this.$panelWrapper = $(this.classes.panelWrapper);
+        this.$template = $(this.classes.template);
+        this.$selectorsDropdown = $(this.classes.selectorsDropdown);
+        this.$breakpointsDropdown = $(this.classes.breakpointsDropdown);
 
         this.isShiftPressed = false;
         this.isAltPressed = false;
@@ -53,10 +61,11 @@
                 var selector = data.typography[index].selector;
                 var type = data.typography[index].type;
                 var properties = data.typography[index].properties;
+                var breakpoints = data.typography[index].breakpoints;
                 var $element = this.$template.clone();
-                var $fontWeightsDropdown = $element.find(this.config.classes.fontWeightDropdown);
-                var $fontStylesDropdown = $element.find(this.config.classes.fontStylesDropdown);
-                var $colorsDropdown = $element.find(this.config.classes.colorsDropdown);
+                var $fontWeightsDropdown = $element.find(this.classes.fontWeightDropdown);
+                var $fontStylesDropdown = $element.find(this.classes.fontStylesDropdown);
+                var $colorsDropdown = $element.find(this.classes.colorsDropdown);
 
                 if (type === 'id') { selector = '#' + selector; }
                 if (type === 'class') { selector = '.' + selector; }
@@ -72,11 +81,24 @@
                     var $input = $element.find('[data-edit="' + property + '"]');
 
                     $input.val(value);
+                    $input.attr('data-breakpoint-default', value);
 
                     if (property === 'color') value = this.getColorValue(value);
                     if (property === 'font-family') $input.attr('data-font-family', value);
 
                     this.updateTypographyPreview(selector, property, value);
+                }
+
+                // Initialize each breakpoint properties
+                for (var index in breakpoints) {
+                    var breakpoint = index;
+                    var properties = breakpoints[index];
+                    for (var index in properties) {
+                        var property = index;
+                        var value = properties[index];
+                        var $input = $element.find('[data-edit="' + property + '"]');
+                        $input.attr('data-breakpoint-' + breakpoint, value);
+                    }
                 }
 
                 // Append each edit panel
@@ -90,12 +112,15 @@
                 $(this.classes.previewWrapper + ' ' + selector).on('click', $.proxy(this.onPreviewTypographyClick, this));
             }
 
-            // Activate first edit panel
-            // this.$container.find(this.config.classes.panel).first().addClass('is-active');
+            var mainFonts = data.fonts.filter(function(font) {
+                return font.main === true;
+            });
 
-            this.updateCurrentSelectedTypography('h1', false);
+            if (mainFonts.length === 0) this.createMainFontAlert();
 
             this.loadSelectorsDropdown(data.typography);
+            this.loadBreakpointsDropdown(data.breakpoints);
+            this.updateCurrentSelectedTypography('h1', false);
             this.updateFontDropdowns(data.fonts);
 
             this.manager.finishLoading();
@@ -106,32 +131,38 @@
             this.manager.$importButton.on('click', $.proxy(this.importJSON, this));
             this.manager.$downloadButton.on('click', $.proxy(this.downloadJSON, this));
 
-            $(document).on('change', this.config.classes.selectorsDropdown, $.proxy(function(event) {
+            $(document).on('change', this.classes.selectorsDropdown, $.proxy(function(event) {
                 var selector = $(event.currentTarget).val();
 
                 this.updateCurrentSelectedTypography(selector, true);
             }, this));
 
-            $(document).on('change', this.config.classes.fontFamilyDropdown, $.proxy(function(event) {
+            $(document).on('change', this.classes.breakpointsDropdown, $.proxy(function(event) {
+                var breakpoint = $(event.currentTarget).val();
+
+                this.updateCurrentSelectedBreakpoint(breakpoint);
+            }, this));
+
+            $(document).on('change', this.classes.fontFamilyDropdown, $.proxy(function(event) {
                 var fontFamily = $(event.currentTarget).val();
-                var $currentPanel = $(this.config.classes.panel + '.is-active');
-                var $fontWeightsDropdown = $currentPanel.find(this.config.classes.fontWeightDropdown);
+                var $currentPanel = $(this.classes.panel + '.is-active');
+                var $fontWeightsDropdown = $currentPanel.find(this.classes.fontWeightDropdown);
 
                 this.updateFontWeightsDropdown($fontWeightsDropdown, fontFamily);
             }, this));
 
-            $(document).on('change', this.config.classes.fontWeightDropdown, $.proxy(function(event) {
-                var $currentPanel = $(this.config.classes.panel + '.is-active');
-                var $fontFamilyDropdown = $currentPanel.find(this.config.classes.fontFamilyDropdown);
-                var $fontStylesDropdown = $currentPanel.find(this.config.classes.fontStylesDropdown);
+            $(document).on('change', this.classes.fontWeightDropdown, $.proxy(function(event) {
+                var $currentPanel = $(this.classes.panel + '.is-active');
+                var $fontFamilyDropdown = $currentPanel.find(this.classes.fontFamilyDropdown);
+                var $fontStylesDropdown = $currentPanel.find(this.classes.fontStylesDropdown);
                 var fontFamily = $fontFamilyDropdown.val();
                 var fontWeight = $(event.currentTarget).val();
 
                 this.updateFontStylesDropdown($fontStylesDropdown, fontFamily, fontWeight);
             }, this));
 
-            $(document).on('change', this.config.classes.typographyInput, $.proxy(function(event) {
-                var selector = $(this.config.classes.selectorsDropdown).val();
+            $(document).on('change', this.classes.typographyInput, $.proxy(function(event) {
+                var selector = $(this.classes.selectorsDropdown).val();
                 var $element = $(event.currentTarget);
                 var property = $element.attr('data-edit');
                 var value = $element.val();
@@ -139,10 +170,11 @@
                 if (property === 'color') value = this.getColorValue(value);
 
                 this.updateTypographyPreview(selector, property, value);
+                this.updateInputBreakpointProperty($element);
                 this.updateLocalJSON();
             }, this));
 
-            $(document).on('keydown', this.config.classes.typographyInput, $.proxy(function(event) {
+            $(document).on('keydown', this.classes.typographyInput, $.proxy(function(event) {
                 var variance = 0;
                 var $element = $(event.currentTarget);
 
@@ -159,7 +191,7 @@
                 }
             }, this));
 
-            $(document).on('mousewheel', this.config.classes.typographyInput + '[type="text"]', $.proxy(function(event) {
+            $(document).on('mousewheel', this.classes.typographyInput + '[type="text"]', $.proxy(function(event) {
                 var variance = (event.originalEvent.wheelDelta > 0 ? 1 : -1);
                 var $element = $(event.currentTarget);
 
@@ -167,7 +199,7 @@
                 event.preventDefault();
             }, this));
 
-            $(document).on('keyup', this.config.classes.typographyInput, $.proxy(function(event) {
+            $(document).on('keyup', this.classes.typographyInput, $.proxy(function(event) {
                 if (event.keyCode === 16) this.isShiftPressed = false;
                 if (event.keyCode === 18) this.isAltPressed = false;
             }, this));
@@ -189,14 +221,29 @@
             }
         },
 
+        loadBreakpointsDropdown: function(breakpoints) {
+            this.$breakpointsDropdown.html('');
+
+            // Create 'default' option
+            var $option = $('<option value="default">-</option>');
+            this.$breakpointsDropdown.append($option);
+
+            for (var index in breakpoints) {
+                var name = breakpoints[index].name;
+                var $option = $('<option value="' + name + '">' + name + '</option>');
+
+                this.$breakpointsDropdown.append($option);
+            }
+        },
+
         updateCurrentSelectedTypography: function(selector, scroll) {
             var selectedOption = $(this.classes.selectorsDropdown).find('option:selected');
             var type = selectedOption.attr('data-type');
 
-            $(this.config.classes.panel)
-                .removeClass('is-active')
+            $(this.classes.panel)
+                .removeClass(this.classes.states.active)
                 .filter('[data-selector="' + selector + '"]')
-                .addClass('is-active');
+                .addClass(this.classes.states.active);
             $('.l-block-content .' + this.classes.states.editing).removeClass(this.classes.states.editing);
 
             if (type === 'element') {
@@ -211,6 +258,51 @@
             }
 
             if (scroll) this.scrollToElement($element);
+            this.updateCurrentBreakpointProperties();
+        },
+
+        updateCurrentSelectedBreakpoint: function(breakpoint) {
+            var $panels = $(this.classes.panel + ':not(.is-template)');
+
+            $panels.each($.proxy(function(index, element) {
+                var $panel = $(element);
+                var selector = $(element).attr('data-selector');
+                var $inputs = $panel.find(this.classes.typographyInput);
+
+                $inputs.each($.proxy(function(index, element) {
+                    var $element = $(element);
+                    var property = $element.attr('data-edit');
+                    var value = $element.attr('data-breakpoint-' + breakpoint);
+
+                    if (value === undefined) value = $element.attr('data-breakpoint-default');
+                    $element.val(value);
+
+                    if (property === 'color') value = this.getColorValue(value);
+                    this.updateTypographyPreview(selector, property, value);
+                }, this));
+            }, this));
+
+            if (breakpoint === 'mobile') {
+                this.$previewContainer.addClass('is-mobile');
+            } else {
+                this.$previewContainer.removeClass('is-mobile');
+            }
+        },
+
+        updateInputBreakpointProperty: function($element) {
+            var currentBreakpoint = $(this.classes.breakpointsDropdown).find('option:selected').val();
+            $element.attr('data-breakpoint-' + currentBreakpoint, $element.val());
+        },
+
+        updateCurrentBreakpointProperties: function() {
+            var currentBreakpoint = $(this.classes.breakpointsDropdown).find('option:selected').val();
+            var $inputs = $(this.classes.panel).find(this.classes.typographyInput);
+
+            $inputs.each(function(index, element) {
+                var $element = $(element);
+                var value = $element.val();
+                if (value !== null) $element.attr('data-breakpoint-' + currentBreakpoint, value);
+            });
         },
 
         updateFontWeightsDropdown: function($dropdown, fontFamily) {
@@ -312,6 +404,10 @@
             }, this)).trigger('scroll');
         },
 
+        createMainFontAlert: function() {
+            this.$wrapper.prepend('<p class="main-font-alert editing-element">' + this.config.mainFontAlertMessage + '</p>')
+        },
+
         getFontWeights: function(fontFamily) {
             var currentJSON = this.manager.getJSON();
             var fontWeights = [];
@@ -379,7 +475,7 @@
 
         getNewJSON: function() {
             var currentJSON = this.manager.getJSON();
-            var panels = $(this.config.classes.panel + ':not(.is-template)');
+            var panels = $(this.classes.panel + ':not(.is-template)');
 
             // Reset current typography
             currentJSON.typography = [];
@@ -388,18 +484,28 @@
                 var $element = $(element);
                 var selector = $element.attr('data-selector').replace('.', '').replace('#', '');
                 var type = $element.attr('data-type');
-                var inputs = $element.find(this.config.classes.typographyInput);
+                var inputs = $element.find(this.classes.typographyInput);
                 var currentTypography = {};
 
                 currentTypography.selector = selector;
                 currentTypography.type = type;
                 currentTypography.properties = {};
+                currentTypography.breakpoints = {};
 
                 inputs.each(function(index, element) {
                     var $input = $(element);
                     var property = $input.attr('data-edit');
-                    var value = $input.val();
+                    var value = $input.attr('data-breakpoint-default');
                     currentTypography.properties[property] = value;
+
+                    for (var index in currentJSON.breakpoints) {
+                        var breakpoint = currentJSON.breakpoints[index].name;
+                        var breakpointValue = $input.attr('data-breakpoint-' + breakpoint);
+                        if (breakpointValue !== undefined) {
+                            currentTypography.breakpoints[breakpoint] = currentTypography.breakpoints[breakpoint] || {};
+                            currentTypography.breakpoints[breakpoint][property] = breakpointValue;
+                        }
+                    }
                 });
 
                 currentJSON.typography.push(currentTypography);
