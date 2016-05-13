@@ -97,6 +97,11 @@ nav a {
     text-decoration: none;
 }
 
+// Reset default font-size for code, kbd, pre, samp elements
+code, kbd, pre, samp {
+    font-size: 1rem;
+}
+
 // Text selection
 ::selection,
 ::-moz-selection {
