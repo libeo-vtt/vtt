@@ -287,29 +287,4 @@ customFunctions.push({
     }
 });
 
-/**
- * create_debug_static_nav
- * Return:
- *     HTML list with static pages links
- */
-customFunctions.push({
-    name: 'create_debug_static_nav',
-    func: function(args) {
-        if (!argv.prod) {
-            var index = 0;
-            var output = '<nav class="debug_static_nav" style="position: fixed; bottom: 0; left: 0; width: 100%; padding: 10px 20px; background-color: rgba(0,0,0,0.75); text-align: center;"><ul>';
-            var files = glob.sync(config.src + 'twig/views/**/*.twig');
-            files.forEach(function(file) {
-                var filename = file.replace(config.src + 'twig/views/', '').replace('.twig', '');
-                output += '<li style="display: inline-block; vertical-align: middle; ' + (index > 0 ? 'margin-left: 15px;' : '') + '"><a href="/' + filename + '.html" style="color: #fff; text-transform: uppercase; font-size: 12px; text-decoration: none;">' + filename + '</a></li>';
-                index++;
-            });
-            output += '</ul></nav>';
-            return output;
-        } else {
-            return '';
-        }
-    }
-});
-
 module.exports = customFunctions;
