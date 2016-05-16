@@ -3,6 +3,8 @@ var argv = require('yargs').argv;
 var requireDir = require('require-dir');
 var runSequence = require('run-sequence');
 
+require('gulp-release-tasks')(gulp);
+
 requireDir('./gulp/tasks', { recurse: true });
 
 gulp.task('build', ['bower', 'sass', 'copy', 'concat:helpers', 'concat:templates', 'svg2png', 'svgSprite', 'twig']);
