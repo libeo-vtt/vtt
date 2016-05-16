@@ -12,7 +12,7 @@
             </li>
         {% endif %}
         {% for page in get_static_pages() %}
-            {% if loop.index == 0 or not project.templates %}
+            {% if loop.index == 0 and not project.templates %}
                 {% set styles = 'display: inline-block; vertical-align: middle;' %}
             {% else %}
                 {% set styles = 'display: inline-block; vertical-align: middle; margin-left: 15px;' %}
