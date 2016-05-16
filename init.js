@@ -78,27 +78,23 @@ var questions = [{
 }, {
     name: 'responsive',
     type: 'confirm',
-    message: 'Responsive?',
-    default: true
+    message: 'Responsive?'
 }, {
     name: 'accessible',
     type: 'confirm',
-    message: 'Accessible?',
-    default: true
+    message: 'Accessible?'
 }, {
     name: 'retina',
     type: 'confirm',
-    message: 'Retina?',
-    default: true
+    message: 'Retina?'
 }, {
     name: 'templates',
     type: 'confirm',
-    message: 'Include VTT templates?',
-    default: true
+    message: 'Include VTT templates?'
 }];
 
 // Prompt user for project informations
-inquirer.prompt(questions, function(answers) {
+inquirer.prompt(questions).then(function (answers) {
 
     // Update package.json values
     package.name = answers.name;
@@ -142,7 +138,7 @@ inquirer.prompt(questions, function(answers) {
 
     // Remove templates files
     if (!answers.templates) {
-        rm('./src/templates/', function(error) {
+        rm('./templates/', function(error) {
             if (error) return console.log(error);
         });
         rm('./src/sass/styles.json', function(error) {

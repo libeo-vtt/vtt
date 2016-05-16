@@ -64,7 +64,7 @@ var questions = [{
 }];
 
 // Prompt user for project informations
-inquirer.prompt(questions, function(answers) {
+inquirer.prompt(questions).then(function (answers) {
     if (answers.js) {
         var jsTemplateFile = './.templates/module.js',
             jsNewFile = './src/js/modules/jquery.' + answers.name + '.js';

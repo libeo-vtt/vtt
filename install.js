@@ -33,7 +33,7 @@ var questions = [{
 }];
 
 // Prompt user for project informations
-inquirer.prompt(questions, function(answers) {
+inquirer.prompt(questions).then(function (answers) {
     // Update project values
     var modules = answers.modules;
     var links = {
