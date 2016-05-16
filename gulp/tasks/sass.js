@@ -7,7 +7,7 @@ var notifier = require('node-notifier');
 var plumber = require('gulp-plumber');
 var sourcemaps = require('gulp-sourcemaps');
 var cssGlobbing = require('gulp-css-globbing');
-var jsonImporter = require('node-sass-json-importer');
+var jsonImporter = require('../helpers/json-importer.js');
 var customFunctions = require('../helpers/sass.customFunctions.js');
 
 var config = require('../config.js');

@@ -294,24 +294,26 @@
 // Respond-to
 @mixin respond-to($breakpoint) {
     $existingBreakpoint: false;
-    @each $currentBreakpoint in $breakpoints {
-        $bp-name: nth(nth($currentBreakpoint, 1), 2);
-        @if $bp-name == $breakpoint {
-            $existingBreakpoint: true;
-            $bp-min: nth(nth($currentBreakpoint, 2), 2);
-            $bp-max: nth(nth($currentBreakpoint, 3), 2);
-            @if $bp-min == null and $bp-max != null {
-                @media (max-width: $bp-max) {
-                    @content;
+    @if variable-exists(breakpoints) {
+        @each $currentBreakpoint in $breakpoints {
+            $bp-name: nth(nth($currentBreakpoint, 1), 2);
+            @if $bp-name == $breakpoint {
+                $existingBreakpoint: true;
+                $bp-min: nth(nth($currentBreakpoint, 2), 2);
+                $bp-max: nth(nth($currentBreakpoint, 3), 2);
+                @if $bp-min == null and $bp-max != null {
+                    @media (max-width: $bp-max) {
+                        @content;
+                    }
                 }
-            }
-            @else if $bp-min != null and $bp-max == null {
-                @media (min-width: $bp-min) {
-                    @content;
-                }
-            } @else {
-                @media (min-width: $bp-min) and (max-width: $bp-max) {
-                    @content;
+                @else if $bp-min != null and $bp-max == null {
+                    @media (min-width: $bp-min) {
+                        @content;
+                    }
+                } @else {
+                    @media (min-width: $bp-min) and (max-width: $bp-max) {
+                        @content;
+                    }
                 }
             }
         }
@@ -382,27 +384,29 @@
             > .grid-wrapper > .col-#{$i}-#{$current} {
                 width: calc(100% / #{$current} * #{$i} - #{$horizontal-gutter});
             }
-            @each $breakpoint in $breakpoints {
-                $bp-name: nth(nth($breakpoint, 1), 2);
-                $bp-min: nth(nth($breakpoint, 2), 2);
-                $bp-max: nth(nth($breakpoint, 3), 2);
-                @if $bp-min == null and $bp-max != null {
-                    @media (max-width: $bp-max) {
-                        > .grid-wrapper > [class^="col"].col-#{$i}-#{$current}-#{$bp-name} {
-                            width: calc(100% / #{$current} * #{$i} - #{$horizontal-gutter});
+            @if variable-exists(breakpoints) {
+                @each $breakpoint in $breakpoints {
+                    $bp-name: nth(nth($breakpoint, 1), 2);
+                    $bp-min: nth(nth($breakpoint, 2), 2);
+                    $bp-max: nth(nth($breakpoint, 3), 2);
+                    @if $bp-min == null and $bp-max != null {
+                        @media (max-width: $bp-max) {
+                            > .grid-wrapper > [class^="col"].col-#{$i}-#{$current}-#{$bp-name} {
+                                width: calc(100% / #{$current} * #{$i} - #{$horizontal-gutter});
+                            }
                         }
                     }
-                }
-                @else if $bp-min != null and $bp-max == null {
-                    @media (min-width: $bp-min) {
-                        > .grid-wrapper > [class^="col"].col-#{$i}-#{$current}-#{$bp-name} {
-                            width: calc(100% / #{$current} * #{$i} - #{$horizontal-gutter});
+                    @else if $bp-min != null and $bp-max == null {
+                        @media (min-width: $bp-min) {
+                            > .grid-wrapper > [class^="col"].col-#{$i}-#{$current}-#{$bp-name} {
+                                width: calc(100% / #{$current} * #{$i} - #{$horizontal-gutter});
+                            }
                         }
-                    }
-                } @else {
-                    @media (min-width: $bp-min) and (max-width: $bp-max) {
-                        > .grid-wrapper > [class^="col"].col-#{$i}-#{$current}-#{$bp-name} {
-                            width: calc(100% / #{$current} * #{$i} - #{$horizontal-gutter});
+                    } @else {
+                        @media (min-width: $bp-min) and (max-width: $bp-max) {
+                            > .grid-wrapper > [class^="col"].col-#{$i}-#{$current}-#{$bp-name} {
+                                width: calc(100% / #{$current} * #{$i} - #{$horizontal-gutter});
+                            }
                         }
                     }
                 }

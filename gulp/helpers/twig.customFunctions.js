@@ -1,9 +1,13 @@
 var package = require('../../package.json');
 var project = require('../../project.json');
-var styles = require('../../src/sass/styles.json');
 var glob = require('glob');
 var argv = require('yargs').argv;
 var config = require('../config.js');
+var fileExists = require('file-exists');
+
+if (fileExists('../../src/sass/styles.json')) {
+    var styles = require('../../src/sass/styles.json');
+}
 
 var customFunctions = [];
 
@@ -171,19 +175,7 @@ customFunctions.push({
 customFunctions.push({
     name: 'get_styles_json',
     func: function(args) {
-        return styles;
-    }
-});
-
-/**
- * get_styles_json
- * Return:
- *     JSON from styles.json
- */
-customFunctions.push({
-    name: 'get_styles_json',
-    func: function(args) {
-        return styles;
+        return styles || {};
     }
 });
 
@@ -219,7 +211,7 @@ customFunctions.push({
 customFunctions.push({
     name: 'get_webfonts',
     func: function(args) {
-        var fonts = styles.fonts;
+        var fonts = styles !== undefined ? styles.font : [];
         var webfonts = [];
         for (var index in fonts) {
             var font = fonts[index];
@@ -238,7 +230,7 @@ customFunctions.push({
 customFunctions.push({
     name: 'get_webfonts_url',
     func: function(args) {
-        var fonts = styles.fonts;
+        var fonts = styles !== undefined ? styles.font : [];
         var url = 'http://fonts.googleapis.com/css?family=';
         for (var index in fonts) {
             var font = fonts[index];

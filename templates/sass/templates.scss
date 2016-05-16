@@ -580,46 +580,56 @@ hr {
 
 .icons-wrapper {
     font-size: 0;
+    + .icons-wrapper {
+        margin-top: 50px;
+    }
 }
 
 .icon {
     display: inline-block;
     vertical-align: top;
-    width: 25%;
-    padding: 20px;
+    width: (100% / 3);
     text-align: center;
+    border: 1px solid #fff;
+    background-color: #f5f5f5;
+    transition: background-color 150ms;
+    &:hover {
+        background-color: #efefef;
+    }
+    &.is-medium {
+        width: (100% / 5);
+        a {
+            padding: 60px 60px 30px;
+        }
+        span {
+            margin: 30px -40px 0;
+        }
+    }
     &.is-small {
-        width: 10%;
-        img {
-            width: 32px;
-            height: 32px;
+        width: (100% / 8);
+        a {
+            padding: 40px 40px 25px;
+        }
+        span {
+            margin: 25px -20px 0;
+            font-size: 13px;
         }
     }
     a {
         display: block;
+        position: relative;
+        padding: 80px 80px 50px;
+        text-decoration: none;
     }
     span {
         display: block;
-        margin-top: 10px;
-        font-size: 12px;
+        margin: 30px -60px 0;
+        font-family: "Roboto";
+        font-size: 14px;
+        font-weight: bold;
         line-height: 14px;
         text-align: center;
-    }
-}
-
-.template-icons-wrapper {
-    font-size: 0;
-    .template-icon {
-        display: inline-block;
-        vertical-align: top;
-        font-size: 16px;
-        + .template-icon {
-            margin-left: 1em;
-        }
-    }
-    .icon-wrapper {
-        vertical-align: top;
-        line-height: 0;
+        color: #000;
     }
 }
 
@@ -673,41 +683,43 @@ hr {
             background-color: #efefef;
         }
     }
-    @each $typo in $typography {
-        $selector: map-get($typo, "selector");
-        $type: map-get($typo, "type");
-        $properties: map-get($typo, "properties");
+    @if variable-exists(typography) {
+        @each $typo in $typography {
+            $selector: map-get($typo, "selector");
+            $type: map-get($typo, "type");
+            $properties: map-get($typo, "properties");
 
-        @if $type == "id" { $selector: "#" + $selector; }
-        @if $type == "class" { $selector: "." + $selector; }
+            @if $type == "id" { $selector: "#" + $selector; }
+            @if $type == "class" { $selector: "." + $selector; }
 
-        #{$selector} {
-            pointer-events: none;
-            &:before {
-                content: "#{$selector}";
-                position: absolute;
-                left: 0;
-                width: 153px;
-                font-family: "Roboto";
-                font-size: 14px;
-                font-weight: bold;
-                font-style: normal;
-                text-align: right;
-                padding-right: 30px;
-                text-transform: none;
-                text-decoration: none;
-                color: #dadada;
-                pointer-events: all;
-                background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAUAAAAFCAYAAACNbyblAAAABGdBTUEAALGPC/xhBQAAACBjSFJNAAB6JgAAgIQAAPoAAACA6AAAdTAAAOpgAAA6mAAAF3CculE8AAAABmJLR0QAAAAAAAD5Q7t/AAAACXBIWXMAAAsSAAALEgHS3X78AAAAQklEQVQI113IsQ1AUBRA0fPfIOZAbRAJY9mEQvUZ4S2i10iE09zklsxssKDDgblk5orBaw+0vvrA+Zs1MGHD9XS8AXljDibwMlOaAAAAAElFTkSuQmCC');
-                background-repeat: no-repeat;
-                background-position: right center;
-            }
-            &.is-editing:before {
-                color: #8c2c74;
-                background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAUAAAAFCAYAAACNbyblAAAABGdBTUEAALGPC/xhBQAAACBjSFJNAAB6JgAAgIQAAPoAAACA6AAAdTAAAOpgAAA6mAAAF3CculE8AAAABmJLR0QAAAAAAAD5Q7t/AAAACXBIWXMAAAsSAAALEgHS3X78AAAARUlEQVQI113IsQ1AUBRA0ePFHCYwAGr2kDCCMf4IFPZQYyG9gobT3ORmqZwKzKhxYMyxoPXosAYqX03g/M09MGDD9ba/ASAICk37mQGNAAAAAElFTkSuQmCC');
-            }
-            body:not(.is-editing) &:before {
-                display: none !important;
+            #{$selector} {
+                pointer-events: none;
+                &:before {
+                    content: "#{$selector}";
+                    position: absolute;
+                    left: 0;
+                    width: 153px;
+                    font-family: "Roboto";
+                    font-size: 14px;
+                    font-weight: bold;
+                    font-style: normal;
+                    text-align: right;
+                    padding-right: 30px;
+                    text-transform: none;
+                    text-decoration: none;
+                    color: #dadada;
+                    pointer-events: all;
+                    background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAUAAAAFCAYAAACNbyblAAAABGdBTUEAALGPC/xhBQAAACBjSFJNAAB6JgAAgIQAAPoAAACA6AAAdTAAAOpgAAA6mAAAF3CculE8AAAABmJLR0QAAAAAAAD5Q7t/AAAACXBIWXMAAAsSAAALEgHS3X78AAAAQklEQVQI113IsQ1AUBRA0fPfIOZAbRAJY9mEQvUZ4S2i10iE09zklsxssKDDgblk5orBaw+0vvrA+Zs1MGHD9XS8AXljDibwMlOaAAAAAElFTkSuQmCC');
+                    background-repeat: no-repeat;
+                    background-position: right center;
+                }
+                &.is-editing:before {
+                    color: #8c2c74;
+                    background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAUAAAAFCAYAAACNbyblAAAABGdBTUEAALGPC/xhBQAAACBjSFJNAAB6JgAAgIQAAPoAAACA6AAAdTAAAOpgAAA6mAAAF3CculE8AAAABmJLR0QAAAAAAAD5Q7t/AAAACXBIWXMAAAsSAAALEgHS3X78AAAARUlEQVQI113IsQ1AUBRA0ePFHCYwAGr2kDCCMf4IFPZQYyG9gobT3ORmqZwKzKhxYMyxoPXosAYqX03g/M09MGDD9ba/ASAICk37mQGNAAAAAElFTkSuQmCC');
+                }
+                body:not(.is-editing) &:before {
+                    display: none !important;
+                }
             }
         }
     }

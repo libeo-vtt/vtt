@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 
 var program = require('commander');
-var fs = require('fs');
+var fs = require('graceful-fs');
 var rm = require('rimraf');
 var inquirer = require('inquirer');
 var glob = require('glob');

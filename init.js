@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 
 var program = require('commander');
-var fs = require('fs');
+var fs = require('graceful-fs');
 var rm = require('rimraf');
 var inquirer = require('inquirer');
 var glob = require('glob');
@@ -143,6 +143,9 @@ inquirer.prompt(questions, function(answers) {
     // Remove templates files
     if (!answers.templates) {
         rm('./src/templates/', function(error) {
+            if (error) return console.log(error);
+        });
+        rm('./src/sass/styles.json', function(error) {
             if (error) return console.log(error);
         });
     }

@@ -9,73 +9,45 @@ $spacing-tablet: 30px;
 $spacing-mobile: 20px;
 $document-width: 1280px;
 
-// ------------------------------------- //
-//             Media queries             //
-// ------------------------------------- //
-
-// Media queries
-$mq-breakpoints: (
-    "mobile": (
-        min: false,
-        max: 767px,
-        grid: true,
-        export: true
-    ),
-    "tablet": (
-        min: 768px,
-        max: 1024px,
-        grid: true,
-        export: true
-    ),
-    "desktop": (
-        min: 1025px,
-        max: false,
-        grid: true,
-        export: true
-    ),
-    "mobile-tablet": (
-        min: false,
-        max: 1024px,
-        grid: false,
-        export: false
-    ),
-    "document-width": (
-        min: false,
-        max: $document-width,
-        grid: false,
-        export: false
-    )
-);
-
 // ------------------------------ //
 //             Colors             //
 // ------------------------------ //
 
 @function color($color) {
-    $returnValue: null;
+    @if variable-exists(colors) {
+        $returnValue: null;
 
-    @each $current in $colors {
-        $name: map-get($current, "name");
-        $value: map-get($current, "value");
-        @if $name == $color {
-            $returnValue: $value;
+        @each $current in $colors {
+            $name: map-get($current, "name");
+            $value: map-get($current, "value");
+            @if $name == $color {
+                $returnValue: $value;
+            }
         }
-    }
 
-    @if $returnValue != null {
-        @return $returnValue;
-    } @else {
-        @warn "Unfortunately, no value could be retrieved from `#{$color}`. Please make sure it is defined in `$colors` map.";
-        @return null;
+        @if $returnValue != null {
+            @return $returnValue;
+        } @else {
+            @warn "Unfortunately, no value could be retrieved from `#{$color}`. Please make sure it is defined in `$colors` map.";
+            @return null;
+        }
     }
 }
 
 // ------------------------------ //
 
-$c-bg-document: color("c-white");
-$c-border-default: color("c-black");
-$c-txt-default: color("c-black");
-$c-alert: color("c-red");
+// Fallback values
+$c-bg-document: #fff;
+$c-border-default: #1a1a1a;
+$c-txt-default: #1a1a1a;
+$c-alert: #ca0003;
+
+@if variable-exists(colors) {
+    $c-bg-document: color("c-white");
+    $c-border-default: color("c-black");
+    $c-txt-default: color("c-black");
+    $c-alert: color("c-red");
+}
 
 // ----------------------------- //
 //             Fonts             //
