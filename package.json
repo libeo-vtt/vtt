@@ -1,6 +1,6 @@
 {
   "name": "vtt",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "Outil d'intégration frontend soucieux du SGQRI008.",
   "url": "http://localhost:3000",
   "keywords": "vtt, starter, kit",
