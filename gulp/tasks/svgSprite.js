@@ -21,6 +21,9 @@ gulp.task('svgSprite', function() {
                     dest: 'svg',
                     sprite: config.defaults.svgSprite.filename
                 }
+            },
+            svg: {
+                dimensionAttributes: false
             }
         }))
         .pipe(gulp.dest(config.build));
