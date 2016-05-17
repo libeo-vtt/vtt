@@ -52,7 +52,17 @@
 
 .l-block-content,
 .l-block-sidebar {
+    display: inline-block;
+    vertical-align: top;
     position: relative;
     font-size: 1rem;
-    @include clearfix;
+}
+
+.is-two-columns .l-block-content {
+    width: calc(100% - #{$sidebar-width + $sidebar-margin});
+}
+
+.is-two-columns .l-block-sidebar {
+    width: $sidebar-width + $sidebar-margin;
+    padding-left: $sidebar-margin;
 }

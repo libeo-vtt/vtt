@@ -4,10 +4,12 @@
 //             Variables             //
 // --------------------------------- //
 
-$spacing-default: 40px;
-$spacing-tablet: 30px;
-$spacing-mobile: 20px;
-$document-width: 1280px;
+$spacing-default    : 40px;
+$spacing-tablet     : 30px;
+$spacing-mobile     : 20px;
+$document-width     : 1280px;
+$sidebar-width      : 220px;
+$sidebar-margin     : 20px;
 
 // ------------------------------ //
 //             Colors             //
@@ -37,10 +39,10 @@ $document-width: 1280px;
 // ------------------------------ //
 
 // Fallback values
-$c-bg-document: #fff;
-$c-border-default: #1a1a1a;
-$c-txt-default: #1a1a1a;
-$c-alert: #ca0003;
+$c-bg-document      : #fff;
+$c-border-default   : #1a1a1a;
+$c-txt-default      : #1a1a1a;
+$c-alert            : #ca0003;
 
 @if variable-exists(colors) {
     $c-bg-document: color("c-white");
