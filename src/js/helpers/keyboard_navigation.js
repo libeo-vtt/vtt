@@ -13,7 +13,7 @@
         }
     });
 
-    $body.on('mousedown', function(e) {
+    $body.on('mousedown', function() {
         if ($body.attr('data-state')) {
             $body.removeAttr('data-state');
         }

@@ -28,11 +28,11 @@
 
                 @if index($remProperties, $property) != null {
                     #{$property}: rem($value);
-                 } @else if $property == "color" {
+                } @else if $property == "color" {
                     #{$property}: color($value);
-                 } @else {
+                } @else {
                     #{$property}: $value;
-                 }
+                }
             }
 
             @each $breakpoint in $typo_breakpoints {
@@ -53,11 +53,11 @@
 
                         @if index($remProperties, $property) != null {
                             #{$property}: rem($value);
-                         } @else if $property == "color" {
+                        } @else if $property == "color" {
                             #{$property}: color($value);
-                         } @else {
+                        } @else {
                             #{$property}: $value;
-                         }
+                        }
                     }
                 }
             }

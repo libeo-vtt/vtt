@@ -1,7 +1,6 @@
 (function() {
 
-    var $body = $('body'),
-        $document = $(document);
+    var $document = $(document);
 
     $document.on('click', '[data-toggle-active]', function(event) {
         var classes = $(this).attr('data-toggle-active');

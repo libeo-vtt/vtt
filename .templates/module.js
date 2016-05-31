@@ -31,9 +31,9 @@
 
         this.publicMethods = {
             methodName: $.proxy(function() {
-                console.log('methodName function called');
+                // console.log('methodName function called');
             }, this)
-        }
+        };
 
         this.init();
     };
@@ -42,7 +42,7 @@
 
         // Component initialization
         init: function() {
-            console.log('Module MODULE_NAME_LOWERCASE initiated');
+            // console.log('Module MODULE_NAME_LOWERCASE initiated');
         }
 
     });
