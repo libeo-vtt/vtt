@@ -4,20 +4,20 @@
 
 @if variable-exists(typography) {
     @each $typo in $typography {
-        $typo_selector: map-get($typo, "selector");
-        $typo_type: map-get($typo, "type");
-        $typo_properties: map-get($typo, "properties");
-        $typo_breakpoints: map-get($typo, "breakpoints");
+        $typo-selector: map-get($typo, "selector");
+        $typo-type: map-get($typo, "type");
+        $typo-properties: map-get($typo, "properties");
+        $typo-breakpoints: map-get($typo, "breakpoints");
 
-        @if $typo_type == "id" { $typo_selector: "#" + $typo_selector; }
-        @if $typo_type == "class" { $typo_selector: "." + $typo_selector; }
-        @if $typo_type == "element" { $typo_selector: $typo_selector + ", ." + $typo_selector; }
+        @if $typo-type == "id" { $typo-selector: "#" + $typo-selector; }
+        @if $typo-type == "class" { $typo-selector: "." + $typo-selector; }
+        @if $typo-type == "element" { $typo-selector: $typo-selector + ", ." + $typo-selector; }
 
-        #{$typo_selector} {
-            @each $current in $typo_properties {
+        #{$typo-selector} {
+            @each $current in $typo-properties {
                 $property: nth($current, 1);
                 $value: nth($current, 2);
-                $remProperties: (
+                $rem-properties: (
                     "font-size",
                     "line-height",
                     "margin-top",
@@ -26,7 +26,7 @@
                     "margin-left",
                 );
 
-                @if index($remProperties, $property) != null {
+                @if index($rem-properties, $property) != null {
                     #{$property}: rem($value);
                 } @else if $property == "color" {
                     #{$property}: color($value);
@@ -35,14 +35,14 @@
                 }
             }
 
-            @each $breakpoint in $typo_breakpoints {
+            @each $breakpoint in $typo-breakpoints {
                 $name: nth($breakpoint, 1);
-                $typo_properties: nth($breakpoint, 2);
+                $typo-properties: nth($breakpoint, 2);
                 @include respond-to($name) {
-                    @each $current in $typo_properties {
+                    @each $current in $typo-properties {
                         $property: nth($current, 1);
                         $value: nth($current, 2);
-                        $remProperties: (
+                        $rem-properties: (
                             "font-size",
                             "line-height",
                             "margin-top",
@@ -51,7 +51,7 @@
                             "margin-left",
                         );
 
-                        @if index($remProperties, $property) != null {
+                        @if index($rem-properties, $property) != null {
                             #{$property}: rem($value);
                         } @else if $property == "color" {
                             #{$property}: color($value);

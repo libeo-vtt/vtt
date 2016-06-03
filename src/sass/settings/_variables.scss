@@ -4,12 +4,12 @@
 //             Variables             //
 // --------------------------------- //
 
-$spacing-default    : 40px;
-$spacing-tablet     : 30px;
-$spacing-mobile     : 20px;
-$document-width     : 1280px;
-$sidebar-width      : 220px;
-$sidebar-margin     : 20px;
+$spacing-default: 40px;
+$spacing-tablet: 30px;
+$spacing-mobile: 20px;
+$document-width: 1280px;
+$sidebar-width: 220px;
+$sidebar-margin: 20px;
 
 // ------------------------------ //
 //             Colors             //
@@ -17,18 +17,16 @@ $sidebar-margin     : 20px;
 
 @function color($color) {
     @if variable-exists(colors) {
-        $returnValue: null;
-
+        $return-value: null;
         @each $current in $colors {
             $name: map-get($current, "name");
             $value: map-get($current, "value");
             @if $name == $color {
-                $returnValue: $value;
+                $return-value: $value;
             }
         }
-
-        @if $returnValue != null {
-            @return $returnValue;
+        @if $return-value != null {
+            @return $return-value;
         } @else {
             @warn "Unfortunately, no value could be retrieved from `#{$color}`. Please make sure it is defined in `$colors` map.";
             @return null;
@@ -39,10 +37,10 @@ $sidebar-margin     : 20px;
 // ------------------------------ //
 
 // Fallback values
-$c-bg-document      : #fff;
-$c-border-default   : #1a1a1a;
-$c-txt-default      : #1a1a1a;
-$c-alert            : #ca0003;
+$c-bg-document: #fff;
+$c-border-default: #1a1a1a;
+$c-txt-default: #1a1a1a;
+$c-alert: #ca0003;
 
 @if variable-exists(colors) {
     $c-bg-document: color("c-white");

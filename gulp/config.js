@@ -7,6 +7,10 @@ module.exports = {
     sourcemaps: true,
     svgFallback: false,
     showDebugStaticNav: true,
+    lint: {
+        js: true,
+        sass: true
+    },
     prettify: {
         indent_inner_html: false,
         indent_size: 4,

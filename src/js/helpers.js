@@ -5,7 +5,6 @@ var helpers = [
     'font_resize.js',
     'keyboard_navigation.js',
     'mq_breakpoints.js',
-    'safe_console.js',
     'skip_content.js',
     'svg4everybody.js',
     'toggle_active.js'

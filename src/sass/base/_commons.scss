@@ -68,21 +68,6 @@
     pointer-events: none;
 }
 
-// Opacity classes
-// ex: opacity-05, opacity-10, opacity-15, opacity-20, [...], opacity-90, opacity-95, opacity-100
-
-@for $i from 0 through 10 {
-    .opacity-#{$i}0 {
-        opacity: $i / 10;
-    }
-    @if $i < 10 {
-        .opacity-#{$i}5 {
-            opacity: ($i + 0.5) / 10;
-        }
-    }
-}
-
-
 // ------------------------------- //
 
 .table {

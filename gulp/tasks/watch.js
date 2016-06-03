@@ -18,13 +18,19 @@ gulp.task('watch:bower', ['bower']);
 
 gulp.task('watch', ['browser-sync'], function() {
     watch(config.src + 'js/**/*', function() {
-        runSequence('clean:js', 'watch:js', browserSync.reload);
+        runSequence('clean:js', 'watch:js', function() {
+            browserSync.reload();
+            runSequence('eslint');
+        });
+    });
+    watch(config.src + 'sass/**/*', function() {
+        runSequence('clean:sass', 'watch:sass', function() {
+            browserSync.reload();
+            runSequence('sasslint');
+        });
     });
     watch(config.src + 'img/**/*', function() {
         runSequence('clean:img', 'watch:img', browserSync.reload);
-    });
-    watch(config.src + 'sass/**/*', function() {
-        runSequence('clean:sass', 'watch:sass', browserSync.reload);
     });
     watch(config.src + 'twig/**/*', function() {
         runSequence('clean:twig', 'watch:twig', browserSync.reload);
