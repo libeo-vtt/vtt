@@ -3,8 +3,10 @@ var argv = require('yargs').argv;
 var sass = require('gulp-sass');
 var gulpif = require('gulp-if');
 var gutil = require('gulp-util');
-var notifier = require('node-notifier');
+var postcss = require('gulp-postcss');
 var plumber = require('gulp-plumber');
+var notifier = require('node-notifier');
+var autoprefixer = require('autoprefixer');
 var sourcemaps = require('gulp-sourcemaps');
 var cssGlobbing = require('gulp-css-globbing');
 var jsonImporter = require('../helpers/json-importer.js');
@@ -39,6 +41,7 @@ gulp.task('sass', (argv.prod ? [] : ['sass:templates']), function() {
         }))
         .pipe(gulpif(config.sourcemaps && !argv.prod, sourcemaps.init()))
         .pipe(sass(sassConfig))
+        .pipe(postcss([autoprefixer({ browsers: ['last 2 versions', 'ie 10-11'] })]))
         .pipe(gulpif(config.sourcemaps && !argv.prod, sourcemaps.write('./')))
         .pipe(gulp.dest(config.build + 'css/'));
 });

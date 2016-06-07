@@ -6,6 +6,7 @@
   "keywords": "vtt, starter, kit",
   "repository": "https://github.com/libeo-vtt/vtt",
   "devDependencies": {
+    "autoprefixer": "^6.3.6",
     "browser-sync": "^2.12.7",
     "cheerio": "^0.20.0",
     "colors": "^1.1.2",
@@ -25,6 +26,7 @@
     "gulp-imagemin": "^3.0.1",
     "gulp-main-bower-files": "^1.5.0",
     "gulp-plumber": "^1.1.0",
+    "gulp-postcss": "^6.1.1",
     "gulp-prettify": "^0.4.0",
     "gulp-release-tasks": "0.0.3",
     "gulp-rename": "^1.2.2",
