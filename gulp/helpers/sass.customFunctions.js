@@ -1,10 +1,9 @@
 var sizeOf = require('image-size');
 var sass = require('node-sass');
-var project = require('../../package.json');
 var config = require('../config.js');
 var fileExists = require('file-exists');
 
-if (fileExists('../../src/sass/styles.json')) {
+if (fileExists('./src/sass/styles.json')) {
     var styles = require('../../src/sass/styles.json');
 }
 
@@ -14,11 +13,11 @@ var customFunctions = {
     },
     'get-main-font()': function() {
         var returnValue = '';
-        if (fileExists('../../src/sass/styles.json')) {
+        if (styles !== undefined) {
             var matches = styles.fonts.filter(function(font) {
                 return font.main === true;
             });
-            var returnValue = (matches.length > 0 ? matches[0].name : config.defaults.sass.mainFont);
+            returnValue = (matches.length > 0 ? matches[0].name : config.defaults.sass.mainFont);
         } else {
             returnValue = config.defaults.sass.mainFont;
         }
@@ -34,6 +33,6 @@ var customFunctions = {
         var dimensions = sizeOf(config.src + 'img/' + image);
         return sass.types.Number(dimensions.height, 'px');
     }
-}
+};
 
 module.exports = customFunctions;
