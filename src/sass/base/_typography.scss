@@ -26,7 +26,7 @@
                     "margin-left",
                 );
 
-                @if index($rem-properties, $property) != null {
+                @if index($rem-properties, $property) != null and $value != "inherit" {
                     #{$property}: rem($value);
                 } @else if $property == "color" {
                     #{$property}: color($value);
