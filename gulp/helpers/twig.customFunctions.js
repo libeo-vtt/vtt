@@ -1,11 +1,10 @@
 var package = require('../../package.json');
 var project = require('../../project.json');
 var glob = require('glob');
-var argv = require('yargs').argv;
 var config = require('../config.js');
 var fileExists = require('file-exists');
 
-if (fileExists('../../src/sass/styles.json')) {
+if (fileExists('src/sass/styles.json')) {
     var styles = require('../../src/sass/styles.json');
 }
 
@@ -18,7 +17,7 @@ var customFunctions = [];
  */
 customFunctions.push({
     name: 'get_config',
-    func: function(args) {
+    func: function() {
         return config;
     }
 });
@@ -30,7 +29,7 @@ customFunctions.push({
  */
 customFunctions.push({
     name: 'get_project_informations',
-    func: function(args) {
+    func: function() {
         return project;
     }
 });
@@ -42,7 +41,7 @@ customFunctions.push({
  */
 customFunctions.push({
     name: 'get_project_version',
-    func: function(args) {
+    func: function() {
         return package.version;
     }
 });
@@ -54,7 +53,7 @@ customFunctions.push({
  */
 customFunctions.push({
     name: 'get_project_name',
-    func: function(args) {
+    func: function() {
         return project.name;
     }
 });
@@ -66,7 +65,7 @@ customFunctions.push({
  */
 customFunctions.push({
     name: 'get_project_displayedName',
-    func: function(args) {
+    func: function() {
         return project.displayedName;
     }
 });
@@ -78,7 +77,7 @@ customFunctions.push({
  */
 customFunctions.push({
     name: 'get_project_description',
-    func: function(args) {
+    func: function() {
         return project.description;
     }
 });
@@ -90,7 +89,7 @@ customFunctions.push({
  */
 customFunctions.push({
     name: 'get_project_keywords',
-    func: function(args) {
+    func: function() {
         return project.keywords;
     }
 });
@@ -102,7 +101,7 @@ customFunctions.push({
  */
 customFunctions.push({
     name: 'get_project_url',
-    func: function(args) {
+    func: function() {
         return project.url;
     }
 });
@@ -114,7 +113,7 @@ customFunctions.push({
  */
 customFunctions.push({
     name: 'get_project_repository',
-    func: function(args) {
+    func: function() {
         return project.repository;
     }
 });
@@ -126,7 +125,7 @@ customFunctions.push({
  */
 customFunctions.push({
     name: 'get_project_browsers',
-    func: function(args) {
+    func: function() {
         return project.browsers;
     }
 });
@@ -138,7 +137,7 @@ customFunctions.push({
  */
 customFunctions.push({
     name: 'get_project_responsive',
-    func: function(args) {
+    func: function() {
         return (project.responsive ? 'Oui' : 'Non');
     }
 });
@@ -150,7 +149,7 @@ customFunctions.push({
  */
 customFunctions.push({
     name: 'get_project_accessible',
-    func: function(args) {
+    func: function() {
         return (project.accessible ? 'Oui' : 'Non');
     }
 });
@@ -162,7 +161,7 @@ customFunctions.push({
  */
 customFunctions.push({
     name: 'get_project_retina',
-    func: function(args) {
+    func: function() {
         return (project.retina ? 'Oui' : 'Non');
     }
 });
@@ -174,7 +173,7 @@ customFunctions.push({
  */
 customFunctions.push({
     name: 'get_styles_json',
-    func: function(args) {
+    func: function() {
         return styles || {};
     }
 });
@@ -210,8 +209,8 @@ customFunctions.push({
  */
 customFunctions.push({
     name: 'get_webfonts',
-    func: function(args) {
-        var fonts = styles !== undefined ? styles.font : [];
+    func: function() {
+        var fonts = styles !== undefined ? styles.fonts : [];
         var webfonts = [];
         for (var index in fonts) {
             var font = fonts[index];
@@ -229,8 +228,8 @@ customFunctions.push({
  */
 customFunctions.push({
     name: 'get_webfonts_url',
-    func: function(args) {
-        var fonts = styles !== undefined ? styles.font : [];
+    func: function() {
+        var fonts = styles !== undefined ? styles.fonts : [];
         var url = 'http://fonts.googleapis.com/css?family=';
         for (var index in fonts) {
             var font = fonts[index];
@@ -250,13 +249,14 @@ customFunctions.push({
     name: 'get_svg_collection',
     func: function(collectionName) {
         var files = [];
+        var filesPath = '';
         var baseDirectory = config.src + 'svg/';
         if (collectionName === 'all') {
-            var filesPath = baseDirectory + '**/*.svg';
+            filesPath = baseDirectory + '**/*.svg';
         } else if (collectionName === 'generic' || collectionName === 'global') {
-            var filesPath = baseDirectory + '*.svg';
+            filesPath = baseDirectory + '*.svg';
         } else {
-            var filesPath = baseDirectory + collectionName + '**/*.svg';
+            filesPath = baseDirectory + collectionName + '**/*.svg';
         }
         glob.sync(filesPath).forEach(function(file) {
             var fileObject = {};
@@ -275,7 +275,7 @@ customFunctions.push({
  */
 customFunctions.push({
     name: 'get_static_pages',
-    func: function(args) {
+    func: function() {
         var files = [];
         var baseDirectory = config.src + 'twig/views/';
         var filesPath = baseDirectory + '**/*.twig';
