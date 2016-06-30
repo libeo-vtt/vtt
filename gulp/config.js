@@ -2,6 +2,7 @@ module.exports = {
     build: './build/',
     src: './src/',
     templates: './templates/',
+    exportPath: './export/',
     minify: false,
     imagemin: false,
     sourcemaps: true,

@@ -9,3 +9,9 @@ gulp.task('svg2png', function() {
         .pipe(gulpif(config.svgFallback, svg2png()))
         .pipe(gulpif(config.svgFallback, gulp.dest(config.build + 'img/svg-fallbacks/')));
 });
+
+gulp.task('svg2png:export', function() {
+    return gulp.src(config.src + 'svg/*.svg')
+        .pipe(gulpif(config.svgFallback, svg2png()))
+        .pipe(gulpif(config.svgFallback, gulp.dest(config.exportPath + 'img/svg-fallbacks/')));
+});
