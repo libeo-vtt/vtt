@@ -13,10 +13,11 @@
         }
     });
 
-    $body.on('mousedown', function() {
+    $body.on('mousemove.LibeoDataState', function(e) {
         if ($body.attr('data-state')) {
             $body.removeAttr('data-state');
         }
+        $body.off('mousemove.LibeoDataState');
     });
 
 }());
