@@ -193,7 +193,7 @@ customTags.push({
         args.forEach(function(value) {
             output += '<li class="breadcrumb-element"><a href="#">' + value + '</a></li>';
         });
-        output += '</nav></ul>';
+        output += '</ul></nav>';
         return output;
     }
 });
