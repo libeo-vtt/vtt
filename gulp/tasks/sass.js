@@ -46,7 +46,7 @@ gulp.task('sass', (argv.prod ? [] : ['sass:templates']), function() {
             outputStyle: 'compressed',
             functions: customFunctions
         }))
-        .pipe(postcss([autoprefixer({ browsers: ['last 2 versions', 'ie 10-11'] })]))
+        .pipe(postcss([autoprefixer({ browsers: ['last 2 versions', 'ie 10-11', 'iOS 8'] })]))
         .pipe(gulp.dest(config.build + 'css/'));
 });
 
