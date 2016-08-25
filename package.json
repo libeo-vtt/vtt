@@ -1,10 +1,10 @@
 {
-  "name": "vtt",
-  "version": "1.3.1",
-  "description": "Outil d'intégration frontend soucieux du SGQRI008.",
+  "name": "mcq-sosies",
+  "version": "0.0.1",
+  "description": "",
   "url": "http://localhost:3000",
-  "keywords": "vtt, starter, kit",
-  "repository": "https://github.com/libeo-vtt/vtt",
+  "keywords": "",
+  "repository": "https://gitlab.libeo.com/MCQ/sosies-web",
   "devDependencies": {
     "autoprefixer": "^6.3.6",
     "browser-sync": "^2.12.7",

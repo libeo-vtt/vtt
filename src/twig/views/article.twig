@@ -1,0 +1,21 @@
+{% extends "../main.twig" %}
+
+{% set title = "Article" %}
+{% set class = "is-article" %}
+{% set leftColumnClass = "" %}
+{% set rightColumnClass = "is-fixed" %}
+
+{% block leftColumn %}
+    <div class="column-content">
+        <h2>Article</h2>
+        {% for item in 1..5 %}
+        <p>{% lorem "200" %}</p>
+        {% endfor %}
+    </div>
+{% endblock %}
+
+{% block rightColumn %}
+    <div class="column-content">
+        <p>{% lorem "200" %}</p>
+    </div>
+{% endblock %}

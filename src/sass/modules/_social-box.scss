@@ -1,0 +1,37 @@
+// ---------------------------------- //
+//             Social box             //
+// ---------------------------------- //
+
+.social-box {
+    display: flex;
+    width: 100%;
+    margin: 50px 0;
+    justify-content: space-between;
+}
+
+.social-box-left,
+.social-box-right {
+    display: flex;
+    align-items: center;
+    .social-link {
+        fill: #72737c;
+        &:hover {
+            fill: $c-blue;
+        }
+        + .social-link {
+            margin-left: 40px;
+        }
+    }
+}
+
+.social-box-left {
+    svg {
+        fill: #c3c3c6;
+    }
+}
+
+.social-box-title {
+    margin: 0 15px 0 0;
+    color: #c3c3c6;
+    @include rem-typo(12px, 15px);
+}

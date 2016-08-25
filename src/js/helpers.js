@@ -2,6 +2,7 @@
 var helpers = [
     'equalheight.js',
     'external_links.js',
+    'flowtext.js',
     'font_resize.js',
     'keyboard_navigation.js',
     'mq_breakpoints.js',

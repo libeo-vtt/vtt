@@ -5,5 +5,4 @@
 
 // Modules
 
-// Example:
-// window.project.modules.exampleModule = $('.element').module();
+$('input[type="file"]').accessibleUpload();

@@ -23,9 +23,11 @@ img {
 body {
     overflow-x: hidden;
     min-width: $document-width;
-    font-family: get-main-font(), $font-fallback;
+    font-family: $font-main, $font-fallback;
     color: $c-txt-default;
     background-color: $c-bg-document;
+    background-image: url("../img/background-pattern.png");
+    background-attachment: fixed;
     @include respond-to(document-width) {
         min-width: 0;
     }

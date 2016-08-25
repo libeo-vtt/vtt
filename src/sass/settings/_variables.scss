@@ -2,53 +2,25 @@
 //             Variables             //
 // --------------------------------- //
 
+$document-width: 100vw;
 $spacing-default: 40px;
 $spacing-tablet: 30px;
 $spacing-mobile: 20px;
-$document-width: 1280px;
-$sidebar-width: 220px;
-$sidebar-margin: 20px;
+$respond-mobile: 767px;
 
 // ------------------------------ //
 //             Colors             //
 // ------------------------------ //
 
-@function color($color) {
-    @if variable-exists(colors) {
-        $return-value: null;
-        @each $current in $colors {
-            $name: map-get($current, "name");
-            $value: map-get($current, "value");
-            @if $name == $color {
-                $return-value: $value;
-            }
-        }
-        @if $return-value != null {
-            @return $return-value;
-        } @else {
-            @warn "Unfortunately, no value could be retrieved from `#{$color}`. Please make sure it is defined in `$colors` map.";
-            @return null;
-        }
-    }
-}
-
-// ------------------------------ //
-
-// Fallback values
 $c-bg-document: #fff;
-$c-border-default: #1a1a1a;
-$c-txt-default: #1a1a1a;
+$c-border-default: #c3c3c6;
+$c-txt-default: #72737c;
 $c-alert: #ca0003;
-
-@if variable-exists(colors) {
-    $c-bg-document: color("c-white");
-    $c-border-default: color("c-black");
-    $c-txt-default: color("c-black");
-    $c-alert: color("c-red");
-}
+$c-blue: #3bb7e8;
 
 // ----------------------------- //
 //             Fonts             //
 // ----------------------------- //
 
+$font-main: "Raleway";
 $font-fallback: "Arial", sans-serif;
