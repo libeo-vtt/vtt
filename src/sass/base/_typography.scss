@@ -2,27 +2,65 @@
 //             Typography             //
 // ---------------------------------- //
 
-h2 {
-    font-size: 50px;
-    font-weight: 800;
-    line-height: 1.2;
-    letter-spacing: 0.05em;
-    text-transform: uppercase;
-    color: #53535a;
-}
+@if variable-exists(typography) {
+    @each $typo in $typography {
+        $typo-selector: map-get($typo, "selector");
+        $typo-type: map-get($typo, "type");
+        $typo-properties: map-get($typo, "properties");
+        $typo-breakpoints: map-get($typo, "breakpoints");
 
-p {
-    font-size: 15px;
-    font-weight: 400;
-    line-height: 1.4;
-    letter-spacing: 0.04em;
-    color: #72737c;
-}
+        @if $typo-type == "id" { $typo-selector: "#" + $typo-selector; }
+        @if $typo-type == "class" { $typo-selector: "." + $typo-selector; }
+        @if $typo-type == "element" { $typo-selector: $typo-selector + ", ." + $typo-selector; }
 
-a {
-    text-decoration: underline;
-    color: $c-blue;
-    &:hover {
-        text-decoration: none;
+        #{$typo-selector} {
+            @each $current in $typo-properties {
+                $property: nth($current, 1);
+                $value: nth($current, 2);
+                $rem-properties: (
+                    "font-size",
+                    "line-height",
+                    "margin-top",
+                    "margin-right",
+                    "margin-bottom",
+                    "margin-left",
+                );
+
+                @if index($rem-properties, $property) != null and $value != "inherit" {
+                    #{$property}: rem($value);
+                } @else if $property == "color" {
+                    #{$property}: color($value);
+                } @else {
+                    #{$property}: $value;
+                }
+            }
+
+            @each $breakpoint in $typo-breakpoints {
+                $name: nth($breakpoint, 1);
+                $typo-properties: nth($breakpoint, 2);
+                @include respond-to($name) {
+                    @each $current in $typo-properties {
+                        $property: nth($current, 1);
+                        $value: nth($current, 2);
+                        $rem-properties: (
+                            "font-size",
+                            "line-height",
+                            "margin-top",
+                            "margin-right",
+                            "margin-bottom",
+                            "margin-left",
+                        );
+
+                        @if index($rem-properties, $property) != null and $value != "inherit" {
+                            #{$property}: rem($value);
+                        } @else if $property == "color" {
+                            #{$property}: color($value);
+                        } @else {
+                            #{$property}: $value;
+                        }
+                    }
+                }
+            }
+        }
     }
 }

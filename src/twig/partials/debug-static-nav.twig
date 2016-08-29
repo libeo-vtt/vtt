@@ -1,0 +1,28 @@
+{% set config = get_config() %}
+{% set project = get_project_informations() %}
+
+{% if config.showDebugStaticNav %}
+
+<!-- DEBUG -->
+<nav style="position: fixed; bottom: 0; left: 0; width: 100%; padding: 10px 20px; background-color: #1a1a1a; text-align: center;">
+    <ul>
+        {% if project.templates %}
+            <li style="display: inline-block; vertical-align: middle;">
+                <a href="/templates" style="color: #fff; text-transform: uppercase; font-size: 12px; text-decoration: none;">[ Templates ]</a>
+            </li>
+        {% endif %}
+        {% for page in get_static_pages() %}
+            {% if loop.index == 0 and not project.templates %}
+                {% set styles = 'display: inline-block; vertical-align: middle;' %}
+            {% else %}
+                {% set styles = 'display: inline-block; vertical-align: middle; margin-left: 15px;' %}
+            {% endif %}
+            <li style="{{ styles }}">
+                <a href="/{{ page }}" style="color: #fff; text-transform: uppercase; font-size: 12px; text-decoration: none;">{{ page|replace({'.html': ''}) }}</a>
+            </li>
+        {% endfor %}
+    </ul>
+</nav>
+<!-- END DEBUG -->
+
+{% endif %}

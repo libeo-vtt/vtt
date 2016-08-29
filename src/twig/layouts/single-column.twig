@@ -1,0 +1,17 @@
+{% extends "../main.twig" %}
+
+{% block page %}
+<div class="l-page">
+
+    <div class="l-content" role="main">
+        <div class="l-content-wrapper is-single-column">
+            <div class="l-page-wrapper">
+                <div class="l-block-content">
+                    {% block content %}{% endblock %}
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+{% endblock %}

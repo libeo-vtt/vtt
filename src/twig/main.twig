@@ -31,6 +31,9 @@
     <!-- Stylesheets -->
     {% stylesheet "/css/main.css" %}
 
+    <!-- Templates styles -->
+    {% if templates == true %}{% stylesheet "/templates/css/templates.css" %}{% endif %}
+
     <!-- Modernizr & Detectizr -->
     {% script "/js/vendor/modernizr.min.js" %}
     {% script "/js/vendor/detectizr.min.js" %}
@@ -38,23 +41,30 @@
     {% script "/js/vendor/bower/svg4everybody.js" %}
 
     <!-- Google Font Fallback -->
-    <!-- <link rel="stylesheet" href=""> -->
+    <link rel="stylesheet" href="{{ get_webfonts_url() }}">
 
 </head>
 <body class="{{ class }}">
 
+    <a href="#skip-menu-anchor" class="skip-menu-link">Passer au menu</a>
+    <a href="#skip-content-anchor" class="skip-content-link">Passer au contenu</a>
+
+    <!-- Header -->
+    {% if templates == true %}
+        {% include "../../templates/twig/partials/header.twig" %}
+    {% else %}
+        {% include "partials/header.twig" %}
+    {% endif %}
+
     <!-- Content -->
-    <div class="columns-wrapper">
-        <div class="column column-left {{ leftColumnClass }}">
-            {% block leftColumn %}{% endblock %}
-        </div>
-        <div class="column column-right {{ rightColumnClass }}">
-            {% block rightColumn %}{% endblock %}
-        </div>
-    </div>
+    {% block page %}{% endblock %}
 
     <!-- Footer -->
-    {% include "partials/footer.twig" %}
+    {% if templates == true %}
+        {% include "../../templates/twig/partials/footer.twig" %}
+    {% else %}
+        {% include "partials/footer.twig" %}
+    {% endif %}
 
     {# google-analytics "XX-XXXXXXXX-X" #}
 
@@ -69,9 +79,7 @@
     {% script "/js/vendor/bower/webfontloader.js" %}
 
     <!-- jQuery dependencies -->
-    {% script "/js/vendor/bower/jquery.accessibleUpload.js" %}
     {% script "/js/vendor/bower/jquery.waitforimages.js" %}
-    {% script "/js/vendor/bower/jquery.flowtext.js" %}
 
     <!-- Helpers -->
     {% script "/js/helpers.js" %}
@@ -82,10 +90,13 @@
     <!-- Main file -->
     {% script "/js/main.js" %}
 
+    <!-- Templates -->
+    {% if templates == true %}{% script "/templates/js/templates.js" %}{% endif %}
+
     <script>
     WebFont.load({
         google: {
-            families: ["Raleway", "Raleway:400", "Raleway:800", "Raleway:600"]
+            families: {{ get_webfonts()|json_encode|raw }}
         }
     });
     </script>

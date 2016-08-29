@@ -1,0 +1,53 @@
+// ----------------------------------------- //
+//             Navigation - Main             //
+// ----------------------------------------- //
+
+.nav-main {
+    .toplevel {
+        font-size: 0;
+    }
+    .toplevel-item {
+        display: inline-block;
+        vertical-align: bottom;
+        position: relative;
+        margin: 0;
+        font-size: 1rem;
+        &:last-child .sublevel {
+            right: 0;
+            left: auto;
+        }
+        &:hover .sublevel {
+            display: block;
+        }
+    }
+    a {
+        display: block;
+        padding: 10px 15px;
+        background-color: #efefef;
+        &:hover {
+            text-decoration: none;
+            background-color: darken(#efefef, 10%);
+        }
+    }
+    .sublevel {
+        display: none;
+        z-index: 1;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        min-width: 100%;
+        .sublevel-item {
+            display: block;
+            margin: 0;
+        }
+        .sublevel-item-wrap > a {
+            white-space: nowrap;
+        }
+    }
+    &.is-fullwidth {
+        .toplevel-item {
+            display: table-cell;
+            width: $document-width;
+        }
+    }
+}

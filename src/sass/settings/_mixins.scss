@@ -2,10 +2,6 @@
 //             Mixins             //
 // ------------------------------ //
 
-@function vw($value) {
-    @return $value / 1440px * 100vw;
-}
-
 @mixin headers {
     h1,
     h2,

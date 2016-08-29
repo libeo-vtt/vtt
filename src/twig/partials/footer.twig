@@ -1,32 +1,7 @@
-<footer class="footer">
-    <div class="footer-left">
-        <div class="footer-logo">
-            <img src="../img/logo-footer.png" alt="">
-        </div>
-        <div class="footer-informations">
-            <p>85, rue Dalhousie<br>
-            Québec (Québec) G1K 8R2</p>
+<footer class="l-footer">
+    <div class="l-page-wrapper">
 
-            <p>418 643-2158<br>
-            1 866 710-8031<br>
-            <a href="#">musee@mcq.org</a></p>
-        </div>
-        <div class="footer-left-bottom">
-            <div class="social-wrapper is-horizontal">
-                <a href="#" class="social-link">{% svg "icon-facebook", "15x30"%}</a>
-                <a href="#" class="social-link">{% svg "icon-twitter", "30x25"%}</a>
-                <a href="#" class="social-link">{% svg "icon-instagram", "32x32"%}</a>
-            </div>
-            <div class="footer-copyright">© Musées de la civilisation. Août 2016</div>
-        </div>
-    </div>
-    <div class="footer-right">
-        {% svg "icon-partners", "62x60"%}
-        <h2 class="footer-title-partners">Merci à nos<br>partenaires</h2>
-        {% for item in 1..4 %}
-        <div class="footer-partner-item">
-            <a href="#">{% placeholder "120x60", "Partner" %}</a>
-        </div>
-        {% endfor %}
     </div>
 </footer>
+
+{% include "debug-static-nav.twig" %}

@@ -1,111 +1,20 @@
-{% extends "../main.twig" %}
+{% extends "../layouts/single-column.twig" %}
 
-{% set title = "Home" %}
-{% set class = "is-home" %}
-{% set leftColumnClass = "is-fixed" %}
-{% set rightColumnClass = "" %}
+{% set title = "" %}
+{% set class = "" %}
 
-{% block leftColumn %}
-    <div class="column-content">
-        <a href="#" class="logo"><img src="../svg/originals/logo.svg" alt=""></a>
-    </div>
-{% endblock %}
+{% block content %}
 
-{% block rightColumn %}
-    <div class="column-content">
-        {# ----------------------- #}
+    <hr class="is-hidden">
+    <h1 class="is-hidden">{{ get_project_displayedName() }}</h1>
 
-        <div class="column-section">
-            <div class="column-section-wrapper">
-                <h2 class="section-title">Vous avez l’allure de César ou une tête de vénus&nbsp;?</h2>
-                <div class="video-wrapper"><iframe width="560" height="315" src="https://www.youtube.com/embed/y1ttanc72xk" frameborder="0" allowfullscreen></iframe></div>
-                <div class="social-wrapper is-vertical">
-                    <a href="#" class="social-link">{% svg "icon-facebook", "15x30"%}</a>
-                    <a href="#" class="social-link">{% svg "icon-twitter", "30x25"%}</a>
-                    <a href="#" class="social-link">{% svg "icon-instagram", "32x32"%}</a>
-                </div>
-            </div>
-            {% svg "icon-scroll-down", "24x54"%}
-        </div>
+    {% svg "logo", "300x100" %}
+    <hr class="is-hidden">
 
-        {# ----------------------- #}
+    <img src="http://i.imgur.com/1sIuOKF.gif" alt="">
 
-        <div class="column-section">
-            <div class="form-section">
-                <h2 class="section-title">Trouvez votre sosie!</h2>
-                <p>Le thème des sosies vous amuse ? Participez à la création de l’exposition en proposant une photographie de votre visage. Un outil Web se chargera d’effectuer le couplage entre les têtes d’aujourd’hui et la statuaire datant de 2000 ans.</p>
-                <p>Qui sait ? Peut-être vous retrouverez-vous dans l’exposition, aux côtés d’Alexandre le Grand ou d’une nymphe grecque ? Allez, c’est l’heure de la photo. Souriez en regardant le petit oiseau !</p>
-                <form action="#" class="form-wrapper">
-                    <div class="form-row">
-                        <input type="file" id="form-input-1">
-                        <label for="form-input-1" class="form-input-label-photo">{% svg "icon-photo", "33x21"%} Ajouter une photo</label>
-                    </div>
-                    {% set labels = ["Prénom", "Nom", "Courriel", "Téléphone"] %}
-                    {% for label in labels %}
-                    <div class="form-row">
-                        <label class="form-input-label" for="form-input-{{ loop.index + 1 }}">{{ label }}</label>
-                        <input type="input" class="form-input form-input-text" id="form-input-{{ loop.index + 1 }}">
-                    </div>
-                    {% endfor %}
-                    <div class="form-confirmation">
-                        <div class="fake-checkbox-wrapper">
-                            <input type="checkbox" class="fake-checkbox" id="form-input-6">
-                            <label for="form-input-6" class="fake-checkbox-label"><span>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean euismod bibendum <a href="#">Réglements et conditions.</a></span></label>
-                        </div>
-                    </div>
-                    <div class="form-actions">
-                        <button class="btn btn-outline is-blue">Trouvez votre sosie</button>
-                    </div>
-                </form>
-            </div>
+    <pre>{{ get_project_displayedName() }} - {{ get_project_version() }}</pre>
+    <pre>{{ get_project_description() }}</pre>
+    <pre><a href="{{ get_project_repository() }}">{{ get_project_repository() }}</a></pre>
 
-            <div class="form-section form-completed">
-                <div class="match-wrapper">
-                    <div class="match-item">
-                        <div class="match-image">{% placeholder "300x400", "Image" %}</div>
-                        <span class="match-name">Laurence Chouinard</span>
-                    </div>
-                    <div class="match-item">
-                        <div class="match-image">{% placeholder "300x400", "Image" %}</div>
-                        <span class="match-name">Reine Égyptienne</span>
-                    </div>
-                </div>
-                <p>{% lorem "50" %}</p>
-                {% include "../partials/social-box.twig" %}
-                <form action="#" class="form-wrapper">
-                    <div class="form-actions">
-                        <button class="btn btn-outline is-blue">Recommencer</button>
-                    </div>
-                </form>
-            </div>
-        </div>
-
-        {# ----------------------- #}
-
-        <div class="column-section">
-            <h2 class="section-title">Plus sur l'exposition</h2>
-            <p>{% lorem "60" %} <a href="#">{% lorem "3" %}</a> {% lorem "40" %}</p>
-            <p>{% lorem "100" %}</p>
-        </div>
-
-        {# ----------------------- #}
-
-        <div class="column-section">
-            <h2 class="section-title">Quoi de neuf sur l'expo</h2>
-            {% for item in 1..5 %}
-            <div class="news-item">
-                <h3 class="news-item-title"><a href="#">{% lorem "4" %}</a></h3>
-                <span class="news-item-date">{{ random(30) }} {{ random(['juin', 'juillet', 'août']) }} 2016</span>
-                <p>{% lorem "50" %}</p>
-                {% if random(1) %}
-                <div class="news-item-image">
-                    {% placeholder "500x300", "Image" %}
-                </div>
-                {% endif %}
-            </div>
-            {% endfor %}
-        </div>
-
-        {# ----------------------- #}
-    </div>
 {% endblock %}

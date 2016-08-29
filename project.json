@@ -1,10 +1,11 @@
 {
-  "name": "mcq-sosies",
-  "displayedName": "MCQ - Sosies",
-  "description": "",
-  "repository": "https://gitlab.libeo.com/MCQ/sosies-web",
-  "templates": false,
+  "name": "vtt",
+  "displayedName": "VTT",
+  "description": "Outil d'intégration frontend soucieux du SGQRI008.",
+  "repository": "https://github.com/libeo-vtt/vtt",
   "browsers": [
+    "Internet Explorer 8",
+    "Internet Explorer 9",
     "Internet Explorer 10",
     "Internet Explorer 11",
     "Microsoft Edge",
@@ -12,7 +13,8 @@
     "Firefox (dernière version)",
     "Safari (dernière version)"
   ],
-  "responsive": true,
-  "accessible": false,
-  "retina": true
+  "templates": true,
+  "responsive": "",
+  "accessible": "",
+  "retina": ""
 }

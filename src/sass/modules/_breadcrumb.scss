@@ -1,0 +1,21 @@
+// ---------------------------------- //
+//             Breadcrumb             //
+// ---------------------------------- //
+
+.breadcrumb {
+    .breadcrumb-element {
+        display: inline-block;
+        vertical-align: middle;
+        margin: 0;
+        + .breadcrumb-element:before {
+            content: "\0203A";
+            margin: 0 0.5em;
+            font-weight: bold;
+        }
+    }
+    a,
+    .breadcrumb-element:before {
+        display: inline-block;
+        vertical-align: middle;
+    }
+}

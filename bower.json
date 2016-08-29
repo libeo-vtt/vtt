@@ -1,11 +1,11 @@
 {
-  "name": "mcq-sosies",
-  "version": "0.0.1",
-  "homepage": "http://localhost:3000",
+  "name": "vtt",
+  "version": "1.3.1",
+  "homepage": "https://github.com/libeo-vtt/vtt",
   "authors": [
     "libeo <info@libeo.com>"
   ],
-  "description": "",
+  "description": "Outil d'intégration frontend soucieux du SGQRI008.",
   "private": true,
   "ignore": [
     "node_modules"
@@ -15,8 +15,6 @@
     "svg4everybody": "^2.0.3",
     "webfontloader": "^1.6.24",
     "waitForImages": "^2.2.0",
-    "underscore": "^1.8.3",
-    "vtt-jquery-flowtext": "https://github.com/libeo-vtt/jquery-flowtext.git#^1.1.0",
-    "vtt-jquery-accessible-upload": "https://github.com/libeo-vtt/jquery-accessibleUpload.git#^1.1.1"
+    "underscore": "^1.8.3"
   }
 }
