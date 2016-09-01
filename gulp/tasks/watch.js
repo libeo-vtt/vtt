@@ -40,7 +40,6 @@ gulp.task('watch', ['browser-sync'], function() {
     watch(config.src + 'img/**/*', function() {
         runSequence('clean:img', 'watch:img', function() {
             browserSync.reload();
-            browserSync.reload();
             gutil.log(gutil.colors.green(completedMessage));
         });
     });
