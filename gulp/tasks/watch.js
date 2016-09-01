@@ -1,9 +1,13 @@
 var gulp = require('gulp');
 var browserSync = require('browser-sync');
 var runSequence = require('run-sequence');
+var gutil = require('gulp-util');
 var watch = require('gulp-watch');
 
 var config = require('../config.js');
+var package = require('../../package.json');
+
+var completedMessage = 'Watch task completed\n\nCurrently watching project → ' + package.name + '\n';
 
 gulp.task('watch:js', ['bower', 'concat:helpers', 'copy:js']);
 gulp.task('watch:img', ['copy:img']);
@@ -20,34 +24,52 @@ gulp.task('watch', ['browser-sync'], function() {
     watch(config.src + 'js/**/*', function() {
         runSequence('clean:js', 'watch:js', function() {
             browserSync.reload();
-            runSequence('eslint');
+            runSequence('eslint', function() {
+                gutil.log(gutil.colors.green(completedMessage));
+            });
         });
     });
     watch(config.src + 'sass/**/*', function() {
         runSequence('clean:sass', 'watch:sass', function() {
             browserSync.reload();
-            runSequence('sasslint');
+            runSequence('sasslint', function() {
+                gutil.log(gutil.colors.green(completedMessage));
+            });
         });
     });
     watch(config.src + 'img/**/*', function() {
-        runSequence('clean:img', 'watch:img', browserSync.reload);
+        runSequence('clean:img', 'watch:img', browserSync.reload, function() {
+            gutil.log(gutil.colors.green(completedMessage));
+        });
     });
     watch(config.src + 'twig/**/*', function() {
-        runSequence('clean:twig', 'watch:twig', browserSync.reload);
+        runSequence('clean:twig', 'watch:twig', browserSync.reload, function() {
+            gutil.log(gutil.colors.green(completedMessage));
+        });
     });
     watch(config.src + 'svg/**/*', function() {
-        runSequence('clean:svg', 'watch:svg', browserSync.reload);
+        runSequence('clean:svg', 'watch:svg', browserSync.reload, function() {
+            gutil.log(gutil.colors.green(completedMessage));
+        });
     });
     watch(config.templates + 'sass/**/*', function() {
-        runSequence('clean:sass:templates', 'watch:sass:templates', browserSync.reload);
+        runSequence('clean:sass:templates', 'watch:sass:templates', browserSync.reload, function() {
+            gutil.log(gutil.colors.green(completedMessage));
+        });
     });
     watch(config.templates + 'js/**/*', function() {
-        runSequence('clean:js:templates', 'watch:js:templates', browserSync.reload);
+        runSequence('clean:js:templates', 'watch:js:templates', browserSync.reload, function() {
+            gutil.log(gutil.colors.green(completedMessage));
+        });
     });
     watch(config.templates + 'twig/**/*', function() {
-        runSequence('clean:twig:templates', 'watch:twig:templates', browserSync.reload);
+        runSequence('clean:twig:templates', 'watch:twig:templates', browserSync.reload, function() {
+            gutil.log(gutil.colors.green(completedMessage));
+        });
     });
     watch('bower.json', function() {
-        runSequence('clean:bower', 'watch:bower');
+        runSequence('clean:bower', 'watch:bower', function() {
+            gutil.log(gutil.colors.green(completedMessage));
+        });
     });
 });
