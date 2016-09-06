@@ -233,7 +233,7 @@ customFunctions.push({
         var url = 'http://fonts.googleapis.com/css?family=';
         for (var index in fonts) {
             var font = fonts[index];
-            var webfont = (index > 0 ? '%7C' : '') + font.name.replace(' ', '+') + ':' + font.variants.join();
+            var webfont = (index > 0 ? '%7C' : '') + font.name.split(' ').join('+') + ':' + font.variants.join();
             url += webfont;
         }
         return url;
