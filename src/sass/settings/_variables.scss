@@ -1,3 +1,5 @@
+@import "styles.json";
+
 // --------------------------------- //
 //             Variables             //
 // --------------------------------- //
@@ -35,16 +37,16 @@ $sidebar-margin: 20px;
 // ------------------------------ //
 
 // Fallback values
-$c-bg-document: #fff;
-$c-border-default: #1a1a1a;
-$c-txt-default: #1a1a1a;
-$c-alert: #ca0003;
-
 @if variable-exists(colors) {
     $c-bg-document: color("c-white");
     $c-border-default: color("c-black");
     $c-txt-default: color("c-black");
     $c-alert: color("c-red");
+} @else {
+    $c-bg-document: #fff;
+    $c-border-default: #1a1a1a;
+    $c-txt-default: #1a1a1a;
+    $c-alert: #ca0003;
 }
 
 // ----------------------------- //
