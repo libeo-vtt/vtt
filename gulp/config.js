@@ -2,10 +2,17 @@ module.exports = {
     build: './build/',
     src: './src/',
     documentation: true,
-    minify: true,
-    imagemin: true,
+    templates: './templates/',
+    exportPath: './export/',
+    minify: false,
+    imagemin: false,
     sourcemaps: true,
     svgFallback: false,
+    showDebugStaticNav: true,
+    lint: {
+        js: true,
+        sass: true
+    },
     prettify: {
         indent_inner_html: false,
         indent_size: 4,
@@ -30,6 +37,9 @@ module.exports = {
         },
         svgSprite: {
             filename: 'symbols.svg'
+        },
+        sass: {
+            mainFont: 'Roboto'
         },
         twig: {
             data: false,

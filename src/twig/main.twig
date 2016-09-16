@@ -9,7 +9,6 @@
     {% endif %}
 
     <meta charset="UTF-8">
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 
     <meta name="description" content="{{ get_project_description() }}">
     <meta name="dcterms.description" content="{{ get_project_description() }}" />
@@ -33,16 +32,16 @@
     {% stylesheet "/css/main.css" %}
 
     <!-- Templates styles -->
-    {% if templates == true %}{% stylesheet "/css/templates.css" %}{% endif %}
+    {% if templates == true %}{% stylesheet "/templates/css/templates.css" %}{% endif %}
 
     <!-- Modernizr & Detectizr -->
     {% script "/js/vendor/modernizr.min.js" %}
     {% script "/js/vendor/detectizr.min.js" %}
 
-    {% script "/js/vendor/svg4everybody.ie8.min.js" %}
+    {% script "/js/vendor/bower/svg4everybody.js" %}
 
     <!-- Google Font Fallback -->
-    <link href='http://fonts.googleapis.com/css?family=Roboto%7CRoboto:bold%7CRoboto:italic' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" href="{{ get_webfonts_url() }}" media="all">
 
 </head>
 <body class="{{ class }}">
@@ -52,9 +51,9 @@
 
     <!-- Header -->
     {% if templates == true %}
-        {% include 'templates/partials/header.twig' %}
+        {% include "../../templates/twig/partials/header.twig" %}
     {% else %}
-        {% include 'partials/header.twig' %}
+        {% include "partials/header.twig" %}
     {% endif %}
 
     <!-- Content -->
@@ -62,15 +61,45 @@
 
     <!-- Footer -->
     {% if templates == true %}
-        {% include 'templates/partials/footer.twig' %}
+        {% include "../../templates/twig/partials/footer.twig" %}
     {% else %}
-        {% include 'partials/footer.twig' %}
+        {% include "partials/footer.twig" %}
     {% endif %}
 
     {# google-analytics "XX-XXXXXXXX-X" #}
 
-    <!-- Javascript bundle -->
-    {% script "/js/bundle.js" %}
+    <!-- Javascript -->
+
+    <!-- Project -->
+    {% script "/js/project.js" %}
+
+    <!-- Vendors -->
+    {% script "/js/vendor/bower/jquery.js" %}
+    {% script "/js/vendor/bower/underscore.js" %}
+    {% script "/js/vendor/bower/webfontloader.js" %}
+
+    <!-- jQuery dependencies -->
+    {% script "/js/vendor/bower/jquery.waitforimages.js" %}
+
+    <!-- Helpers -->
+    {% script "/js/helpers.js" %}
+
+    <!-- Modules -->
+    {# script "/js/vendor/bower/jquery.moduleName.js" #}
+
+    <!-- Main file -->
+    {% script "/js/main.js" %}
+
+    <!-- Templates -->
+    {% if templates == true %}{% script "/templates/js/templates.js" %}{% endif %}
+
+    <script>
+    WebFont.load({
+        google: {
+            families: {{ get_webfonts()|json_encode|raw }}
+        }
+    });
+    </script>
 
 </body>
 </html>

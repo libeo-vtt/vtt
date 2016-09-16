@@ -1,6 +1,7 @@
 # OS Junk
 .DS_Store
 ThumbsDB
+completer.hist
 
 # Sass Junk
 .sass-cache

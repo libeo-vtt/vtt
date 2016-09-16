@@ -3,13 +3,12 @@ var argv = require('yargs').argv;
 var requireDir = require('require-dir');
 var runSequence = require('run-sequence');
 
+require('gulp-release-tasks')(gulp);
+
 requireDir('./gulp/tasks', { recurse: true });
 
-gulp.task('build', ['browserify', 'sass', 'copy', 'documentation', 'svg2png', 'svgSprite', 'twig']);
+gulp.task('build', ['bower', 'sass', 'copy', 'concat:helpers', 'concat:templates', 'svg2png', 'svgSprite', 'twig', 'documentation']);
+gulp.task('export', ['bower:export', 'sass:export', 'copy:export', 'concat:helpers:export', 'svg2png:export', 'svgSprite:export']);
 gulp.task('default', function() {
-    if (argv.prod) {
-        runSequence('clean', 'build');
-    } else {
-        runSequence('clean', 'build', 'symlink', 'watch');
-    }
+    runSequence('clean', 'build', 'symlink', 'watch');
 });

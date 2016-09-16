@@ -1,3 +1,5 @@
+@import "styles.json";
+
 // --------------------------------- //
 //             Variables             //
 // --------------------------------- //
@@ -6,92 +8,49 @@ $spacing-default: 40px;
 $spacing-tablet: 30px;
 $spacing-mobile: 20px;
 $document-width: 1280px;
-
-// ------------------------------------- //
-//             Media queries             //
-// ------------------------------------- //
-
-// Media queries
-$mq-breakpoints: (
-    "mobile": (
-        min: false,
-        max: 767px,
-        grid: true,
-        export: true
-    ),
-    "tablet": (
-        min: 768px,
-        max: 1024px,
-        grid: true,
-        export: true
-    ),
-    "desktop": (
-        min: 1025px,
-        max: false,
-        grid: true,
-        export: true
-    ),
-    "mobile-tablet": (
-        min: false,
-        max: 1024px,
-        grid: false,
-        export: false
-    ),
-    "document-width": (
-        min: false,
-        max: $document-width,
-        grid: false,
-        export: false
-    )
-);
+$sidebar-width: 220px;
+$sidebar-margin: 20px;
 
 // ------------------------------ //
 //             Colors             //
 // ------------------------------ //
 
-$colors: (
-    "black": (
-        "base": #000,
-        "light": #555
-    ),
-    "white": (
-        "base": #fff,
-        "dark": darken(#fff, 10%)
-    ),
-    "grey": (
-        "base": #d5d5d5
-    ),
-    "red": (
-        "base": #f00
-    )
-);
-
-@function color($color, $tone: "base") {
-    @if map-has-key($colors, $color) {
-        @return map-get(map-get($colors, $color), $tone);
-    } @else {
-        @warn "Unfortunately, no value could be retrieved from `#{$color}`. Please make sure it is defined in `$colors` map.";
-        @return null;
+@function color($color) {
+    @if variable-exists(colors) {
+        $return-value: null;
+        @each $current in $colors {
+            $name: map-get($current, "name");
+            $value: map-get($current, "value");
+            @if $name == $color {
+                $return-value: $value;
+            }
+        }
+        @if $return-value != null {
+            @return $return-value;
+        } @else {
+            @warn "Unfortunately, no value could be retrieved from `#{$color}`. Please make sure it is defined in `$colors` map.";
+            @return null;
+        }
     }
 }
 
 // ------------------------------ //
 
-$c-bg-document: color("white");
-$c-border-default: color("grey");
-$c-txt-default: color("black");
-$c-txt-headers: color("black", "light");
-$c-txt-intro: color("black", "light");
-$c-txt-links: color("black", "light");
-$c-alert: color("red");
+$c-bg-document: #fff;
+$c-border-default: #1a1a1a;
+$c-txt-default: #1a1a1a;
+$c-alert: #ca0003;
+
+// Fallback values
+@if variable-exists(colors) {
+    $c-bg-document: color("c-white");
+    $c-border-default: color("c-black");
+    $c-txt-default: color("c-black");
+    $c-alert: color("c-red");
+}
 
 // ----------------------------- //
 //             Fonts             //
 // ----------------------------- //
 
-$ff-roboto: "Roboto", "Arial", sans-serif;
-
-// ------------------------------ //
-
-$ff-default: $ff-roboto;
-$ff-headers: $ff-roboto;
+$font-fallback: "Arial", sans-serif;

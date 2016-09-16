@@ -1,14 +1,13 @@
 #!/usr/bin/env node
 
 var program = require('commander');
-var fs = require('fs');
+var fs = require('graceful-fs');
 var inquirer = require('inquirer');
 var project = require('./package.json');
 var config = require('./gulp/config.js');
 
 program
     .version(project.version)
-    .option('-n, --name <name>', 'module name')
     .parse(process.argv);
 
 function replaceAll(find, replace, str) {
@@ -46,6 +45,12 @@ var questions = [{
         return input !== '' ? true : 'You must enter a valid name.';
     }
 }, {
+    name: 'description',
+    message: 'Module description:',
+    validate: function(input) {
+        return input !== '' ? true : 'You must enter a valid description.';
+    }
+}, {
     name: 'js',
     type: 'confirm',
     message: 'Create javascript module?',
@@ -58,10 +63,10 @@ var questions = [{
 }];
 
 // Prompt user for project informations
-inquirer.prompt(questions, function(answers) {
+inquirer.prompt(questions).then(function (answers) {
     if (answers.js) {
         var jsTemplateFile = './.templates/module.js',
-            jsNewFile = './src/js/modules/' + answers.name + '.js';
+            jsNewFile = './src/js/modules/jquery.' + answers.name + '.js';
 
         fs.exists(jsNewFile, function(exists) {
             if (exists) {
@@ -75,10 +80,9 @@ inquirer.prompt(questions, function(answers) {
                 fs.readFile(jsNewFile, 'utf8', function(error, data) {
                     if (error) return console.log(error);
 
-                    data = replaceAll('{{HEADER}}', header(answers.name), data);
-                    data = replaceAll('{{MODULE_NAME_LOWERCASE}}', lowercase(answers.name), data);
-                    data = replaceAll('{{MODULE_NAME}}', camelcase(answers.name), data);
-                    data = replaceAll('PROJECT_NAME', project.jsname, data);
+                    data = replaceAll('MODULE_NAME_LOWERCASE', lowercase(answers.name), data);
+                    data = replaceAll('MODULE_NAME_UPPERCASE', camelcase(answers.name), data);
+                    data = replaceAll('MODULE_DESCRIPTION', answers.description, data);
 
                     fs.writeFile(jsNewFile, data, 'utf8', function(error) {
                         if (error) return console.log(error);
@@ -107,9 +111,9 @@ inquirer.prompt(questions, function(answers) {
                 fs.readFile(sassNewFile, 'utf8', function(error, data) {
                     if (error) return console.log(error);
 
-                    data = replaceAll('{{HEADER}}', header(answers.name), data);
-                    data = replaceAll('{{MODULE_NAME_LOWERCASE}}', lowercase(answers.name), data);
-                    data = replaceAll('{{MODULE_NAME}}', camelcase(answers.name), data);
+                    data = replaceAll('HEADER', header(answers.name), data);
+                    data = replaceAll('MODULE_NAME_LOWERCASE', lowercase(answers.name), data);
+                    data = replaceAll('MODULE_NAME_UPPERCASE', camelcase(answers.name), data);
 
                     fs.writeFile(sassNewFile, data, 'utf8', function(error) {
                         if (error) return console.log(error);

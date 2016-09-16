@@ -238,15 +238,6 @@
     transform-origin: $origin;
 }
 
-// Transition
-@mixin transition($transition-property, $transition-time, $method: linear) {
-    -webkit-transition: $transition-property $transition-time $method;
-    -moz-transition: $transition-property $transition-time $method;
-    -ms-transition: $transition-property $transition-time $method;
-    -o-transition: $transition-property $transition-time $method;
-    transition: $transition-property $transition-time $method;
-}
-
 // Border-radius
 @mixin border-radius($radius) {
     background-clip: padding-box;
@@ -302,10 +293,44 @@
 
 // Respond-to
 @mixin respond-to($breakpoint) {
-    $bp-value: map-get($mq-breakpoints, $breakpoint);
-    @if $bp-value == null {
+    $existingBreakpoint: false;
+    @if variable-exists(breakpoints) {
+        @each $currentBreakpoint in $breakpoints {
+            $bp-name: nth(nth($currentBreakpoint, 1), 2);
+            @if $bp-name == $breakpoint {
+                $existingBreakpoint: true;
+                $bp-min: nth(nth($currentBreakpoint, 2), 2);
+                $bp-max: nth(nth($currentBreakpoint, 3), 2);
+                @if $bp-min == null and $bp-max != null {
+                    @media (max-width: $bp-max) {
+                        @content;
+                    }
+                }
+                @else if $bp-min != null and $bp-max == null {
+                    @media (min-width: $bp-min) {
+                        @content;
+                    }
+                } @else {
+                    @media (min-width: $bp-min) and (max-width: $bp-max) {
+                        @content;
+                    }
+                }
+            }
+        }
+    }
+    @if $existingBreakpoint == false {
         @if type-of($breakpoint) == list {
             @media (min-width: nth($breakpoint, 1)) and (max-width: nth($breakpoint, 2)) {
+                @content;
+            }
+        }
+        @else if $breakpoint == "retina" {
+            @media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+                @content;
+            }
+        }
+        @else if $breakpoint == "document-width" {
+            @media (max-width: $document-width) {
                 @content;
             }
         }
@@ -315,90 +340,12 @@
             }
         }
     }
-    @else {
-        $bp-min: nth(nth($bp-value, 1), 2);
-        $bp-max: nth(nth($bp-value, 2), 2);
-        @if $bp-min == false and $bp-max != false {
-            @media (max-width: $bp-max) {
-                @content;
-            }
-        }
-        @else if $bp-min != false and $bp-max == false {
-            @media (min-width: $bp-min) {
-                @content;
-            }
-        } @else {
-            @media (min-width: $bp-min) and (max-width: $bp-max) {
-                @content;
-            }
-        }
-    }
-}
-
-// Media queries classes
-@each $breakpoint in $mq-breakpoints {
-    $bp-name: nth($breakpoint, 1);
-    $bp-value: nth($breakpoint, 2);
-    $bp-min: nth(nth($bp-value, 1), 2);
-    $bp-max: nth(nth($bp-value, 2), 2);
-    $bp-export: nth(nth($bp-value, 4), 2);
-    @if $bp-min == false and $bp-max != false {
-        @media (max-width: $bp-max) {
-            .is-#{$bp-name} {
-                display: block !important;
-            }
-            .is-not-#{$bp-name} {
-                display: none !important;
-            }
-            // Export breakpoint for Javascript
-            @if $bp-export == true {
-                body:before {
-                    display: none;
-                    content: $bp-name;
-                }
-            }
-        }
-    }
-    @else if $bp-min != false and $bp-max == false {
-        @media (min-width: $bp-min) {
-            .is-#{$bp-name} {
-                display: block !important;
-            }
-            .is-not-#{$bp-name} {
-                display: none !important;
-            }
-            // Export breakpoint for Javascript
-            @if $bp-export == true {
-                body:before {
-                    display: none;
-                    content: $bp-name;
-                }
-            }
-        }
-    } @else {
-        @media (min-width: $bp-min) and (max-width: $bp-max) {
-            .is-#{$bp-name} {
-                display: block !important;
-            }
-            .is-not-#{$bp-name} {
-                display: none !important;
-            }
-            // Export breakpoint for Javascript
-            @if $bp-export == true {
-                body:before {
-                    display: none;
-                    content: $bp-name;
-                }
-            }
-        }
-    }
 }
 
 // Grid
 @mixin grid($horizontal-gutter, $vertical-gutter, $margin, $iterations: 4, $vertical-align: top) {
     margin: $margin;
     font-size: 0;
-    //overflow: hidden;
     @if $horizontal-gutter == 0 {
         $horizontal-gutter: $horizontal-gutter * 1px;
     }
@@ -407,8 +354,19 @@
     }
     > .grid-wrapper {
         position: relative;
-        top: floor($vertical-gutter / 2 * -1);
-        margin: 0 floor($horizontal-gutter / 2 * -1) floor($vertical-gutter * -1);
+        margin: 0 floor($horizontal-gutter / 2 * -1);
+        &:before,
+        &:after {
+            content: "";
+            height: 1px;
+            display: block;
+        }
+        &:before {
+            margin-bottom: floor(($vertical-gutter + 1) / 2 * -1);
+        }
+        &:after {
+            margin-top: floor(($vertical-gutter + 1) / 2 * -1);
+        }
         .ie & {
             margin: 0 floor(($horizontal-gutter - 1px) / 2 * -1);
         }
@@ -426,21 +384,19 @@
             > .grid-wrapper > .col-#{$i}-#{$current} {
                 width: calc(100% / #{$current} * #{$i} - #{$horizontal-gutter});
             }
-            @each $breakpoint in $mq-breakpoints {
-                $bp-name: nth($breakpoint, 1);
-                $bp-value: nth($breakpoint, 2);
-                $bp-min: nth(nth($bp-value, 1), 2);
-                $bp-max: nth(nth($bp-value, 2), 2);
-                $bp-grid: nth(nth($bp-value, 3), 2);
-                @if $bp-grid == true {
-                    @if $bp-min == false and $bp-max != false {
+            @if variable-exists(breakpoints) {
+                @each $breakpoint in $breakpoints {
+                    $bp-name: nth(nth($breakpoint, 1), 2);
+                    $bp-min: nth(nth($breakpoint, 2), 2);
+                    $bp-max: nth(nth($breakpoint, 3), 2);
+                    @if $bp-min == null and $bp-max != null {
                         @media (max-width: $bp-max) {
                             > .grid-wrapper > [class^="col"].col-#{$i}-#{$current}-#{$bp-name} {
                                 width: calc(100% / #{$current} * #{$i} - #{$horizontal-gutter});
                             }
                         }
                     }
-                    @else if $bp-min != false and $bp-max == false {
+                    @else if $bp-min != null and $bp-max == null {
                         @media (min-width: $bp-min) {
                             > .grid-wrapper > [class^="col"].col-#{$i}-#{$current}-#{$bp-name} {
                                 width: calc(100% / #{$current} * #{$i} - #{$horizontal-gutter});

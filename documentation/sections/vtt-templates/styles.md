@@ -1,0 +1,1 @@
+Tous les styles de typographie, couleurs et breakpoints d'un site web se retrouvent dans le fichier ```/src/sass/styles.json```. Pour modifier ces styles, il est possible de modifier directement le fichier styles.json, ou de passer par l'éditeur de styles disponible dans les VTT-templates.

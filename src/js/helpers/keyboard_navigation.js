@@ -1,6 +1,4 @@
-var $ = require('jquery');
-
-module.exports = (function() {
+(function() {
 
     var $body = $('body'),
         $document = $(document);
@@ -15,10 +13,11 @@ module.exports = (function() {
         }
     });
 
-    $body.on('mousedown', function(e) {
+    $body.on('mousemove.LibeoDataState', function(e) {
         if ($body.attr('data-state')) {
             $body.removeAttr('data-state');
         }
+        $body.off('mousemove.LibeoDataState');
     });
 
 }());

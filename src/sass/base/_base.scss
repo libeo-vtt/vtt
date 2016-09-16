@@ -23,7 +23,7 @@ img {
 body {
     overflow-x: hidden;
     min-width: $document-width;
-    font-family: $ff-default;
+    font-family: get-main-font(), $font-fallback;
     color: $c-txt-default;
     background-color: $c-bg-document;
     @include respond-to(document-width) {
@@ -36,9 +36,6 @@ img,
 svg,
 iframe {
     max-width: 100%;
-    html:not(.ie) & {
-        height: auto;
-    }
 }
 
 // Remove the gap between elements and the bottom of their containers
@@ -63,10 +60,10 @@ textarea {
     resize: vertical;
 }
 
-// Change blockquote margin for padding
+// Reset blockquote margin and padding
 blockquote {
-    margin-left: 0;
-    padding-left: 40px;
+    margin: 0;
+    padding: 0;
 }
 
 // Default horizontal rule
@@ -83,16 +80,29 @@ hr {
 // Default list style
 ul,
 ol {
+    padding: 5px 0;
     @include clearfix;
-    li,
-    li:first-child {
-        margin-top: 0.25em;
+    li > &:first-child {
+        margin-top: 10px;
     }
 }
 
 // Disable default list style inside navigation
 nav ul {
     @include reset-list-style;
+}
+
+// Remove default underline for links inside navigation
+nav a {
+    text-decoration: none;
+}
+
+// Reset default font-size for code, kbd, pre, samp elements
+code,
+kbd,
+pre,
+samp {
+    font-size: 1rem;
 }
 
 // Text selection

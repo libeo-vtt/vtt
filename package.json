@@ -1,106 +1,64 @@
 {
-  "name": "vtt-starter-kit",
-  "version": "1.0.0",
-  "description": "Starter kit for VTT projects",
-  "url": "http://127.0.0.1:3000",
+  "name": "vtt",
+  "version": "1.3.4",
+  "description": "Outil d'intégration frontend soucieux du SGQRI008.",
+  "url": "http://localhost:3000",
   "keywords": "vtt, starter, kit",
-  "repository": "https://gitlab.libeo.com/vtt/starter-kit",
-  "jsname": "PROJECT_NAME",
-  "browserify": {
-    "transform": [
-      "browserify-shim"
-    ]
-  },
-  "browser": {
-    "jquery": "./src/js/vendor/jquery.min.js",
-    "is": "./src/js/vendor/is.min.js",
-    "onfontresize": "./src/js/vendor/jquery.onfontresize.js",
-    "upload": "./src/js/vendor/jquery.upload.js",
-    "buttonize": "./src/js/vendor/jquery.buttonize.js",
-    "eminize": "./src/js/vendor/jquery.eminize.js",
-    "focusable": "./src/js/vendor/jquery.focusable.js",
-    "webfont": "./src/js/vendor/webfont.min.js",
-    "waitforimages": "./src/js/vendor/jquery.waitforimages.min.js"
-  },
-  "browserify-shim": {
-    "jquery": {
-      "exports": "$"
-    },
-    "is": {
-      "exports": "is"
-    },
-    "onfontresize": {
-      "depends": "jquery",
-      "exports": null
-    },
-    "buttonize": {
-      "depends": "jquery",
-      "exports": null
-    },
-    "eminize": {
-      "depends": "jquery",
-      "exports": null
-    },
-    "focusable": {
-      "depends": "jquery",
-      "exports": null
-    },
-    "upload": {
-      "depends": "jquery",
-      "exports": null
-    },
-    "webfont": {
-      "exports": "WebFont"
-    },
-    "waitforimages": {
-      "depends": "jquery",
-      "exports": null
-    }
-  },
+  "repository": "https://github.com/libeo-vtt/vtt",
   "devDependencies": {
-    "browser-sync": "^2.9.6",
-    "browserify": "^11.1.0",
-    "browserify-shim": "^3.8.10",
-    "cheerio": "^0.19.0",
-    "commander": "^2.8.1",
-    "del": "^2.0.2",
-    "event-emitter": "^0.3.3",
-    "glob": "^5.0.14",
-    "gulp": "^3.9.0",
+    "autoprefixer": "^6.3.6",
+    "browser-sync": "^2.12.7",
+    "cheerio": "^0.20.0",
+    "colors": "^1.1.2",
+    "commander": "^2.9.0",
+    "del": "^2.2.0",
+    "file-exists": "^1.0.0",
+    "glob": "^7.0.6",
+    "graceful-fs": "^4.1.4",
+    "gulp": "^3.9.1",
+    "gulp-bower": "0.0.13",
+    "gulp-bump": "^2.1.0",
     "gulp-cheerio": "^0.6.2",
+    "gulp-concat": "^2.6.0",
     "gulp-css-globbing": "^0.1.8",
-    "gulp-if": "^1.2.5",
-    "gulp-imagemin": "^2.3.0",
-    "gulp-plumber": "^1.0.1",
-    "gulp-prettify": "^0.3.0",
-    "gulp-sass": "^2.0.4",
-    "gulp-shell": "^0.4.3",
-    "gulp-sourcemaps": "^1.5.2",
-    "gulp-svg-sprite": "^1.2.10",
-    "gulp-svg2png": "^0.3.0",
-    "gulp-svgmin": "^1.2.0",
-    "gulp-symlink": "^2.1.2",
-    "gulp-todo": "^3.3.0",
-    "gulp-twig": "^0.4.0",
-    "gulp-uglify": "^1.4.1",
+    "gulp-eslint": "^2.0.0",
+    "gulp-if": "^2.0.1",
+    "gulp-imagemin": "^3.0.1",
+    "gulp-main-bower-files": "^1.5.0",
+    "gulp-plumber": "^1.1.0",
+    "gulp-postcss": "^6.1.1",
+    "gulp-prettify": "^0.4.0",
+    "gulp-release-tasks": "0.0.3",
+    "gulp-rename": "^1.2.2",
+    "gulp-sass": "^2.3.1",
+    "gulp-sass-lint": "^1.1.1",
+    "gulp-sourcemaps": "^1.6.0",
+    "gulp-svg-sprite": "^1.2.19",
+    "gulp-svg2png": "^1.0.0",
+    "gulp-svgmin": "^1.2.2",
+    "gulp-symlink": "^2.1.4",
+    "gulp-todo": "^4.1.0",
+    "gulp-twig": "^0.5.0",
+    "gulp-uglify": "^1.5.3",
     "gulp-util": "^3.0.7",
     "gulp-watch": "^4.3.5",
-    "image-size": "^0.3.5",
+    "image-size": "^0.5.0",
     "inherits": "^2.0.1",
-    "inquirer": "^0.10.0",
-    "lodash": "^3.10.1",
+    "inquirer": "^1.0.2",
+    "is-there": "^4.3.2",
+    "lodash": "^4.12.0",
     "lorem-ipsum": "^1.0.3",
-    "marked": "^0.3.5",
-    "node-sass": "^3.3.3",
+    "main-bower-files": "^2.13.0",
+    "marked": "^0.3.6",
+    "node-cmd": "^1.1.1",
+    "node-notifier": "^4.5.0",
+    "node-sass": "^3.7.0",
     "require-dir": "^0.3.0",
-    "rimraf": "^2.4.3",
-    "run-sequence": "^1.1.3",
-    "source-map": "^0.5.0",
-    "svgo": "^0.5.6",
-    "vinyl": "^0.5.3",
-    "vinyl-buffer": "^1.0.0",
-    "vinyl-source-stream": "^1.1.0",
-    "vinyl-transform": "^1.0.0",
-    "yargs": "^3.25.0"
+    "rimraf": "^2.5.2",
+    "run-sequence": "^1.1.5",
+    "source-map": "^0.5.6",
+    "svgo": "^0.6.6",
+    "sync-exec": "^0.6.2",
+    "yargs": "^5.0.0"
   }
 }

@@ -1,23 +1,25 @@
-// Initialize project
-var PROJECT_NAME = window.PROJECT_NAME = {};
+// ------------------------------- //
+//             Project             //
+// ------------------------------- //
+// This file is called before every other javascript files
 
-// Project settings
-PROJECT_NAME.Settings = {
-    Classes: {
+// Create global project variable
+window.project = window.project || {};
+
+// Initialize project modules
+window.project.modules = {};
+
+// Initialize project classes
+window.project.classes = {
+    states: {
         active: 'is-active',
         open: 'is-open',
         hover: 'is-hover',
+        loaded: 'is-loaded',
+        editing: 'is-editing',
         clicked: 'is-clicked',
         extern: 'is-external',
         error: 'is-error',
-        a11y: 'l-a11y',
-        zoom: 'l-zoomed',
-        font: 'l-font'
+        zoom: 'is-zoomed'
     }
 };
-
-// Project components
-PROJECT_NAME.Components = {};
-
-// Export project
-module.exports = PROJECT_NAME;

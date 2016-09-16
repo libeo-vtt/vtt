@@ -1,4 +1,4 @@
-Pour créer un nouveau plugin, naviguer à la racine du site web VTT avec le terminal et exécuter le fichier new-module.scss (./new-module.scss). Entrer les informations demandé et choisissez les options voulues.
+Pour créer un nouveau plugin, naviguer à la racine du site web VTT avec le terminal et exécuter le fichier new-module.js (./new-module.js). Entrer les informations demandé et choisissez les options voulues.
 ```
 ? Module name:
 ? Module description:

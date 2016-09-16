@@ -1,0 +1,20 @@
+{
+  "name": "vtt",
+  "version": "1.3.4",
+  "homepage": "https://github.com/libeo-vtt/vtt",
+  "authors": [
+    "libeo <info@libeo.com>"
+  ],
+  "description": "Outil d'intégration frontend soucieux du SGQRI008.",
+  "private": true,
+  "ignore": [
+    "node_modules"
+  ],
+  "dependencies": {
+    "jquery": "^3.0.0",
+    "svg4everybody": "^2.0.3",
+    "webfontloader": "^1.6.24",
+    "waitForImages": "^2.2.0",
+    "underscore": "^1.8.3"
+  }
+}
