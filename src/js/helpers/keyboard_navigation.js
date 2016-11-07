@@ -13,7 +13,7 @@
         }
     });
 
-    $body.on('mousemove.LibeoDataState', function(e) {
+    $body.on('mousemove.LibeoDataState', function() {
         if ($body.attr('data-state')) {
             $body.removeAttr('data-state');
         }
