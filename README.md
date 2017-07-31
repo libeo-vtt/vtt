@@ -9,8 +9,24 @@ VTT est la somme revue et pauffinnée de tous nos morceaux d'expertise en intég
 
 ## Initialisation du projet
 
+Faire la commande
 ```
 npm install
+```
+
+Faire la commande
+```
 ./init.js
+```
+et répondre aux questions pour initialiser le projet.
+
+Faire la commande
+```
 bower install
 ```
+
+Faire la commande
+```
+gulp
+```
+pour builder le projet et démarrer un serveur local.
