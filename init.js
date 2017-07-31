@@ -16,7 +16,7 @@ program
 // Initialisation prompt questions
 var questions = [{
     name: 'name',
-    message: 'Project unique name:',
+    message: 'Project unique name (lowercase only):',
     validate: function(input) {
         return input !== '' ? true : 'You must enter a valid name.';
     }
