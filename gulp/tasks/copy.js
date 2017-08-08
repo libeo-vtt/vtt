@@ -44,6 +44,16 @@ gulp.task('copy:img:export', function() {
         .pipe(gulp.dest(config.exportPath + 'img'));
 });
 
+gulp.task('copy:fonts', function() {
+    return gulp.src(config.src + 'fonts/**/*')
+        .pipe(gulp.dest(config.build + 'fonts'));
+});
+
+gulp.task('copy:fonts:export', function() {
+    return gulp.src(config.src + 'fonts/**/*')
+        .pipe(gulp.dest(config.exportPath + 'fonts'));
+});
+
 gulp.task('copy:svg', function() {
     return gulp.src(config.src + 'svg/**/*')
         .pipe(gulp.dest(config.build + 'svg/originals'));
@@ -54,5 +64,5 @@ gulp.task('copy:svg:export', function() {
         .pipe(gulp.dest(config.exportPath + 'svg/originals'));
 });
 
-gulp.task('copy', ['copy:js', 'copy:js:templates', 'copy:img', 'copy:svg']);
-gulp.task('copy:export', ['copy:js:export', 'copy:img:export', 'copy:svg:export']);
+gulp.task('copy', ['copy:js', 'copy:js:templates', 'copy:img', 'copy:fonts', 'copy:svg']);
+gulp.task('copy:export', ['copy:js:export', 'copy:img:export', 'copy:fonts:export', 'copy:svg:export']);
